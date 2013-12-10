@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d356a41e-348a-4280-8f85-35897159d3c2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.15.82:47773/gcafeSvc.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="gcafeSvc.xsd" MetadataType="Schema" ID="43b5ebfb-0a3a-48d2-83a7-f0fa8c304d60" SourceId="1" SourceUrl="http://192.168.15.82:47773/gcafeSvc.svc?xsd=xsd0" />
+    <MetadataFile FileName="gcafeSvc.wsdl" MetadataType="Wsdl" ID="97e7e93d-dc9a-4ce0-ba8a-098652ac0eb0" SourceId="1" SourceUrl="http://192.168.15.82:47773/gcafeSvc.svc?wsdl" />
+    <MetadataFile FileName="gcafeSvc1.xsd" MetadataType="Schema" ID="f8bf623c-b27d-46d8-8636-c2d9ea59d6ca" SourceId="1" SourceUrl="http://192.168.15.82:47773/gcafeSvc.svc?xsd=xsd2" />
+    <MetadataFile FileName="gcafeSvc2.xsd" MetadataType="Schema" ID="7e90bfe1-c089-41d7-a373-0f0a8e273ce6" SourceId="1" SourceUrl="http://192.168.15.82:47773/gcafeSvc.svc?xsd=xsd1" />
+    <MetadataFile FileName="gcafeSvc.disco" MetadataType="Disco" ID="2819795c-647b-4b17-a136-9a7f24b9c97d" SourceId="1" SourceUrl="http://192.168.15.82:47773/gcafeSvc.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,17 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_IgcafeSvc" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://192.168.15.82:47773/gcafeSvc.svc" binding="basicHttpBinding"
+                bindingConfiguration="BasicHttpBinding_IgcafeSvc" contract="gcafeSvc.IgcafeSvc"
+                name="BasicHttpBinding_IgcafeSvc" />
+        </client>
+    </system.serviceModel>
+</configuration>

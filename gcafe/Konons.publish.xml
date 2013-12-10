@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseName>DB_44222_dbmgr</TargetDatabaseName>
+    <DeployScriptFileName>gcafe.sql</DeployScriptFileName>
+    <TargetConnectionString>Data Source=s05.winhost.com;Persist Security Info=True;User ID=DB_44222_dbmgr_user;Pooling=False</TargetConnectionString>
+    <ProfileVersionNumber>1</ProfileVersionNumber>
+  </PropertyGroup>
+</Project>

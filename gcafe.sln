@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "gcafe", "gcafe\gcafe.sqlproj", "{5FA43C75-290C-4612-9B55-E9BBBB938950}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeWeb", "gcafeWeb\gcafeWeb.csproj", "{5137AFC1-B508-41CD-8053-59766C9F56B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeApp", "gcafeApp\gcafeApp.csproj", "{A712BF43-F580-4935-B3BA-2D1FD204CC01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FA43C75-290C-4612-9B55-E9BBBB938950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FA43C75-290C-4612-9B55-E9BBBB938950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FA43C75-290C-4612-9B55-E9BBBB938950}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5FA43C75-290C-4612-9B55-E9BBBB938950}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5FA43C75-290C-4612-9B55-E9BBBB938950}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5FA43C75-290C-4612-9B55-E9BBBB938950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA43C75-290C-4612-9B55-E9BBBB938950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FA43C75-290C-4612-9B55-E9BBBB938950}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5FA43C75-290C-4612-9B55-E9BBBB938950}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5FA43C75-290C-4612-9B55-E9BBBB938950}.Release|x86.ActiveCfg = Release|Any CPU
+		{5137AFC1-B508-41CD-8053-59766C9F56B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5137AFC1-B508-41CD-8053-59766C9F56B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5137AFC1-B508-41CD-8053-59766C9F56B7}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5137AFC1-B508-41CD-8053-59766C9F56B7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5137AFC1-B508-41CD-8053-59766C9F56B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5137AFC1-B508-41CD-8053-59766C9F56B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5137AFC1-B508-41CD-8053-59766C9F56B7}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5137AFC1-B508-41CD-8053-59766C9F56B7}.Release|x86.ActiveCfg = Release|Any CPU
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|ARM.Build.0 = Debug|ARM
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|ARM.Deploy.0 = Debug|ARM
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|x86.ActiveCfg = Debug|x86
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|x86.Build.0 = Debug|x86
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|x86.Deploy.0 = Debug|x86
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|ARM.ActiveCfg = Release|ARM
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|ARM.Build.0 = Release|ARM
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|ARM.Deploy.0 = Release|ARM
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|x86.ActiveCfg = Release|x86
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|x86.Build.0 = Release|x86
+		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
