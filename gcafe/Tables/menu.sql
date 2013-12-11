@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Menu]
+﻿CREATE TABLE [dbo].[menu]
 (
 	[id] INT NOT NULL PRIMARY KEY IDENTITY, 
 	[branch_id] INT NOT NULL,
@@ -20,7 +20,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Menu',
+    @level1name = N'menu',
     @level2type = N'COLUMN',
     @level2name = N'name'
 GO
@@ -29,7 +29,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Menu',
+    @level1name = N'menu',
     @level2type = N'COLUMN',
     @level2name = N'number'
 GO
@@ -38,7 +38,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Menu',
+    @level1name = N'menu',
     @level2type = N'COLUMN',
     @level2name = N'printer_group_id'
 GO
@@ -47,7 +47,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Menu',
+    @level1name = N'menu',
     @level2type = N'COLUMN',
     @level2name = N'is_locked'
 GO
@@ -57,7 +57,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Menu',
+    @level1name = N'menu',
     @level2type = N'COLUMN',
     @level2name = N'unit'
 GO
@@ -66,7 +66,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Menu',
+    @level1name = N'menu',
     @level2type = N'COLUMN',
     @level2name = N'sold_out'
 GO
@@ -75,6 +75,6 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Menu',
+    @level1name = N'menu',
     @level2type = N'COLUMN',
     @level2name = N'is_setmeal'

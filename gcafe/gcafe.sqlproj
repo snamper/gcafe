@@ -4,6 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+    <DefaultCollation>Chinese_PRC_Stroke_90_BIN</DefaultCollation>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -19,7 +20,7 @@
     </RootPath>
     <RootNamespace>gcafe</RootNamespace>
     <AssemblyName>gcafe</AssemblyName>
-    <ModelCollation>1033, CI</ModelCollation>
+    <ModelCollation>1033,CS</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -63,6 +64,9 @@
     <Build Include="Tables\staff.sql" />
     <Build Include="Tables\shift.sql" />
     <Build Include="Tables\credit.sql" />
+    <Build Include="Tables\method.sql" />
+    <Build Include="Tables\method_catalog.sql" />
+    <Build Include="Tables\service.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="gcafe.refactorlog" />

@@ -30,3 +30,8 @@ SET IDENTITY_INSERT [dbo].[staff] ON
 INSERT [dbo].[staff] ([id], [number], [name], [password], [branch_id], [role_id], [join_date], [is_deleted]) VALUES (1, N'01001', N'赖家宁', N'laijianing', 1, 1, CAST(0xE6370B00 AS Date), 0)
 INSERT [dbo].[staff] ([id], [number], [name], [password], [branch_id], [role_id], [join_date], [is_deleted]) VALUES (2, N'01002', N'张志强', N'zhangzq71', 1, 1, CAST(0xE6370B00 AS Date), 0)
 SET IDENTITY_INSERT [dbo].[staff] OFF
+
+SET IDENTITY_INSERT [dbo].[printer_group] ON
+INSERT [dbo].[printer_group] ([id], [branch_id], [name]) VALUES (1, 1, N'厨房组');
+SET IDENTITY_INSERT [dbo].[printer_group] OFF
+

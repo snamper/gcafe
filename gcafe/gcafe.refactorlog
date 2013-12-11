@@ -147,4 +147,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="refill_time" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="d9f22fb1-9e60-4f47-b52d-f11d23c10ed8" ChangeDateTime="12/10/2013 03:51:23">
+    <Property Name="ElementName" Value="[dbo].[method].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[method]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5b2bf1cf-8536-47d1-b291-e5de8b5fcbf2" ChangeDateTime="12/10/2013 03:53:21">
+    <Property Name="ElementName" Value="[dbo].[method_catalog].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[method_catalog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="dbdea65f-b7d9-4982-8a98-9d0141bc07e7" ChangeDateTime="12/10/2013 04:01:21">
+    <Property Name="ElementName" Value="[dbo].[service].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[service]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="id" />
+  </Operation>
 </Operations>
