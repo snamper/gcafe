@@ -13,6 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeApp", "gcafeApp\gcafeA
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foxpro2Db", "Foxpro2Db\Foxpro2Db.csproj", "{C2180268-EDC1-4CB8-9C6E-91B068917473}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5137AFC1-B508-41CD-8053-59766C9F56B7} = {5137AFC1-B508-41CD-8053-59766C9F56B7}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
