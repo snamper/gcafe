@@ -2,7 +2,7 @@
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US"/>
-  <App xmlns="" ProductID="{d2d9b78b-433f-498d-bd84-356ba3497fbc}" Title="gcafeApp" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="gcafeApp author" Description="Sample description" Publisher="gcafeApp" PublisherID="{d6fb0672-d778-4ae1-bd40-eccc02e8c9c1}">
+  <App xmlns="" ProductID="{b951b57a-2515-48b5-823b-143f409f2945}" Title="gcafeApp" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="gcafeApp author" Description="Sample description" Publisher="gcafeApp" PublisherID="{5777d8a7-084e-49f1-b7b7-e6fc5133df48}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING"/>
