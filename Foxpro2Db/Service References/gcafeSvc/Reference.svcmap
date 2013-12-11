@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="97100bf9-64a1-4f02-ad59-9b38caa68997" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:47773/gcafeSvc.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="gcafeSvc.xsd" MetadataType="Schema" ID="2d3146da-d133-42a7-8203-0c1bf6435f4b" SourceId="1" SourceUrl="http://localhost:47773/gcafeSvc.svc?xsd=xsd0" />
+    <MetadataFile FileName="gcafeSvc1.xsd" MetadataType="Schema" ID="d5913d26-2639-43e9-8b65-710f669df15f" SourceId="1" SourceUrl="http://localhost:47773/gcafeSvc.svc?xsd=xsd2" />
+    <MetadataFile FileName="gcafeSvc.wsdl" MetadataType="Wsdl" ID="01595231-1119-447e-a65b-41d93af61f9f" SourceId="1" SourceUrl="http://localhost:47773/gcafeSvc.svc?wsdl" />
+    <MetadataFile FileName="gcafeSvc.disco" MetadataType="Disco" ID="b8d6056d-5793-46ec-a07a-ccf6d202fda9" SourceId="1" SourceUrl="http://localhost:47773/gcafeSvc.svc?disco" />
+    <MetadataFile FileName="gcafeSvc2.xsd" MetadataType="Schema" ID="f877bbe7-6316-4011-bdd9-08899361f789" SourceId="1" SourceUrl="http://localhost:47773/gcafeSvc.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

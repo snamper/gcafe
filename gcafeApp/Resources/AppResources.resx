@@ -122,19 +122,19 @@
     <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
-    <value>zh-cn</value>
+    <value>en-US</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>我的应用程序</value>
+    <value>MY APPLICATION</value>
   </data>
   <data name="SampleProperty" xml:space="preserve">
-    <value>示例运行时属性值</value>
+    <value>Sample Runtime Property Value</value>
   </data>
   <data name="AppBarButtonText" xml:space="preserve">
-    <value>添加</value>
+    <value>add</value>
   </data>
   <data name="AppBarMenuItemText" xml:space="preserve">
-    <value>菜单项</value>
+    <value>Menu Item</value>
   </data>
 </root>

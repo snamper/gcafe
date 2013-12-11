@@ -14,7 +14,7 @@ namespace gcafeApp.ViewModels
     {
         private string _lineOne;
         /// <summary>
-        /// 示例 ViewModel 属性；此属性在视图中用于使用绑定显示它的值。
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
         /// </summary>
         /// <returns></returns>
         public string LineOne
@@ -35,7 +35,7 @@ namespace gcafeApp.ViewModels
 
         private string _lineTwo;
         /// <summary>
-        /// 示例 ViewModel 属性；此属性在视图中用于使用绑定显示它的值。
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
         /// </summary>
         /// <returns></returns>
         public string LineTwo
@@ -56,7 +56,7 @@ namespace gcafeApp.ViewModels
 
         private string _lineThree;
         /// <summary>
-        /// 示例 ViewModel 属性；此属性在视图中用于使用绑定显示它的值。
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
         /// </summary>
         /// <returns></returns>
         public string LineThree

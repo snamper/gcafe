@@ -3,7 +3,7 @@
 namespace gcafeApp
 {
     /// <summary>
-    /// 提供对字符串资源的访问权。
+    /// Provides access to string resources.
     /// </summary>
     public class LocalizedStrings
     {

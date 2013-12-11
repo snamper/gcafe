@@ -13,13 +13,13 @@ namespace gcafeApp.ViewModels
         }
 
         /// <summary>
-        /// ItemViewModel 对象的集合。
+        /// A collection for ItemViewModel objects.
         /// </summary>
         public ObservableCollection<ItemViewModel> Items { get; private set; }
 
         private string _sampleProperty = "Sample Runtime Property Value";
         /// <summary>
-        /// 示例 ViewModel 属性；此属性在视图中用于使用绑定显示它的值
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding
         /// </summary>
         /// <returns></returns>
         public string SampleProperty
@@ -39,7 +39,7 @@ namespace gcafeApp.ViewModels
         }
 
         /// <summary>
-        /// 返回本地化字符串的示例属性
+        /// Sample property that returns a localized string
         /// </summary>
         public string LocalizedSampleProperty
         {
@@ -56,11 +56,11 @@ namespace gcafeApp.ViewModels
         }
 
         /// <summary>
-        /// 创建一些 ItemViewModel 对象并将其添加到 Items 集合中。
+        /// Creates and adds a few ItemViewModel objects into the Items collection.
         /// </summary>
         public void LoadData()
         {
-            // 示例数据；替换为实际数据
+            // Sample data; replace with real data
             this.Items.Add(new ItemViewModel() { LineOne = "runtime one", LineTwo = "Maecenas praesent accumsan bibendum", LineThree = "Facilisi faucibus habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu" });
             this.Items.Add(new ItemViewModel() { LineOne = "runtime two", LineTwo = "Dictumst eleifend facilisi faucibus", LineThree = "Suscipit torquent ultrices vehicula volutpat maecenas praesent accumsan bibendum dictumst eleifend facilisi faucibus" });
             this.Items.Add(new ItemViewModel() { LineOne = "runtime three", LineTwo = "Habitant inceptos interdum lobortis", LineThree = "Habitant inceptos interdum lobortis nascetur pharetra placerat pulvinar sagittis senectus sociosqu suscipit torquent" });
