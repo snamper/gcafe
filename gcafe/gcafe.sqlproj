@@ -68,6 +68,8 @@
     <Build Include="Tables\method_catalog.sql" />
     <Build Include="Tables\service.sql" />
     <Build Include="Tables\menu_catalog.sql" />
+    <Build Include="Tables\order_detail_method.sql" />
+    <Build Include="Tables\order_detail_setmeal.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="gcafe.refactorlog" />
@@ -82,7 +84,6 @@
     <Build Include="Tables\menu.sql" />
     <Build Include="Tables\order.sql" />
     <Build Include="Tables\order_detail.sql" />
-    <Build Include="Tables\order_detail_print.sql" />
     <Build Include="Tables\printer.sql" />
     <Build Include="Tables\printer_group.sql" />
     <Build Include="Tables\role.sql" />

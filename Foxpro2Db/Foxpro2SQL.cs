@@ -15,7 +15,9 @@ namespace Foxpro2Db
     {
         public override void Convert()
         {
-            DbMaintain();
+            //DbMaintain();
+
+            MenuCata();
 
             SqlTransaction trans = null;
 
@@ -46,10 +48,17 @@ namespace Foxpro2Db
                                 decimal price = (decimal)row["price"];
                                 bool isSetmeal = IsSetmeal(prodNo);
 
-                                if (prodNo.Substring(0, 2) != "33")
+                                if ((prodNo.Substring(0, 2) != "33") &&
+                                    (prodNo.Length > 4))
                                 {
-                                    sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3})",
-                                        prodName, prodNo, price, isSetmeal ? 1 : 0);
+                                    int? catId = GetMenuCataId(prodNo);
+
+                                    if (catId != null)
+                                        sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, menu_catalog_id) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3}, {4})",
+                                            prodName, prodNo, price, isSetmeal ? 1 : 0, catId);
+                                    else
+                                        sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3})",
+                                            prodName, prodNo, price, isSetmeal ? 1 : 0);
 
                                     using (var dbCmd = new SqlCommand(sql, dbConn, trans))
                                     {
@@ -194,6 +203,82 @@ namespace Foxpro2Db
 
                 conn.Close();
             }
+        }
+
+        private void MenuCata()
+        {
+            using (var conn = new OleDbConnection(FoxproConnStr))
+            {
+                conn.Open();
+
+                var adapter = new OleDbDataAdapter("SELECT productno, prodname FROM product ORDER BY productno", conn);
+                var table = new DataTable();
+                adapter.Fill(table);
+                foreach (DataRow r in table.Rows)
+                {
+                    string prodNo = ((string)r["productno"]).Trim();
+                    string prodName = ((string)r["prodname"]).Trim();
+
+                    if (prodNo.Substring(0, 2) != "33")
+                    {
+                        if ((prodNo.Length > 2) &&
+                            (prodNo.Length < 5))
+                        {
+                            string sql = string.Format("INSERT INTO menu_catalog(parent_id, name) VALUES({0}, '{1}')", prodNo.Substring(0, 2) == "11" ? 1 : 2, prodName);
+
+                            using (var sqlConn = new SqlConnection(DbConnStr))
+                            {
+                                sqlConn.Open();
+
+                                var cmd = new SqlCommand(sql, sqlConn);
+                                cmd.ExecuteNonQuery();
+
+                                sqlConn.Close();
+                            }
+                        }
+                    }
+                }
+
+                conn.Close();
+            }
+        }
+
+        private int? GetMenuCataId(string prodNo)
+        {
+            int? id = null;
+
+            using (var conn = new OleDbConnection(FoxproConnStr))
+            {
+                conn.Open();
+
+                string sql = string.Empty;
+
+                sql = string.Format("SELECT prodname FROM product WHERE productno = '{0}'", prodNo.Substring(0, 4));
+                var cmd = new OleDbCommand(sql, conn);
+                string cata = (string)cmd.ExecuteScalar();
+
+                if (cata != null)
+                {
+                    cata = cata.Trim();
+
+                    sql = string.Format("SELECT id FROM menu_catalog WHERE name = '{0}'", cata);
+                    using (var sqlConn = new SqlConnection(DbConnStr))
+                    {
+                        sqlConn.Open();
+
+                        var cmd1 = new SqlCommand(sql, sqlConn);
+                        object val = cmd1.ExecuteScalar();
+                        Type t = val.GetType();
+                        id = (int)val;
+
+                        sqlConn.Close();
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return id;
         }
     }
 }

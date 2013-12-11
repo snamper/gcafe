@@ -35,3 +35,7 @@ SET IDENTITY_INSERT [dbo].[printer_group] ON
 INSERT [dbo].[printer_group] ([id], [branch_id], [name]) VALUES (1, 1, N'厨房组');
 SET IDENTITY_INSERT [dbo].[printer_group] OFF
 
+SET IDENTITY_INSERT [dbo].[menu_catalog] ON
+INSERT [dbo].[menu_catalog] ([id], [name]) VALUES (1, N'厨房菜牌');
+INSERT [dbo].[menu_catalog] ([id], [name]) VALUES (2, N'酒吧菜牌');
+SET IDENTITY_INSERT [dbo].[menu_catalog] OFF
