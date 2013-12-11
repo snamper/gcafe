@@ -170,12 +170,16 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MenuItem.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <Content Include="Images\ApplicationBar.Cancel.png" />
+    <Content Include="Images\ApplicationBar.Check.png" />
+    <None Include="Service References\gcafeSvc\gcafeSvc.disco" />
+    <None Include="Service References\gcafeSvc\configuration91.svcinfo" />
+    <None Include="Service References\gcafeSvc\configuration.svcinfo" />
+    <None Include="Service References\gcafeSvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.Order.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <Content Include="ServiceReferences.ClientConfig" />
     <None Include="Service References\gcafeSvc\gcafeSvc.wsdl" />
     <None Include="Service References\gcafeSvc\gcafeSvc.xsd">
       <SubType>Designer</SubType>
@@ -186,9 +190,6 @@
     <None Include="Service References\gcafeSvc\gcafeSvc2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Images\ApplicationBar.Cancel.png" />
-    <Content Include="Images\ApplicationBar.Check.png" />
-    <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
@@ -210,13 +211,6 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Service References\gcafeSvc\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\gcafeSvc\configuration.svcinfo" />
-    <None Include="Service References\gcafeSvc\configuration91.svcinfo" />
-    <None Include="Service References\gcafeSvc\gcafeSvc.disco" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
@@ -248,7 +242,6 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\gcafeSvc\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

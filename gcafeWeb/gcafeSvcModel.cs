@@ -43,8 +43,42 @@ namespace gcafeWeb
     }
 
     [DataContract(IsReference = true)]
-    public class MenuItem
+    public class MenuCatalog
     {
+        [DataMember]
+        public int ID { get; set; }
+        [DataMember]
+        public int ParentID { get; set; }
+        [DataMember]
+        public string Name { get; set; }
     }
 
+    [DataContract(IsReference = true)]
+    public class SetmealItem
+    {
+        [DataMember]
+        public string Name { get; set; }
+        [DataMember]
+        public string Unit { get; set; }
+        /// <summary>
+        /// 套餐项目的可选项目
+        /// </summary>
+        [DataMember]
+        public List<SetmealItem> OptionItems { get; set; }
+    }
+
+    [DataContract(IsReference = true)]
+    public class MenuItem
+    {
+        [DataMember]
+        public string Name { get; set; }
+        [DataMember]
+        public string Unit { get; set; }
+        [DataMember]
+        public decimal Price { get; set; }
+        [DataMember]
+        public bool IsSetmeal { get; set; }
+        [DataMember]
+        public List<SetmealItem> SetmealItems { get; set; }
+    }
 }

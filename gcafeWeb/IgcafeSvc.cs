@@ -19,6 +19,22 @@ namespace gcafeWeb
 
         [OperationContract]
         List<MenuItem> GetMenu();
+
+        /// <summary>
+        /// 从menu_catalog按rootCata取数据
+        /// </summary>
+        /// <param name="rootCata">厨房，酒吧</param>
+        /// <returns></returns>
+        [OperationContract]
+        List<MenuCatalog> GetMenuCatalogs(string rootCata);
+
+        /// <summary>
+        /// 根据cataId取数据
+        /// </summary>
+        /// <param name="cataId">menu_catalog.id</param>
+        /// <returns></returns>
+        [OperationContract]
+        List<MenuItem> GetMenuItemByCatalogId(int cataId);
     }
 
 }

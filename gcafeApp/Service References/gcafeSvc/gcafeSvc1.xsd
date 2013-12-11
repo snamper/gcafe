@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/gcafeWeb" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/gcafeWeb" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.15.82:47773/gcafeSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:47773/gcafeSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="ArrayOfOrder">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Order" nillable="true" type="tns:Order" />
@@ -23,9 +23,47 @@
   </xs:complexType>
   <xs:element name="ArrayOfMenuItem" nillable="true" type="tns:ArrayOfMenuItem" />
   <xs:complexType name="MenuItem">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsSetmeal" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SetmealItems" nillable="true" type="tns:ArrayOfSetmealItem" />
+      <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
+    </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="MenuItem" nillable="true" type="tns:MenuItem" />
+  <xs:complexType name="ArrayOfSetmealItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SetmealItem" nillable="true" type="tns:SetmealItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSetmealItem" nillable="true" type="tns:ArrayOfSetmealItem" />
+  <xs:complexType name="SetmealItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OptionItems" nillable="true" type="tns:ArrayOfSetmealItem" />
+      <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="SetmealItem" nillable="true" type="tns:SetmealItem" />
+  <xs:complexType name="ArrayOfMenuCatalog">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MenuCatalog" nillable="true" type="tns:MenuCatalog" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMenuCatalog" nillable="true" type="tns:ArrayOfMenuCatalog" />
+  <xs:complexType name="MenuCatalog">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentID" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MenuCatalog" nillable="true" type="tns:MenuCatalog" />
 </xs:schema>

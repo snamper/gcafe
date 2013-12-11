@@ -50,5 +50,19 @@ namespace gcafeWeb
 
             return menuList;
         }
+
+        public List<MenuCatalog> GetMenuCatalogs(string rootCata)
+        {
+            List<MenuCatalog> cataList = new List<MenuCatalog>();
+
+            return cataList;
+        }
+
+        public List<MenuItem> GetMenuItemByCatalogId(int cataId)
+        {
+            List<MenuItem> menuList = new List<MenuItem>();
+
+            return menuList;
+        }
     }
 }
