@@ -2,6 +2,7 @@
 (
 	[id] INT NOT NULL PRIMARY KEY IDENTITY, 
 	[branch_id] INT NOT NULL,
+	[menu_catalog_id] INT NULL, 
     [name] NVARCHAR(50) NOT NULL, 
     [number] VARCHAR(10) NOT NULL, 
 	[unit] NVARCHAR(6) NOT NULL,
@@ -12,6 +13,7 @@
     [sold_out] BIT NOT NULL DEFAULT 0, 
     CONSTRAINT [FK_Menu_branch] FOREIGN KEY ([branch_id]) REFERENCES [branch]([id]), 
     CONSTRAINT [FK_Menu_printer_group] FOREIGN KEY ([printer_group_id]) REFERENCES [printer_group]([id]), 
+    CONSTRAINT [FK_menu_menu_catalog] FOREIGN KEY ([menu_catalog_id]) REFERENCES [menu_catalog]([id]), 
 )
 
 GO
@@ -78,3 +80,12 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level1name = N'menu',
     @level2type = N'COLUMN',
     @level2name = N'is_setmeal'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'类别，NULL时为未分类别',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'menu',
+    @level2type = N'COLUMN',
+    @level2name = N'menu_catalog_id'

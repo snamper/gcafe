@@ -67,6 +67,7 @@
     <Build Include="Tables\method.sql" />
     <Build Include="Tables\method_catalog.sql" />
     <Build Include="Tables\service.sql" />
+    <Build Include="Tables\menu_catalog.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="gcafe.refactorlog" />
