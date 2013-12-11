@@ -16,14 +16,14 @@ namespace gcafeApp
         private static MainViewModel viewModel = null;
 
         /// <summary>
-        /// A static ViewModel used by the views to bind against.
+        /// 视图用于进行绑定的静态 ViewModel。
         /// </summary>
-        /// <returns>The MainViewModel object.</returns>
+        /// <returns>MainViewModel 对象。</returns>
         public static MainViewModel ViewModel
         {
             get
             {
-                // Delay creation of the view model until necessary
+                // 延迟创建视图模型，直至需要时
                 if (viewModel == null)
                     viewModel = new MainViewModel();
 
@@ -32,208 +32,208 @@ namespace gcafeApp
         }
 
         /// <summary>
-        /// Provides easy access to the root frame of the Phone Application.
+        /// 提供对电话应用程序的根框架的轻松访问。
         /// </summary>
-        /// <returns>The root frame of the Phone Application.</returns>
+        /// <returns>电话应用程序的根框架。</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
         /// <summary>
-        /// Constructor for the Application object.
+        /// Application 对象的构造函数。
         /// </summary>
         public App()
         {
-            // Global handler for uncaught exceptions.
+            // 未捕获的异常的全局处理程序。
             UnhandledException += Application_UnhandledException;
 
-            // Standard XAML initialization
+            // 标准 XAML 初始化
             InitializeComponent();
 
-            // Phone-specific initialization
+            // 特定于电话的初始化
             InitializePhoneApplication();
 
-            // Language display initialization
+            // 语言显示初始化
             InitializeLanguage();
 
-            // Show graphics profiling information while debugging.
+            // 调试时显示图形分析信息。
             if (Debugger.IsAttached)
             {
-                // Display the current frame rate counters
+                // 显示当前帧速率计数器
                 Application.Current.Host.Settings.EnableFrameRateCounter = true;
 
-                // Show the areas of the app that are being redrawn in each frame.
-                //Application.Current.Host.Settings.EnableRedrawRegions = true;
+                // 显示在每个帧中重绘的应用程序区域。
+                //Application.Current.Host.Settings.EnableRedrawRegions = true；
 
-                // Enable non-production analysis visualization mode,
-                // which shows areas of a page that are handed off to GPU with a colored overlay.
-                //Application.Current.Host.Settings.EnableCacheVisualization = true;
+                // 启用非生产分析可视化模式，
+                // 该模式显示递交给 GPU 的包含彩色重叠区的页面区域。
+                //Application.Current.Host.Settings.EnableCacheVisualization = true；
 
-                // Prevent the screen from turning off while under the debugger by disabling
-                // the application's idle detection.
-                // Caution:- Use this under debug mode only. Application that disables user idle detection will continue to run
-                // and consume battery power when the user is not using the phone.
+                // 通过禁用以下对象阻止在调试过程中关闭屏幕
+                // 应用程序的空闲检测。
+                //  注意: 仅在调试模式下使用此设置。禁用用户空闲检测的应用程序在用户不使用电话时将继续运行
+                // 并且消耗电池电量。
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
         }
 
-        // Code to execute when the application is launching (eg, from Start)
-        // This code will not execute when the application is reactivated
+        // 应用程序启动(例如，从“开始”菜单启动)时执行的代码
+        // 此代码在重新激活应用程序时不执行
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
         }
 
-        // Code to execute when the application is activated (brought to foreground)
-        // This code will not execute when the application is first launched
+        // 激活应用程序(置于前台)时执行的代码
+        // 此代码在首次启动应用程序时不执行
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            // Ensure that application state is restored appropriately
+            // 确保正确恢复应用程序状态
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadData();
             }
         }
 
-        // Code to execute when the application is deactivated (sent to background)
-        // This code will not execute when the application is closing
+        // 停用应用程序(发送到后台)时执行的代码
+        // 此代码在应用程序关闭时不执行
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
         }
 
-        // Code to execute when the application is closing (eg, user hit Back)
-        // This code will not execute when the application is deactivated
+        // 应用程序关闭(例如，用户点击“后退”)时执行的代码
+        // 此代码在停用应用程序时不执行
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            // Ensure that required application state is persisted here.
+            // 确保所需的应用程序状态在此处保持不变。
         }
 
-        // Code to execute if a navigation fails
+        // 导航失败时执行的代码
         private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             if (Debugger.IsAttached)
             {
-                // A navigation has failed; break into the debugger
+                // 导航已失败；强行进入调试器
                 Debugger.Break();
             }
         }
 
-        // Code to execute on Unhandled Exceptions
+        // 出现未处理的异常时执行的代码
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             if (Debugger.IsAttached)
             {
-                // An unhandled exception has occurred; break into the debugger
+                // 出现未处理的异常；强行进入调试器
                 Debugger.Break();
             }
         }
 
-        #region Phone application initialization
+        #region 电话应用程序初始化
 
-        // Avoid double-initialization
+        // 避免双重初始化
         private bool phoneApplicationInitialized = false;
 
-        // Do not add any additional code to this method
+        // 请勿向此方法中添加任何其他代码
         private void InitializePhoneApplication()
         {
             if (phoneApplicationInitialized)
                 return;
 
-            // Create the frame but don't set it as RootVisual yet; this allows the splash
-            // screen to remain active until the application is ready to render.
+            // 创建框架但先不将它设置为 RootVisual；这允许初始
+            // 屏幕保持活动状态，直到准备呈现应用程序时。
             RootFrame = new PhoneApplicationFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
-            // Handle navigation failures
+            // 处理导航故障
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
 
-            // Handle reset requests for clearing the backstack
+            // 在下一次导航中处理清除 BackStack 的重置请求，
             RootFrame.Navigated += CheckForResetNavigation;
 
-            // Ensure we don't initialize again
+            // 确保我们未再次初始化
             phoneApplicationInitialized = true;
         }
 
-        // Do not add any additional code to this method
+        // 请勿向此方法中添加任何其他代码
         private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e)
         {
-            // Set the root visual to allow the application to render
+            // 设置根视觉效果以允许应用程序呈现
             if (RootVisual != RootFrame)
                 RootVisual = RootFrame;
 
-            // Remove this handler since it is no longer needed
+            // 删除此处理程序，因为不再需要它
             RootFrame.Navigated -= CompleteInitializePhoneApplication;
         }
 
         private void CheckForResetNavigation(object sender, NavigationEventArgs e)
         {
-            // If the app has received a 'reset' navigation, then we need to check
-            // on the next navigation to see if the page stack should be reset
+            // 如果应用程序收到“重置”导航，则需要进行检查
+            // 以确定是否应重置页面堆栈
             if (e.NavigationMode == NavigationMode.Reset)
                 RootFrame.Navigated += ClearBackStackAfterReset;
         }
 
         private void ClearBackStackAfterReset(object sender, NavigationEventArgs e)
         {
-            // Unregister the event so it doesn't get called again
+            // 取消注册事件，以便不再调用该事件
             RootFrame.Navigated -= ClearBackStackAfterReset;
 
-            // Only clear the stack for 'new' (forward) and 'refresh' navigations
+            // 只为“新建”(向前)和“刷新”导航清除堆栈
             if (e.NavigationMode != NavigationMode.New && e.NavigationMode != NavigationMode.Refresh)
                 return;
 
-            // For UI consistency, clear the entire page stack
+            // 为了获得 UI 一致性，请清除整个页面堆栈
             while (RootFrame.RemoveBackEntry() != null)
             {
-                ; // do nothing
+                ; // 不执行任何操作
             }
         }
 
         #endregion
 
-        // Initialize the app's font and flow direction as defined in its localized resource strings.
+        // 初始化应用程序在其本地化资源字符串中定义的字体和排列方向。
         //
-        // To ensure that the font of your application is aligned with its supported languages and that the
-        // FlowDirection for each of those languages follows its traditional direction, ResourceLanguage
-        // and ResourceFlowDirection should be initialized in each resx file to match these values with that
-        // file's culture. For example:
+        // 若要确保应用程序的字体与受支持的语言相符，并确保
+        // 这些语言的 FlowDirection 都采用其传统方向，ResourceLanguage
+        // 应该初始化每个 resx 文件中的 ResourceFlowDirection，以便将这些值与以下对象匹配
+        // 文件的区域性。例如:
         //
         // AppResources.es-ES.resx
-        //    ResourceLanguage's value should be "es-ES"
-        //    ResourceFlowDirection's value should be "LeftToRight"
+        //    ResourceLanguage 的值应为“es-ES”
+        //    ResourceFlowDirection 的值应为“LeftToRight”
         //
         // AppResources.ar-SA.resx
-        //     ResourceLanguage's value should be "ar-SA"
-        //     ResourceFlowDirection's value should be "RightToLeft"
+        //     ResourceLanguage 的值应为“ar-SA”
+        //     ResourceFlowDirection 的值应为“RightToLeft”
         //
-        // For more info on localizing Windows Phone apps see http://go.microsoft.com/fwlink/?LinkId=262072.
+        // 有关本地化 Windows Phone 应用程序的详细信息，请参见 http://go.microsoft.com/fwlink/?LinkId=262072。
         //
         private void InitializeLanguage()
         {
             try
             {
-                // Set the font to match the display language defined by the
-                // ResourceLanguage resource string for each supported language.
+                // 将字体设置为与由以下对象定义的显示语言匹配
+                // 每种受支持的语言的 ResourceLanguage 资源字符串。
                 //
-                // Fall back to the font of the neutral language if the Display
-                // language of the phone is not supported.
+                // 如果显示出现以下情况，则回退到非特定语言的字体
+                // 手机的语言不受支持。
                 //
-                // If a compiler error is hit then ResourceLanguage is missing from
-                // the resource file.
+                // 如果命中编译器错误，则表示以下对象中缺少 ResourceLanguage
+                // 资源文件。
                 RootFrame.Language = XmlLanguage.GetLanguage(AppResources.ResourceLanguage);
 
-                // Set the FlowDirection of all elements under the root frame based
-                // on the ResourceFlowDirection resource string for each
-                // supported language.
+                // 根据以下条件设置根框架下的所有元素的 FlowDirection
+                // 每个以下对象的 ResourceFlowDirection 资源字符串上的
+                // 受支持的语言。
                 //
-                // If a compiler error is hit then ResourceFlowDirection is missing from
-                // the resource file.
+                // 如果命中编译器错误，则表示以下对象中缺少 ResourceFlowDirection
+                // 资源文件。
                 FlowDirection flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.ResourceFlowDirection);
                 RootFrame.FlowDirection = flow;
             }
             catch
             {
-                // If an exception is caught here it is most likely due to either
-                // ResourceLangauge not being correctly set to a supported language
-                // code or ResourceFlowDirection is set to a value other than LeftToRight
-                // or RightToLeft.
+                // 如果此处导致了异常，则最可能的原因是
+                // ResourceLangauge 未正确设置为受支持的语言
+                // 代码或 ResourceFlowDirection 设置为 LeftToRight 以外的值
+                // 或 RightToLeft。
 
                 if (Debugger.IsAttached)
                 {

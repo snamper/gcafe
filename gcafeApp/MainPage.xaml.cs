@@ -13,19 +13,19 @@ namespace gcafeApp
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        // Constructor
+        // 构造函数
         public MainPage()
         {
             InitializeComponent();
 
-            // Set the data context of the listbox control to the sample data
+            // 将 listbox 控件的数据上下文设置为示例数据
             DataContext = App.ViewModel;
 
-            // Sample code to localize the ApplicationBar
+            // 用于本地化 ApplicationBar 的示例代码
             //BuildLocalizedApplicationBar();
         }
 
-        // Load data for the ViewModel Items
+        // 为 ViewModel 项加载数据
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (!App.ViewModel.IsDataLoaded)
@@ -34,18 +34,18 @@ namespace gcafeApp
             }
         }
 
-        // Sample code for building a localized ApplicationBar
+        // 用于生成本地化 ApplicationBar 的示例代码
         //private void BuildLocalizedApplicationBar()
         //{
-        //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
+        //    // 将页面的 ApplicationBar 设置为 ApplicationBar 的新实例。
         //    ApplicationBar = new ApplicationBar();
 
-        //    // Create a new button and set the text value to the localized string from AppResources.
+        //    // 创建新按钮并将文本值设置为 AppResources 中的本地化字符串。
         //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
         //    appBarButton.Text = AppResources.AppBarButtonText;
         //    ApplicationBar.Buttons.Add(appBarButton);
 
-        //    // Create a new menu item with the localized string from AppResources.
+        //    // 使用 AppResources 中的本地化字符串创建新菜单项。
         //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
         //    ApplicationBar.MenuItems.Add(appBarMenuItem);
         //}

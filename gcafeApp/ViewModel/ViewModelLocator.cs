@@ -43,6 +43,13 @@ namespace gcafeApp.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<TablesViewModel>();
+            SimpleIoc.Default.Register<MenuSelectViewModel>();
+        }
+
+        public MenuSelectViewModel VMMenuSelect
+        {
+            get { return ServiceLocator.Current.GetInstance<MenuSelectViewModel>(); }
         }
 
         public MainViewModel Main

@@ -1,4 +1,6 @@
+using System;
 using GalaSoft.MvvmLight;
+using Microsoft.Phone.Info;
 
 namespace gcafeApp.ViewModel
 {
@@ -30,5 +32,21 @@ namespace gcafeApp.ViewModel
             ////    // Code runs "for real"
             ////}
         }
+
+        /// <summary>
+        /// Gets the unique hash for the device.
+        /// </summary>
+        public string DeviceUniqueID
+        {
+            get
+            {
+                object id;
+                if (DeviceExtendedProperties.TryGetValue("DeviceUniqueId", out id))
+                    return Convert.ToBase64String((byte[])id);
+                else
+                    throw new Exception("È¡UniqueID³ö´í");
+            }
+        }
+
     }
 }
