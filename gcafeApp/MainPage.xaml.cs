@@ -34,6 +34,12 @@ namespace gcafeApp
             }
         }
 
+        private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings.AppSettings.LoginStaff = null;
+            App.RootFrame.Navigate(new Uri("/Pages/AuthenticationPage.xaml", UriKind.Relative));
+        }
+
         // 用于生成本地化 ApplicationBar 的示例代码
         //private void BuildLocalizedApplicationBar()
         //{
