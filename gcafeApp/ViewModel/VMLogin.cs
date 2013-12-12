@@ -7,9 +7,22 @@ namespace gcafeApp.ViewModel
 {
     public class VMLogin : VMBase
     {
+        gcafeSvc.Staff _staff = new gcafeSvc.Staff();
+        gcafeSvc.IgcafeSvcClient _svc = new gcafeSvc.IgcafeSvcClient();
+
         public VMLogin()
         {
+            _svc.GetStaffByNumCompleted += _svc_GetStaffByNumCompleted;
+        }
 
+        void _svc_GetStaffByNumCompleted(object sender, gcafeSvc.GetStaffByNumCompletedEventArgs e)
+        {
+            _staff = e.Result.GetStaffByNumResult;
+        }
+
+        public gcafeSvc.Staff Staff
+        {
+            get { return _staff; }
         }
 
         public int LoginStaffID
@@ -39,6 +52,9 @@ namespace gcafeApp.ViewModel
             get { return _loginStaffNo; }
             set
             {
+                gcafeSvc.GetStaffByNumRequest req = new gcafeSvc.GetStaffByNumRequest();
+                req.Num = value;
+                _svc.GetStaffByNumAsync(req);
                 this._loginStaffNo = value;
                 RaisePropertyChanged();
             }
@@ -52,6 +68,11 @@ namespace gcafeApp.ViewModel
             {
                 this._loginStaffPassword = value;
                 RaisePropertyChanged();
+
+                if (this._loginStaffPassword == _staff.Password)
+                    IsLogin = true;
+                else
+                    IsLogin = false;
             }
         }
         private string _loginStaffPassword;

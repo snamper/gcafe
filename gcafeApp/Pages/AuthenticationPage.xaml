@@ -37,12 +37,13 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,6,12,-6">
             <StackPanel>
                 <TextBlock Text="员工编号" />
-                <TextBox Width="300" Text="{Binding LoginStaffNo}"  HorizontalAlignment="Left" />
+                <TextBox Width="300" Text="{Binding LoginStaffNo, Mode=TwoWay}"  HorizontalAlignment="Left" />
                 <TextBlock Text="密码" />
-                <PasswordBox Width="300" Password="{Binding LoginStaffPassword}" HorizontalAlignment="Left" />
+                <PasswordBox x:Name="pwd" Width="300" Password="{Binding LoginStaffPassword, Mode=TwoWay}" HorizontalAlignment="Left" />
             </StackPanel>
         </Grid>
     </Grid>
+
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True">
