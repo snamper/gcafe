@@ -101,9 +101,13 @@
       <DependentUpon>Order.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TableNoPicker.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AuthenticationPage.xaml.cs">
+      <DependentUpon>AuthenticationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MenuSelectPage.xaml.cs">
       <DependentUpon>MenuSelectPage.xaml</DependentUpon>
@@ -129,6 +133,8 @@
     <Compile Include="ViewModel\TablesViewModel.cs" />
     <Compile Include="ViewModel\TableViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\VMBase.cs" />
+    <Compile Include="ViewModel\VMLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -147,11 +153,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="Pages\AuthenticationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MenuSelectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TableNoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ColorStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

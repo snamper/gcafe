@@ -5,7 +5,7 @@ using GalaSoft.MvvmLight;
 
 namespace gcafeApp.ViewModel
 {
-    public class MenuSelectViewModel : ViewModelBase
+    public class MenuSelectViewModel : VMBase
     {
         public MenuSelectViewModel()
         {

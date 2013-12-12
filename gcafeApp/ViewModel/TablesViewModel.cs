@@ -5,7 +5,7 @@ using GalaSoft.MvvmLight;
 
 namespace gcafeApp.ViewModel
 {
-    public class TablesViewModel : ViewModelBase
+    public class TablesViewModel : VMBase
     {
         /// <summary>
         /// 初始化
