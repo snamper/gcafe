@@ -64,5 +64,22 @@ namespace gcafeWeb
 
             return menuList;
         }
+
+
+        public Staff GetStaffByNum(string Num)
+        {
+            using (var context = new gcafeEntities())
+            {
+                staff staff = context.staff.Include("branch").Where(n => n.number == Num).FirstOrDefault();
+
+                if (staff != null)
+                {
+                    Staff stf = new Staff() { Name = staff.name, ID = staff.id, Number = staff.number, Password = staff.password, RoleID = staff.role_id, Branch = staff.branch.name, BranchID = staff.branch_id };
+                    return stf;
+                }
+                else
+                    return null;
+            }
+        }
     }
 }

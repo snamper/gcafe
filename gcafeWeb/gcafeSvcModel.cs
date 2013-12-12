@@ -81,4 +81,23 @@ namespace gcafeWeb
         [DataMember]
         public List<SetmealItem> SetmealItems { get; set; }
     }
+
+    [DataContract(IsReference = true)]
+    public class Staff
+    {
+        [DataMember]
+        public string Name { get; set; }
+        [DataMember]
+        public int ID { get; set; }
+        [DataMember]
+        public string Number { get; set; }
+        [DataMember]
+        public string Password { get; set; }
+        [DataMember]
+        public string Branch { get; set; }
+        [DataMember]
+        public int BranchID { get; set; }
+        [DataMember]
+        public int RoleID { get; set; }
+    }
 }

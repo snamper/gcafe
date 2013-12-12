@@ -194,6 +194,9 @@
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetOrdersResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetStaffByNumResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\gcafeSvc\gcafeSvc1.wsdl" />
     <None Include="Service References\gcafeSvc\gcafeSvc3.xsd">
       <SubType>Designer</SubType>

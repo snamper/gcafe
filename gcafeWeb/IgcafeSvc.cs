@@ -35,6 +35,14 @@ namespace gcafeWeb
         /// <returns></returns>
         [OperationContract]
         List<MenuItem> GetMenuItemByCatalogId(int cataId);
+
+        /// <summary>
+        /// 根据Num取员工信息
+        /// </summary>
+        /// <param name="Num"></param>
+        /// <returns></returns>
+        [OperationContract]
+        Staff GetStaffByNum(string Num);
     }
 
 }

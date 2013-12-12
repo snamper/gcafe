@@ -270,6 +270,126 @@ namespace gcafeApp.gcafeSvc {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Staff", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    public partial class Staff : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string BranchField;
+        
+        private int BranchIDField;
+        
+        private int IDField;
+        
+        private string NameField;
+        
+        private string NumberField;
+        
+        private string PasswordField;
+        
+        private int RoleIDField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Branch {
+            get {
+                return this.BranchField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BranchField, value) != true)) {
+                    this.BranchField = value;
+                    this.RaisePropertyChanged("Branch");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int BranchID {
+            get {
+                return this.BranchIDField;
+            }
+            set {
+                if ((this.BranchIDField.Equals(value) != true)) {
+                    this.BranchIDField = value;
+                    this.RaisePropertyChanged("BranchID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Number {
+            get {
+                return this.NumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumberField, value) != true)) {
+                    this.NumberField = value;
+                    this.RaisePropertyChanged("Number");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password {
+            get {
+                return this.PasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int RoleID {
+            get {
+                return this.RoleIDField;
+            }
+            set {
+                if ((this.RoleIDField.Equals(value) != true)) {
+                    this.RoleIDField = value;
+                    this.RaisePropertyChanged("RoleID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="gcafeSvc.IgcafeSvc")]
     public interface IgcafeSvc {
@@ -298,6 +418,11 @@ namespace gcafeApp.gcafeSvc {
         System.IAsyncResult BeginGetMenuItemByCatalogId(gcafeApp.gcafeSvc.GetMenuItemByCatalogIdRequest request, System.AsyncCallback callback, object asyncState);
         
         gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse EndGetMenuItemByCatalogId(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetStaffByNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetStaffByNumResponse")]
+        System.IAsyncResult BeginGetStaffByNum(gcafeApp.gcafeSvc.GetStaffByNumRequest request, System.AsyncCallback callback, object asyncState);
+        
+        gcafeApp.gcafeSvc.GetStaffByNumResponse EndGetStaffByNum(System.IAsyncResult result);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -432,6 +557,38 @@ namespace gcafeApp.gcafeSvc {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetStaffByNum", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetStaffByNumRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string Num;
+        
+        public GetStaffByNumRequest() {
+        }
+        
+        public GetStaffByNumRequest(string Num) {
+            this.Num = Num;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetStaffByNumResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetStaffByNumResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public gcafeApp.gcafeSvc.Staff GetStaffByNumResult;
+        
+        public GetStaffByNumResponse() {
+        }
+        
+        public GetStaffByNumResponse(gcafeApp.gcafeSvc.Staff GetStaffByNumResult) {
+            this.GetStaffByNumResult = GetStaffByNumResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IgcafeSvcChannel : gcafeApp.gcafeSvc.IgcafeSvc, System.ServiceModel.IClientChannel {
     }
@@ -533,6 +690,25 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetStaffByNumCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetStaffByNumCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public gcafeApp.gcafeSvc.GetStaffByNumResponse Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((gcafeApp.gcafeSvc.GetStaffByNumResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class IgcafeSvcClient : System.ServiceModel.ClientBase<gcafeApp.gcafeSvc.IgcafeSvc>, gcafeApp.gcafeSvc.IgcafeSvc {
         
         private BeginOperationDelegate onBeginDoWorkDelegate;
@@ -564,6 +740,12 @@ namespace gcafeApp.gcafeSvc {
         private EndOperationDelegate onEndGetMenuItemByCatalogIdDelegate;
         
         private System.Threading.SendOrPostCallback onGetMenuItemByCatalogIdCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetStaffByNumDelegate;
+        
+        private EndOperationDelegate onEndGetStaffByNumDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetStaffByNumCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -627,6 +809,8 @@ namespace gcafeApp.gcafeSvc {
         public event System.EventHandler<GetMenuCatalogsCompletedEventArgs> GetMenuCatalogsCompleted;
         
         public event System.EventHandler<GetMenuItemByCatalogIdCompletedEventArgs> GetMenuItemByCatalogIdCompleted;
+        
+        public event System.EventHandler<GetStaffByNumCompletedEventArgs> GetStaffByNumCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -862,6 +1046,52 @@ namespace gcafeApp.gcafeSvc {
                         request}, this.onEndGetMenuItemByCatalogIdDelegate, this.onGetMenuItemByCatalogIdCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetStaffByNum(gcafeApp.gcafeSvc.GetStaffByNumRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetStaffByNum(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        gcafeApp.gcafeSvc.GetStaffByNumResponse gcafeApp.gcafeSvc.IgcafeSvc.EndGetStaffByNum(System.IAsyncResult result) {
+            return base.Channel.EndGetStaffByNum(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetStaffByNum(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            gcafeApp.gcafeSvc.GetStaffByNumRequest request = ((gcafeApp.gcafeSvc.GetStaffByNumRequest)(inValues[0]));
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginGetStaffByNum(request, callback, asyncState);
+        }
+        
+        private object[] OnEndGetStaffByNum(System.IAsyncResult result) {
+            gcafeApp.gcafeSvc.GetStaffByNumResponse retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetStaffByNum(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetStaffByNumCompleted(object state) {
+            if ((this.GetStaffByNumCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetStaffByNumCompleted(this, new GetStaffByNumCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetStaffByNumAsync(gcafeApp.gcafeSvc.GetStaffByNumRequest request) {
+            this.GetStaffByNumAsync(request, null);
+        }
+        
+        public void GetStaffByNumAsync(gcafeApp.gcafeSvc.GetStaffByNumRequest request, object userState) {
+            if ((this.onBeginGetStaffByNumDelegate == null)) {
+                this.onBeginGetStaffByNumDelegate = new BeginOperationDelegate(this.OnBeginGetStaffByNum);
+            }
+            if ((this.onEndGetStaffByNumDelegate == null)) {
+                this.onEndGetStaffByNumDelegate = new EndOperationDelegate(this.OnEndGetStaffByNum);
+            }
+            if ((this.onGetStaffByNumCompletedDelegate == null)) {
+                this.onGetStaffByNumCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetStaffByNumCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetStaffByNumDelegate, new object[] {
+                        request}, this.onEndGetStaffByNumDelegate, this.onGetStaffByNumCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -1000,6 +1230,19 @@ namespace gcafeApp.gcafeSvc {
             public gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse EndGetMenuItemByCatalogId(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse _result = ((gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse)(base.EndInvoke("GetMenuItemByCatalogId", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetStaffByNum(gcafeApp.gcafeSvc.GetStaffByNumRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("GetStaffByNum", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public gcafeApp.gcafeSvc.GetStaffByNumResponse EndGetStaffByNum(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                gcafeApp.gcafeSvc.GetStaffByNumResponse _result = ((gcafeApp.gcafeSvc.GetStaffByNumResponse)(base.EndInvoke("GetStaffByNum", _args, result)));
                 return _result;
             }
         }
