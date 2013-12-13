@@ -118,6 +118,9 @@
     <Compile Include="Pages\MenuSelectPage.xaml.cs">
       <DependentUpon>MenuSelectPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MenuSubCatalogPage.xaml.cs">
+      <DependentUpon>MenuSubCatalogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TableNoPage.xaml.cs">
       <DependentUpon>TableNoPage.xaml</DependentUpon>
     </Compile>
@@ -143,6 +146,7 @@
     <Compile Include="ViewModel\VMBase.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />
     <Compile Include="ViewModel\VMMenuCatalog.cs" />
+    <Compile Include="ViewModel\VMSubMenuCatalog.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -177,6 +181,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\MenuSubCatalogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\TableNoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\ColorStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SampleData\SubMenuCatalogSampleData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

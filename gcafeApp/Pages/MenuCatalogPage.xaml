@@ -11,7 +11,8 @@
     Foreground="{StaticResource TitleFontColor}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding VMMenuCatalog, Source={StaticResource Locator}}">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource BackgroundColor}">
@@ -29,7 +30,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <Button Style="{StaticResource MenuCatalogButton}" Command="{Binding navigateToCommand}" CommandParameter="厨房">
+                <Button Style="{StaticResource MenuCatalogButton}" Command="{Binding NavigateToCommand}" CommandParameter="厨房">
                     <Button.Content>
                         <StackPanel>
                             <Image Source="/Assets/KitchenIcon.png" Stretch="None"></Image>
@@ -38,7 +39,7 @@
                     </Button.Content>
                 </Button>
 
-                <Button Margin="0, 60" Style="{StaticResource MenuCatalogButton}" Command="{Binding navigateToCommand}" CommandParameter="酒吧">
+                <Button Margin="0, 60" Style="{StaticResource MenuCatalogButton}" Command="{Binding NavigateToCommand}" CommandParameter="酒吧">
                     <Button.Content>
                         <StackPanel>
                             <Image Source="/Assets/BarIcon.png" Stretch="None"></Image>

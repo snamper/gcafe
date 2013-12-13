@@ -55,6 +55,22 @@ namespace gcafeWeb
         {
             List<MenuCatalog> cataList = new List<MenuCatalog>();
 
+            using (var context = new gcafeEntities())
+            {
+                int parent_id = 0;
+
+                if (rootCata == "厨房")
+                    parent_id = 1;
+                else if (rootCata == "酒吧")
+                    parent_id = 2;
+
+                List<menu_catalog> menuCataList = context.menu_catalog.Where(n => n.parent_id == parent_id).OrderBy(n => n.name).ToList();
+                foreach (menu_catalog mc in menuCataList)
+                {
+                    cataList.Add(new MenuCatalog() { ID = mc.id, Name = mc.name });
+                }
+            }
+
             return cataList;
         }
 

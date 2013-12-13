@@ -46,6 +46,18 @@ namespace gcafeApp.ViewModel
             SimpleIoc.Default.Register<TablesViewModel>();
             SimpleIoc.Default.Register<MenuSelectViewModel>();
             SimpleIoc.Default.Register<VMLogin>();
+            SimpleIoc.Default.Register<VMMenuCatalog>();
+            SimpleIoc.Default.Register<VMSubMenuCatalog>();
+        }
+
+        public VMSubMenuCatalog VMSubMenuCatalog
+        {
+            get { return ServiceLocator.Current.GetInstance<VMSubMenuCatalog>(); }
+        }
+
+        public VMMenuCatalog VMMenuCatalog
+        {
+            get { return ServiceLocator.Current.GetInstance<VMMenuCatalog>(); }
         }
 
         public MenuSelectViewModel VMMenuSelect

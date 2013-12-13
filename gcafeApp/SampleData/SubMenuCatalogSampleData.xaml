@@ -1,0 +1,25 @@
+﻿<vm:VMSubMenuCatalog
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:gcafeApp.ViewModel"
+    xmlns:svc="clr-namespace:gcafeApp.gcafeSvc">
+
+    <vm:VMSubMenuCatalog.Items>
+        <svc:MenuCatalog ID="1" Name="套 餐 类(厨)" ParentID="1" />
+        <svc:MenuCatalog ID="2" Name="经典美食(厨)" ParentID="1" />
+        <svc:MenuCatalog ID="3" Name="炒饭/跟饭/泡饭" ParentID="1" />
+        <svc:MenuCatalog ID="4" Name="时蔬(厨)" ParentID="1" />
+        <svc:MenuCatalog ID="5" Name="附加(厨)" ParentID="1" />
+        <svc:MenuCatalog ID="6" Name="海鲜(厨)" ParentID="1" />
+        <svc:MenuCatalog ID="7" Name="意粉/乌冬（厨）" ParentID="1" />
+        <svc:MenuCatalog ID="8" Name="面/米粉（厨）" ParentID="1" />
+        <svc:MenuCatalog ID="9" Name="焗饭/锅烧饭/煲仔饭" ParentID="1" />
+        <svc:MenuCatalog ID="10" Name="特色小食(厨)" ParentID="1" />
+        <svc:MenuCatalog ID="11" Name="餐牌加钱配送（厨）" ParentID="1" />
+        <svc:MenuCatalog ID="12" Name="职权签送(厨)" ParentID="1" />
+        <svc:MenuCatalog ID="13" Name="会员（厨）" ParentID="1" />
+        <svc:MenuCatalog ID="14" Name="商务套餐(厨)" ParentID="1" />
+        <svc:MenuCatalog ID="15" Name="商务餐零点(厨)" ParentID="1" />
+    </vm:VMSubMenuCatalog.Items>
+
+</vm:VMSubMenuCatalog>

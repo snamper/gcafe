@@ -16,7 +16,7 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource ModuleColor}">
         <!--枢轴控件-->
         <phone:Pivot Title="台号选择">
             <!--枢轴项一-->
@@ -24,7 +24,7 @@
                 <phone:LongListSelector Margin="0,0,-22,0" ItemsSource="{Binding Items}">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="0,8,0,8" Background="Transparent">
+                            <Grid Margin="0,8,0,8" Background="Gray">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="*"/>

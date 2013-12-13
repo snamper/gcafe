@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Input;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,14 @@ namespace gcafeApp.ViewModel
             navigateToCommand = new RelayCommand<string>(NavigateTo);
         }
 
+        public ICommand NavigateToCommand
+        {
+            get { return navigateToCommand; }
+        }
+
         private void NavigateTo(string cata)
         {
-
+            App.RootFrame.Navigate(new Uri(string.Format("/Pages/MenuSubCatalogPage.xaml?Catalog={0}", cata), UriKind.Relative));
         }
     }
 }
