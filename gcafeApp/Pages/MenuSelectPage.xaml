@@ -42,7 +42,7 @@
             <TextBox Grid.Row="0" Grid.Column="1" Text="0001" VerticalAlignment="Center" />
             <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="数量:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
             <TextBox Grid.Row="1" Grid.Column="1" Text="0001" VerticalAlignment="Center" />
-            <Button Grid.Row="0" Grid.Column="2">
+            <Button Grid.Row="0" Grid.Column="2" Command="{Binding NavigateToCommand}" CommandParameter="CataSel">
                 <Button.Template>
                     <ControlTemplate>
                         <Border Margin="10" BorderBrush="Yellow" BorderThickness="4" CornerRadius="50">

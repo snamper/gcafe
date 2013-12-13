@@ -16,7 +16,7 @@
     DataContext="{Binding Main, Source={StaticResource Locator}}">
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
-    <Grid x:Name="LayoutRoot" Background="{StaticResource BackgroundColor}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource ModuleColor}">
 
         <!-- 本地化说明:
             若要本地化显示的字符串，请将其值复制到应用程序的非特定语言资源文件(AppResources.resx)
