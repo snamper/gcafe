@@ -32,6 +32,8 @@ namespace gcafeApp.Pages
                 AppSettings.LoginStaff = vml.Staff;
                 App.RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
+            else
+                vml.IsPasswordError = true;
         }
     }
 }

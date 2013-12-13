@@ -12,12 +12,24 @@ namespace gcafeApp.ViewModel
 
         public VMLogin()
         {
+            IsUserError = false;
+            IsPasswordError = false;
+
             _svc.GetStaffByNumCompleted += _svc_GetStaffByNumCompleted;
         }
 
         void _svc_GetStaffByNumCompleted(object sender, gcafeSvc.GetStaffByNumCompletedEventArgs e)
         {
             _staff = e.Result.GetStaffByNumResult;
+            if (_staff == null)
+            {
+                IsUserError = true;
+            }
+            else
+            {
+                IsUserError = false;
+                IsPasswordError = false;
+            }
         }
 
         public gcafeSvc.Staff Staff
@@ -66,16 +78,46 @@ namespace gcafeApp.ViewModel
             get { return _loginStaffPassword; }
             set
             {
+                System.Diagnostics.Debug.WriteLine("LoginStaffPassword");
+
                 this._loginStaffPassword = value;
                 RaisePropertyChanged();
 
                 if (this._loginStaffPassword == _staff.Password)
+                {
                     IsLogin = true;
+                    IsPasswordError = false;
+                }
                 else
+                {
                     IsLogin = false;
+                    IsPasswordError = true;
+                }
             }
         }
         private string _loginStaffPassword;
+
+        public bool IsUserError
+        {
+            get { return _isUserError; }
+            set
+            {
+                this._isUserError = value;
+                RaisePropertyChanged();
+            }
+        }
+        private bool _isUserError;
+
+        public bool IsPasswordError
+        {
+            get { return _isPasswordError; }
+            set
+            {
+                this._isPasswordError = value;
+                RaisePropertyChanged();
+            }
+        }
+        private bool _isPasswordError;
 
         public bool IsLogin { get; set; }
     }

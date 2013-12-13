@@ -48,5 +48,9 @@ namespace gcafeApp.ViewModel
             }
         }
 
+        public string Test
+        {
+            get { return "Hello"; }
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace gcafeApp
             InitializeComponent();
 
             // 将 listbox 控件的数据上下文设置为示例数据
-            DataContext = App.ViewModel;
+            //DataContext = App.ViewModel;
 
             // 用于本地化 ApplicationBar 的示例代码
             //BuildLocalizedApplicationBar();
@@ -28,10 +28,11 @@ namespace gcafeApp
         // 为 ViewModel 项加载数据
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
+            ViewModel.MainViewModel mv = (ViewModel.MainViewModel)DataContext;
+            //if (!App.ViewModel.IsDataLoaded)
+            //{
+            //    App.ViewModel.LoadData();
+            //}
         }
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
@@ -39,6 +40,7 @@ namespace gcafeApp
             Settings.AppSettings.LoginStaff = null;
             App.RootFrame.Navigate(new Uri("/Pages/AuthenticationPage.xaml", UriKind.Relative));
         }
+
 
         // 用于生成本地化 ApplicationBar 的示例代码
         //private void BuildLocalizedApplicationBar()

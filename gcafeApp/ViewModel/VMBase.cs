@@ -46,6 +46,18 @@ namespace gcafeApp.ViewModel
             }
         }
 
+        public string LoginStaffName
+        {
+            get
+            {
+                if (Settings.AppSettings.LoginStaff != null)
+                    return Settings.AppSettings.LoginStaff.Name;
+                else
+                    return "未登录";
+            }
+        }
+
+
         /// <summary>
         /// Overrided RaisePropertyChanged to use CallerMemberName
         /// </summary>

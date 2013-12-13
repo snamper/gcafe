@@ -55,6 +55,11 @@ namespace gcafeApp.ViewModels
             private set;
         }
 
+        public string Test
+        {
+            get { return "test"; }
+        }
+
         /// <summary>
         /// 创建一些 ItemViewModel 对象并将其添加到 Items 集合中。
         /// </summary>

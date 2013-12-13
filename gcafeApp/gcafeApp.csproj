@@ -100,6 +100,9 @@
     <Compile Include="Controls\Order.xaml.cs">
       <DependentUpon>Order.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PageTitle.xaml.cs">
+      <DependentUpon>PageTitle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TableNoPicker.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -143,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="Controls\Order.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PageTitle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -37,9 +37,16 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,6,12,-6">
             <StackPanel>
                 <TextBlock Text="员工编号" />
-                <TextBox Width="300" Text="{Binding LoginStaffNo, Mode=TwoWay}"  HorizontalAlignment="Left" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Width="300" Text="{Binding LoginStaffNo, Mode=TwoWay}"  HorizontalAlignment="Left" />
+                    <TextBlock Text="无此用户" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Visibility="{Binding IsUserError, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </StackPanel>
                 <TextBlock Text="密码" />
-                <PasswordBox x:Name="pwd" Width="300" Password="{Binding LoginStaffPassword, Mode=TwoWay}" HorizontalAlignment="Left" />
+                <StackPanel Orientation="Horizontal">
+                    <PasswordBox x:Name="pwd" Width="300" Password="{Binding LoginStaffPassword, Mode=TwoWay}" HorizontalAlignment="Left" />
+                    <TextBlock Text="密码错误" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red" Visibility="{Binding IsPasswordError, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </StackPanel>
+
             </StackPanel>
         </Grid>
     </Grid>
