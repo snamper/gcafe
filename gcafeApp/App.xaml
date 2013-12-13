@@ -11,6 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/ColorStyles.xaml"/>
+                <ResourceDictionary Source="Resources/ButtonStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <local:LocalizedStrings xmlns:local="clr-namespace:gcafeApp" x:Key="LocalizedStrings" />

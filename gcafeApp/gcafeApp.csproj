@@ -112,6 +112,9 @@
     <Compile Include="Pages\AuthenticationPage.xaml.cs">
       <DependentUpon>AuthenticationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MenuCatalogPage.xaml.cs">
+      <DependentUpon>MenuCatalogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MenuSelectPage.xaml.cs">
       <DependentUpon>MenuSelectPage.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,7 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\VMBase.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />
+    <Compile Include="ViewModel\VMMenuCatalog.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -165,11 +169,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\MenuCatalogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MenuSelectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TableNoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ButtonStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -226,6 +238,8 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Assets\BarIcon.png" />
+    <Content Include="Assets\KitchenIcon.png" />
     <Content Include="Images\ApplicationBar.Cancel.png" />
     <Content Include="Images\ApplicationBar.Check.png" />
     <None Include="Service References\gcafeSvc\gcafeSvc1.disco" />
