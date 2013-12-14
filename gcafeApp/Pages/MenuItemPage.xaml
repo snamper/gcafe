@@ -1,0 +1,59 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="gcafeApp.Pages.MenuItemPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    d:DataContext="{d:DesignData ../SampleData/MenuItemSampleData.xaml}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding VMMenuItem, Source={StaticResource Locator}}">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="{StaticResource ModuleColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <Grid Grid.Row="0" Margin="12,0,0,0">
+            <ProgressBar IsIndeterminate="True" HorizontalAlignment="Stretch" Margin="0,5,0,0"
+                         VerticalAlignment="Top"
+                         Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+            <!--TitlePanel contains the name of the application and page title-->
+            <StackPanel>
+                <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock Text="菜品条目" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            </StackPanel>
+        </Grid>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <phone:LongListSelector Margin="0,0,-22,0" ItemsSource="{Binding Items}" >
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,8,10,8" Background="Gray">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="80" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Background="Red" ></StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" FontSize="20" FontFamily="{StaticResource PhoneFontFamilySemiBold}" VerticalAlignment="Center" Margin="10" />
+                            <TextBlock Grid.Column="2" Text="{Binding Price}" Style="{StaticResource PhoneTextLargeStyle}" FontSize="20" FontFamily="{StaticResource PhoneFontFamilySemiBold}" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Right" Foreground="Brown" />
+                        </Grid>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+            </phone:LongListSelector>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

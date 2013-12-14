@@ -30,7 +30,7 @@ namespace gcafeApp.Pages
         private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             gcafeSvc.MenuCatalog menuCatalog = (gcafeSvc.MenuCatalog)e.AddedItems[0];
-            App.RootFrame.Navigate(new Uri(string.Format("/Pages/MenuItemPage.xaml?CataId={0}", menuCatalog.ID), UriKind.Relative));
+            App.RootFrame.Navigate(new Uri(string.Format("/Pages/MenuItemPage.xaml?CatalogID={0}", menuCatalog.ID), UriKind.Relative));
         }
     }
 }

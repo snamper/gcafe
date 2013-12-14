@@ -1,0 +1,21 @@
+﻿<vm:VMMenuItem
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:gcafeApp.ViewModel"
+    xmlns:svc="clr-namespace:gcafeApp.gcafeSvc">
+    
+    <vm:VMMenuItem.Items>
+        <svc:MenuItem Name="扒墨鱼皇" Price="79.00" IsSetmeal="False" />
+        <svc:MenuItem Name="扒芝心精品牛扒(巡礼)" Price="23.00" IsSetmeal="False" />
+        <svc:MenuItem Name="贝莉公爵夫人干红" Price="12.0" IsSetmeal="False" />
+        <svc:MenuItem Name="巴帝罗玛丝缇半甜白葡萄酒(750ML)." Price="128.00" IsSetmeal="False" />
+        <svc:MenuItem Name="肥牛香菇泡饭（厨推）" Price="33.00" IsSetmeal="False" />
+        <svc:MenuItem Name="橄榄菜牛脷炒饭" Price="29.00" IsSetmeal="False" />
+        <svc:MenuItem Name="跟餐扒龙利鱼配蟹皇汁" Price="168.00" IsSetmeal="False" />
+        <svc:MenuItem Name="古典式牛仔肋排(700G)(外)" Price="89.00" IsSetmeal="False" />
+        <svc:MenuItem Name="桂圆红枣牛蒡茶(壶)" Price="29.00" IsSetmeal="False" />
+        <svc:MenuItem Name="花甲肉芝士汁烩螺丝粉(尊享卡)" Price="25.00" IsSetmeal="False" />
+        <svc:MenuItem Name="欢乐薯条派对(茶)(零)" Price="19.00" IsSetmeal="False" />
+    </vm:VMMenuItem.Items>
+    
+</vm:VMMenuItem>
