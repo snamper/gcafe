@@ -22,15 +22,22 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" />
-            <TextBlock Text="菜品子类" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+        <Grid Grid.Row="0" Margin="12,0,0,0">
+            <ProgressBar IsIndeterminate="True" HorizontalAlignment="Stretch" Margin="0,5,0,0"
+                         VerticalAlignment="Top"
+                         Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+            <!--TitlePanel contains the name of the application and page title-->
+            <StackPanel>
+                <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock Text="菜品子类" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            </StackPanel>
+        </Grid>
+
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector Margin="0,0,-22,0" ItemsSource="{Binding Items}">
+            <phone:LongListSelector Margin="0,0,-22,0" ItemsSource="{Binding Items}" SelectionChanged="LongListSelector_SelectionChanged">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,8,10,8" Background="Gray">

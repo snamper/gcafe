@@ -23,6 +23,8 @@ namespace gcafeApp.ViewModel
 
         void _svc_GetMenuCatalogsCompleted(object sender, GetMenuCatalogsCompletedEventArgs e)
         {
+            IsBusy = false;
+
             if (e.Result.GetMenuCatalogsResult != null)
                 this.Items = new ObservableCollection<MenuCatalog>(e.Result.GetMenuCatalogsResult);
             else
@@ -33,6 +35,8 @@ namespace gcafeApp.ViewModel
         {
             set
             {
+                IsBusy = true;
+
                 GetMenuCatalogsRequest req = new GetMenuCatalogsRequest(value);
                 _svc.GetMenuCatalogsAsync(req);
             }

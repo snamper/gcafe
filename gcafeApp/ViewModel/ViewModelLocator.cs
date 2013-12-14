@@ -48,6 +48,12 @@ namespace gcafeApp.ViewModel
             SimpleIoc.Default.Register<VMLogin>();
             SimpleIoc.Default.Register<VMMenuCatalog>();
             SimpleIoc.Default.Register<VMSubMenuCatalog>();
+            SimpleIoc.Default.Register<VMMenuItem>();
+        }
+
+        public VMMenuItem VMMenuItem
+        {
+            get { return ServiceLocator.Current.GetInstance<VMMenuItem>(); }
         }
 
         public VMSubMenuCatalog VMSubMenuCatalog

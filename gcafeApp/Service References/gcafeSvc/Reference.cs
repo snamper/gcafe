@@ -65,6 +65,8 @@ namespace gcafeApp.gcafeSvc {
     [System.Runtime.Serialization.DataContractAttribute(Name="MenuItem", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
     public partial class MenuItem : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private int IDField;
+        
         private bool IsSetmealField;
         
         private string NameField;
@@ -74,6 +76,19 @@ namespace gcafeApp.gcafeSvc {
         private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.SetmealItem> SetmealItemsField;
         
         private string UnitField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsSetmeal {

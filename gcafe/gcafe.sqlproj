@@ -77,6 +77,7 @@
   <ItemGroup>
     <None Include="Server-192.168.1.200.publish.xml" />
     <None Include="Konons.publish.xml" />
+    <None Include="gcafe.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\member.sql" />

@@ -78,6 +78,15 @@ namespace gcafeWeb
         {
             List<MenuItem> menuList = new List<MenuItem>();
 
+            using (var context = new gcafeEntities())
+            {
+                List<menu> menus = context.menu.Where(n => n.menu_catalog_id == cataId).OrderBy(n => n.name).ToList();
+                foreach (menu menu in menus)
+                {
+                    menuList.Add(new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = menu.is_setmeal });
+                }
+            }
+
             return menuList;
         }
 
