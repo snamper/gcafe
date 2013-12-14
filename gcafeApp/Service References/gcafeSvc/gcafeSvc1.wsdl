@@ -7,35 +7,17 @@
       <xsd:import schemaLocation="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/gcafeWeb" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IgcafeSvc_DoWork_InputMessage">
-    <wsdl:part name="parameters" element="tns:DoWork" />
-  </wsdl:message>
-  <wsdl:message name="IgcafeSvc_DoWork_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DoWorkResponse" />
-  </wsdl:message>
-  <wsdl:message name="IgcafeSvc_GetOrders_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrders" />
-  </wsdl:message>
-  <wsdl:message name="IgcafeSvc_GetOrders_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrdersResponse" />
-  </wsdl:message>
-  <wsdl:message name="IgcafeSvc_GetMenu_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetMenu" />
-  </wsdl:message>
-  <wsdl:message name="IgcafeSvc_GetMenu_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetMenuResponse" />
-  </wsdl:message>
   <wsdl:message name="IgcafeSvc_GetMenuCatalogs_InputMessage">
     <wsdl:part name="parameters" element="tns:GetMenuCatalogs" />
   </wsdl:message>
   <wsdl:message name="IgcafeSvc_GetMenuCatalogs_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMenuCatalogsResponse" />
   </wsdl:message>
-  <wsdl:message name="IgcafeSvc_GetMenuItemByCatalogId_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetMenuItemByCatalogId" />
+  <wsdl:message name="IgcafeSvc_GetMenuItemsByCatalogId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMenuItemsByCatalogId" />
   </wsdl:message>
-  <wsdl:message name="IgcafeSvc_GetMenuItemByCatalogId_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetMenuItemByCatalogIdResponse" />
+  <wsdl:message name="IgcafeSvc_GetMenuItemsByCatalogId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMenuItemsByCatalogIdResponse" />
   </wsdl:message>
   <wsdl:message name="IgcafeSvc_GetStaffByNum_InputMessage">
     <wsdl:part name="parameters" element="tns:GetStaffByNum" />
@@ -44,25 +26,13 @@
     <wsdl:part name="parameters" element="tns:GetStaffByNumResponse" />
   </wsdl:message>
   <wsdl:portType name="IgcafeSvc">
-    <wsdl:operation name="DoWork">
-      <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/DoWork" message="tns:IgcafeSvc_DoWork_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/DoWorkResponse" message="tns:IgcafeSvc_DoWork_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetOrders">
-      <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetOrders" message="tns:IgcafeSvc_GetOrders_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/GetOrdersResponse" message="tns:IgcafeSvc_GetOrders_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetMenu">
-      <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetMenu" message="tns:IgcafeSvc_GetMenu_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/GetMenuResponse" message="tns:IgcafeSvc_GetMenu_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetMenuCatalogs">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetMenuCatalogs" message="tns:IgcafeSvc_GetMenuCatalogs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/GetMenuCatalogsResponse" message="tns:IgcafeSvc_GetMenuCatalogs_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetMenuItemByCatalogId">
-      <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetMenuItemByCatalogId" message="tns:IgcafeSvc_GetMenuItemByCatalogId_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/GetMenuItemByCatalogIdResponse" message="tns:IgcafeSvc_GetMenuItemByCatalogId_OutputMessage" />
+    <wsdl:operation name="GetMenuItemsByCatalogId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetMenuItemsByCatalogId" message="tns:IgcafeSvc_GetMenuItemsByCatalogId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/GetMenuItemsByCatalogIdResponse" message="tns:IgcafeSvc_GetMenuItemsByCatalogId_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetStaffByNum">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetStaffByNum" message="tns:IgcafeSvc_GetStaffByNum_InputMessage" />
@@ -71,33 +41,6 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IgcafeSvc" type="tns:IgcafeSvc">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="DoWork">
-      <soap:operation soapAction="http://tempuri.org/IgcafeSvc/DoWork" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetOrders">
-      <soap:operation soapAction="http://tempuri.org/IgcafeSvc/GetOrders" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetMenu">
-      <soap:operation soapAction="http://tempuri.org/IgcafeSvc/GetMenu" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetMenuCatalogs">
       <soap:operation soapAction="http://tempuri.org/IgcafeSvc/GetMenuCatalogs" style="document" />
       <wsdl:input>
@@ -107,8 +50,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetMenuItemByCatalogId">
-      <soap:operation soapAction="http://tempuri.org/IgcafeSvc/GetMenuItemByCatalogId" style="document" />
+    <wsdl:operation name="GetMenuItemsByCatalogId">
+      <soap:operation soapAction="http://tempuri.org/IgcafeSvc/GetMenuItemsByCatalogId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

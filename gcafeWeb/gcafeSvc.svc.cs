@@ -13,44 +13,6 @@ namespace gcafeWeb
     // 注意: 为了启动 WCF 测试客户端以测试此服务，请在解决方案资源管理器中选择 gcafeSvc.svc 或 gcafeSvc.svc.cs，然后开始调试。
     public class gcafeSvc : IgcafeSvc
     {
-        public void DoWork()
-        {
-            using (var _context = new gcafeEntities())
-            {
-                branch[] branchs = _context.branch.ToArray();
-
-                foreach (var branch in branchs)
-                {
-                    if (branch.name == "")
-                        break;
-                }
-            }
-        }
-
-        public List<Order> GetOrders()
-        {
-            //return new Order();
-            List<Order> orderList = new List<Order>();
-
-            using (var _context = new gcafeEntities())
-            {
-                order[] orders = _context.order.ToArray();
-                foreach (var order in orders)
-                {
-
-                }
-            }
-
-            return orderList;
-        }
-
-        public List<MenuItem> GetMenu()
-        {
-            List<MenuItem> menuList = new List<MenuItem>();
-
-            return menuList;
-        }
-
         public List<MenuCatalog> GetMenuCatalogs(string rootCata)
         {
             List<MenuCatalog> cataList = new List<MenuCatalog>();
@@ -74,13 +36,13 @@ namespace gcafeWeb
             return cataList;
         }
 
-        public List<MenuItem> GetMenuItemByCatalogId(int cataId)
+        public List<MenuItem> GetMenuItemsByCatalogId(int branchId, int cataId)
         {
             List<MenuItem> menuList = new List<MenuItem>();
 
             using (var context = new gcafeEntities())
             {
-                List<menu> menus = context.menu.Where(n => n.menu_catalog_id == cataId).OrderBy(n => n.name).ToList();
+                List<menu> menus = context.menu.Where(n => (n.menu_catalog_id == cataId) && (n.branch_id == branchId)).OrderBy(n => n.name).ToList();
                 foreach (menu menu in menus)
                 {
                     menuList.Add(new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = menu.is_setmeal });

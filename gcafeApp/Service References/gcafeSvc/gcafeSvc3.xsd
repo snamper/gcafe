@@ -1,40 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/gcafeWeb" />
-  <xs:element name="DoWork">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DoWorkResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrders">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrdersResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetOrdersResult" nillable="true" type="q1:ArrayOfOrder" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMenu">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMenuResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetMenuResult" nillable="true" type="q2:ArrayOfMenuItem" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="GetMenuCatalogs">
     <xs:complexType>
       <xs:sequence>
@@ -45,21 +11,22 @@
   <xs:element name="GetMenuCatalogsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetMenuCatalogsResult" nillable="true" type="q3:ArrayOfMenuCatalog" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetMenuCatalogsResult" nillable="true" type="q1:ArrayOfMenuCatalog" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetMenuItemByCatalogId">
+  <xs:element name="GetMenuItemsByCatalogId">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="branchId" type="xs:int" />
         <xs:element minOccurs="0" name="cataId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetMenuItemByCatalogIdResponse">
+  <xs:element name="GetMenuItemsByCatalogIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetMenuItemByCatalogIdResult" nillable="true" type="q4:ArrayOfMenuItem" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetMenuItemsByCatalogIdResult" nillable="true" type="q2:ArrayOfMenuItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -73,7 +40,7 @@
   <xs:element name="GetStaffByNumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q5:Staff" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q3:Staff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -11,15 +11,6 @@ namespace gcafeWeb
     [ServiceContract]
     public interface IgcafeSvc
     {
-        [OperationContract]
-        void DoWork();
-
-        [OperationContract]
-        List<Order> GetOrders();
-
-        [OperationContract]
-        List<MenuItem> GetMenu();
-
         /// <summary>
         /// 从menu_catalog按rootCata取数据
         /// </summary>
@@ -31,10 +22,11 @@ namespace gcafeWeb
         /// <summary>
         /// 根据cataId取数据
         /// </summary>
-        /// <param name="cataId">menu_catalog.id</param>
+        /// <param name="branchId">分店ID</param>
+        /// <param name="cataId"></param>
         /// <returns></returns>
         [OperationContract]
-        List<MenuItem> GetMenuItemByCatalogId(int cataId);
+        List<MenuItem> GetMenuItemsByCatalogId(int branchId, int cataId);
 
         /// <summary>
         /// 根据Num取员工信息

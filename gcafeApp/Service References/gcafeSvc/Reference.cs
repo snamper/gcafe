@@ -17,35 +17,50 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Order", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
-    public partial class Order : object, System.ComponentModel.INotifyPropertyChanged {
+    [System.Runtime.Serialization.DataContractAttribute(Name="MenuCatalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    public partial class MenuCatalog : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private string TableNoField;
+        private int IDField;
         
-        private int idField;
+        private string NameField;
+        
+        private int ParentIDField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TableNo {
+        public int ID {
             get {
-                return this.TableNoField;
+                return this.IDField;
             }
             set {
-                if ((object.ReferenceEquals(this.TableNoField, value) != true)) {
-                    this.TableNoField = value;
-                    this.RaisePropertyChanged("TableNo");
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int id {
+        public string Name {
             get {
-                return this.idField;
+                return this.NameField;
             }
             set {
-                if ((this.idField.Equals(value) != true)) {
-                    this.idField = value;
-                    this.RaisePropertyChanged("id");
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ParentID {
+            get {
+                return this.ParentIDField;
+            }
+            set {
+                if ((this.ParentIDField.Equals(value) != true)) {
+                    this.ParentIDField = value;
+                    this.RaisePropertyChanged("ParentID");
                 }
             }
         }
@@ -227,66 +242,6 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MenuCatalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
-    public partial class MenuCatalog : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private int IDField;
-        
-        private string NameField;
-        
-        private int ParentIDField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ParentID {
-            get {
-                return this.ParentIDField;
-            }
-            set {
-                if ((this.ParentIDField.Equals(value) != true)) {
-                    this.ParentIDField = value;
-                    this.RaisePropertyChanged("ParentID");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Staff", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
     public partial class Staff : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -409,103 +364,20 @@ namespace gcafeApp.gcafeSvc {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="gcafeSvc.IgcafeSvc")]
     public interface IgcafeSvc {
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/DoWork", ReplyAction="http://tempuri.org/IgcafeSvc/DoWorkResponse")]
-        System.IAsyncResult BeginDoWork(gcafeApp.gcafeSvc.DoWorkRequest request, System.AsyncCallback callback, object asyncState);
-        
-        gcafeApp.gcafeSvc.DoWorkResponse EndDoWork(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetOrders", ReplyAction="http://tempuri.org/IgcafeSvc/GetOrdersResponse")]
-        System.IAsyncResult BeginGetOrders(gcafeApp.gcafeSvc.GetOrdersRequest request, System.AsyncCallback callback, object asyncState);
-        
-        gcafeApp.gcafeSvc.GetOrdersResponse EndGetOrders(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetMenu", ReplyAction="http://tempuri.org/IgcafeSvc/GetMenuResponse")]
-        System.IAsyncResult BeginGetMenu(gcafeApp.gcafeSvc.GetMenuRequest request, System.AsyncCallback callback, object asyncState);
-        
-        gcafeApp.gcafeSvc.GetMenuResponse EndGetMenu(System.IAsyncResult result);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetMenuCatalogs", ReplyAction="http://tempuri.org/IgcafeSvc/GetMenuCatalogsResponse")]
         System.IAsyncResult BeginGetMenuCatalogs(gcafeApp.gcafeSvc.GetMenuCatalogsRequest request, System.AsyncCallback callback, object asyncState);
         
         gcafeApp.gcafeSvc.GetMenuCatalogsResponse EndGetMenuCatalogs(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetMenuItemByCatalogId", ReplyAction="http://tempuri.org/IgcafeSvc/GetMenuItemByCatalogIdResponse")]
-        System.IAsyncResult BeginGetMenuItemByCatalogId(gcafeApp.gcafeSvc.GetMenuItemByCatalogIdRequest request, System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetMenuItemsByCatalogId", ReplyAction="http://tempuri.org/IgcafeSvc/GetMenuItemsByCatalogIdResponse")]
+        System.IAsyncResult BeginGetMenuItemsByCatalogId(gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdRequest request, System.AsyncCallback callback, object asyncState);
         
-        gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse EndGetMenuItemByCatalogId(System.IAsyncResult result);
+        gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdResponse EndGetMenuItemsByCatalogId(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetStaffByNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetStaffByNumResponse")]
         System.IAsyncResult BeginGetStaffByNum(gcafeApp.gcafeSvc.GetStaffByNumRequest request, System.AsyncCallback callback, object asyncState);
         
         gcafeApp.gcafeSvc.GetStaffByNumResponse EndGetStaffByNum(System.IAsyncResult result);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="DoWork", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class DoWorkRequest {
-        
-        public DoWorkRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="DoWorkResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class DoWorkResponse {
-        
-        public DoWorkResponse() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetOrders", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class GetOrdersRequest {
-        
-        public GetOrdersRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetOrdersResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class GetOrdersResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.Order> GetOrdersResult;
-        
-        public GetOrdersResponse() {
-        }
-        
-        public GetOrdersResponse(System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.Order> GetOrdersResult) {
-            this.GetOrdersResult = GetOrdersResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMenu", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class GetMenuRequest {
-        
-        public GetMenuRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMenuResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class GetMenuResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> GetMenuResult;
-        
-        public GetMenuResponse() {
-        }
-        
-        public GetMenuResponse(System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> GetMenuResult) {
-            this.GetMenuResult = GetMenuResult;
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -542,33 +414,37 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMenuItemByCatalogId", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class GetMenuItemByCatalogIdRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMenuItemsByCatalogId", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetMenuItemsByCatalogIdRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public int branchId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
         public int cataId;
         
-        public GetMenuItemByCatalogIdRequest() {
+        public GetMenuItemsByCatalogIdRequest() {
         }
         
-        public GetMenuItemByCatalogIdRequest(int cataId) {
+        public GetMenuItemsByCatalogIdRequest(int branchId, int cataId) {
+            this.branchId = branchId;
             this.cataId = cataId;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMenuItemByCatalogIdResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class GetMenuItemByCatalogIdResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetMenuItemsByCatalogIdResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetMenuItemsByCatalogIdResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
-        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> GetMenuItemByCatalogIdResult;
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> GetMenuItemsByCatalogIdResult;
         
-        public GetMenuItemByCatalogIdResponse() {
+        public GetMenuItemsByCatalogIdResponse() {
         }
         
-        public GetMenuItemByCatalogIdResponse(System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> GetMenuItemByCatalogIdResult) {
-            this.GetMenuItemByCatalogIdResult = GetMenuItemByCatalogIdResult;
+        public GetMenuItemsByCatalogIdResponse(System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> GetMenuItemsByCatalogIdResult) {
+            this.GetMenuItemsByCatalogIdResult = GetMenuItemsByCatalogIdResult;
         }
     }
     
@@ -610,63 +486,6 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DoWorkCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public DoWorkCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public gcafeApp.gcafeSvc.DoWorkResponse Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((gcafeApp.gcafeSvc.DoWorkResponse)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetOrdersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public GetOrdersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public gcafeApp.gcafeSvc.GetOrdersResponse Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((gcafeApp.gcafeSvc.GetOrdersResponse)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetMenuCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public GetMenuCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public gcafeApp.gcafeSvc.GetMenuResponse Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((gcafeApp.gcafeSvc.GetMenuResponse)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class GetMenuCatalogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -686,19 +505,19 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetMenuItemByCatalogIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetMenuItemsByCatalogIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        public GetMenuItemByCatalogIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        public GetMenuItemsByCatalogIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
-        public gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse Result {
+        public gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdResponse Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse)(this.results[0]));
+                return ((gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdResponse)(this.results[0]));
             }
         }
     }
@@ -726,35 +545,17 @@ namespace gcafeApp.gcafeSvc {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class IgcafeSvcClient : System.ServiceModel.ClientBase<gcafeApp.gcafeSvc.IgcafeSvc>, gcafeApp.gcafeSvc.IgcafeSvc {
         
-        private BeginOperationDelegate onBeginDoWorkDelegate;
-        
-        private EndOperationDelegate onEndDoWorkDelegate;
-        
-        private System.Threading.SendOrPostCallback onDoWorkCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginGetOrdersDelegate;
-        
-        private EndOperationDelegate onEndGetOrdersDelegate;
-        
-        private System.Threading.SendOrPostCallback onGetOrdersCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginGetMenuDelegate;
-        
-        private EndOperationDelegate onEndGetMenuDelegate;
-        
-        private System.Threading.SendOrPostCallback onGetMenuCompletedDelegate;
-        
         private BeginOperationDelegate onBeginGetMenuCatalogsDelegate;
         
         private EndOperationDelegate onEndGetMenuCatalogsDelegate;
         
         private System.Threading.SendOrPostCallback onGetMenuCatalogsCompletedDelegate;
         
-        private BeginOperationDelegate onBeginGetMenuItemByCatalogIdDelegate;
+        private BeginOperationDelegate onBeginGetMenuItemsByCatalogIdDelegate;
         
-        private EndOperationDelegate onEndGetMenuItemByCatalogIdDelegate;
+        private EndOperationDelegate onEndGetMenuItemsByCatalogIdDelegate;
         
-        private System.Threading.SendOrPostCallback onGetMenuItemByCatalogIdCompletedDelegate;
+        private System.Threading.SendOrPostCallback onGetMenuItemsByCatalogIdCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetStaffByNumDelegate;
         
@@ -815,159 +616,15 @@ namespace gcafeApp.gcafeSvc {
             }
         }
         
-        public event System.EventHandler<DoWorkCompletedEventArgs> DoWorkCompleted;
-        
-        public event System.EventHandler<GetOrdersCompletedEventArgs> GetOrdersCompleted;
-        
-        public event System.EventHandler<GetMenuCompletedEventArgs> GetMenuCompleted;
-        
         public event System.EventHandler<GetMenuCatalogsCompletedEventArgs> GetMenuCatalogsCompleted;
         
-        public event System.EventHandler<GetMenuItemByCatalogIdCompletedEventArgs> GetMenuItemByCatalogIdCompleted;
+        public event System.EventHandler<GetMenuItemsByCatalogIdCompletedEventArgs> GetMenuItemsByCatalogIdCompleted;
         
         public event System.EventHandler<GetStaffByNumCompletedEventArgs> GetStaffByNumCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginDoWork(gcafeApp.gcafeSvc.DoWorkRequest request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginDoWork(request, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        gcafeApp.gcafeSvc.DoWorkResponse gcafeApp.gcafeSvc.IgcafeSvc.EndDoWork(System.IAsyncResult result) {
-            return base.Channel.EndDoWork(result);
-        }
-        
-        private System.IAsyncResult OnBeginDoWork(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            gcafeApp.gcafeSvc.DoWorkRequest request = ((gcafeApp.gcafeSvc.DoWorkRequest)(inValues[0]));
-            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginDoWork(request, callback, asyncState);
-        }
-        
-        private object[] OnEndDoWork(System.IAsyncResult result) {
-            gcafeApp.gcafeSvc.DoWorkResponse retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndDoWork(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnDoWorkCompleted(object state) {
-            if ((this.DoWorkCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.DoWorkCompleted(this, new DoWorkCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void DoWorkAsync(gcafeApp.gcafeSvc.DoWorkRequest request) {
-            this.DoWorkAsync(request, null);
-        }
-        
-        public void DoWorkAsync(gcafeApp.gcafeSvc.DoWorkRequest request, object userState) {
-            if ((this.onBeginDoWorkDelegate == null)) {
-                this.onBeginDoWorkDelegate = new BeginOperationDelegate(this.OnBeginDoWork);
-            }
-            if ((this.onEndDoWorkDelegate == null)) {
-                this.onEndDoWorkDelegate = new EndOperationDelegate(this.OnEndDoWork);
-            }
-            if ((this.onDoWorkCompletedDelegate == null)) {
-                this.onDoWorkCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDoWorkCompleted);
-            }
-            base.InvokeAsync(this.onBeginDoWorkDelegate, new object[] {
-                        request}, this.onEndDoWorkDelegate, this.onDoWorkCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetOrders(gcafeApp.gcafeSvc.GetOrdersRequest request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetOrders(request, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        gcafeApp.gcafeSvc.GetOrdersResponse gcafeApp.gcafeSvc.IgcafeSvc.EndGetOrders(System.IAsyncResult result) {
-            return base.Channel.EndGetOrders(result);
-        }
-        
-        private System.IAsyncResult OnBeginGetOrders(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            gcafeApp.gcafeSvc.GetOrdersRequest request = ((gcafeApp.gcafeSvc.GetOrdersRequest)(inValues[0]));
-            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginGetOrders(request, callback, asyncState);
-        }
-        
-        private object[] OnEndGetOrders(System.IAsyncResult result) {
-            gcafeApp.gcafeSvc.GetOrdersResponse retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetOrders(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnGetOrdersCompleted(object state) {
-            if ((this.GetOrdersCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetOrdersCompleted(this, new GetOrdersCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void GetOrdersAsync(gcafeApp.gcafeSvc.GetOrdersRequest request) {
-            this.GetOrdersAsync(request, null);
-        }
-        
-        public void GetOrdersAsync(gcafeApp.gcafeSvc.GetOrdersRequest request, object userState) {
-            if ((this.onBeginGetOrdersDelegate == null)) {
-                this.onBeginGetOrdersDelegate = new BeginOperationDelegate(this.OnBeginGetOrders);
-            }
-            if ((this.onEndGetOrdersDelegate == null)) {
-                this.onEndGetOrdersDelegate = new EndOperationDelegate(this.OnEndGetOrders);
-            }
-            if ((this.onGetOrdersCompletedDelegate == null)) {
-                this.onGetOrdersCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetOrdersCompleted);
-            }
-            base.InvokeAsync(this.onBeginGetOrdersDelegate, new object[] {
-                        request}, this.onEndGetOrdersDelegate, this.onGetOrdersCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetMenu(gcafeApp.gcafeSvc.GetMenuRequest request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetMenu(request, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        gcafeApp.gcafeSvc.GetMenuResponse gcafeApp.gcafeSvc.IgcafeSvc.EndGetMenu(System.IAsyncResult result) {
-            return base.Channel.EndGetMenu(result);
-        }
-        
-        private System.IAsyncResult OnBeginGetMenu(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            gcafeApp.gcafeSvc.GetMenuRequest request = ((gcafeApp.gcafeSvc.GetMenuRequest)(inValues[0]));
-            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginGetMenu(request, callback, asyncState);
-        }
-        
-        private object[] OnEndGetMenu(System.IAsyncResult result) {
-            gcafeApp.gcafeSvc.GetMenuResponse retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetMenu(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnGetMenuCompleted(object state) {
-            if ((this.GetMenuCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetMenuCompleted(this, new GetMenuCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void GetMenuAsync(gcafeApp.gcafeSvc.GetMenuRequest request) {
-            this.GetMenuAsync(request, null);
-        }
-        
-        public void GetMenuAsync(gcafeApp.gcafeSvc.GetMenuRequest request, object userState) {
-            if ((this.onBeginGetMenuDelegate == null)) {
-                this.onBeginGetMenuDelegate = new BeginOperationDelegate(this.OnBeginGetMenu);
-            }
-            if ((this.onEndGetMenuDelegate == null)) {
-                this.onEndGetMenuDelegate = new EndOperationDelegate(this.OnEndGetMenu);
-            }
-            if ((this.onGetMenuCompletedDelegate == null)) {
-                this.onGetMenuCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetMenuCompleted);
-            }
-            base.InvokeAsync(this.onBeginGetMenuDelegate, new object[] {
-                        request}, this.onEndGetMenuDelegate, this.onGetMenuCompletedDelegate, userState);
-        }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetMenuCatalogs(gcafeApp.gcafeSvc.GetMenuCatalogsRequest request, System.AsyncCallback callback, object asyncState) {
@@ -1016,49 +673,49 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetMenuItemByCatalogId(gcafeApp.gcafeSvc.GetMenuItemByCatalogIdRequest request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetMenuItemByCatalogId(request, callback, asyncState);
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetMenuItemsByCatalogId(gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetMenuItemsByCatalogId(request, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse gcafeApp.gcafeSvc.IgcafeSvc.EndGetMenuItemByCatalogId(System.IAsyncResult result) {
-            return base.Channel.EndGetMenuItemByCatalogId(result);
+        gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdResponse gcafeApp.gcafeSvc.IgcafeSvc.EndGetMenuItemsByCatalogId(System.IAsyncResult result) {
+            return base.Channel.EndGetMenuItemsByCatalogId(result);
         }
         
-        private System.IAsyncResult OnBeginGetMenuItemByCatalogId(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            gcafeApp.gcafeSvc.GetMenuItemByCatalogIdRequest request = ((gcafeApp.gcafeSvc.GetMenuItemByCatalogIdRequest)(inValues[0]));
-            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginGetMenuItemByCatalogId(request, callback, asyncState);
+        private System.IAsyncResult OnBeginGetMenuItemsByCatalogId(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdRequest request = ((gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdRequest)(inValues[0]));
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginGetMenuItemsByCatalogId(request, callback, asyncState);
         }
         
-        private object[] OnEndGetMenuItemByCatalogId(System.IAsyncResult result) {
-            gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetMenuItemByCatalogId(result);
+        private object[] OnEndGetMenuItemsByCatalogId(System.IAsyncResult result) {
+            gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdResponse retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetMenuItemsByCatalogId(result);
             return new object[] {
                     retVal};
         }
         
-        private void OnGetMenuItemByCatalogIdCompleted(object state) {
-            if ((this.GetMenuItemByCatalogIdCompleted != null)) {
+        private void OnGetMenuItemsByCatalogIdCompleted(object state) {
+            if ((this.GetMenuItemsByCatalogIdCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetMenuItemByCatalogIdCompleted(this, new GetMenuItemByCatalogIdCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+                this.GetMenuItemsByCatalogIdCompleted(this, new GetMenuItemsByCatalogIdCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void GetMenuItemByCatalogIdAsync(gcafeApp.gcafeSvc.GetMenuItemByCatalogIdRequest request) {
-            this.GetMenuItemByCatalogIdAsync(request, null);
+        public void GetMenuItemsByCatalogIdAsync(gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdRequest request) {
+            this.GetMenuItemsByCatalogIdAsync(request, null);
         }
         
-        public void GetMenuItemByCatalogIdAsync(gcafeApp.gcafeSvc.GetMenuItemByCatalogIdRequest request, object userState) {
-            if ((this.onBeginGetMenuItemByCatalogIdDelegate == null)) {
-                this.onBeginGetMenuItemByCatalogIdDelegate = new BeginOperationDelegate(this.OnBeginGetMenuItemByCatalogId);
+        public void GetMenuItemsByCatalogIdAsync(gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdRequest request, object userState) {
+            if ((this.onBeginGetMenuItemsByCatalogIdDelegate == null)) {
+                this.onBeginGetMenuItemsByCatalogIdDelegate = new BeginOperationDelegate(this.OnBeginGetMenuItemsByCatalogId);
             }
-            if ((this.onEndGetMenuItemByCatalogIdDelegate == null)) {
-                this.onEndGetMenuItemByCatalogIdDelegate = new EndOperationDelegate(this.OnEndGetMenuItemByCatalogId);
+            if ((this.onEndGetMenuItemsByCatalogIdDelegate == null)) {
+                this.onEndGetMenuItemsByCatalogIdDelegate = new EndOperationDelegate(this.OnEndGetMenuItemsByCatalogId);
             }
-            if ((this.onGetMenuItemByCatalogIdCompletedDelegate == null)) {
-                this.onGetMenuItemByCatalogIdCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetMenuItemByCatalogIdCompleted);
+            if ((this.onGetMenuItemsByCatalogIdCompletedDelegate == null)) {
+                this.onGetMenuItemsByCatalogIdCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetMenuItemsByCatalogIdCompleted);
             }
-            base.InvokeAsync(this.onBeginGetMenuItemByCatalogIdDelegate, new object[] {
-                        request}, this.onEndGetMenuItemByCatalogIdDelegate, this.onGetMenuItemByCatalogIdCompletedDelegate, userState);
+            base.InvokeAsync(this.onBeginGetMenuItemsByCatalogIdDelegate, new object[] {
+                        request}, this.onEndGetMenuItemsByCatalogIdDelegate, this.onGetMenuItemsByCatalogIdCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1183,45 +840,6 @@ namespace gcafeApp.gcafeSvc {
                     base(client) {
             }
             
-            public System.IAsyncResult BeginDoWork(gcafeApp.gcafeSvc.DoWorkRequest request, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
-                _args[0] = request;
-                System.IAsyncResult _result = base.BeginInvoke("DoWork", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public gcafeApp.gcafeSvc.DoWorkResponse EndDoWork(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                gcafeApp.gcafeSvc.DoWorkResponse _result = ((gcafeApp.gcafeSvc.DoWorkResponse)(base.EndInvoke("DoWork", _args, result)));
-                return _result;
-            }
-            
-            public System.IAsyncResult BeginGetOrders(gcafeApp.gcafeSvc.GetOrdersRequest request, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
-                _args[0] = request;
-                System.IAsyncResult _result = base.BeginInvoke("GetOrders", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public gcafeApp.gcafeSvc.GetOrdersResponse EndGetOrders(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                gcafeApp.gcafeSvc.GetOrdersResponse _result = ((gcafeApp.gcafeSvc.GetOrdersResponse)(base.EndInvoke("GetOrders", _args, result)));
-                return _result;
-            }
-            
-            public System.IAsyncResult BeginGetMenu(gcafeApp.gcafeSvc.GetMenuRequest request, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
-                _args[0] = request;
-                System.IAsyncResult _result = base.BeginInvoke("GetMenu", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public gcafeApp.gcafeSvc.GetMenuResponse EndGetMenu(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                gcafeApp.gcafeSvc.GetMenuResponse _result = ((gcafeApp.gcafeSvc.GetMenuResponse)(base.EndInvoke("GetMenu", _args, result)));
-                return _result;
-            }
-            
             public System.IAsyncResult BeginGetMenuCatalogs(gcafeApp.gcafeSvc.GetMenuCatalogsRequest request, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = request;
@@ -1235,16 +853,16 @@ namespace gcafeApp.gcafeSvc {
                 return _result;
             }
             
-            public System.IAsyncResult BeginGetMenuItemByCatalogId(gcafeApp.gcafeSvc.GetMenuItemByCatalogIdRequest request, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginGetMenuItemsByCatalogId(gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdRequest request, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = request;
-                System.IAsyncResult _result = base.BeginInvoke("GetMenuItemByCatalogId", _args, callback, asyncState);
+                System.IAsyncResult _result = base.BeginInvoke("GetMenuItemsByCatalogId", _args, callback, asyncState);
                 return _result;
             }
             
-            public gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse EndGetMenuItemByCatalogId(System.IAsyncResult result) {
+            public gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdResponse EndGetMenuItemsByCatalogId(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse _result = ((gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse)(base.EndInvoke("GetMenuItemByCatalogId", _args, result)));
+                gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdResponse _result = ((gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdResponse)(base.EndInvoke("GetMenuItemsByCatalogId", _args, result)));
                 return _result;
             }
             

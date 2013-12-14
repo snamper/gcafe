@@ -223,19 +223,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.DoWorkResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetMenuCatalogsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetMenuItemByCatalogIdResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetMenuResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetOrdersResponse.datasource">
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetStaffByNumResponse.datasource">

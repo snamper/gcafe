@@ -18,15 +18,15 @@ namespace gcafeApp.ViewModel
         public VMMenuItem()
         {
             _items = new ObservableCollection<MenuItem>();
-            _svc.GetMenuItemByCatalogIdCompleted += _svc_GetMenuItemByCatalogIdCompleted;
+            _svc.GetMenuItemsByCatalogIdCompleted += _svc_GetMenuItemsByCatalogIdCompleted;
         }
 
-        void _svc_GetMenuItemByCatalogIdCompleted(object sender, GetMenuItemByCatalogIdCompletedEventArgs e)
+        void _svc_GetMenuItemsByCatalogIdCompleted(object sender, GetMenuItemsByCatalogIdCompletedEventArgs e)
         {
             IsBusy = false;
 
-            if (e.Result.GetMenuItemByCatalogIdResult != null)
-                this.Items = new ObservableCollection<MenuItem>(e.Result.GetMenuItemByCatalogIdResult);
+            if (e.Result.GetMenuItemsByCatalogIdResult != null)
+                this.Items = new ObservableCollection<MenuItem>(e.Result.GetMenuItemsByCatalogIdResult);
             else
                 this.Items = new ObservableCollection<MenuItem>();
         }
@@ -37,8 +37,8 @@ namespace gcafeApp.ViewModel
             {
                 IsBusy = true;
 
-                GetMenuItemByCatalogIdRequest req = new GetMenuItemByCatalogIdRequest(value);
-                _svc.GetMenuItemByCatalogIdAsync(req);
+                GetMenuItemsByCatalogIdRequest req = new GetMenuItemsByCatalogIdRequest(1, value);
+                _svc.GetMenuItemsByCatalogIdAsync(req);
             }
         }
 
