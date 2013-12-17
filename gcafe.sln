@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.21126.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "gcafe", "gcafe\gcafe.sqlproj", "{5FA43C75-290C-4612-9B55-E9BBBB938950}"
 EndProject
@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foxpro2Db", "Foxpro2Db\Foxp
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeApp", "gcafeApp\gcafeApp.csproj", "{A712BF43-F580-4935-B3BA-2D1FD204CC01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuPrint", "MenuPrint\MenuPrint.csproj", "{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualPrint", "VisualPrint\VisualPrint.csproj", "{D239EFD3-2871-47FA-BE04-F13209FF2225}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +82,26 @@ Global
 		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|x86.ActiveCfg = Release|x86
 		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|x86.Build.0 = Release|x86
 		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Release|x86.Deploy.0 = Release|x86
+		{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}.Release|ARM.ActiveCfg = Release|Any CPU
+		{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}.Release|x64.ActiveCfg = Release|Any CPU
+		{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}.Release|x86.ActiveCfg = Release|Any CPU
+		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Release|x64.ActiveCfg = Release|Any CPU
+		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,21 @@
+﻿<UserControl xmlns:MenuPrint="clr-namespace:MenuPrint"  x:Class="MenuPrint.MenuItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <WrapPanel x:Name="wp">
+            <!--MenuPrint:MenuItemDetail Code="111025" Desc="川味小炒肉跟饭" Padding="30" />
+            <MenuPrint:MenuItemDetail Code="223105" Desc="川贝陈皮炖雪梨" Padding="30" />
+            <MenuPrint:MenuItemDetail Code="111105" Desc="法兰西厚多士配雪糕" Padding="30" />
+            <MenuPrint:MenuItemDetail Code="112910" Desc="肥牛香菇泡饭（厨推）" Padding="30" />
+            <MenuPrint:MenuItemDetail Code="116001" Desc="跟餐越南炸蔗虾" Padding="30" />
+            <MenuPrint:MenuItemDetail Code="223232" Desc="桂花乌龙茶(特)" Padding="30" />
+            <MenuPrint:MenuItemDetail Code="111021" Desc="海鲜捞饭" Padding="30" />
+            <MenuPrint:MenuItemDetail Code="115031" Desc="黑椒肉丝炒意粉(茶)(零)" Padding="30" /-->
+
+        </WrapPanel>
+    </Grid>
+</UserControl>
