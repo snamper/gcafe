@@ -29,6 +29,14 @@ namespace gcafeWeb
         List<MenuItem> GetMenuItemsByCatalogId(int branchId, int cataId);
 
         /// <summary>
+        /// 根据number取菜单项
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        [OperationContract]
+        MenuItem GetMenuItemByNumber(string number);
+
+        /// <summary>
         /// 根据Num取员工信息
         /// </summary>
         /// <param name="Num"></param>

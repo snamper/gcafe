@@ -112,6 +112,9 @@
     <Compile Include="Pages\AuthenticationPage.xaml.cs">
       <DependentUpon>AuthenticationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MenuCameraSelect.xaml.cs">
+      <DependentUpon>MenuCameraSelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MenuCatalogPage.xaml.cs">
       <DependentUpon>MenuCatalogPage.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,7 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\VMBase.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />
+    <Compile Include="ViewModel\VMMenuCameraSelect.cs" />
     <Compile Include="ViewModel\VMMenuCatalog.cs" />
     <Compile Include="ViewModel\VMMenuItem.cs" />
     <Compile Include="ViewModel\VMSubMenuCatalog.cs" />
@@ -174,6 +178,10 @@
       <SubType>Designer</SubType>
     </DesignData>
     <Page Include="Pages\AuthenticationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MenuCameraSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetMenuCatalogsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetMenuItemByNumberResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetMenuItemsByCatalogIdResponse.datasource">
@@ -306,6 +317,9 @@
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.wp8.0">
+      <HintPath>D:\Software\codeplex\zxingnet\Build\Release\wp8.0\zxing.wp8.0.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

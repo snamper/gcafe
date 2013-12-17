@@ -25,7 +25,8 @@ namespace gcafeApp.ViewModel
         {
             if (type == "CataSel")
             {
-                App.RootFrame.Navigate(new Uri("/Pages/MenuCatalogPage.xaml", UriKind.Relative));
+                //App.RootFrame.Navigate(new Uri("/Pages/MenuCatalogPage.xaml", UriKind.Relative));
+                App.RootFrame.Navigate(new Uri("/Pages/MenuCameraSelect.xaml", UriKind.Relative));
             }
         }
 

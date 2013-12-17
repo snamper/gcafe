@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,17 @@ namespace gcafeApp.ViewModel
 {
     public class VMSubMenuCatalog : VMBase
     {
-        gcafeSvc.IgcafeSvcClient _svc = new IgcafeSvcClient();
+        gcafeSvc.IgcafeSvcClient _svc;
 
         public VMSubMenuCatalog()
         {
             this.Items = new ObservableCollection<MenuCatalog>();
 
-            _svc.GetMenuCatalogsCompleted += _svc_GetMenuCatalogsCompleted;
+            if (!DesignerProperties.IsInDesignTool)
+            {
+                _svc = new IgcafeSvcClient();
+                _svc.GetMenuCatalogsCompleted += _svc_GetMenuCatalogsCompleted;
+            }
         }
 
         void _svc_GetMenuCatalogsCompleted(object sender, GetMenuCatalogsCompletedEventArgs e)

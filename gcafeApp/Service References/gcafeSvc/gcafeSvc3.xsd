@@ -30,6 +30,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetMenuItemByNumber">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="number" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMenuItemByNumberResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetMenuItemByNumberResult" nillable="true" type="q3:MenuItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetStaffByNum">
     <xs:complexType>
       <xs:sequence>
@@ -40,7 +54,7 @@
   <xs:element name="GetStaffByNumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q3:Staff" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q4:Staff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

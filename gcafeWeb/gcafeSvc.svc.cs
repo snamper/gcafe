@@ -52,6 +52,18 @@ namespace gcafeWeb
             return menuList;
         }
 
+        public MenuItem GetMenuItemByNumber(string number)
+        {
+            using (var context = new gcafeEntities())
+            {
+                menu menu = context.menu.Where(n => n.number == number).FirstOrDefault();
+                if (menu != null)
+                    return new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = menu.is_setmeal };
+                else
+                    return (MenuItem)null;
+            }
+        }
+
 
         public Staff GetStaffByNum(string Num)
         {
