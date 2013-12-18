@@ -27,5 +27,18 @@ namespace gcafeApp.Pages
         public override void SetFlowDirection(FlowDirection flowDirection)
         {
         }
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            if (_pivot.SelectedIndex == 1)
+            {
+                ApplicationBarIconButton btn = (ApplicationBarIconButton)sender;
+                if (btn.Text == "确定")
+                {
+                    ViewModel.TablesViewModel vm = (ViewModel.TablesViewModel)DataContext;
+                    vm.OpenTable();
+                }
+            }
+        }
     }
 }

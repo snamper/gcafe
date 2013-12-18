@@ -73,6 +73,24 @@ namespace gcafeWeb
         {
             int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
 
+            order order;
+
+            using (var context = new gcafeEntities())
+            {
+                switch (oprType)
+                {
+                    case TableOprType.OpenTable:
+                        order = new order();
+                        break;
+
+                    case TableOprType.ChangeTable:
+                        break;
+
+                    case TableOprType.ChangeCustomerNum:
+                        break;
+                }
+            }
+
             return "";
         }
 

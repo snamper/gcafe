@@ -13,12 +13,13 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding TablesViewModel, Source={StaticResource Locator}}">
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource ModuleColor}">
         <!--枢轴控件-->
-        <phone:Pivot Title="台号选择">
+        <phone:Pivot x:Name="_pivot" Title="台号选择">
             <!--枢轴项一-->
             <phone:PivotItem Header="已开台">
                 <phone:LongListSelector Margin="0,0,-22,0" ItemsSource="{Binding Items}">
@@ -71,11 +72,11 @@
                         <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="台号:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-                    <TextBox Grid.Row="0" Grid.Column="1" Text="121" VerticalAlignment="Center" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TableNum, Mode=TwoWay}" VerticalAlignment="Center" />
                     <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="人数:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="1" VerticalAlignment="Center" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CustomerNum, Mode=TwoWay}" VerticalAlignment="Center" />
                     <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="称呼:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="张生" VerticalAlignment="Center" />
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="" VerticalAlignment="Center" />
                 </Grid>
             </phone:PivotItem>
         </phone:Pivot>
@@ -85,10 +86,10 @@
         <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/ApplicationBar.Check.png"
-                Text="确定" />
+                Text="确定" Click="ApplicationBarIconButton_Click" />
             <shell:ApplicationBarIconButton
                 IconUri="/Images/ApplicationBar.Cancel.png"
-                Text="取消" />
+                Text="取消"  Click="ApplicationBarIconButton_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

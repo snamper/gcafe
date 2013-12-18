@@ -17,7 +17,30 @@ namespace gcafeApp.ViewModel
         {
             this.Items = new ObservableCollection<TableViewModel>();
 
-            _svc = svc;
+            if (!DesignerProperties.IsInDesignTool)
+            {
+                _svc = svc;
+                _svc.TableOprCompleted += _svc_TableOprCompleted;
+                _svc.GetTablesInfoCompleted += _svc_GetTablesInfoCompleted;
+            }
+        }
+
+        protected override void Dispose(bool dispose)
+        {
+            base.Dispose(dispose);
+
+            _svc.GetTablesInfoCompleted -= _svc_GetTablesInfoCompleted;
+            _svc.TableOprCompleted -= _svc_TableOprCompleted;
+        }
+
+        void _svc_GetTablesInfoCompleted(object sender, GetTablesInfoCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void _svc_TableOprCompleted(object sender, TableOprCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -71,9 +94,11 @@ namespace gcafeApp.ViewModel
         }
         private int _customerNum;
 
-        public void OpenTable(string tableNum, int customerNum)
+        public void OpenTable()
         {
+            TableOprRequest req = new TableOprRequest() { DeviceId = Settings.AppSettings.DeviceID, tableNum = TableNum, customerNum = CustomerNum, oprType = TableOprType.OpenTable };
 
+            _svc.TableOprAsync(req);
         }
     }
 }

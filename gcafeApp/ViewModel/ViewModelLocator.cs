@@ -84,6 +84,11 @@ namespace gcafeApp.ViewModel
             get { return ServiceLocator.Current.GetInstance<MenuSelectViewModel>(); }
         }
 
+        public TablesViewModel TablesViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<TablesViewModel>(); }
+        }
+
         public MainViewModel Main
         {
             get
