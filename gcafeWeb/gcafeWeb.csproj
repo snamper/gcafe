@@ -217,6 +217,9 @@
     <Compile Include="credit.cs">
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="device.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Filters\ValidateHttpAntiForgeryTokenAttribute.cs" />
     <Compile Include="gcafeDb.Context.cs">

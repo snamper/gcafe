@@ -66,7 +66,7 @@ namespace gcafeApp.ViewModel
 
                 if (result != null)
                 {
-                    GetMenuItemByNumberRequest req = new GetMenuItemByNumberRequest(result.Text);
+                    GetMenuItemByNumberRequest req = new GetMenuItemByNumberRequest(Settings.AppSettings.DeviceID, result.Text);
                     _svc.GetMenuItemByNumberAsync(req);
                 }
                 //string s = result.Text;

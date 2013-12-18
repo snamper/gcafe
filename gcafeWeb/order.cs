@@ -22,7 +22,9 @@ namespace gcafeWeb
     
         public int id { get; set; }
         public int branch_id { get; set; }
+        public int device_id { get; set; }
         public string table_no { get; set; }
+        public int customer_number { get; set; }
         public int open_table_staff_id { get; set; }
         public System.DateTime table_opened_time { get; set; }
         public Nullable<decimal> receivable { get; set; }
@@ -37,6 +39,7 @@ namespace gcafeWeb
     
         public virtual branch branch { get; set; }
         public virtual ICollection<credit> credit { get; set; }
+        public virtual device device { get; set; }
         public virtual member member { get; set; }
         public virtual staff staff { get; set; }
         public virtual staff staff1 { get; set; }

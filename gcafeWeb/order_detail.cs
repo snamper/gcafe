@@ -27,7 +27,9 @@ namespace gcafeWeb
         public decimal price { get; set; }
         public int order_staff_id { get; set; }
         public System.DateTime order_time { get; set; }
+        public int device_id { get; set; }
     
+        public virtual device device { get; set; }
         public virtual menu menu { get; set; }
         public virtual order order { get; set; }
         public virtual ICollection<order_detail_method> order_detail_method { get; set; }

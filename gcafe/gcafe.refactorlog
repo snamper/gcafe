@@ -189,4 +189,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="id" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="9e7bebed-646c-413f-8f82-7d3187fd9b4b" ChangeDateTime="12/18/2013 10:06:53">
+    <Property Name="ElementName" Value="[dbo].[device].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[device]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c6dcb18a-3805-424c-9aae-7576c3300915" ChangeDateTime="12/18/2013 10:10:59">
+    <Property Name="ElementName" Value="[dbo].[device].[is_allow]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[device]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="is_deny" />
+  </Operation>
 </Operations>

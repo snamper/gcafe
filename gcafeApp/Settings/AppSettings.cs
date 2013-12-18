@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO.IsolatedStorage;
 using gcafeApp.gcafeSvc;
+using Microsoft.Phone.Info;
 
 namespace gcafeApp.Settings
 {
@@ -24,5 +25,16 @@ namespace gcafeApp.Settings
             }
         }
 
+        public static string DeviceID
+        {
+            get
+            {
+                object id;
+                if (DeviceExtendedProperties.TryGetValue("DeviceUniqueId", out id))
+                    return Convert.ToBase64String((byte[])id);
+                else
+                    throw new Exception("取UniqueID出错");
+            }
+        }
     }
 }

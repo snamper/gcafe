@@ -520,12 +520,16 @@ namespace gcafeApp.gcafeSvc {
     public partial class GetMenuCatalogsRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string DeviceId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
         public string rootCata;
         
         public GetMenuCatalogsRequest() {
         }
         
-        public GetMenuCatalogsRequest(string rootCata) {
+        public GetMenuCatalogsRequest(string DeviceId, string rootCata) {
+            this.DeviceId = DeviceId;
             this.rootCata = rootCata;
         }
     }
@@ -552,12 +556,16 @@ namespace gcafeApp.gcafeSvc {
     public partial class GetMenuItemsByCatalogIdRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string DeviceId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
         public int cataId;
         
         public GetMenuItemsByCatalogIdRequest() {
         }
         
-        public GetMenuItemsByCatalogIdRequest(int cataId) {
+        public GetMenuItemsByCatalogIdRequest(string DeviceId, int cataId) {
+            this.DeviceId = DeviceId;
             this.cataId = cataId;
         }
     }
@@ -584,12 +592,16 @@ namespace gcafeApp.gcafeSvc {
     public partial class GetMenuItemByNumberRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string DeviceId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
         public string number;
         
         public GetMenuItemByNumberRequest() {
         }
         
-        public GetMenuItemByNumberRequest(string number) {
+        public GetMenuItemByNumberRequest(string DeviceId, string number) {
+            this.DeviceId = DeviceId;
             this.number = number;
         }
     }
@@ -616,21 +628,25 @@ namespace gcafeApp.gcafeSvc {
     public partial class TableOprRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
-        public string tableNum;
+        public string DeviceId;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
-        public string oldTableNum;
+        public string tableNum;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
-        public int customerNum;
+        public string oldTableNum;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public int customerNum;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
         public gcafeApp.gcafeSvc.TableOprType oprType;
         
         public TableOprRequest() {
         }
         
-        public TableOprRequest(string tableNum, string oldTableNum, int customerNum, gcafeApp.gcafeSvc.TableOprType oprType) {
+        public TableOprRequest(string DeviceId, string tableNum, string oldTableNum, int customerNum, gcafeApp.gcafeSvc.TableOprType oprType) {
+            this.DeviceId = DeviceId;
             this.tableNum = tableNum;
             this.oldTableNum = oldTableNum;
             this.customerNum = customerNum;
@@ -660,12 +676,16 @@ namespace gcafeApp.gcafeSvc {
     public partial class GetTablesInfoRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string DeviceId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
         public int branchId;
         
         public GetTablesInfoRequest() {
         }
         
-        public GetTablesInfoRequest(int branchId) {
+        public GetTablesInfoRequest(string DeviceId, int branchId) {
+            this.DeviceId = DeviceId;
             this.branchId = branchId;
         }
     }
@@ -692,12 +712,16 @@ namespace gcafeApp.gcafeSvc {
     public partial class GetStaffByNumRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string DeviceId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
         public string Num;
         
         public GetStaffByNumRequest() {
         }
         
-        public GetStaffByNumRequest(string Num) {
+        public GetStaffByNumRequest(string DeviceId, string Num) {
+            this.DeviceId = DeviceId;
             this.Num = Num;
         }
     }

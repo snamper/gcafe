@@ -17,7 +17,7 @@ namespace gcafeWeb
         /// <param name="rootCata">厨房，酒吧</param>
         /// <returns></returns>
         [OperationContract]
-        List<MenuCatalog> GetMenuCatalogs(string rootCata);
+        List<MenuCatalog> GetMenuCatalogs(string DeviceId, string rootCata);
 
         /// <summary>
         /// 根据cataId取数据
@@ -25,7 +25,7 @@ namespace gcafeWeb
         /// <param name="cataId"></param>
         /// <returns></returns>
         [OperationContract]
-        List<MenuItem> GetMenuItemsByCatalogId(int cataId);
+        List<MenuItem> GetMenuItemsByCatalogId(string DeviceId, int cataId);
 
         /// <summary>
         /// 根据number取菜单项
@@ -33,7 +33,7 @@ namespace gcafeWeb
         /// <param name="number"></param>
         /// <returns></returns>
         [OperationContract]
-        MenuItem GetMenuItemByNumber(string number);
+        MenuItem GetMenuItemByNumber(string DeviceId, string number);
 
         /// <summary>
         /// 餐台操作，开台，换台，改人数都在这里操作
@@ -45,7 +45,7 @@ namespace gcafeWeb
         /// <param name="oprType"></param>
         /// <returns>成功返回"成功", 失败返回出错原因</returns>
         [OperationContract]
-        string TableOpr(string tableNum, string oldTableNum, int customerNum, TableOprType oprType);
+        string TableOpr(string DeviceId, string tableNum, string oldTableNum, int customerNum, TableOprType oprType);
 
         /// <summary>
         /// 取当前已开台并且还没埋单的台的信息
@@ -53,7 +53,7 @@ namespace gcafeWeb
         /// <param name="branchId"></param>
         /// <returns></returns>
         [OperationContract]
-        List<TableInfo> GetTablesInfo(int branchId);
+        List<TableInfo> GetTablesInfo(string DeviceId, int branchId);
 
         /// <summary>
         /// 根据Num取员工信息
@@ -61,7 +61,7 @@ namespace gcafeWeb
         /// <param name="Num"></param>
         /// <returns></returns>
         [OperationContract]
-        Staff GetStaffByNum(string Num);
+        Staff GetStaffByNum(string DeviceId, string Num);
     }
 
 }

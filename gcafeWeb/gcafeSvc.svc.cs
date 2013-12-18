@@ -14,7 +14,7 @@ namespace gcafeWeb
     // 注意: 为了启动 WCF 测试客户端以测试此服务，请在解决方案资源管理器中选择 gcafeSvc.svc 或 gcafeSvc.svc.cs，然后开始调试。
     public class gcafeSvc : IgcafeSvc
     {
-        public List<MenuCatalog> GetMenuCatalogs(string rootCata)
+        public List<MenuCatalog> GetMenuCatalogs(string DeviceId, string rootCata)
         {
             List<MenuCatalog> cataList = new List<MenuCatalog>();
 
@@ -37,7 +37,7 @@ namespace gcafeWeb
             return cataList;
         }
 
-        public List<MenuItem> GetMenuItemsByCatalogId(int cataId)
+        public List<MenuItem> GetMenuItemsByCatalogId(string DeviceId, int cataId)
         {
             int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
 
@@ -55,7 +55,7 @@ namespace gcafeWeb
             return menuList;
         }
 
-        public MenuItem GetMenuItemByNumber(string number)
+        public MenuItem GetMenuItemByNumber(string DeviceId, string number)
         {
             int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
 
@@ -69,14 +69,14 @@ namespace gcafeWeb
             }
         }
 
-        public string TableOpr(string tableNum, string oldTableNum, int customerNum, TableOprType oprType)
+        public string TableOpr(string DeviceId, string tableNum, string oldTableNum, int customerNum, TableOprType oprType)
         {
             int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
 
             return "";
         }
 
-        public List<TableInfo> GetTablesInfo(int branchId)
+        public List<TableInfo> GetTablesInfo(string DeviceId, int branchId)
         {
             List<TableInfo> tableInfoList = new List<TableInfo>();
 
@@ -84,7 +84,7 @@ namespace gcafeWeb
         }
 
 
-        public Staff GetStaffByNum(string Num)
+        public Staff GetStaffByNum(string DeviceId, string Num)
         {
             using (var context = new gcafeEntities())
             {

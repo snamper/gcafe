@@ -27,6 +27,7 @@ namespace gcafeWeb
     
         public virtual DbSet<branch> branch { get; set; }
         public virtual DbSet<credit> credit { get; set; }
+        public virtual DbSet<device> device { get; set; }
         public virtual DbSet<member> member { get; set; }
         public virtual DbSet<member_refill> member_refill { get; set; }
         public virtual DbSet<menu> menu { get; set; }

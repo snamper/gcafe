@@ -2,17 +2,22 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using GalaSoft.MvvmLight;
+using gcafeApp.gcafeSvc;
 
 namespace gcafeApp.ViewModel
 {
     public class TablesViewModel : VMBase
     {
+        private readonly IgcafeSvcClient _svc;
+
         /// <summary>
         /// 初始化
         /// </summary>
-        public TablesViewModel()
+        public TablesViewModel(IgcafeSvcClient svc)
         {
             this.Items = new ObservableCollection<TableViewModel>();
+
+            _svc = svc;
         }
 
         /// <summary>

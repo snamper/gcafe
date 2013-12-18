@@ -7,9 +7,11 @@
     [price] DECIMAL(8, 2) NOT NULL, 
     [order_staff_id] INT NOT NULL, 
     [order_time] DATETIME NOT NULL, 
+    [device_id] INT NOT NULL, 
     CONSTRAINT [FK_order_detail_order] FOREIGN KEY ([order_id]) REFERENCES [order]([id]), 
     CONSTRAINT [FK_order_detail_menu] FOREIGN KEY ([menu_id]) REFERENCES [menu]([id]), 
-    CONSTRAINT [FK_order_detail_staff] FOREIGN KEY ([order_staff_id]) REFERENCES [staff]([id]),
+    CONSTRAINT [FK_order_detail_staff] FOREIGN KEY ([order_staff_id]) REFERENCES [staff]([id]), 
+    CONSTRAINT [FK_order_detail_device] FOREIGN KEY ([device_id]) REFERENCES [device]([id]),
 )
 
 GO

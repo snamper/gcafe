@@ -23,6 +23,16 @@
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
           <Property Name="repay_time" Type="datetime" />
         </EntityType>
+        <EntityType Name="device">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="device_id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="register_ticket" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="register_time" Type="datetime" Nullable="false" />
+          <Property Name="is_deny" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="member">
           <Key>
             <PropertyRef Name="id" />
@@ -92,7 +102,9 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="branch_id" Type="int" Nullable="false" />
+          <Property Name="device_id" Type="int" Nullable="false" />
           <Property Name="table_no" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="customer_number" Type="int" Nullable="false" />
           <Property Name="open_table_staff_id" Type="int" Nullable="false" />
           <Property Name="table_opened_time" Type="datetime" Nullable="false" />
           <Property Name="receivable" Type="decimal" Precision="8" Scale="2" />
@@ -116,6 +128,7 @@
           <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="order_staff_id" Type="int" Nullable="false" />
           <Property Name="order_time" Type="datetime" Nullable="false" />
+          <Property Name="device_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="order_detail_method">
           <Key>
@@ -359,6 +372,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_order_detail_device">
+          <End Role="device" Type="Self.device" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_order_detail_menu">
           <End Role="menu" Type="Self.menu" Multiplicity="1" />
           <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
@@ -452,6 +477,18 @@
             </Principal>
             <Dependent Role="order_detail">
               <PropertyRef Name="order_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_device">
+          <End Role="device" Type="Self.device" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="device_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -590,6 +627,7 @@
         <EntityContainer Name="gcafeModelStoreContainer">
           <EntitySet Name="branch" EntityType="Self.branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="credit" EntityType="Self.credit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="device" EntityType="Self.device" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="member_refill" EntityType="Self.member_refill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
@@ -660,6 +698,10 @@
             <End Role="staff" EntitySet="staff" />
             <End Role="order" EntitySet="order" />
           </AssociationSet>
+          <AssociationSet Name="FK_order_detail_device" Association="Self.FK_order_detail_device">
+            <End Role="device" EntitySet="device" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
           <AssociationSet Name="FK_order_detail_menu" Association="Self.FK_order_detail_menu">
             <End Role="menu" EntitySet="menu" />
             <End Role="order_detail" EntitySet="order_detail" />
@@ -691,6 +733,10 @@
           <AssociationSet Name="FK_order_detail_staff" Association="Self.FK_order_detail_staff">
             <End Role="staff" EntitySet="staff" />
             <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_device" Association="Self.FK_order_device">
+            <End Role="device" EntitySet="device" />
+            <End Role="order" EntitySet="order" />
           </AssociationSet>
           <AssociationSet Name="FK_order_member" Association="Self.FK_order_member">
             <End Role="member" EntitySet="member" />
@@ -766,6 +812,18 @@
           <Property Name="repay_time" Type="DateTime" Precision="3" />
           <NavigationProperty Name="member" Relationship="Self.FK_credit_member" FromRole="credit" ToRole="member" />
           <NavigationProperty Name="order" Relationship="Self.FK_credit_order" FromRole="credit" ToRole="order" />
+        </EntityType>
+        <EntityType Name="device">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="device_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="register_ticket" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="register_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_deny" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_device" FromRole="device" ToRole="order_detail" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_device" FromRole="device" ToRole="order" />
         </EntityType>
         <EntityType Name="member">
           <Key>
@@ -857,7 +915,9 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="branch_id" Type="Int32" Nullable="false" />
+          <Property Name="device_id" Type="Int32" Nullable="false" />
           <Property Name="table_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customer_number" Type="Int32" Nullable="false" />
           <Property Name="open_table_staff_id" Type="Int32" Nullable="false" />
           <Property Name="table_opened_time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="receivable" Type="Decimal" Precision="8" Scale="2" />
@@ -871,6 +931,7 @@
           <Property Name="memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="branch" Relationship="Self.FK_order_branch" FromRole="order" ToRole="branch" />
           <NavigationProperty Name="credit" Relationship="Self.FK_credit_order" FromRole="order" ToRole="credit" />
+          <NavigationProperty Name="device" Relationship="Self.FK_order_device" FromRole="order" ToRole="device" />
           <NavigationProperty Name="member" Relationship="Self.FK_order_member" FromRole="order" ToRole="member" />
           <NavigationProperty Name="staff" Relationship="Self.FK_order_co_staff" FromRole="order" ToRole="staff" />
           <NavigationProperty Name="staff1" Relationship="Self.FK_order_dc_staff" FromRole="order" ToRole="staff" />
@@ -889,6 +950,8 @@
           <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="order_staff_id" Type="Int32" Nullable="false" />
           <Property Name="order_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="device_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="device" Relationship="Self.FK_order_detail_device" FromRole="order_detail" ToRole="device" />
           <NavigationProperty Name="menu" Relationship="Self.FK_order_detail_menu" FromRole="order_detail" ToRole="menu" />
           <NavigationProperty Name="order" Relationship="Self.FK_order_detail_order" FromRole="order_detail" ToRole="order" />
           <NavigationProperty Name="order_detail_method" Relationship="Self.FK_order_detail_method_order_detail" FromRole="order_detail" ToRole="order_detail_method" />
@@ -1085,6 +1148,30 @@
             </Principal>
             <Dependent Role="credit">
               <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_device">
+          <End Role="device" Type="Self.device" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_device">
+          <End Role="device" Type="Self.device" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="device_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1391,6 +1478,7 @@
         <EntityContainer Name="gcafeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="branch" EntityType="Self.branch" />
           <EntitySet Name="credit" EntityType="Self.credit" />
+          <EntitySet Name="device" EntityType="Self.device" />
           <EntitySet Name="member" EntityType="Self.member" />
           <EntitySet Name="member_refill" EntityType="Self.member_refill" />
           <EntitySet Name="menu" EntityType="Self.menu" />
@@ -1436,6 +1524,14 @@
           <AssociationSet Name="FK_credit_order" Association="Self.FK_credit_order">
             <End Role="order" EntitySet="order" />
             <End Role="credit" EntitySet="credit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_device" Association="Self.FK_order_detail_device">
+            <End Role="device" EntitySet="device" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_device" Association="Self.FK_order_device">
+            <End Role="device" EntitySet="device" />
+            <End Role="order" EntitySet="order" />
           </AssociationSet>
           <AssociationSet Name="FK_member_refill_member" Association="Self.FK_member_refill_member">
             <End Role="member" EntitySet="member" />
@@ -1564,6 +1660,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="device">
+            <EntityTypeMapping TypeName="gcafeModel.device">
+              <MappingFragment StoreEntitySet="device">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="register_ticket" ColumnName="register_ticket" />
+                <ScalarProperty Name="register_time" ColumnName="register_time" />
+                <ScalarProperty Name="is_deny" ColumnName="is_deny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="member">
             <EntityTypeMapping TypeName="gcafeModel.member">
               <MappingFragment StoreEntitySet="member">
@@ -1638,7 +1745,9 @@
               <MappingFragment StoreEntitySet="order">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
                 <ScalarProperty Name="table_no" ColumnName="table_no" />
+                <ScalarProperty Name="customer_number" ColumnName="customer_number" />
                 <ScalarProperty Name="open_table_staff_id" ColumnName="open_table_staff_id" />
                 <ScalarProperty Name="table_opened_time" ColumnName="table_opened_time" />
                 <ScalarProperty Name="receivable" ColumnName="receivable" />
@@ -1663,6 +1772,7 @@
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="order_staff_id" ColumnName="order_staff_id" />
                 <ScalarProperty Name="order_time" ColumnName="order_time" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -4,6 +4,7 @@
   <xs:element name="GetMenuCatalogs">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="rootCata" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -18,6 +19,7 @@
   <xs:element name="GetMenuItemsByCatalogId">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="cataId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -32,6 +34,7 @@
   <xs:element name="GetMenuItemByNumber">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="number" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -46,6 +49,7 @@
   <xs:element name="TableOpr">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="tableNum" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="oldTableNum" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="customerNum" type="xs:int" />
@@ -63,6 +67,7 @@
   <xs:element name="GetTablesInfo">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="branchId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -77,6 +82,7 @@
   <xs:element name="GetStaffByNum">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Num" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>

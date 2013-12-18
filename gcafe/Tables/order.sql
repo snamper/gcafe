@@ -2,6 +2,7 @@
 (
 	[id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [branch_id] INT NOT NULL, 
+	[device_id] INT NOT NULL, 
     [table_no] NVARCHAR(10) NOT NULL, 
 	[customer_number] INT NOT NULL DEFAULT 1, 
     [open_table_staff_id] INT NOT NULL, 
@@ -20,7 +21,8 @@
     CONSTRAINT [FK_order_co_staff] FOREIGN KEY ([check_out_staff_id]) REFERENCES [staff]([id]), 
     CONSTRAINT [FK_order_dc_staff] FOREIGN KEY ([discount_staff_id]) REFERENCES [staff]([id]), 
     CONSTRAINT [FK_order_member] FOREIGN KEY ([member_id]) REFERENCES [member]([id]), 
-    CONSTRAINT [FK_order_shift] FOREIGN KEY ([shift_id]) REFERENCES [shift]([id]),
+    CONSTRAINT [FK_order_shift] FOREIGN KEY ([shift_id]) REFERENCES [shift]([id]), 
+    CONSTRAINT [FK_order_device] FOREIGN KEY ([device_id]) REFERENCES [device]([id]),
 )
 
 GO

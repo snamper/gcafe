@@ -70,6 +70,7 @@
     <Build Include="Tables\menu_catalog.sql" />
     <Build Include="Tables\order_detail_method.sql" />
     <Build Include="Tables\order_detail_setmeal.sql" />
+    <Build Include="Tables\device.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="gcafe.refactorlog" />
