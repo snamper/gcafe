@@ -30,6 +30,7 @@ namespace gcafeApp.Settings
             get
             {
                 object id;
+
                 if (DeviceExtendedProperties.TryGetValue("DeviceUniqueId", out id))
                     return Convert.ToBase64String((byte[])id);
                 else
