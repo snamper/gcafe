@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using gcafeApp.gcafeSvc;
 
 namespace gcafeApp.ViewModel
 {
@@ -30,6 +31,12 @@ namespace gcafeApp.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+            SimpleIoc.Default.Reset();
+            SimpleIoc.Default.Register<IgcafeSvcClient>(() =>
+                {
+                    return new IgcafeSvcClient();
+                });
 
             ////if (ViewModelBase.IsInDesignModeStatic)
             ////{

@@ -20,15 +20,21 @@ namespace gcafeApp.ViewModel
 {
     public class VMMenuCameraSelect : VMBase
     {
-        gcafeSvc.IgcafeSvcClient _svc;
+        private readonly IgcafeSvcClient _svc;
 
-        public VMMenuCameraSelect()
+        public VMMenuCameraSelect(IgcafeSvcClient svc)
         {
             if (!DesignerProperties.IsInDesignTool)
             {
-                _svc = new IgcafeSvcClient();
+                _svc = svc;
                 _svc.GetMenuItemByNumberCompleted += _svc_GetMenuItemByNumberCompleted;
             }
+        }
+
+        protected override void Dispose(bool dispose)
+        {
+            base.Dispose(dispose);
+            _svc.GetMenuItemByNumberCompleted -= _svc_GetMenuItemByNumberCompleted;
         }
 
         void _svc_GetMenuItemByNumberCompleted(object sender, GetMenuItemByNumberCompletedEventArgs e)

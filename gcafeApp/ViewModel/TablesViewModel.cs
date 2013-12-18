@@ -66,7 +66,7 @@ namespace gcafeApp.ViewModel
         }
         private int _customerNum;
 
-        public void OpenTable(int branchId, string tableNum, int customerNum)
+        public void OpenTable(string tableNum, int customerNum)
         {
 
         }

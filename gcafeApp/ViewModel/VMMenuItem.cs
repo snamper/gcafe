@@ -13,12 +13,22 @@ namespace gcafeApp.ViewModel
 {
     public class VMMenuItem :　VMBase
     {
-        gcafeSvc.IgcafeSvcClient _svc = new IgcafeSvcClient();
+        private readonly IgcafeSvcClient _svc;
 
-        public VMMenuItem()
+        //gcafeSvc.IgcafeSvcClient _svc = new IgcafeSvcClient();
+
+        public VMMenuItem(IgcafeSvcClient svc)
         {
             _items = new ObservableCollection<MenuItem>();
+
+            _svc = svc;
             _svc.GetMenuItemsByCatalogIdCompleted += _svc_GetMenuItemsByCatalogIdCompleted;
+        }
+
+        protected override void Dispose(bool dispose)
+        {
+            base.Dispose(dispose);
+            _svc.GetMenuItemsByCatalogIdCompleted -= _svc_GetMenuItemsByCatalogIdCompleted;
         }
 
         void _svc_GetMenuItemsByCatalogIdCompleted(object sender, GetMenuItemsByCatalogIdCompletedEventArgs e)
