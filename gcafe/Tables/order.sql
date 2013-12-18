@@ -3,6 +3,7 @@
 	[id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [branch_id] INT NOT NULL, 
     [table_no] NVARCHAR(10) NOT NULL, 
+	[customer_number] INT NOT NULL DEFAULT 1, 
     [open_table_staff_id] INT NOT NULL, 
     [table_opened_time] DATETIME NOT NULL, 
     [receivable] DECIMAL(8, 2) NULL , 

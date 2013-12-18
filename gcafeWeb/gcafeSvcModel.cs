@@ -8,6 +8,17 @@ using System.Runtime.CompilerServices;
 
 namespace gcafeWeb
 {
+    [DataContract(Name = "TableOprType")]
+    public enum TableOprType
+    {
+        [EnumMember]
+        OpenTable,
+        [EnumMember]
+        ChangeTable,
+        [EnumMember]
+        ChangeCustomerNum,
+    }
+
     [DataContract(IsReference = true)]
     public class Order
     {
@@ -82,6 +93,23 @@ namespace gcafeWeb
         public bool IsSetmeal { get; set; }
         [DataMember]
         public List<SetmealItem> SetmealItems { get; set; }
+    }
+
+    [DataContract(IsReference = true)]
+    public class TableInfo
+    {
+        [DataMember]
+        public int ID { get; set; }
+        [DataMember]
+        public string Num { get; set; }
+        [DataMember]
+        public int CustomerNum { get; set; }
+        [DataMember]
+        public decimal Amount { get; set; }
+        [DataMember]
+        public string OpenTableStaff { get; set; }
+        [DataMember]
+        public DateTime OpenTableTime { get; set; }
     }
 
     [DataContract(IsReference = true)]

@@ -240,6 +240,125 @@ namespace gcafeApp.gcafeSvc {
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TableOprType", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public enum TableOprType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OpenTable = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ChangeTable = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ChangeCustomerNum = 2,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TableInfo", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    public partial class TableInfo : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private decimal AmountField;
+        
+        private int CustomerNumField;
+        
+        private int IDField;
+        
+        private string NumField;
+        
+        private string OpenTableStaffField;
+        
+        private System.DateTime OpenTableTimeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Amount {
+            get {
+                return this.AmountField;
+            }
+            set {
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CustomerNum {
+            get {
+                return this.CustomerNumField;
+            }
+            set {
+                if ((this.CustomerNumField.Equals(value) != true)) {
+                    this.CustomerNumField = value;
+                    this.RaisePropertyChanged("CustomerNum");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Num {
+            get {
+                return this.NumField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumField, value) != true)) {
+                    this.NumField = value;
+                    this.RaisePropertyChanged("Num");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string OpenTableStaff {
+            get {
+                return this.OpenTableStaffField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OpenTableStaffField, value) != true)) {
+                    this.OpenTableStaffField = value;
+                    this.RaisePropertyChanged("OpenTableStaff");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime OpenTableTime {
+            get {
+                return this.OpenTableTimeField;
+            }
+            set {
+                if ((this.OpenTableTimeField.Equals(value) != true)) {
+                    this.OpenTableTimeField = value;
+                    this.RaisePropertyChanged("OpenTableTime");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Staff", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
@@ -379,6 +498,16 @@ namespace gcafeApp.gcafeSvc {
         
         gcafeApp.gcafeSvc.GetMenuItemByNumberResponse EndGetMenuItemByNumber(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/TableOpr", ReplyAction="http://tempuri.org/IgcafeSvc/TableOprResponse")]
+        System.IAsyncResult BeginTableOpr(gcafeApp.gcafeSvc.TableOprRequest request, System.AsyncCallback callback, object asyncState);
+        
+        gcafeApp.gcafeSvc.TableOprResponse EndTableOpr(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetTablesInfo", ReplyAction="http://tempuri.org/IgcafeSvc/GetTablesInfoResponse")]
+        System.IAsyncResult BeginGetTablesInfo(gcafeApp.gcafeSvc.GetTablesInfoRequest request, System.AsyncCallback callback, object asyncState);
+        
+        gcafeApp.gcafeSvc.GetTablesInfoResponse EndGetTablesInfo(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetStaffByNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetStaffByNumResponse")]
         System.IAsyncResult BeginGetStaffByNum(gcafeApp.gcafeSvc.GetStaffByNumRequest request, System.AsyncCallback callback, object asyncState);
         
@@ -423,16 +552,12 @@ namespace gcafeApp.gcafeSvc {
     public partial class GetMenuItemsByCatalogIdRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
-        public int branchId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
         public int cataId;
         
         public GetMenuItemsByCatalogIdRequest() {
         }
         
-        public GetMenuItemsByCatalogIdRequest(int branchId, int cataId) {
-            this.branchId = branchId;
+        public GetMenuItemsByCatalogIdRequest(int cataId) {
             this.cataId = cataId;
         }
     }
@@ -482,6 +607,82 @@ namespace gcafeApp.gcafeSvc {
         
         public GetMenuItemByNumberResponse(gcafeApp.gcafeSvc.MenuItem GetMenuItemByNumberResult) {
             this.GetMenuItemByNumberResult = GetMenuItemByNumberResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="TableOpr", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class TableOprRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string tableNum;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        public string oldTableNum;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public int customerNum;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public gcafeApp.gcafeSvc.TableOprType oprType;
+        
+        public TableOprRequest() {
+        }
+        
+        public TableOprRequest(string tableNum, string oldTableNum, int customerNum, gcafeApp.gcafeSvc.TableOprType oprType) {
+            this.tableNum = tableNum;
+            this.oldTableNum = oldTableNum;
+            this.customerNum = customerNum;
+            this.oprType = oprType;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="TableOprResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class TableOprResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string TableOprResult;
+        
+        public TableOprResponse() {
+        }
+        
+        public TableOprResponse(string TableOprResult) {
+            this.TableOprResult = TableOprResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTablesInfo", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetTablesInfoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public int branchId;
+        
+        public GetTablesInfoRequest() {
+        }
+        
+        public GetTablesInfoRequest(int branchId) {
+            this.branchId = branchId;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTablesInfoResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetTablesInfoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.TableInfo> GetTablesInfoResult;
+        
+        public GetTablesInfoResponse() {
+        }
+        
+        public GetTablesInfoResponse(System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.TableInfo> GetTablesInfoResult) {
+            this.GetTablesInfoResult = GetTablesInfoResult;
         }
     }
     
@@ -580,6 +781,44 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class TableOprCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public TableOprCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public gcafeApp.gcafeSvc.TableOprResponse Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((gcafeApp.gcafeSvc.TableOprResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTablesInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTablesInfoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public gcafeApp.gcafeSvc.GetTablesInfoResponse Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((gcafeApp.gcafeSvc.GetTablesInfoResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class GetStaffByNumCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -618,6 +857,18 @@ namespace gcafeApp.gcafeSvc {
         private EndOperationDelegate onEndGetMenuItemByNumberDelegate;
         
         private System.Threading.SendOrPostCallback onGetMenuItemByNumberCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginTableOprDelegate;
+        
+        private EndOperationDelegate onEndTableOprDelegate;
+        
+        private System.Threading.SendOrPostCallback onTableOprCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetTablesInfoDelegate;
+        
+        private EndOperationDelegate onEndGetTablesInfoDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTablesInfoCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetStaffByNumDelegate;
         
@@ -683,6 +934,10 @@ namespace gcafeApp.gcafeSvc {
         public event System.EventHandler<GetMenuItemsByCatalogIdCompletedEventArgs> GetMenuItemsByCatalogIdCompleted;
         
         public event System.EventHandler<GetMenuItemByNumberCompletedEventArgs> GetMenuItemByNumberCompleted;
+        
+        public event System.EventHandler<TableOprCompletedEventArgs> TableOprCompleted;
+        
+        public event System.EventHandler<GetTablesInfoCompletedEventArgs> GetTablesInfoCompleted;
         
         public event System.EventHandler<GetStaffByNumCompletedEventArgs> GetStaffByNumCompleted;
         
@@ -826,6 +1081,98 @@ namespace gcafeApp.gcafeSvc {
             }
             base.InvokeAsync(this.onBeginGetMenuItemByNumberDelegate, new object[] {
                         request}, this.onEndGetMenuItemByNumberDelegate, this.onGetMenuItemByNumberCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginTableOpr(gcafeApp.gcafeSvc.TableOprRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginTableOpr(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        gcafeApp.gcafeSvc.TableOprResponse gcafeApp.gcafeSvc.IgcafeSvc.EndTableOpr(System.IAsyncResult result) {
+            return base.Channel.EndTableOpr(result);
+        }
+        
+        private System.IAsyncResult OnBeginTableOpr(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            gcafeApp.gcafeSvc.TableOprRequest request = ((gcafeApp.gcafeSvc.TableOprRequest)(inValues[0]));
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginTableOpr(request, callback, asyncState);
+        }
+        
+        private object[] OnEndTableOpr(System.IAsyncResult result) {
+            gcafeApp.gcafeSvc.TableOprResponse retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndTableOpr(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnTableOprCompleted(object state) {
+            if ((this.TableOprCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.TableOprCompleted(this, new TableOprCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void TableOprAsync(gcafeApp.gcafeSvc.TableOprRequest request) {
+            this.TableOprAsync(request, null);
+        }
+        
+        public void TableOprAsync(gcafeApp.gcafeSvc.TableOprRequest request, object userState) {
+            if ((this.onBeginTableOprDelegate == null)) {
+                this.onBeginTableOprDelegate = new BeginOperationDelegate(this.OnBeginTableOpr);
+            }
+            if ((this.onEndTableOprDelegate == null)) {
+                this.onEndTableOprDelegate = new EndOperationDelegate(this.OnEndTableOpr);
+            }
+            if ((this.onTableOprCompletedDelegate == null)) {
+                this.onTableOprCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnTableOprCompleted);
+            }
+            base.InvokeAsync(this.onBeginTableOprDelegate, new object[] {
+                        request}, this.onEndTableOprDelegate, this.onTableOprCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetTablesInfo(gcafeApp.gcafeSvc.GetTablesInfoRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTablesInfo(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        gcafeApp.gcafeSvc.GetTablesInfoResponse gcafeApp.gcafeSvc.IgcafeSvc.EndGetTablesInfo(System.IAsyncResult result) {
+            return base.Channel.EndGetTablesInfo(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTablesInfo(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            gcafeApp.gcafeSvc.GetTablesInfoRequest request = ((gcafeApp.gcafeSvc.GetTablesInfoRequest)(inValues[0]));
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginGetTablesInfo(request, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTablesInfo(System.IAsyncResult result) {
+            gcafeApp.gcafeSvc.GetTablesInfoResponse retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetTablesInfo(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTablesInfoCompleted(object state) {
+            if ((this.GetTablesInfoCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTablesInfoCompleted(this, new GetTablesInfoCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTablesInfoAsync(gcafeApp.gcafeSvc.GetTablesInfoRequest request) {
+            this.GetTablesInfoAsync(request, null);
+        }
+        
+        public void GetTablesInfoAsync(gcafeApp.gcafeSvc.GetTablesInfoRequest request, object userState) {
+            if ((this.onBeginGetTablesInfoDelegate == null)) {
+                this.onBeginGetTablesInfoDelegate = new BeginOperationDelegate(this.OnBeginGetTablesInfo);
+            }
+            if ((this.onEndGetTablesInfoDelegate == null)) {
+                this.onEndGetTablesInfoDelegate = new EndOperationDelegate(this.OnEndGetTablesInfo);
+            }
+            if ((this.onGetTablesInfoCompletedDelegate == null)) {
+                this.onGetTablesInfoCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTablesInfoCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTablesInfoDelegate, new object[] {
+                        request}, this.onEndGetTablesInfoDelegate, this.onGetTablesInfoCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -986,6 +1333,32 @@ namespace gcafeApp.gcafeSvc {
             public gcafeApp.gcafeSvc.GetMenuItemByNumberResponse EndGetMenuItemByNumber(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 gcafeApp.gcafeSvc.GetMenuItemByNumberResponse _result = ((gcafeApp.gcafeSvc.GetMenuItemByNumberResponse)(base.EndInvoke("GetMenuItemByNumber", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginTableOpr(gcafeApp.gcafeSvc.TableOprRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("TableOpr", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public gcafeApp.gcafeSvc.TableOprResponse EndTableOpr(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                gcafeApp.gcafeSvc.TableOprResponse _result = ((gcafeApp.gcafeSvc.TableOprResponse)(base.EndInvoke("TableOpr", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetTablesInfo(gcafeApp.gcafeSvc.GetTablesInfoRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("GetTablesInfo", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public gcafeApp.gcafeSvc.GetTablesInfoResponse EndGetTablesInfo(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                gcafeApp.gcafeSvc.GetTablesInfoResponse _result = ((gcafeApp.gcafeSvc.GetTablesInfoResponse)(base.EndInvoke("GetTablesInfo", _args, result)));
                 return _result;
             }
             

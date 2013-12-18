@@ -23,5 +23,6 @@ namespace gcafeApp.Settings
                 IsolatedStorageSettings.ApplicationSettings["LoginStaff"] = value;
             }
         }
+
     }
 }

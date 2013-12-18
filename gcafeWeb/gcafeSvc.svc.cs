@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Collections.Generic;
@@ -36,8 +37,10 @@ namespace gcafeWeb
             return cataList;
         }
 
-        public List<MenuItem> GetMenuItemsByCatalogId(int branchId, int cataId)
+        public List<MenuItem> GetMenuItemsByCatalogId(int cataId)
         {
+            int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
+
             List<MenuItem> menuList = new List<MenuItem>();
 
             using (var context = new gcafeEntities())
@@ -54,14 +57,30 @@ namespace gcafeWeb
 
         public MenuItem GetMenuItemByNumber(string number)
         {
+            int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
+
             using (var context = new gcafeEntities())
             {
-                menu menu = context.menu.Where(n => n.number == number).FirstOrDefault();
+                menu menu = context.menu.Where(n => n.number == number && n.branch_id == branchId).FirstOrDefault();
                 if (menu != null)
                     return new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = menu.is_setmeal };
                 else
                     return (MenuItem)null;
             }
+        }
+
+        public string TableOpr(string tableNum, string oldTableNum, int customerNum, TableOprType oprType)
+        {
+            int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
+
+            return "";
+        }
+
+        public List<TableInfo> GetTablesInfo(int branchId)
+        {
+            List<TableInfo> tableInfoList = new List<TableInfo>();
+
+            return tableInfoList;
         }
 
 

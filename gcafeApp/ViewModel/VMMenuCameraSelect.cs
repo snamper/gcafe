@@ -33,10 +33,17 @@ namespace gcafeApp.ViewModel
 
         void _svc_GetMenuItemByNumberCompleted(object sender, GetMenuItemByNumberCompletedEventArgs e)
         {
-            if (e.Result.GetMenuItemByNumberResult != null)
+            try
             {
-                MenuItem menuItem = e.Result.GetMenuItemByNumberResult;
-                this.Result = menuItem.Name;
+                if (e.Result.GetMenuItemByNumberResult != null)
+                {
+                    MenuItem menuItem = e.Result.GetMenuItemByNumberResult;
+                    this.Result = menuItem.Name;
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
             }
         }
 

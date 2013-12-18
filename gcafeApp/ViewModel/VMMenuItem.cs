@@ -37,7 +37,7 @@ namespace gcafeApp.ViewModel
             {
                 IsBusy = true;
 
-                GetMenuItemsByCatalogIdRequest req = new GetMenuItemsByCatalogIdRequest(1, value);
+                GetMenuItemsByCatalogIdRequest req = new GetMenuItemsByCatalogIdRequest(value);
                 _svc.GetMenuItemsByCatalogIdAsync(req);
             }
         }

@@ -243,6 +243,12 @@
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetStaffByNumResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetTablesInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.TableOprResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\gcafeSvc\gcafeSvc.wsdl" />
     <None Include="Service References\gcafeSvc\gcafeSvc.xsd">
       <SubType>Designer</SubType>
