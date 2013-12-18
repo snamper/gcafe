@@ -9,7 +9,7 @@
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://192.168.11.6:47773/gcafeSvc.svc" binding="basicHttpBinding"
+            <endpoint address="http://192.168.15.81:47773/gcafeSvc.svc" binding="basicHttpBinding"
                 bindingConfiguration="BasicHttpBinding_IgcafeSvc" contract="gcafeSvc.IgcafeSvc"
                 name="BasicHttpBinding_IgcafeSvc" />
         </client>

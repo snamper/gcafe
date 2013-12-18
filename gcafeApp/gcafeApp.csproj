@@ -243,14 +243,14 @@
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetStaffByNumResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc1.wsdl" />
-    <None Include="Service References\gcafeSvc\gcafeSvc3.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc.wsdl" />
+    <None Include="Service References\gcafeSvc\gcafeSvc.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc31.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc32.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\gcafeSvc\Reference.svcmap">
@@ -268,7 +268,7 @@
     <Content Include="Assets\KitchenIcon.png" />
     <Content Include="Images\ApplicationBar.Cancel.png" />
     <Content Include="Images\ApplicationBar.Check.png" />
-    <None Include="Service References\gcafeSvc\gcafeSvc1.disco" />
+    <None Include="Service References\gcafeSvc\gcafeSvc.disco" />
     <Content Include="ServiceReferences.ClientConfig">
       <SubType>Designer</SubType>
     </Content>
