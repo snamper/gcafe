@@ -246,6 +246,9 @@
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.GetTablesInfoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.IsTableAvaliableResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.TableOprResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

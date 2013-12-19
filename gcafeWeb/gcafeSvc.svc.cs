@@ -141,6 +141,17 @@ namespace gcafeWeb
             return tableInfoList;
         }
 
+        public bool IsTableAvaliable(string tableNum)
+        {
+            using (var context = new gcafeEntities())
+            {
+                if (context.order.Where(n => n.table_no == tableNum && n.check_out_staff_id == null).FirstOrDefault() != null)
+                    return false;
+            }
+
+            return true;
+        }
+
 
         public Staff GetStaffByNum(string DeviceId, string Num)
         {

@@ -56,6 +56,14 @@ namespace gcafeWeb
         List<TableInfo> GetTablesInfo(string DeviceId);
 
         /// <summary>
+        /// 检查tableNum的台是否可以开台
+        /// </summary>
+        /// <param name="tableNum"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool IsTableAvaliable(string tableNum);
+
+        /// <summary>
         /// 根据Num取员工信息
         /// </summary>
         /// <param name="Num"></param>

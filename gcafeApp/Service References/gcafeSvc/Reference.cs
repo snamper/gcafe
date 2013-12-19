@@ -508,6 +508,11 @@ namespace gcafeApp.gcafeSvc {
         
         gcafeApp.gcafeSvc.GetTablesInfoResponse EndGetTablesInfo(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/IsTableAvaliable", ReplyAction="http://tempuri.org/IgcafeSvc/IsTableAvaliableResponse")]
+        System.IAsyncResult BeginIsTableAvaliable(gcafeApp.gcafeSvc.IsTableAvaliableRequest request, System.AsyncCallback callback, object asyncState);
+        
+        gcafeApp.gcafeSvc.IsTableAvaliableResponse EndIsTableAvaliable(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetStaffByNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetStaffByNumResponse")]
         System.IAsyncResult BeginGetStaffByNum(gcafeApp.gcafeSvc.GetStaffByNumRequest request, System.AsyncCallback callback, object asyncState);
         
@@ -700,6 +705,38 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="IsTableAvaliable", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class IsTableAvaliableRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string tableNum;
+        
+        public IsTableAvaliableRequest() {
+        }
+        
+        public IsTableAvaliableRequest(string tableNum) {
+            this.tableNum = tableNum;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="IsTableAvaliableResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class IsTableAvaliableResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public bool IsTableAvaliableResult;
+        
+        public IsTableAvaliableResponse() {
+        }
+        
+        public IsTableAvaliableResponse(bool IsTableAvaliableResult) {
+            this.IsTableAvaliableResult = IsTableAvaliableResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetStaffByNum", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
     public partial class GetStaffByNumRequest {
         
@@ -835,6 +872,25 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class IsTableAvaliableCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public IsTableAvaliableCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public gcafeApp.gcafeSvc.IsTableAvaliableResponse Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((gcafeApp.gcafeSvc.IsTableAvaliableResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class GetStaffByNumCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -885,6 +941,12 @@ namespace gcafeApp.gcafeSvc {
         private EndOperationDelegate onEndGetTablesInfoDelegate;
         
         private System.Threading.SendOrPostCallback onGetTablesInfoCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginIsTableAvaliableDelegate;
+        
+        private EndOperationDelegate onEndIsTableAvaliableDelegate;
+        
+        private System.Threading.SendOrPostCallback onIsTableAvaliableCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetStaffByNumDelegate;
         
@@ -954,6 +1016,8 @@ namespace gcafeApp.gcafeSvc {
         public event System.EventHandler<TableOprCompletedEventArgs> TableOprCompleted;
         
         public event System.EventHandler<GetTablesInfoCompletedEventArgs> GetTablesInfoCompleted;
+        
+        public event System.EventHandler<IsTableAvaliableCompletedEventArgs> IsTableAvaliableCompleted;
         
         public event System.EventHandler<GetStaffByNumCompletedEventArgs> GetStaffByNumCompleted;
         
@@ -1192,6 +1256,52 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginIsTableAvaliable(gcafeApp.gcafeSvc.IsTableAvaliableRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginIsTableAvaliable(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        gcafeApp.gcafeSvc.IsTableAvaliableResponse gcafeApp.gcafeSvc.IgcafeSvc.EndIsTableAvaliable(System.IAsyncResult result) {
+            return base.Channel.EndIsTableAvaliable(result);
+        }
+        
+        private System.IAsyncResult OnBeginIsTableAvaliable(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            gcafeApp.gcafeSvc.IsTableAvaliableRequest request = ((gcafeApp.gcafeSvc.IsTableAvaliableRequest)(inValues[0]));
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginIsTableAvaliable(request, callback, asyncState);
+        }
+        
+        private object[] OnEndIsTableAvaliable(System.IAsyncResult result) {
+            gcafeApp.gcafeSvc.IsTableAvaliableResponse retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndIsTableAvaliable(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnIsTableAvaliableCompleted(object state) {
+            if ((this.IsTableAvaliableCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.IsTableAvaliableCompleted(this, new IsTableAvaliableCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void IsTableAvaliableAsync(gcafeApp.gcafeSvc.IsTableAvaliableRequest request) {
+            this.IsTableAvaliableAsync(request, null);
+        }
+        
+        public void IsTableAvaliableAsync(gcafeApp.gcafeSvc.IsTableAvaliableRequest request, object userState) {
+            if ((this.onBeginIsTableAvaliableDelegate == null)) {
+                this.onBeginIsTableAvaliableDelegate = new BeginOperationDelegate(this.OnBeginIsTableAvaliable);
+            }
+            if ((this.onEndIsTableAvaliableDelegate == null)) {
+                this.onEndIsTableAvaliableDelegate = new EndOperationDelegate(this.OnEndIsTableAvaliable);
+            }
+            if ((this.onIsTableAvaliableCompletedDelegate == null)) {
+                this.onIsTableAvaliableCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnIsTableAvaliableCompleted);
+            }
+            base.InvokeAsync(this.onBeginIsTableAvaliableDelegate, new object[] {
+                        request}, this.onEndIsTableAvaliableDelegate, this.onIsTableAvaliableCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetStaffByNum(gcafeApp.gcafeSvc.GetStaffByNumRequest request, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginGetStaffByNum(request, callback, asyncState);
         }
@@ -1375,6 +1485,19 @@ namespace gcafeApp.gcafeSvc {
             public gcafeApp.gcafeSvc.GetTablesInfoResponse EndGetTablesInfo(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 gcafeApp.gcafeSvc.GetTablesInfoResponse _result = ((gcafeApp.gcafeSvc.GetTablesInfoResponse)(base.EndInvoke("GetTablesInfo", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginIsTableAvaliable(gcafeApp.gcafeSvc.IsTableAvaliableRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("IsTableAvaliable", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public gcafeApp.gcafeSvc.IsTableAvaliableResponse EndIsTableAvaliable(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                gcafeApp.gcafeSvc.IsTableAvaliableResponse _result = ((gcafeApp.gcafeSvc.IsTableAvaliableResponse)(base.EndInvoke("IsTableAvaliable", _args, result)));
                 return _result;
             }
             
