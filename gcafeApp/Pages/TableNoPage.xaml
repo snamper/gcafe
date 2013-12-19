@@ -74,7 +74,7 @@
                     <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="台号:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TableNum, Mode=TwoWay}" VerticalAlignment="Center" />
                     <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="人数:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CustomerNum, Mode=TwoWay}" VerticalAlignment="Center" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CustomerNum,  UpdateSourceTrigger=Explicit, Mode=TwoWay}" VerticalAlignment="Center" />
                     <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="称呼:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
                     <TextBox Grid.Row="2" Grid.Column="1" Text="" VerticalAlignment="Center" />
                 </Grid>
