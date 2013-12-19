@@ -48,7 +48,24 @@
             </phone:Pivot.TitleTemplate>
             <!--枢轴项一-->
             <phone:PivotItem Header="点菜">
-                <Controls:Order />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <phone:LongListSelector Grid.Row="1" Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,17">
+                                    <TextBlock Text="{Binding LineOne}" TextWrapping="NoWrap" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    <TextBlock Text="{Binding LineThree}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+                    <Controls:Order />
+                </Grid>
+                
             </phone:PivotItem>
 
             <!--枢轴项二-->
