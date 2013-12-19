@@ -24,9 +24,6 @@ namespace gcafeApp.ViewModel
                 _svc = svc;
                 _svc.TableOprCompleted += _svc_TableOprCompleted;
                 _svc.GetTablesInfoCompleted += _svc_GetTablesInfoCompleted;
-
-                GetTablesInfoRequest req = new GetTablesInfoRequest(Settings.AppSettings.DeviceID);
-                _svc.GetTablesInfoAsync(req);
             }
         }
 
@@ -124,6 +121,12 @@ namespace gcafeApp.ViewModel
             };
 
             _svc.TableOprAsync(req);
+        }
+
+        public void GetOpenedTables()
+        {
+            GetTablesInfoRequest req = new GetTablesInfoRequest(Settings.AppSettings.DeviceID);
+            _svc.GetTablesInfoAsync(req);
         }
     }
 }

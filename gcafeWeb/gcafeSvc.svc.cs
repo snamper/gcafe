@@ -83,7 +83,7 @@ namespace gcafeWeb
                 switch (oprType)
                 {
                     case TableOprType.OpenTable:
-                        dev = context.device.Where(n => n.device_id == DeviceId).FirstOrDefault();
+                        dev = context.device.Where(n => n.device_id == DeviceId && n.is_deny == false).FirstOrDefault();
                         if (dev == null)
                             rtn = "设备未验证";
                         else
@@ -120,6 +120,23 @@ namespace gcafeWeb
         {
             int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
             List<TableInfo> tableInfoList = new List<TableInfo>();
+
+            using (var context = new gcafeEntities())
+            {
+                List<order> orders = context.order.Include("staff2").Where(n => n.branch_id == branchId && n.check_out_staff_id == null).ToList();
+                foreach (var order in orders)
+                {
+                    tableInfoList.Add(new TableInfo()
+                    {
+                        ID = order.id,
+                        Num = order.table_no,
+                        CustomerNum = order.customer_number,
+                        Amount = order.receivable == null ? 0 : (decimal)order.receivable,
+                        OpenTableStaff = new Staff() { Name = order.staff2.name },
+                        OpenTableTime = order.table_opened_time,
+                    });
+                }
+            }
 
             return tableInfoList;
         }

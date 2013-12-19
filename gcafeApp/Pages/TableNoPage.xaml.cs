@@ -31,6 +31,15 @@ namespace gcafeApp.Pages
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
+
+            //((ViewModel.TablesViewModel)DataContext).GetOpenedTables();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            ((ViewModel.TablesViewModel)DataContext).GetOpenedTables();
         }
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)

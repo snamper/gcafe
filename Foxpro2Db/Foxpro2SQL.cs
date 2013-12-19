@@ -46,6 +46,7 @@ namespace Foxpro2Db
                                 string prodNo = ((string)row["productno"]).Trim();
                                 string prodName = ((string)row["prodname"]).Trim();
                                 decimal price = (decimal)row["price"];
+                                decimal fprice = (decimal)row["fprice"];
                                 bool isSetmeal = IsSetmeal(prodNo);
 
                                 if ((prodNo.Substring(0, 2) != "33") &&
@@ -54,11 +55,11 @@ namespace Foxpro2Db
                                     int? catId = GetMenuCataId(prodNo);
 
                                     if (catId != null)
-                                        sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, menu_catalog_id) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3}, {4})",
-                                            prodName, prodNo, price, isSetmeal ? 1 : 0, catId);
+                                        sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, menu_catalog_id, fprice) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3}, {4}, {5})",
+                                            prodName, prodNo, price, isSetmeal ? 1 : 0, catId, fprice);
                                     else
-                                        sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3})",
-                                            prodName, prodNo, price, isSetmeal ? 1 : 0);
+                                        sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, fprice) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3}, {4})",
+                                            prodName, prodNo, price, isSetmeal ? 1 : 0, fprice);
 
                                     using (var dbCmd = new SqlCommand(sql, dbConn, trans))
                                     {
