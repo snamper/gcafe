@@ -18,11 +18,13 @@ namespace gcafeWeb
         {
             this.credit = new HashSet<credit>();
             this.order_detail = new HashSet<order_detail>();
+            this.shift_detail = new HashSet<shift_detail>();
         }
     
         public int id { get; set; }
         public int branch_id { get; set; }
         public int device_id { get; set; }
+        public string order_num { get; set; }
         public string table_no { get; set; }
         public int customer_number { get; set; }
         public int open_table_staff_id { get; set; }
@@ -35,6 +37,9 @@ namespace gcafeWeb
         public Nullable<System.DateTime> check_out_time { get; set; }
         public Nullable<int> member_id { get; set; }
         public Nullable<int> shift_id { get; set; }
+        public bool is_cancel { get; set; }
+        public Nullable<int> cancel_staff_id { get; set; }
+        public Nullable<System.DateTime> cancel_time { get; set; }
         public string memo { get; set; }
     
         public virtual branch branch { get; set; }
@@ -46,5 +51,6 @@ namespace gcafeWeb
         public virtual ICollection<order_detail> order_detail { get; set; }
         public virtual shift shift { get; set; }
         public virtual staff staff2 { get; set; }
+        public virtual ICollection<shift_detail> shift_detail { get; set; }
     }
 }

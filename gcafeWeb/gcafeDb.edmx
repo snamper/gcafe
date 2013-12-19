@@ -68,6 +68,7 @@
           <Property Name="number" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="unit" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="fprice" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="printer_group_id" Type="int" Nullable="false" />
           <Property Name="is_setmeal" Type="bit" Nullable="false" />
           <Property Name="is_locked" Type="bit" Nullable="false" />
@@ -103,6 +104,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="branch_id" Type="int" Nullable="false" />
           <Property Name="device_id" Type="int" Nullable="false" />
+          <Property Name="order_num" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="table_no" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="customer_number" Type="int" Nullable="false" />
           <Property Name="open_table_staff_id" Type="int" Nullable="false" />
@@ -115,6 +117,9 @@
           <Property Name="check_out_time" Type="datetime" />
           <Property Name="member_id" Type="int" />
           <Property Name="shift_id" Type="int" />
+          <Property Name="is_cancel" Type="bit" Nullable="false" />
+          <Property Name="cancel_staff_id" Type="int" />
+          <Property Name="cancel_time" Type="datetime" />
           <Property Name="memo" Type="ntext" />
         </EntityType>
         <EntityType Name="order_detail">
@@ -122,13 +127,18 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="device_id" Type="int" Nullable="false" />
           <Property Name="order_id" Type="int" Nullable="false" />
           <Property Name="menu_id" Type="int" Nullable="false" />
           <Property Name="quantity" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="order_staff_id" Type="int" Nullable="false" />
           <Property Name="order_time" Type="datetime" Nullable="false" />
-          <Property Name="device_id" Type="int" Nullable="false" />
+          <Property Name="produced_time" Type="datetime" />
+          <Property Name="is_cancle" Type="bit" Nullable="false" />
+          <Property Name="cancel_staff_id" Type="int" />
+          <Property Name="cancel_time" Type="date" />
+          <Property Name="memo" Type="text" />
         </EntityType>
         <EntityType Name="order_detail_method">
           <Key>
@@ -203,6 +213,14 @@
           <Property Name="time" Type="datetime" Nullable="false" />
           <Property Name="staff_id" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="shift_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shift_id" Type="int" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="staff">
           <Key>
             <PropertyRef Name="id" />
@@ -215,6 +233,14 @@
           <Property Name="role_id" Type="int" Nullable="false" />
           <Property Name="join_date" Type="date" Nullable="false" />
           <Property Name="is_deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sys_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="branch_id" Type="int" Nullable="false" />
+          <Property Name="order_cnt" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_credit_member">
           <End Role="member" Type="Self.member" Multiplicity="0..1" />
@@ -600,6 +626,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_shift_detail_order">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="shift_detail" Type="Self.shift_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shift_detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_shift_detail_shift">
+          <End Role="shift" Type="Self.shift" Multiplicity="1" />
+          <End Role="shift_detail" Type="Self.shift_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shift">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shift_detail">
+              <PropertyRef Name="shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_staff_branch">
           <End Role="branch" Type="Self.branch" Multiplicity="1" />
           <End Role="staff" Type="Self.staff" Multiplicity="*" />
@@ -624,6 +674,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_sys_info_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="sys_info" Type="Self.sys_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sys_info">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="gcafeModelStoreContainer">
           <EntitySet Name="branch" EntityType="Self.branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="credit" EntityType="Self.credit" Schema="dbo" store:Type="Tables" />
@@ -645,7 +707,9 @@
           <EntitySet Name="setmeal_item" EntityType="Self.setmeal_item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="setmeal_item_opt" EntityType="Self.setmeal_item_opt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="shift" EntityType="Self.shift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shift_detail" EntityType="Self.shift_detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sys_info" EntityType="Self.sys_info" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_credit_member" Association="Self.FK_credit_member">
             <End Role="member" EntitySet="member" />
             <End Role="credit" EntitySet="credit" />
@@ -774,6 +838,14 @@
             <End Role="menu" EntitySet="menu" />
             <End Role="setmeal_item" EntitySet="setmeal_item" />
           </AssociationSet>
+          <AssociationSet Name="FK_shift_detail_order" Association="Self.FK_shift_detail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="shift_detail" EntitySet="shift_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shift_detail_shift" Association="Self.FK_shift_detail_shift">
+            <End Role="shift" EntitySet="shift" />
+            <End Role="shift_detail" EntitySet="shift_detail" />
+          </AssociationSet>
           <AssociationSet Name="FK_staff_branch" Association="Self.FK_staff_branch">
             <End Role="branch" EntitySet="branch" />
             <End Role="staff" EntitySet="staff" />
@@ -781,6 +853,10 @@
           <AssociationSet Name="FK_staff_role" Association="Self.FK_staff_role">
             <End Role="role" EntitySet="role" />
             <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sys_info_branch" Association="Self.FK_sys_info_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="sys_info" EntitySet="sys_info" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -799,6 +875,7 @@
           <NavigationProperty Name="order" Relationship="Self.FK_order_branch" FromRole="branch" ToRole="order" />
           <NavigationProperty Name="printer_group" Relationship="Self.FK_printer_group_branch" FromRole="branch" ToRole="printer_group" />
           <NavigationProperty Name="staff" Relationship="Self.FK_staff_branch" FromRole="branch" ToRole="staff" />
+          <NavigationProperty Name="sys_info" Relationship="Self.FK_sys_info_branch" FromRole="branch" ToRole="sys_info" />
         </EntityType>
         <EntityType Name="credit">
           <Key>
@@ -866,6 +943,7 @@
           <Property Name="number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="unit" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="fprice" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="printer_group_id" Type="Int32" Nullable="false" />
           <Property Name="is_setmeal" Type="Boolean" Nullable="false" />
           <Property Name="is_locked" Type="Boolean" Nullable="false" />
@@ -916,6 +994,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="branch_id" Type="Int32" Nullable="false" />
           <Property Name="device_id" Type="Int32" Nullable="false" />
+          <Property Name="order_num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="table_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="customer_number" Type="Int32" Nullable="false" />
           <Property Name="open_table_staff_id" Type="Int32" Nullable="false" />
@@ -928,6 +1007,9 @@
           <Property Name="check_out_time" Type="DateTime" Precision="3" />
           <Property Name="member_id" Type="Int32" />
           <Property Name="shift_id" Type="Int32" />
+          <Property Name="is_cancel" Type="Boolean" Nullable="false" />
+          <Property Name="cancel_staff_id" Type="Int32" />
+          <Property Name="cancel_time" Type="DateTime" Precision="3" />
           <Property Name="memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="branch" Relationship="Self.FK_order_branch" FromRole="order" ToRole="branch" />
           <NavigationProperty Name="credit" Relationship="Self.FK_credit_order" FromRole="order" ToRole="credit" />
@@ -938,19 +1020,25 @@
           <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_order" FromRole="order" ToRole="order_detail" />
           <NavigationProperty Name="shift" Relationship="Self.FK_order_shift" FromRole="order" ToRole="shift" />
           <NavigationProperty Name="staff2" Relationship="Self.FK_order_to_staff" FromRole="order" ToRole="staff" />
+          <NavigationProperty Name="shift_detail" Relationship="Self.FK_shift_detail_order" FromRole="order" ToRole="shift_detail" />
         </EntityType>
         <EntityType Name="order_detail">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="device_id" Type="Int32" Nullable="false" />
           <Property Name="order_id" Type="Int32" Nullable="false" />
           <Property Name="menu_id" Type="Int32" Nullable="false" />
           <Property Name="quantity" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="order_staff_id" Type="Int32" Nullable="false" />
           <Property Name="order_time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="device_id" Type="Int32" Nullable="false" />
+          <Property Name="produced_time" Type="DateTime" Precision="3" />
+          <Property Name="is_cancle" Type="Boolean" Nullable="false" />
+          <Property Name="cancel_staff_id" Type="Int32" />
+          <Property Name="cancel_time" Type="DateTime" Precision="0" />
+          <Property Name="memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="device" Relationship="Self.FK_order_detail_device" FromRole="order_detail" ToRole="device" />
           <NavigationProperty Name="menu" Relationship="Self.FK_order_detail_menu" FromRole="order_detail" ToRole="menu" />
           <NavigationProperty Name="order" Relationship="Self.FK_order_detail_order" FromRole="order_detail" ToRole="order" />
@@ -1046,6 +1134,17 @@
           <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="staff_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="order" Relationship="Self.FK_order_shift" FromRole="shift" ToRole="order" />
+          <NavigationProperty Name="shift_detail" Relationship="Self.FK_shift_detail_shift" FromRole="shift" ToRole="shift_detail" />
+        </EntityType>
+        <EntityType Name="shift_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shift_id" Type="Int32" Nullable="false" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="order" Relationship="Self.FK_shift_detail_order" FromRole="shift_detail" ToRole="order" />
+          <NavigationProperty Name="shift" Relationship="Self.FK_shift_detail_shift" FromRole="shift_detail" ToRole="shift" />
         </EntityType>
         <EntityType Name="staff">
           <Key>
@@ -1066,6 +1165,15 @@
           <NavigationProperty Name="order2" Relationship="Self.FK_order_to_staff" FromRole="staff" ToRole="order" />
           <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_staff" FromRole="staff" ToRole="order_detail" />
           <NavigationProperty Name="role" Relationship="Self.FK_staff_role" FromRole="staff" ToRole="role" />
+        </EntityType>
+        <EntityType Name="sys_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="branch_id" Type="Int32" Nullable="false" />
+          <Property Name="order_cnt" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="branch" Relationship="Self.FK_sys_info_branch" FromRole="sys_info" ToRole="branch" />
         </EntityType>
         <Association Name="FK_member_refill_branch">
           <End Role="branch" Type="Self.branch" Multiplicity="1" />
@@ -1123,6 +1231,18 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="staff">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sys_info_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="sys_info" Type="Self.sys_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sys_info">
               <PropertyRef Name="branch_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1403,6 +1523,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_shift_detail_order">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="shift_detail" Type="Self.shift_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shift_detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_order_detail_method_order_detail">
           <End Role="order_detail" Type="Self.order_detail" Multiplicity="0..1" />
           <End Role="order_detail_method" Type="Self.order_detail_method" Multiplicity="*" />
@@ -1475,6 +1607,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_shift_detail_shift">
+          <End Role="shift" Type="Self.shift" Multiplicity="1" />
+          <End Role="shift_detail" Type="Self.shift_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shift">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shift_detail">
+              <PropertyRef Name="shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="gcafeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="branch" EntityType="Self.branch" />
           <EntitySet Name="credit" EntityType="Self.credit" />
@@ -1496,7 +1640,9 @@
           <EntitySet Name="setmeal_item" EntityType="Self.setmeal_item" />
           <EntitySet Name="setmeal_item_opt" EntityType="Self.setmeal_item_opt" />
           <EntitySet Name="shift" EntityType="Self.shift" />
+          <EntitySet Name="shift_detail" EntityType="Self.shift_detail" />
           <EntitySet Name="staff" EntityType="Self.staff" />
+          <EntitySet Name="sys_info" EntityType="Self.sys_info" />
           <AssociationSet Name="FK_member_refill_branch" Association="Self.FK_member_refill_branch">
             <End Role="branch" EntitySet="branch" />
             <End Role="member_refill" EntitySet="member_refill" />
@@ -1516,6 +1662,10 @@
           <AssociationSet Name="FK_staff_branch" Association="Self.FK_staff_branch">
             <End Role="branch" EntitySet="branch" />
             <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sys_info_branch" Association="Self.FK_sys_info_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="sys_info" EntitySet="sys_info" />
           </AssociationSet>
           <AssociationSet Name="FK_credit_member" Association="Self.FK_credit_member">
             <End Role="member" EntitySet="member" />
@@ -1609,6 +1759,10 @@
             <End Role="staff" EntitySet="staff" />
             <End Role="order" EntitySet="order" />
           </AssociationSet>
+          <AssociationSet Name="FK_shift_detail_order" Association="Self.FK_shift_detail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="shift_detail" EntitySet="shift_detail" />
+          </AssociationSet>
           <AssociationSet Name="FK_order_detail_method_order_detail" Association="Self.FK_order_detail_method_order_detail">
             <End Role="order_detail" EntitySet="order_detail" />
             <End Role="order_detail_method" EntitySet="order_detail_method" />
@@ -1632,6 +1786,10 @@
           <AssociationSet Name="FK_staff_role" Association="Self.FK_staff_role">
             <End Role="role" EntitySet="role" />
             <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shift_detail_shift" Association="Self.FK_shift_detail_shift">
+            <End Role="shift" EntitySet="shift" />
+            <End Role="shift_detail" EntitySet="shift_detail" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1707,6 +1865,7 @@
                 <ScalarProperty Name="number" ColumnName="number" />
                 <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="fprice" ColumnName="fprice" />
                 <ScalarProperty Name="printer_group_id" ColumnName="printer_group_id" />
                 <ScalarProperty Name="is_setmeal" ColumnName="is_setmeal" />
                 <ScalarProperty Name="is_locked" ColumnName="is_locked" />
@@ -1746,6 +1905,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="branch_id" ColumnName="branch_id" />
                 <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="order_num" ColumnName="order_num" />
                 <ScalarProperty Name="table_no" ColumnName="table_no" />
                 <ScalarProperty Name="customer_number" ColumnName="customer_number" />
                 <ScalarProperty Name="open_table_staff_id" ColumnName="open_table_staff_id" />
@@ -1758,6 +1918,9 @@
                 <ScalarProperty Name="check_out_time" ColumnName="check_out_time" />
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
                 <ScalarProperty Name="shift_id" ColumnName="shift_id" />
+                <ScalarProperty Name="is_cancel" ColumnName="is_cancel" />
+                <ScalarProperty Name="cancel_staff_id" ColumnName="cancel_staff_id" />
+                <ScalarProperty Name="cancel_time" ColumnName="cancel_time" />
                 <ScalarProperty Name="memo" ColumnName="memo" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1766,13 +1929,18 @@
             <EntityTypeMapping TypeName="gcafeModel.order_detail">
               <MappingFragment StoreEntitySet="order_detail">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="menu_id" ColumnName="menu_id" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="order_staff_id" ColumnName="order_staff_id" />
                 <ScalarProperty Name="order_time" ColumnName="order_time" />
-                <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="produced_time" ColumnName="produced_time" />
+                <ScalarProperty Name="is_cancle" ColumnName="is_cancle" />
+                <ScalarProperty Name="cancel_staff_id" ColumnName="cancel_staff_id" />
+                <ScalarProperty Name="cancel_time" ColumnName="cancel_time" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1858,6 +2026,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="shift_detail">
+            <EntityTypeMapping TypeName="gcafeModel.shift_detail">
+              <MappingFragment StoreEntitySet="shift_detail">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="shift_id" ColumnName="shift_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="staff">
             <EntityTypeMapping TypeName="gcafeModel.staff">
               <MappingFragment StoreEntitySet="staff">
@@ -1869,6 +2046,15 @@
                 <ScalarProperty Name="role_id" ColumnName="role_id" />
                 <ScalarProperty Name="join_date" ColumnName="join_date" />
                 <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sys_info">
+            <EntityTypeMapping TypeName="gcafeModel.sys_info">
+              <MappingFragment StoreEntitySet="sys_info">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+                <ScalarProperty Name="order_cnt" ColumnName="order_cnt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

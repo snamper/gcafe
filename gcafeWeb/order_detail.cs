@@ -21,13 +21,18 @@ namespace gcafeWeb
         }
     
         public int id { get; set; }
+        public int device_id { get; set; }
         public int order_id { get; set; }
         public int menu_id { get; set; }
         public decimal quantity { get; set; }
         public decimal price { get; set; }
         public int order_staff_id { get; set; }
         public System.DateTime order_time { get; set; }
-        public int device_id { get; set; }
+        public Nullable<System.DateTime> produced_time { get; set; }
+        public bool is_cancle { get; set; }
+        public Nullable<int> cancel_staff_id { get; set; }
+        public Nullable<System.DateTime> cancel_time { get; set; }
+        public string memo { get; set; }
     
         public virtual device device { get; set; }
         public virtual menu menu { get; set; }

@@ -31,6 +31,7 @@ namespace gcafeWeb
         public string number { get; set; }
         public string unit { get; set; }
         public decimal price { get; set; }
+        public decimal fprice { get; set; }
         public int printer_group_id { get; set; }
         public bool is_setmeal { get; set; }
         public bool is_locked { get; set; }

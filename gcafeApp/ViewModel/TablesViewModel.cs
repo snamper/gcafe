@@ -11,6 +11,7 @@ namespace gcafeApp.ViewModel
     public class TablesViewModel : VMBase
     {
         private readonly IgcafeSvcClient _svc;
+        private bool _isInputValid = true;
 
         /// <summary>
         /// 初始化
@@ -24,6 +25,21 @@ namespace gcafeApp.ViewModel
                 _svc = svc;
                 _svc.TableOprCompleted += _svc_TableOprCompleted;
                 _svc.GetTablesInfoCompleted += _svc_GetTablesInfoCompleted;
+                _svc.IsTableAvaliableCompleted += _svc_IsTableAvaliableCompleted;
+            }
+        }
+
+        void _svc_IsTableAvaliableCompleted(object sender, IsTableAvaliableCompletedEventArgs e)
+        {
+            if (e.Result.IsTableAvaliableResult != true)
+            {
+                _isInputValid = false;
+                ErrorMsg = "台号已开，请重新选择台号";
+            }
+            else
+            {
+                _isInputValid = true;
+                ErrorMsg = string.Empty;
             }
         }
 
@@ -31,6 +47,7 @@ namespace gcafeApp.ViewModel
         {
             base.Dispose(dispose);
 
+            _svc.IsTableAvaliableCompleted -= _svc_IsTableAvaliableCompleted;
             _svc.GetTablesInfoCompleted -= _svc_GetTablesInfoCompleted;
             _svc.TableOprCompleted -= _svc_TableOprCompleted;
         }
@@ -77,6 +94,20 @@ namespace gcafeApp.ViewModel
         }
         private ObservableCollection<TableViewModel> _items;
 
+        public string ErrorMsg
+        {
+            get { return _errorMsg; }
+            set
+            {
+                if (!ReferenceEquals(value, _errorMsg))
+                {
+                    _errorMsg = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        private string _errorMsg;
+
         /// <summary>
         /// 台号
         /// </summary>
@@ -89,6 +120,9 @@ namespace gcafeApp.ViewModel
                 {
                     _tableNum = value;
                     RaisePropertyChanged();
+
+                    IsTableAvaliableRequest req = new IsTableAvaliableRequest(_tableNum);
+                    _svc.IsTableAvaliableAsync(req);
                 }
             }
         }

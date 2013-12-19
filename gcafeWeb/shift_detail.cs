@@ -12,20 +12,13 @@ namespace gcafeWeb
     using System;
     using System.Collections.Generic;
     
-    public partial class shift
+    public partial class shift_detail
     {
-        public shift()
-        {
-            this.order = new HashSet<order>();
-            this.shift_detail = new HashSet<shift_detail>();
-        }
-    
         public int id { get; set; }
-        public decimal sum { get; set; }
-        public System.DateTime time { get; set; }
-        public string staff_id { get; set; }
+        public int shift_id { get; set; }
+        public int order_id { get; set; }
     
-        public virtual ICollection<order> order { get; set; }
-        public virtual ICollection<shift_detail> shift_detail { get; set; }
+        public virtual order order { get; set; }
+        public virtual shift shift { get; set; }
     }
 }

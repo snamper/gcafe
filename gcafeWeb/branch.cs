@@ -21,6 +21,7 @@ namespace gcafeWeb
             this.order = new HashSet<order>();
             this.printer_group = new HashSet<printer_group>();
             this.staff = new HashSet<staff>();
+            this.sys_info = new HashSet<sys_info>();
         }
     
         public int id { get; set; }
@@ -31,5 +32,6 @@ namespace gcafeWeb
         public virtual ICollection<order> order { get; set; }
         public virtual ICollection<printer_group> printer_group { get; set; }
         public virtual ICollection<staff> staff { get; set; }
+        public virtual ICollection<sys_info> sys_info { get; set; }
     }
 }

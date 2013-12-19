@@ -75,8 +75,7 @@
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TableNum, Mode=TwoWay}" VerticalAlignment="Center" />
                     <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="人数:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CustomerNum,  UpdateSourceTrigger=Explicit, Mode=TwoWay}" VerticalAlignment="Center" />
-                    <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="称呼:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="" VerticalAlignment="Center" />
+                    <TextBlock Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding ErrorMsg}" Style="{StaticResource PhoneTextExtraLargeStyle}" Foreground="Red" />
                 </Grid>
             </phone:PivotItem>
         </phone:Pivot>

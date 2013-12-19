@@ -45,6 +45,8 @@ namespace gcafeWeb
         public virtual DbSet<setmeal_item> setmeal_item { get; set; }
         public virtual DbSet<setmeal_item_opt> setmeal_item_opt { get; set; }
         public virtual DbSet<shift> shift { get; set; }
+        public virtual DbSet<shift_detail> shift_detail { get; set; }
         public virtual DbSet<staff> staff { get; set; }
+        public virtual DbSet<sys_info> sys_info { get; set; }
     }
 }

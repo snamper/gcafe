@@ -303,7 +303,13 @@
     <Compile Include="shift.cs">
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="shift_detail.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="staff.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_info.cs">
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
   </ItemGroup>
