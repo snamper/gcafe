@@ -21,6 +21,7 @@ namespace gcafeApp.ViewModel
     public class VMMenuCameraSelect : VMBase
     {
         private readonly IgcafeSvcClient _svc;
+        bool _notfocus = false;
 
         public VMMenuCameraSelect(IgcafeSvcClient svc)
         {
@@ -45,6 +46,7 @@ namespace gcafeApp.ViewModel
                 {
                     MenuItem menuItem = e.Result.GetMenuItemByNumberResult;
                     this.Result = menuItem.Name;
+                    //System.Diagnostics.Debug.WriteLine(this.Result);
                 }
             }
             catch (Exception ex)
@@ -58,7 +60,7 @@ namespace gcafeApp.ViewModel
             CaptureResolution = new Size(800, 480);
             await InitializePhotoCaptureDevice(CaptureResolution);
             await StartCapturingAsync();
-
+            await PhotoCaptureDevice.FocusAsync();
             int i = 0;
             while (true)
             {
@@ -96,7 +98,9 @@ namespace gcafeApp.ViewModel
 
         private async Task<Result> GetBarcodeAsync()
         {
-            await PhotoCaptureDevice.FocusAsync();
+            if (!_notfocus)
+                await PhotoCaptureDevice.FocusAsync();
+            //PhotoCaptureDevice.FocusAsync();
             return await DetectBarcodeAsync();
         }
 
@@ -114,6 +118,19 @@ namespace gcafeApp.ViewModel
             //barcodeReader.AutoRotate = true;
 
             var result = barcodeReader.Decode(previewBuffer, width, height, RGBLuminanceSource.BitmapFormat.Gray8);
+            if (result != null)
+            {
+                if (!_notfocus)
+                {
+                    PhotoCaptureDevice.SetProperty(KnownCameraPhotoProperties.LockedAutoFocusParameters, AutoFocusParameters.Focus);
+                    _notfocus = true;
+                }
+
+                await Task.Delay(10);
+                //System.Diagnostics.Debug.WriteLine(result.Text);
+            }
+
+
             return result;
         }
 
