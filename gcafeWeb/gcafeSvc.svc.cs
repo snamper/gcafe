@@ -88,10 +88,14 @@ namespace gcafeWeb
                             rtn = "设备未验证";
                         else
                         {
+                            sys_info sysInfo = context.sys_info.FirstOrDefault();
+                            string orderNum = string.Format("{0}{1}{2}{3:D2}{4:D4}", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 1, ++sysInfo.order_cnt);
+
                             order = new order() 
                             { 
                                 branch_id = branchId, 
                                 device_id = dev.id, 
+                                order_num = orderNum,
                                 table_no = tableInfo.Num, 
                                 customer_number = tableInfo.CustomerNum, 
                                 open_table_staff_id = tableInfo.OpenTableStaff.ID,
@@ -129,6 +133,7 @@ namespace gcafeWeb
                     tableInfoList.Add(new TableInfo()
                     {
                         ID = order.id,
+                        OrderNum = order.order_num,
                         Num = order.table_no,
                         CustomerNum = order.customer_number,
                         Amount = order.receivable == null ? 0 : (decimal)order.receivable,

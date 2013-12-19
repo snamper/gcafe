@@ -257,6 +257,8 @@ namespace gcafeApp.gcafeSvc {
         
         private System.DateTime OpenTableTimeField;
         
+        private string OrderNumField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public decimal Amount {
             get {
@@ -331,6 +333,19 @@ namespace gcafeApp.gcafeSvc {
                 if ((this.OpenTableTimeField.Equals(value) != true)) {
                     this.OpenTableTimeField = value;
                     this.RaisePropertyChanged("OpenTableTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string OrderNum {
+            get {
+                return this.OrderNumField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrderNumField, value) != true)) {
+                    this.OrderNumField = value;
+                    this.RaisePropertyChanged("OrderNum");
                 }
             }
         }

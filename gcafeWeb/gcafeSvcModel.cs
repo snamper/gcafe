@@ -101,6 +101,8 @@ namespace gcafeWeb
         [DataMember]
         public int ID { get; set; }
         [DataMember]
+        public string OrderNum { get; set; }
+        [DataMember]
         public string Num { get; set; }
         [DataMember]
         public int CustomerNum { get; set; }

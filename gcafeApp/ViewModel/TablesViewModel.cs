@@ -19,6 +19,7 @@ namespace gcafeApp.ViewModel
         public TablesViewModel(IgcafeSvcClient svc)
         {
             this.Items = new ObservableCollection<TableViewModel>();
+            CustomerNum = 1;
 
             if (!DesignerProperties.IsInDesignTool)
             {
@@ -61,11 +62,12 @@ namespace gcafeApp.ViewModel
                 {
                     vmList.Add(new TableViewModel()
                     {
+                        OrderNum = tbl.OrderNum,
                         TableNo = tbl.Num,
                         CustomerNum = tbl.CustomerNum,
                         OpenTableStaff = tbl.OpenTableStaff.Name,
                         TableOpenedTime = tbl.OpenTableTime,
-                        Amount = tbl.Amount
+                        Amount = tbl.Amount,
                     });
                 }
                 this.Items = new ObservableCollection<TableViewModel>(vmList);
@@ -75,6 +77,14 @@ namespace gcafeApp.ViewModel
         void _svc_TableOprCompleted(object sender, TableOprCompletedEventArgs e)
         {
             string s = e.Result.TableOprResult;
+        }
+
+        public void Reset()
+        {
+            TableNum = string.Empty;
+            CustomerNum = 1;
+            _isInputValid = true;
+            ErrorMsg = string.Empty;
         }
 
         /// <summary>
@@ -93,6 +103,11 @@ namespace gcafeApp.ViewModel
             }
         }
         private ObservableCollection<TableViewModel> _items;
+
+        public bool IsInputValid
+        {
+            get { return _isInputValid; }
+        }
 
         public string ErrorMsg
         {

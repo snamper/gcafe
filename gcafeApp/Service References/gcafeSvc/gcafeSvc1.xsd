@@ -60,6 +60,7 @@
       <xs:element minOccurs="0" name="Num" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OpenTableStaff" nillable="true" type="tns:Staff" />
       <xs:element minOccurs="0" name="OpenTableTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OrderNum" nillable="true" type="xs:string" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />

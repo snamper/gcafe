@@ -96,6 +96,20 @@ namespace gcafeApp.ViewModel
             }
         }
 
+        public string OrderNum
+        {
+            get { return _orderNum; }
+            set
+            {
+                if (!ReferenceEquals(value, _orderNum))
+                {
+                    _orderNum = value;
+                    NotifyPropertyChanged("OrderNum");
+                }
+            }
+        }
+        private string _orderNum;
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {

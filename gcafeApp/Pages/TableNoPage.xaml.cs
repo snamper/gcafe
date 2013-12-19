@@ -32,6 +32,8 @@ namespace gcafeApp.Pages
         {
             base.OnNavigatedFrom(e);
 
+            ((ViewModel.TablesViewModel)DataContext).Reset();
+
             //((ViewModel.TablesViewModel)DataContext).GetOpenedTables();
         }
 
@@ -50,7 +52,12 @@ namespace gcafeApp.Pages
                 if (btn.Text == "确定")
                 {
                     ViewModel.TablesViewModel vm = (ViewModel.TablesViewModel)DataContext;
-                    vm.OpenTable();
+
+                    if (vm.IsInputValid)
+                    {
+                        vm.OpenTable();
+                        Value = vm.TableNum;
+                    }
                 }
             }
         }

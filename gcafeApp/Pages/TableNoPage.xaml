@@ -27,12 +27,13 @@
                         <DataTemplate>
                             <Grid Margin="0,8,0,8" Background="Gray">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="120"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" Background="Red">
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding TableNo}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                    <StackPanel Width="120" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding TableNo}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalAlignment="Center" />
+                                        <TextBlock Margin="0, 20" Text="{Binding OrderNum}" HorizontalAlignment="Center" FontSize="15" />
                                     </StackPanel>
 
                                 </StackPanel>
@@ -75,7 +76,7 @@
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TableNum, Mode=TwoWay}" VerticalAlignment="Center" />
                     <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="人数:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CustomerNum,  UpdateSourceTrigger=Explicit, Mode=TwoWay}" VerticalAlignment="Center" />
-                    <TextBlock Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding ErrorMsg}" Style="{StaticResource PhoneTextExtraLargeStyle}" Foreground="Red" />
+                    <TextBlock Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding ErrorMsg}" Style="{StaticResource PhoneTextExtraLargeStyle}" Foreground="Red" TextWrapping="Wrap" FontSize="18"/>
                 </Grid>
             </phone:PivotItem>
         </phone:Pivot>

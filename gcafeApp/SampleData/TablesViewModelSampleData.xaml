@@ -4,14 +4,14 @@
     xmlns:vm="clr-namespace:gcafeApp.ViewModel">
     
     <vm:TablesViewModel.Items>
-        <vm:TableViewModel TableNo="101" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 12:01:00" Amount="10.00" />
-        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" />
-        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" />
-        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" />
-        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" />
-        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" />
-        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" />
-        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" />
+        <vm:TableViewModel TableNo="101" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 12:01:00" Amount="10.00" OrderNum="20131219010001" />
+        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" OrderNum="20131219010002" />
+        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" OrderNum="20131219010003" />
+        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" OrderNum="20131219010004" />
+        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" OrderNum="20131219010005" />
+        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" OrderNum="20131219010006" />
+        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" OrderNum="20131219010007" />
+        <vm:TableViewModel TableNo="201" CustomerNum="2" OpenTableStaff="张志强" TableOpenedTime="2013-12-04 13:02:00" Amount="20.00" OrderNum="20131219010008" />
     </vm:TablesViewModel.Items>
 
 </vm:TablesViewModel>
