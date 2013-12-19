@@ -45,7 +45,7 @@ namespace gcafeWeb
         /// <param name="oprType"></param>
         /// <returns>成功返回"成功", 失败返回出错原因</returns>
         [OperationContract]
-        string TableOpr(string DeviceId, string tableNum, string oldTableNum, int customerNum, TableOprType oprType);
+        string TableOpr(string DeviceId, TableInfo tableInfo, string oldTableNum, TableOprType oprType);
 
         /// <summary>
         /// 取当前已开台并且还没埋单的台的信息

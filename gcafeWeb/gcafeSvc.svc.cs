@@ -69,18 +69,40 @@ namespace gcafeWeb
             }
         }
 
-        public string TableOpr(string DeviceId, string tableNum, string oldTableNum, int customerNum, TableOprType oprType)
+        public string TableOpr(string DeviceId, TableInfo tableInfo, string oldTableNum, TableOprType oprType)
         {
+            string rtn = string.Empty;
+
             int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
 
             order order;
+            device dev;
 
             using (var context = new gcafeEntities())
             {
                 switch (oprType)
                 {
                     case TableOprType.OpenTable:
-                        order = new order();
+                        dev = context.device.Where(n => n.device_id == DeviceId).FirstOrDefault();
+                        if (dev == null)
+                            rtn = "设备未验证";
+                        else
+                        {
+                            order = new order() 
+                            { 
+                                branch_id = branchId, 
+                                device_id = dev.id, 
+                                table_no = tableInfo.Num, 
+                                customer_number = tableInfo.CustomerNum, 
+                                open_table_staff_id = tableInfo.OpenTableStaff.ID,
+                                table_opened_time = DateTime.Now,
+                            };
+
+                            context.order.Add(order);
+                            context.SaveChanges();
+
+                            rtn = "开台成功";
+                        }
                         break;
 
                     case TableOprType.ChangeTable:
@@ -91,7 +113,7 @@ namespace gcafeWeb
                 }
             }
 
-            return "";
+            return rtn;
         }
 
         public List<TableInfo> GetTablesInfo(string DeviceId, int branchId)

@@ -52,27 +52,13 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SetmealItem" nillable="true" type="tns:SetmealItem" />
-  <xs:simpleType name="TableOprType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="OpenTable" />
-      <xs:enumeration value="ChangeTable" />
-      <xs:enumeration value="ChangeCustomerNum" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="TableOprType" nillable="true" type="tns:TableOprType" />
-  <xs:complexType name="ArrayOfTableInfo">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="TableInfo" nillable="true" type="tns:TableInfo" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfTableInfo" nillable="true" type="tns:ArrayOfTableInfo" />
   <xs:complexType name="TableInfo">
     <xs:sequence>
       <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
       <xs:element minOccurs="0" name="CustomerNum" type="xs:int" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="Num" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OpenTableStaff" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpenTableStaff" nillable="true" type="tns:Staff" />
       <xs:element minOccurs="0" name="OpenTableTime" type="xs:dateTime" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
@@ -93,4 +79,18 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Staff" nillable="true" type="tns:Staff" />
+  <xs:simpleType name="TableOprType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OpenTable" />
+      <xs:enumeration value="ChangeTable" />
+      <xs:enumeration value="ChangeCustomerNum" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TableOprType" nillable="true" type="tns:TableOprType" />
+  <xs:complexType name="ArrayOfTableInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TableInfo" nillable="true" type="tns:TableInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTableInfo" nillable="true" type="tns:ArrayOfTableInfo" />
 </xs:schema>

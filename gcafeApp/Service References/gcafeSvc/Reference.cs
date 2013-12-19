@@ -240,20 +240,6 @@ namespace gcafeApp.gcafeSvc {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TableOprType", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
-    public enum TableOprType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        OpenTable = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ChangeTable = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ChangeCustomerNum = 2,
-    }
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="TableInfo", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
@@ -267,7 +253,7 @@ namespace gcafeApp.gcafeSvc {
         
         private string NumField;
         
-        private string OpenTableStaffField;
+        private gcafeApp.gcafeSvc.Staff OpenTableStaffField;
         
         private System.DateTime OpenTableTimeField;
         
@@ -324,7 +310,7 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string OpenTableStaff {
+        public gcafeApp.gcafeSvc.Staff OpenTableStaff {
             get {
                 return this.OpenTableStaffField;
             }
@@ -479,6 +465,20 @@ namespace gcafeApp.gcafeSvc {
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TableOprType", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public enum TableOprType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OpenTable = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ChangeTable = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ChangeCustomerNum = 2,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="gcafeSvc.IgcafeSvc")]
     public interface IgcafeSvc {
@@ -631,25 +631,21 @@ namespace gcafeApp.gcafeSvc {
         public string DeviceId;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
-        public string tableNum;
+        public gcafeApp.gcafeSvc.TableInfo tableInfo;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
         public string oldTableNum;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
-        public int customerNum;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
         public gcafeApp.gcafeSvc.TableOprType oprType;
         
         public TableOprRequest() {
         }
         
-        public TableOprRequest(string DeviceId, string tableNum, string oldTableNum, int customerNum, gcafeApp.gcafeSvc.TableOprType oprType) {
+        public TableOprRequest(string DeviceId, gcafeApp.gcafeSvc.TableInfo tableInfo, string oldTableNum, gcafeApp.gcafeSvc.TableOprType oprType) {
             this.DeviceId = DeviceId;
-            this.tableNum = tableNum;
+            this.tableInfo = tableInfo;
             this.oldTableNum = oldTableNum;
-            this.customerNum = customerNum;
             this.oprType = oprType;
         }
     }

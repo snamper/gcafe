@@ -50,10 +50,9 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="tableNum" nillable="true" type="xs:string" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="tableInfo" nillable="true" type="q4:TableInfo" />
         <xs:element minOccurs="0" name="oldTableNum" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="customerNum" type="xs:int" />
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="oprType" type="q4:TableOprType" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="oprType" type="q5:TableOprType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -75,7 +74,7 @@
   <xs:element name="GetTablesInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetTablesInfoResult" nillable="true" type="q5:ArrayOfTableInfo" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetTablesInfoResult" nillable="true" type="q6:ArrayOfTableInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -90,7 +89,7 @@
   <xs:element name="GetStaffByNumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q6:Staff" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q7:Staff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using GalaSoft.MvvmLight;
@@ -35,12 +37,27 @@ namespace gcafeApp.ViewModel
 
         void _svc_GetTablesInfoCompleted(object sender, GetTablesInfoCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.Result.GetTablesInfoResult != null)
+            {
+                List<TableViewModel> vmList = new List<TableViewModel>();
+                foreach (TableInfo tbl in e.Result.GetTablesInfoResult)
+                {
+                    vmList.Add(new TableViewModel()
+                    {
+                        TableNo = tbl.Num,
+                        CustomerNum = tbl.CustomerNum,
+                        OpenTableStaff = tbl.OpenTableStaff.Name,
+                        TableOpenedTime = tbl.OpenTableTime,
+                        Amount = tbl.Amount
+                    });
+                }
+                this.Items = new ObservableCollection<TableViewModel>(vmList);
+            }
         }
 
         void _svc_TableOprCompleted(object sender, TableOprCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            string s = e.Result.TableOprResult;
         }
 
         /// <summary>
@@ -96,7 +113,12 @@ namespace gcafeApp.ViewModel
 
         public void OpenTable()
         {
-            TableOprRequest req = new TableOprRequest() { DeviceId = Settings.AppSettings.DeviceID, tableNum = TableNum, customerNum = CustomerNum, oprType = TableOprType.OpenTable };
+            TableOprRequest req = new TableOprRequest() 
+            { 
+                DeviceId = Settings.AppSettings.DeviceID, 
+                tableInfo = new TableInfo() { Num = TableNum, CustomerNum = CustomerNum, OpenTableStaff = Settings.AppSettings.LoginStaff }, 
+                oprType = TableOprType.OpenTable 
+            };
 
             _svc.TableOprAsync(req);
         }

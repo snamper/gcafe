@@ -107,7 +107,7 @@ namespace gcafeWeb
         [DataMember]
         public decimal Amount { get; set; }
         [DataMember]
-        public string OpenTableStaff { get; set; }
+        public Staff OpenTableStaff { get; set; }
         [DataMember]
         public DateTime OpenTableTime { get; set; }
     }
