@@ -77,10 +77,16 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsMenuEnabled="True" Mode="Minimized" Opacity=".8">
+        <shell:ApplicationBar IsMenuEnabled="True" Mode="Default"  Opacity=".6">
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="退出登录" Click="ApplicationBarMenuItem_Click" />
             </shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/ApplicationBar.Check.png"
+                Text="确定" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/ApplicationBar.Cancel.png"
+                Text="取消" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

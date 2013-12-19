@@ -19,7 +19,7 @@ namespace gcafeApp.ViewModel
         {
             this.Items = new ObservableCollection<MenuCatalog>();
 
-            if (!DesignerProperties.IsInDesignTool)
+            if (!IsInDesignMode)
             {
                 _svc = new IgcafeSvcClient();
                 _svc.GetMenuCatalogsCompleted += _svc_GetMenuCatalogsCompleted;

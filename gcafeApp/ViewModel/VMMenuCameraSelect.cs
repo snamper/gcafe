@@ -24,7 +24,7 @@ namespace gcafeApp.ViewModel
 
         public VMMenuCameraSelect(IgcafeSvcClient svc)
         {
-            if (!DesignerProperties.IsInDesignTool)
+            if (!IsInDesignMode)
             {
                 _svc = svc;
                 _svc.GetMenuItemByNumberCompleted += _svc_GetMenuItemByNumberCompleted;

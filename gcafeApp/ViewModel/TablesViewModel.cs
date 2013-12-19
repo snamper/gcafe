@@ -21,7 +21,7 @@ namespace gcafeApp.ViewModel
             this.Items = new ObservableCollection<TableViewModel>();
             CustomerNum = 1;
 
-            if (!DesignerProperties.IsInDesignTool)
+            if (!IsInDesignMode)
             {
                 _svc = svc;
                 _svc.TableOprCompleted += _svc_TableOprCompleted;
