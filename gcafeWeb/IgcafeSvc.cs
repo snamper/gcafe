@@ -53,7 +53,7 @@ namespace gcafeWeb
         /// <param name="branchId"></param>
         /// <returns></returns>
         [OperationContract]
-        List<TableInfo> GetTablesInfo(string DeviceId, int branchId);
+        List<TableInfo> GetTablesInfo(string DeviceId);
 
         /// <summary>
         /// 根据Num取员工信息

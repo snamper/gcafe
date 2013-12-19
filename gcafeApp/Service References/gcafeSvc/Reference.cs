@@ -674,15 +674,11 @@ namespace gcafeApp.gcafeSvc {
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         public string DeviceId;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
-        public int branchId;
-        
         public GetTablesInfoRequest() {
         }
         
-        public GetTablesInfoRequest(string DeviceId, int branchId) {
+        public GetTablesInfoRequest(string DeviceId) {
             this.DeviceId = DeviceId;
-            this.branchId = branchId;
         }
     }
     

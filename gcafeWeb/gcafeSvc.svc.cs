@@ -116,8 +116,9 @@ namespace gcafeWeb
             return rtn;
         }
 
-        public List<TableInfo> GetTablesInfo(string DeviceId, int branchId)
+        public List<TableInfo> GetTablesInfo(string DeviceId)
         {
+            int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
             List<TableInfo> tableInfoList = new List<TableInfo>();
 
             return tableInfoList;

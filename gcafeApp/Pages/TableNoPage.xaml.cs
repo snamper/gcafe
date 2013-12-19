@@ -28,6 +28,11 @@ namespace gcafeApp.Pages
         {
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+        }
+
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
             if (_pivot.SelectedIndex == 1)
