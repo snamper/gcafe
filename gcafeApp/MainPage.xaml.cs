@@ -41,6 +41,11 @@ namespace gcafeApp
             App.RootFrame.Navigate(new Uri("/Pages/AuthenticationPage.xaml", UriKind.Relative));
         }
 
+        private void ExpanderView_Expanded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
 
         // 用于生成本地化 ApplicationBar 的示例代码
         //private void BuildLocalizedApplicationBar()

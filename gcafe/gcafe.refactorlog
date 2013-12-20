@@ -224,4 +224,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="produced_time" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="b8d3fb5e-e5c6-412f-80e6-f6de392899bd" ChangeDateTime="12/20/2013 02:46:07">
+    <Property Name="ElementName" Value="[dbo].[sys_info].[is_fes]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[sys_info]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="is_festival" />
+  </Operation>
 </Operations>

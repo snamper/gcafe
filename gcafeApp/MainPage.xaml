@@ -6,6 +6,8 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:data="clr-namespace:gcafeApp.ViewModel"
     mc:Ignorable="d"
     d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -14,6 +16,7 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
     DataContext="{Binding Main, Source={StaticResource Locator}}">
+    
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource ModuleColor}">
@@ -53,16 +56,63 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <phone:LongListSelector Grid.Row="1" Margin="0,0,-12,0" ItemsSource="{Binding Items}">
-                        <phone:LongListSelector.ItemTemplate>
+                    <ListBox Grid.Row="1" ItemsSource="{Binding Path=MenuItems }" Margin="12,0,0,0">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0,0,0,17">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="NoWrap" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineThree}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
+                                <toolkit:ExpanderView Margin="0,0,0,8" Background="Red"
+                                                      Header="{Binding}"
+                                                      NonExpandableHeader="{Binding}"
+                                                      Expander="{Binding}"
+                                                      ItemsSource="{Binding SetmealItems}"
+                                                      IsNonExpandable="False">
+                                    <toolkit:ExpanderView.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" 
+                                                       Foreground="{StaticResource PhoneForegroundBrush}"
+                                                       FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+                                        </DataTemplate>
+                                    </toolkit:ExpanderView.HeaderTemplate>
+
+                                    <toolkit:ExpanderView.ExpanderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="张志强在19:30点菜" Foreground="red"  />
+                                                <TextBlock Foreground="Black">
+                                                    <Run Text="这套餐有3项内容" />
+
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </toolkit:ExpanderView.ExpanderTemplate>
+
+                                    <toolkit:ExpanderView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                                                <TextBlock Text="{Binding Name}" />
+                                            </ListBoxItem>
+                                        </DataTemplate>
+                                    </toolkit:ExpanderView.ItemTemplate>
+
+                                    <toolkit:ExpanderView.NonExpandableHeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="nonexpand" />
+                                        </DataTemplate>
+                                    </toolkit:ExpanderView.NonExpandableHeaderTemplate>
+                                    
+                                </toolkit:ExpanderView>
                             </DataTemplate>
-                        </phone:LongListSelector.ItemTemplate>
-                    </phone:LongListSelector>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                     <Controls:Order />
                 </Grid>
                 

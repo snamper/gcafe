@@ -1,6 +1,10 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 using Microsoft.Phone.Info;
+using gcafeApp.gcafeSvc;
 
 namespace gcafeApp.ViewModel
 {
@@ -18,39 +22,48 @@ namespace gcafeApp.ViewModel
     /// </summary>
     public class MainViewModel : VMBase
     {
+        private readonly IgcafeSvcClient _svc;
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel()
+        public MainViewModel(/*IgcafeSvcClient svc*/)
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
-        }
-
-        /// <summary>
-        /// Gets the unique hash for the device.
-        /// </summary>
-        public string DeviceUniqueID
-        {
-            get
+            if (!IsInDesignMode)
             {
-                object id;
-                if (DeviceExtendedProperties.TryGetValue("DeviceUniqueId", out id))
-                    return Convert.ToBase64String((byte[])id);
-                else
-                    throw new Exception("È¡UniqueID³ö´í");
+                //_svc = svc;
+
+                List<SetmealItem> setMeals = new List<SetmealItem>();
+                setMeals.Add(new SetmealItem() { Name = "»ðÁú¹û" });
+                setMeals.Add(new SetmealItem() { Name = "Ã¢¹ûÒû" });
+
+                List<MenuItem> menuItems = new List<MenuItem>();
+                menuItems.Add(new MenuItem()
+                    {
+                        ID = 1,
+                        Name = "»ðÁú¹ûÃ¢¹ûÒû",
+                        Price = (decimal)12.01,
+                        Unit = "±­",
+                        IsSetmeal = true,
+                        SetmealItems = new ObservableCollection<SetmealItem>(setMeals),
+                    });
+
+                MenuItems = new ObservableCollection<MenuItem>(menuItems);
             }
         }
 
-        public string Test
+        public ObservableCollection<MenuItem> MenuItems
         {
-            get { return "Hello"; }
+            get { return _menuItems; }
+            set
+            {
+                if (!ReferenceEquals(value, _menuItems))
+                {
+                    _menuItems = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
+        private ObservableCollection<MenuItem> _menuItems;
     }
 }
