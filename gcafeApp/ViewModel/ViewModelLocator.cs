@@ -49,7 +49,7 @@ namespace gcafeApp.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<MainViewModel>(true);
             SimpleIoc.Default.Register<TablesViewModel>();
             SimpleIoc.Default.Register<MenuSelectViewModel>();
             SimpleIoc.Default.Register<VMLogin>();

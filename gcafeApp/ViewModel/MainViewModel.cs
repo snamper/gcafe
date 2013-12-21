@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Input;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,11 +25,26 @@ namespace gcafeApp.ViewModel
     {
         private readonly IgcafeSvcClient _svc;
 
+        public ICommand MethodCommand 
+        {
+            get { return _methodCommand; }
+            private set
+            {
+                _methodCommand = value;
+                RaisePropertyChanged();
+            }
+        }
+        private ICommand _methodCommand;
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel(/*IgcafeSvcClient svc*/)
         {
+            System.Diagnostics.Debug.WriteLine("========================================================");
+
+            MethodCommand = new MethodCommand();
+
             if (!IsInDesignMode)
             {
                 //_svc = svc;
@@ -36,6 +52,7 @@ namespace gcafeApp.ViewModel
                 List<SetmealItem> setMeals = new List<SetmealItem>();
                 setMeals.Add(new SetmealItem() { Name = "火龙果" });
                 setMeals.Add(new SetmealItem() { Name = "芒果饮" });
+                setMeals.Add(new SetmealItem() { Name = "牛扒" });
 
                 List<MenuItem> menuItems = new List<MenuItem>();
                 menuItems.Add(new MenuItem()
@@ -44,9 +61,18 @@ namespace gcafeApp.ViewModel
                         Name = "火龙果芒果饮",
                         Price = (decimal)12.01,
                         Unit = "杯",
-                        IsSetmeal = true,
+                        IsSetmeal = false,
                         SetmealItems = new ObservableCollection<SetmealItem>(setMeals),
                     });
+
+                menuItems.Add(new MenuItem()
+                {
+                    ID = 2,
+                    Name = "开心大餐",
+                    Price = (decimal)123.12,
+                    Unit = "份",
+                    IsSetmeal = true,
+                });
 
                 MenuItems = new ObservableCollection<MenuItem>(menuItems);
             }
@@ -65,5 +91,21 @@ namespace gcafeApp.ViewModel
             }
         }
         private ObservableCollection<MenuItem> _menuItems;
+
+    }
+
+    public class MethodCommand : ICommand
+    {
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public void Execute(object parameter)
+        {
+            int i = 0;
+        }
     }
 }

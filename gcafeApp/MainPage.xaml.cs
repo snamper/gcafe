@@ -23,6 +23,9 @@ namespace gcafeApp
 
             // 用于本地化 ApplicationBar 的示例代码
             //BuildLocalizedApplicationBar();
+
+            object o = this.Resources["mydata"];
+
         }
 
         // 为 ViewModel 项加载数据
@@ -44,6 +47,11 @@ namespace gcafeApp
         private void ExpanderView_Expanded(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            int i = 0;
         }
 
 

@@ -17,6 +17,10 @@
     shell:SystemTray.IsVisible="True"
     DataContext="{Binding Main, Source={StaticResource Locator}}">
     
+    <!--phone:PhoneApplicationPage.Resources>
+        <data:MainViewModel x:Key="mydata" />
+    </-->
+    
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource ModuleColor}">
@@ -56,7 +60,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ListBox Grid.Row="1" ItemsSource="{Binding Path=MenuItems }" Margin="12,0,0,0">
+                    <ListBox Grid.Row="1" ItemsSource="{Binding Path=MenuItems}" Margin="12,0,0,0">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -74,42 +78,92 @@
                                                       NonExpandableHeader="{Binding}"
                                                       Expander="{Binding}"
                                                       ItemsSource="{Binding SetmealItems}"
-                                                      IsNonExpandable="False">
+                                                      IsNonExpandable="{Binding IsSetmeal}">
                                     <toolkit:ExpanderView.HeaderTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Name}" 
-                                                       Foreground="{StaticResource PhoneForegroundBrush}"
-                                                       FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+                                            <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="360" />
+                                                        <ColumnDefinition Width="80" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock Text="{Binding Name}" 
+                                                               Foreground="{StaticResource PhoneForegroundBrush}"
+                                                               FontSize="32"
+                                                               TextWrapping="Wrap" />
+                                                
+                                                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Price}" Foreground="Red" />
+                                                </Grid>
+                                                <toolkit:ContextMenuService.ContextMenu>
+                                                    <toolkit:ContextMenu>
+                                                        <toolkit:MenuItem Header="可选内容" />
+                                                    </toolkit:ContextMenu>
+                                                </toolkit:ContextMenuService.ContextMenu>
+                                            </ListBoxItem>
                                         </DataTemplate>
                                     </toolkit:ExpanderView.HeaderTemplate>
 
                                     <toolkit:ExpanderView.ExpanderTemplate>
                                         <DataTemplate>
-                                            <StackPanel>
-                                                <TextBlock Text="张志强在19:30点菜" Foreground="red"  />
-                                                <TextBlock Foreground="Black">
+                                            <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                                                <StackPanel>
+                                                    <TextBlock Text="张志强在19:30点菜" Foreground="red"  />
+                                                    <TextBlock Foreground="Black">
                                                     <Run Text="这套餐有3项内容" />
-
-                                                </TextBlock>
-                                            </StackPanel>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                                <toolkit:ContextMenuService.ContextMenu>
+                                                    <toolkit:ContextMenu>
+                                                        <toolkit:MenuItem Header="可选内容" />
+                                                    </toolkit:ContextMenu>
+                                                </toolkit:ContextMenuService.ContextMenu>
+                                            </ListBoxItem>
                                         </DataTemplate>
                                     </toolkit:ExpanderView.ExpanderTemplate>
 
                                     <toolkit:ExpanderView.ItemTemplate>
                                         <DataTemplate>
                                             <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
-                                                <TextBlock Text="{Binding Name}" />
+                                                <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+                                                <toolkit:ContextMenuService.ContextMenu>
+                                                    <toolkit:ContextMenu>
+                                                        <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                                        <toolkit:MenuItem Header="可选内容" Visibility="Collapsed" />
+                                                    </toolkit:ContextMenu>
+                                                </toolkit:ContextMenuService.ContextMenu>
                                             </ListBoxItem>
                                         </DataTemplate>
                                     </toolkit:ExpanderView.ItemTemplate>
 
                                     <toolkit:ExpanderView.NonExpandableHeaderTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="nonexpand" />
+                                            <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="360" />
+                                                        <ColumnDefinition Width="80" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock Text="{Binding Name}" 
+                                                               Foreground="{StaticResource PhoneForegroundBrush}"
+                                                               FontSize="32"
+                                                               TextWrapping="Wrap" />
+
+                                                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Price}" Foreground="Red" />
+                                                </Grid>
+
+                                                <toolkit:ContextMenuService.ContextMenu>
+                                                    <toolkit:ContextMenu>
+                                                        <toolkit:MenuItem Header="可选内容" />
+                                                    </toolkit:ContextMenu>
+                                                </toolkit:ContextMenuService.ContextMenu>
+                                            </ListBoxItem>
                                         </DataTemplate>
                                     </toolkit:ExpanderView.NonExpandableHeaderTemplate>
                                     
                                 </toolkit:ExpanderView>
+
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
