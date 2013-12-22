@@ -19,6 +19,7 @@
 
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <converters:ItemCountToTextConverter x:Key="ItemCountToTextConverter" />
         </ResourceDictionary>
     </Application.Resources>
   <Application.ApplicationLifetimeObjects>

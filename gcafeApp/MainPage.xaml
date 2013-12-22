@@ -110,7 +110,7 @@
                                                 <StackPanel>
                                                     <TextBlock Text="张志强在19:30点菜" Foreground="red"  />
                                                     <TextBlock Foreground="Black">
-                                                    <Run Text="这套餐有3项内容" />
+                                                    <Run Text="{Binding SetmealItems, Converter={StaticResource ItemCountToTextConverter}}" />
                                                     </TextBlock>
                                                 </StackPanel>
                                                 <toolkit:ContextMenuService.ContextMenu>
