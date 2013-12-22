@@ -130,6 +130,9 @@
     <Compile Include="Pages\MenuSubCatalogPage.xaml.cs">
       <DependentUpon>MenuSubCatalogPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SelectMethodPage.xaml.cs">
+      <DependentUpon>SelectMethodPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TableNoPage.xaml.cs">
       <DependentUpon>TableNoPage.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MenuSubCatalogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SelectMethodPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
