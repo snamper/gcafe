@@ -10,14 +10,14 @@ namespace gcafeApp.Settings
 {
     public static class AppSettings
     {
-        public static Staff LoginStaff
+        public static Staff1 LoginStaff
         {
             get
             {
                 if (IsolatedStorageSettings.ApplicationSettings.Contains("LoginStaff"))
-                    return IsolatedStorageSettings.ApplicationSettings["LoginStaff"] as Staff;
+                    return IsolatedStorageSettings.ApplicationSettings["LoginStaff"] as Staff1;
                 else
-                    return (Staff)null;
+                    return (Staff1)null;
             }
             set
             {

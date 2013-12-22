@@ -7,7 +7,7 @@ namespace gcafeApp.ViewModel
 {
     public class VMLogin : VMBase
     {
-        gcafeSvc.Staff _staff = new gcafeSvc.Staff();
+        gcafeSvc.Staff1 _staff = new gcafeSvc.Staff1();
         gcafeSvc.IgcafeSvcClient _svc = new gcafeSvc.IgcafeSvcClient();
 
         public VMLogin()
@@ -32,7 +32,7 @@ namespace gcafeApp.ViewModel
             }
         }
 
-        public gcafeSvc.Staff Staff
+        public gcafeSvc.Staff1 Staff
         {
             get { return _staff; }
         }

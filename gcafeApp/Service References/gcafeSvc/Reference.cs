@@ -84,6 +84,8 @@ namespace gcafeApp.gcafeSvc {
         
         private bool IsSetmealField;
         
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> MethodsField;
+        
         private string NameField;
         
         private decimal PriceField;
@@ -114,6 +116,19 @@ namespace gcafeApp.gcafeSvc {
                 if ((this.IsSetmealField.Equals(value) != true)) {
                     this.IsSetmealField = value;
                     this.RaisePropertyChanged("IsSetmeal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> Methods {
+            get {
+                return this.MethodsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MethodsField, value) != true)) {
+                    this.MethodsField = value;
+                    this.RaisePropertyChanged("Methods");
                 }
             }
         }
@@ -182,14 +197,119 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="method", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class method : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private gcafeApp.gcafeSvc.method_catalog method_catalogField;
+        
+        private System.Nullable<int> method_catalog_idField;
+        
+        private string nameField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail_method> order_detail_methodField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.method_catalog method_catalog {
+            get {
+                return this.method_catalogField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.method_catalogField, value) != true)) {
+                    this.method_catalogField = value;
+                    this.RaisePropertyChanged("method_catalog");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> method_catalog_id {
+            get {
+                return this.method_catalog_idField;
+            }
+            set {
+                if ((this.method_catalog_idField.Equals(value) != true)) {
+                    this.method_catalog_idField = value;
+                    this.RaisePropertyChanged("method_catalog_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail_method> order_detail_method {
+            get {
+                return this.order_detail_methodField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detail_methodField, value) != true)) {
+                    this.order_detail_methodField = value;
+                    this.RaisePropertyChanged("order_detail_method");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SetmealItem", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
     public partial class SetmealItem : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> MethodsField;
         
         private string NameField;
         
         private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.SetmealItem> OptionItemsField;
         
         private string UnitField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> Methods {
+            get {
+                return this.MethodsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MethodsField, value) != true)) {
+                    this.MethodsField = value;
+                    this.RaisePropertyChanged("Methods");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name {
@@ -242,6 +362,3156 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="method_catalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class method_catalog : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> methodField;
+        
+        private string nameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> method {
+            get {
+                return this.methodField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.methodField, value) != true)) {
+                    this.methodField = value;
+                    this.RaisePropertyChanged("method");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="order_detail_method", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class order_detail_method : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private gcafeApp.gcafeSvc.method methodField;
+        
+        private int method_idField;
+        
+        private gcafeApp.gcafeSvc.order_detail order_detailField;
+        
+        private System.Nullable<int> order_detail_idField;
+        
+        private gcafeApp.gcafeSvc.order_detail_setmeal order_detail_setmealField;
+        
+        private System.Nullable<int> order_detail_setmeal_idField;
+        
+        private decimal priceField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.method method {
+            get {
+                return this.methodField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.methodField, value) != true)) {
+                    this.methodField = value;
+                    this.RaisePropertyChanged("method");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int method_id {
+            get {
+                return this.method_idField;
+            }
+            set {
+                if ((this.method_idField.Equals(value) != true)) {
+                    this.method_idField = value;
+                    this.RaisePropertyChanged("method_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.order_detail order_detail {
+            get {
+                return this.order_detailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detailField, value) != true)) {
+                    this.order_detailField = value;
+                    this.RaisePropertyChanged("order_detail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> order_detail_id {
+            get {
+                return this.order_detail_idField;
+            }
+            set {
+                if ((this.order_detail_idField.Equals(value) != true)) {
+                    this.order_detail_idField = value;
+                    this.RaisePropertyChanged("order_detail_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.order_detail_setmeal order_detail_setmeal {
+            get {
+                return this.order_detail_setmealField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detail_setmealField, value) != true)) {
+                    this.order_detail_setmealField = value;
+                    this.RaisePropertyChanged("order_detail_setmeal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> order_detail_setmeal_id {
+            get {
+                return this.order_detail_setmeal_idField;
+            }
+            set {
+                if ((this.order_detail_setmeal_idField.Equals(value) != true)) {
+                    this.order_detail_setmeal_idField = value;
+                    this.RaisePropertyChanged("order_detail_setmeal_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal price {
+            get {
+                return this.priceField;
+            }
+            set {
+                if ((this.priceField.Equals(value) != true)) {
+                    this.priceField = value;
+                    this.RaisePropertyChanged("price");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="order_detail", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class order_detail : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.Nullable<int> cancel_staff_idField;
+        
+        private System.Nullable<System.DateTime> cancel_timeField;
+        
+        private gcafeApp.gcafeSvc.device deviceField;
+        
+        private int device_idField;
+        
+        private int idField;
+        
+        private bool is_cancleField;
+        
+        private string memoField;
+        
+        private gcafeApp.gcafeSvc.menu menuField;
+        
+        private int menu_idField;
+        
+        private gcafeApp.gcafeSvc.order orderField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail_method> order_detail_methodField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail_setmeal> order_detail_setmealField;
+        
+        private int order_idField;
+        
+        private int order_staff_idField;
+        
+        private System.DateTime order_timeField;
+        
+        private decimal priceField;
+        
+        private System.Nullable<System.DateTime> produced_timeField;
+        
+        private decimal quantityField;
+        
+        private gcafeApp.gcafeSvc.staff staffField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> cancel_staff_id {
+            get {
+                return this.cancel_staff_idField;
+            }
+            set {
+                if ((this.cancel_staff_idField.Equals(value) != true)) {
+                    this.cancel_staff_idField = value;
+                    this.RaisePropertyChanged("cancel_staff_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> cancel_time {
+            get {
+                return this.cancel_timeField;
+            }
+            set {
+                if ((this.cancel_timeField.Equals(value) != true)) {
+                    this.cancel_timeField = value;
+                    this.RaisePropertyChanged("cancel_time");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.device device {
+            get {
+                return this.deviceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.deviceField, value) != true)) {
+                    this.deviceField = value;
+                    this.RaisePropertyChanged("device");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int device_id {
+            get {
+                return this.device_idField;
+            }
+            set {
+                if ((this.device_idField.Equals(value) != true)) {
+                    this.device_idField = value;
+                    this.RaisePropertyChanged("device_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool is_cancle {
+            get {
+                return this.is_cancleField;
+            }
+            set {
+                if ((this.is_cancleField.Equals(value) != true)) {
+                    this.is_cancleField = value;
+                    this.RaisePropertyChanged("is_cancle");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string memo {
+            get {
+                return this.memoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.memoField, value) != true)) {
+                    this.memoField = value;
+                    this.RaisePropertyChanged("memo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.menu menu {
+            get {
+                return this.menuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menuField, value) != true)) {
+                    this.menuField = value;
+                    this.RaisePropertyChanged("menu");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int menu_id {
+            get {
+                return this.menu_idField;
+            }
+            set {
+                if ((this.menu_idField.Equals(value) != true)) {
+                    this.menu_idField = value;
+                    this.RaisePropertyChanged("menu_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.order order {
+            get {
+                return this.orderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.orderField, value) != true)) {
+                    this.orderField = value;
+                    this.RaisePropertyChanged("order");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail_method> order_detail_method {
+            get {
+                return this.order_detail_methodField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detail_methodField, value) != true)) {
+                    this.order_detail_methodField = value;
+                    this.RaisePropertyChanged("order_detail_method");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail_setmeal> order_detail_setmeal {
+            get {
+                return this.order_detail_setmealField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detail_setmealField, value) != true)) {
+                    this.order_detail_setmealField = value;
+                    this.RaisePropertyChanged("order_detail_setmeal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int order_id {
+            get {
+                return this.order_idField;
+            }
+            set {
+                if ((this.order_idField.Equals(value) != true)) {
+                    this.order_idField = value;
+                    this.RaisePropertyChanged("order_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int order_staff_id {
+            get {
+                return this.order_staff_idField;
+            }
+            set {
+                if ((this.order_staff_idField.Equals(value) != true)) {
+                    this.order_staff_idField = value;
+                    this.RaisePropertyChanged("order_staff_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime order_time {
+            get {
+                return this.order_timeField;
+            }
+            set {
+                if ((this.order_timeField.Equals(value) != true)) {
+                    this.order_timeField = value;
+                    this.RaisePropertyChanged("order_time");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal price {
+            get {
+                return this.priceField;
+            }
+            set {
+                if ((this.priceField.Equals(value) != true)) {
+                    this.priceField = value;
+                    this.RaisePropertyChanged("price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> produced_time {
+            get {
+                return this.produced_timeField;
+            }
+            set {
+                if ((this.produced_timeField.Equals(value) != true)) {
+                    this.produced_timeField = value;
+                    this.RaisePropertyChanged("produced_time");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                if ((this.quantityField.Equals(value) != true)) {
+                    this.quantityField = value;
+                    this.RaisePropertyChanged("quantity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.staff staff {
+            get {
+                return this.staffField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.staffField, value) != true)) {
+                    this.staffField = value;
+                    this.RaisePropertyChanged("staff");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="order_detail_setmeal", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class order_detail_setmeal : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private gcafeApp.gcafeSvc.menu menuField;
+        
+        private int menu_idField;
+        
+        private gcafeApp.gcafeSvc.order_detail order_detailField;
+        
+        private int order_detail_idField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail_method> order_detail_methodField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.menu menu {
+            get {
+                return this.menuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menuField, value) != true)) {
+                    this.menuField = value;
+                    this.RaisePropertyChanged("menu");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int menu_id {
+            get {
+                return this.menu_idField;
+            }
+            set {
+                if ((this.menu_idField.Equals(value) != true)) {
+                    this.menu_idField = value;
+                    this.RaisePropertyChanged("menu_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.order_detail order_detail {
+            get {
+                return this.order_detailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detailField, value) != true)) {
+                    this.order_detailField = value;
+                    this.RaisePropertyChanged("order_detail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int order_detail_id {
+            get {
+                return this.order_detail_idField;
+            }
+            set {
+                if ((this.order_detail_idField.Equals(value) != true)) {
+                    this.order_detail_idField = value;
+                    this.RaisePropertyChanged("order_detail_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail_method> order_detail_method {
+            get {
+                return this.order_detail_methodField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detail_methodField, value) != true)) {
+                    this.order_detail_methodField = value;
+                    this.RaisePropertyChanged("order_detail_method");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="device", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class device : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string device_idField;
+        
+        private int idField;
+        
+        private bool is_denyField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> orderField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> order_detailField;
+        
+        private string register_ticketField;
+        
+        private System.DateTime register_timeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string device_id {
+            get {
+                return this.device_idField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.device_idField, value) != true)) {
+                    this.device_idField = value;
+                    this.RaisePropertyChanged("device_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool is_deny {
+            get {
+                return this.is_denyField;
+            }
+            set {
+                if ((this.is_denyField.Equals(value) != true)) {
+                    this.is_denyField = value;
+                    this.RaisePropertyChanged("is_deny");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> order {
+            get {
+                return this.orderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.orderField, value) != true)) {
+                    this.orderField = value;
+                    this.RaisePropertyChanged("order");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> order_detail {
+            get {
+                return this.order_detailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detailField, value) != true)) {
+                    this.order_detailField = value;
+                    this.RaisePropertyChanged("order_detail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string register_ticket {
+            get {
+                return this.register_ticketField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.register_ticketField, value) != true)) {
+                    this.register_ticketField = value;
+                    this.RaisePropertyChanged("register_ticket");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime register_time {
+            get {
+                return this.register_timeField;
+            }
+            set {
+                if ((this.register_timeField.Equals(value) != true)) {
+                    this.register_timeField = value;
+                    this.RaisePropertyChanged("register_time");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="menu", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class menu : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private gcafeApp.gcafeSvc.branch branchField;
+        
+        private int branch_idField;
+        
+        private decimal fpriceField;
+        
+        private int idField;
+        
+        private bool is_lockedField;
+        
+        private bool is_setmealField;
+        
+        private gcafeApp.gcafeSvc.menu_catalog menu_catalogField;
+        
+        private System.Nullable<int> menu_catalog_idField;
+        
+        private string nameField;
+        
+        private string numberField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> order_detailField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail_setmeal> order_detail_setmealField;
+        
+        private decimal priceField;
+        
+        private gcafeApp.gcafeSvc.printer_group printer_groupField;
+        
+        private int printer_group_idField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item> setmeal_itemField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item> setmeal_item1Field;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item_opt> setmeal_item_optField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item_opt> setmeal_item_opt1Field;
+        
+        private bool sold_outField;
+        
+        private string unitField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.branch branch {
+            get {
+                return this.branchField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.branchField, value) != true)) {
+                    this.branchField = value;
+                    this.RaisePropertyChanged("branch");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int branch_id {
+            get {
+                return this.branch_idField;
+            }
+            set {
+                if ((this.branch_idField.Equals(value) != true)) {
+                    this.branch_idField = value;
+                    this.RaisePropertyChanged("branch_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal fprice {
+            get {
+                return this.fpriceField;
+            }
+            set {
+                if ((this.fpriceField.Equals(value) != true)) {
+                    this.fpriceField = value;
+                    this.RaisePropertyChanged("fprice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool is_locked {
+            get {
+                return this.is_lockedField;
+            }
+            set {
+                if ((this.is_lockedField.Equals(value) != true)) {
+                    this.is_lockedField = value;
+                    this.RaisePropertyChanged("is_locked");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool is_setmeal {
+            get {
+                return this.is_setmealField;
+            }
+            set {
+                if ((this.is_setmealField.Equals(value) != true)) {
+                    this.is_setmealField = value;
+                    this.RaisePropertyChanged("is_setmeal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.menu_catalog menu_catalog {
+            get {
+                return this.menu_catalogField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menu_catalogField, value) != true)) {
+                    this.menu_catalogField = value;
+                    this.RaisePropertyChanged("menu_catalog");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> menu_catalog_id {
+            get {
+                return this.menu_catalog_idField;
+            }
+            set {
+                if ((this.menu_catalog_idField.Equals(value) != true)) {
+                    this.menu_catalog_idField = value;
+                    this.RaisePropertyChanged("menu_catalog_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string number {
+            get {
+                return this.numberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.numberField, value) != true)) {
+                    this.numberField = value;
+                    this.RaisePropertyChanged("number");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> order_detail {
+            get {
+                return this.order_detailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detailField, value) != true)) {
+                    this.order_detailField = value;
+                    this.RaisePropertyChanged("order_detail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail_setmeal> order_detail_setmeal {
+            get {
+                return this.order_detail_setmealField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detail_setmealField, value) != true)) {
+                    this.order_detail_setmealField = value;
+                    this.RaisePropertyChanged("order_detail_setmeal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal price {
+            get {
+                return this.priceField;
+            }
+            set {
+                if ((this.priceField.Equals(value) != true)) {
+                    this.priceField = value;
+                    this.RaisePropertyChanged("price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.printer_group printer_group {
+            get {
+                return this.printer_groupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.printer_groupField, value) != true)) {
+                    this.printer_groupField = value;
+                    this.RaisePropertyChanged("printer_group");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int printer_group_id {
+            get {
+                return this.printer_group_idField;
+            }
+            set {
+                if ((this.printer_group_idField.Equals(value) != true)) {
+                    this.printer_group_idField = value;
+                    this.RaisePropertyChanged("printer_group_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item> setmeal_item {
+            get {
+                return this.setmeal_itemField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.setmeal_itemField, value) != true)) {
+                    this.setmeal_itemField = value;
+                    this.RaisePropertyChanged("setmeal_item");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item> setmeal_item1 {
+            get {
+                return this.setmeal_item1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.setmeal_item1Field, value) != true)) {
+                    this.setmeal_item1Field = value;
+                    this.RaisePropertyChanged("setmeal_item1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item_opt> setmeal_item_opt {
+            get {
+                return this.setmeal_item_optField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.setmeal_item_optField, value) != true)) {
+                    this.setmeal_item_optField = value;
+                    this.RaisePropertyChanged("setmeal_item_opt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item_opt> setmeal_item_opt1 {
+            get {
+                return this.setmeal_item_opt1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.setmeal_item_opt1Field, value) != true)) {
+                    this.setmeal_item_opt1Field = value;
+                    this.RaisePropertyChanged("setmeal_item_opt1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool sold_out {
+            get {
+                return this.sold_outField;
+            }
+            set {
+                if ((this.sold_outField.Equals(value) != true)) {
+                    this.sold_outField = value;
+                    this.RaisePropertyChanged("sold_out");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string unit {
+            get {
+                return this.unitField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.unitField, value) != true)) {
+                    this.unitField = value;
+                    this.RaisePropertyChanged("unit");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="order", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class order : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private gcafeApp.gcafeSvc.branch branchField;
+        
+        private int branch_idField;
+        
+        private System.Nullable<int> cancel_staff_idField;
+        
+        private System.Nullable<System.DateTime> cancel_timeField;
+        
+        private System.Nullable<int> check_out_staff_idField;
+        
+        private System.Nullable<System.DateTime> check_out_timeField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.credit> creditField;
+        
+        private int customer_numberField;
+        
+        private gcafeApp.gcafeSvc.device deviceField;
+        
+        private int device_idField;
+        
+        private System.Nullable<decimal> discountField;
+        
+        private System.Nullable<int> discount_staff_idField;
+        
+        private int idField;
+        
+        private bool is_cancelField;
+        
+        private gcafeApp.gcafeSvc.member memberField;
+        
+        private System.Nullable<int> member_idField;
+        
+        private string memoField;
+        
+        private System.Nullable<decimal> net_receiptsField;
+        
+        private int open_table_staff_idField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> order_detailField;
+        
+        private string order_numField;
+        
+        private System.Nullable<decimal> receivableField;
+        
+        private gcafeApp.gcafeSvc.shift shiftField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.shift_detail> shift_detailField;
+        
+        private System.Nullable<int> shift_idField;
+        
+        private gcafeApp.gcafeSvc.staff staffField;
+        
+        private gcafeApp.gcafeSvc.staff staff1Field;
+        
+        private gcafeApp.gcafeSvc.staff staff2Field;
+        
+        private string table_noField;
+        
+        private System.DateTime table_opened_timeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.branch branch {
+            get {
+                return this.branchField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.branchField, value) != true)) {
+                    this.branchField = value;
+                    this.RaisePropertyChanged("branch");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int branch_id {
+            get {
+                return this.branch_idField;
+            }
+            set {
+                if ((this.branch_idField.Equals(value) != true)) {
+                    this.branch_idField = value;
+                    this.RaisePropertyChanged("branch_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> cancel_staff_id {
+            get {
+                return this.cancel_staff_idField;
+            }
+            set {
+                if ((this.cancel_staff_idField.Equals(value) != true)) {
+                    this.cancel_staff_idField = value;
+                    this.RaisePropertyChanged("cancel_staff_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> cancel_time {
+            get {
+                return this.cancel_timeField;
+            }
+            set {
+                if ((this.cancel_timeField.Equals(value) != true)) {
+                    this.cancel_timeField = value;
+                    this.RaisePropertyChanged("cancel_time");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> check_out_staff_id {
+            get {
+                return this.check_out_staff_idField;
+            }
+            set {
+                if ((this.check_out_staff_idField.Equals(value) != true)) {
+                    this.check_out_staff_idField = value;
+                    this.RaisePropertyChanged("check_out_staff_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> check_out_time {
+            get {
+                return this.check_out_timeField;
+            }
+            set {
+                if ((this.check_out_timeField.Equals(value) != true)) {
+                    this.check_out_timeField = value;
+                    this.RaisePropertyChanged("check_out_time");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.credit> credit {
+            get {
+                return this.creditField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.creditField, value) != true)) {
+                    this.creditField = value;
+                    this.RaisePropertyChanged("credit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int customer_number {
+            get {
+                return this.customer_numberField;
+            }
+            set {
+                if ((this.customer_numberField.Equals(value) != true)) {
+                    this.customer_numberField = value;
+                    this.RaisePropertyChanged("customer_number");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.device device {
+            get {
+                return this.deviceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.deviceField, value) != true)) {
+                    this.deviceField = value;
+                    this.RaisePropertyChanged("device");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int device_id {
+            get {
+                return this.device_idField;
+            }
+            set {
+                if ((this.device_idField.Equals(value) != true)) {
+                    this.device_idField = value;
+                    this.RaisePropertyChanged("device_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> discount {
+            get {
+                return this.discountField;
+            }
+            set {
+                if ((this.discountField.Equals(value) != true)) {
+                    this.discountField = value;
+                    this.RaisePropertyChanged("discount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> discount_staff_id {
+            get {
+                return this.discount_staff_idField;
+            }
+            set {
+                if ((this.discount_staff_idField.Equals(value) != true)) {
+                    this.discount_staff_idField = value;
+                    this.RaisePropertyChanged("discount_staff_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool is_cancel {
+            get {
+                return this.is_cancelField;
+            }
+            set {
+                if ((this.is_cancelField.Equals(value) != true)) {
+                    this.is_cancelField = value;
+                    this.RaisePropertyChanged("is_cancel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.member member {
+            get {
+                return this.memberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.memberField, value) != true)) {
+                    this.memberField = value;
+                    this.RaisePropertyChanged("member");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> member_id {
+            get {
+                return this.member_idField;
+            }
+            set {
+                if ((this.member_idField.Equals(value) != true)) {
+                    this.member_idField = value;
+                    this.RaisePropertyChanged("member_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string memo {
+            get {
+                return this.memoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.memoField, value) != true)) {
+                    this.memoField = value;
+                    this.RaisePropertyChanged("memo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> net_receipts {
+            get {
+                return this.net_receiptsField;
+            }
+            set {
+                if ((this.net_receiptsField.Equals(value) != true)) {
+                    this.net_receiptsField = value;
+                    this.RaisePropertyChanged("net_receipts");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int open_table_staff_id {
+            get {
+                return this.open_table_staff_idField;
+            }
+            set {
+                if ((this.open_table_staff_idField.Equals(value) != true)) {
+                    this.open_table_staff_idField = value;
+                    this.RaisePropertyChanged("open_table_staff_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> order_detail {
+            get {
+                return this.order_detailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detailField, value) != true)) {
+                    this.order_detailField = value;
+                    this.RaisePropertyChanged("order_detail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string order_num {
+            get {
+                return this.order_numField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_numField, value) != true)) {
+                    this.order_numField = value;
+                    this.RaisePropertyChanged("order_num");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> receivable {
+            get {
+                return this.receivableField;
+            }
+            set {
+                if ((this.receivableField.Equals(value) != true)) {
+                    this.receivableField = value;
+                    this.RaisePropertyChanged("receivable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.shift shift {
+            get {
+                return this.shiftField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.shiftField, value) != true)) {
+                    this.shiftField = value;
+                    this.RaisePropertyChanged("shift");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.shift_detail> shift_detail {
+            get {
+                return this.shift_detailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.shift_detailField, value) != true)) {
+                    this.shift_detailField = value;
+                    this.RaisePropertyChanged("shift_detail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> shift_id {
+            get {
+                return this.shift_idField;
+            }
+            set {
+                if ((this.shift_idField.Equals(value) != true)) {
+                    this.shift_idField = value;
+                    this.RaisePropertyChanged("shift_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.staff staff {
+            get {
+                return this.staffField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.staffField, value) != true)) {
+                    this.staffField = value;
+                    this.RaisePropertyChanged("staff");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.staff staff1 {
+            get {
+                return this.staff1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.staff1Field, value) != true)) {
+                    this.staff1Field = value;
+                    this.RaisePropertyChanged("staff1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.staff staff2 {
+            get {
+                return this.staff2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.staff2Field, value) != true)) {
+                    this.staff2Field = value;
+                    this.RaisePropertyChanged("staff2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string table_no {
+            get {
+                return this.table_noField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.table_noField, value) != true)) {
+                    this.table_noField = value;
+                    this.RaisePropertyChanged("table_no");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime table_opened_time {
+            get {
+                return this.table_opened_timeField;
+            }
+            set {
+                if ((this.table_opened_timeField.Equals(value) != true)) {
+                    this.table_opened_timeField = value;
+                    this.RaisePropertyChanged("table_opened_time");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="staff", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class staff : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private gcafeApp.gcafeSvc.branch branchField;
+        
+        private int branch_idField;
+        
+        private int idField;
+        
+        private bool is_deletedField;
+        
+        private System.DateTime join_dateField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.member_refill> member_refillField;
+        
+        private string nameField;
+        
+        private string numberField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> orderField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> order1Field;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> order2Field;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> order_detailField;
+        
+        private string passwordField;
+        
+        private gcafeApp.gcafeSvc.role roleField;
+        
+        private int role_idField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.branch branch {
+            get {
+                return this.branchField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.branchField, value) != true)) {
+                    this.branchField = value;
+                    this.RaisePropertyChanged("branch");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int branch_id {
+            get {
+                return this.branch_idField;
+            }
+            set {
+                if ((this.branch_idField.Equals(value) != true)) {
+                    this.branch_idField = value;
+                    this.RaisePropertyChanged("branch_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool is_deleted {
+            get {
+                return this.is_deletedField;
+            }
+            set {
+                if ((this.is_deletedField.Equals(value) != true)) {
+                    this.is_deletedField = value;
+                    this.RaisePropertyChanged("is_deleted");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime join_date {
+            get {
+                return this.join_dateField;
+            }
+            set {
+                if ((this.join_dateField.Equals(value) != true)) {
+                    this.join_dateField = value;
+                    this.RaisePropertyChanged("join_date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.member_refill> member_refill {
+            get {
+                return this.member_refillField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.member_refillField, value) != true)) {
+                    this.member_refillField = value;
+                    this.RaisePropertyChanged("member_refill");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string number {
+            get {
+                return this.numberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.numberField, value) != true)) {
+                    this.numberField = value;
+                    this.RaisePropertyChanged("number");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> order {
+            get {
+                return this.orderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.orderField, value) != true)) {
+                    this.orderField = value;
+                    this.RaisePropertyChanged("order");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> order1 {
+            get {
+                return this.order1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order1Field, value) != true)) {
+                    this.order1Field = value;
+                    this.RaisePropertyChanged("order1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> order2 {
+            get {
+                return this.order2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order2Field, value) != true)) {
+                    this.order2Field = value;
+                    this.RaisePropertyChanged("order2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> order_detail {
+            get {
+                return this.order_detailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.order_detailField, value) != true)) {
+                    this.order_detailField = value;
+                    this.RaisePropertyChanged("order_detail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.passwordField, value) != true)) {
+                    this.passwordField = value;
+                    this.RaisePropertyChanged("password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.role role {
+            get {
+                return this.roleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.roleField, value) != true)) {
+                    this.roleField = value;
+                    this.RaisePropertyChanged("role");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int role_id {
+            get {
+                return this.role_idField;
+            }
+            set {
+                if ((this.role_idField.Equals(value) != true)) {
+                    this.role_idField = value;
+                    this.RaisePropertyChanged("role_id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="branch", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class branch : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.member_refill> member_refillField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.menu> menuField;
+        
+        private string nameField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> orderField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.printer_group> printer_groupField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.staff> staffField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.sys_info> sys_infoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.member_refill> member_refill {
+            get {
+                return this.member_refillField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.member_refillField, value) != true)) {
+                    this.member_refillField = value;
+                    this.RaisePropertyChanged("member_refill");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.menu> menu {
+            get {
+                return this.menuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menuField, value) != true)) {
+                    this.menuField = value;
+                    this.RaisePropertyChanged("menu");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> order {
+            get {
+                return this.orderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.orderField, value) != true)) {
+                    this.orderField = value;
+                    this.RaisePropertyChanged("order");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.printer_group> printer_group {
+            get {
+                return this.printer_groupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.printer_groupField, value) != true)) {
+                    this.printer_groupField = value;
+                    this.RaisePropertyChanged("printer_group");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.staff> staff {
+            get {
+                return this.staffField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.staffField, value) != true)) {
+                    this.staffField = value;
+                    this.RaisePropertyChanged("staff");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.sys_info> sys_info {
+            get {
+                return this.sys_infoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.sys_infoField, value) != true)) {
+                    this.sys_infoField = value;
+                    this.RaisePropertyChanged("sys_info");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="member", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class member : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private decimal creditField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.credit> credit1Field;
+        
+        private string emailField;
+        
+        private int idField;
+        
+        private string idcard_numberField;
+        
+        private System.DateTime join_dateField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.member_refill> member_refillField;
+        
+        private string nameField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> orderField;
+        
+        private string phone_numField;
+        
+        private int pointField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal credit {
+            get {
+                return this.creditField;
+            }
+            set {
+                if ((this.creditField.Equals(value) != true)) {
+                    this.creditField = value;
+                    this.RaisePropertyChanged("credit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.credit> credit1 {
+            get {
+                return this.credit1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.credit1Field, value) != true)) {
+                    this.credit1Field = value;
+                    this.RaisePropertyChanged("credit1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string email {
+            get {
+                return this.emailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.emailField, value) != true)) {
+                    this.emailField = value;
+                    this.RaisePropertyChanged("email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string idcard_number {
+            get {
+                return this.idcard_numberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.idcard_numberField, value) != true)) {
+                    this.idcard_numberField = value;
+                    this.RaisePropertyChanged("idcard_number");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime join_date {
+            get {
+                return this.join_dateField;
+            }
+            set {
+                if ((this.join_dateField.Equals(value) != true)) {
+                    this.join_dateField = value;
+                    this.RaisePropertyChanged("join_date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.member_refill> member_refill {
+            get {
+                return this.member_refillField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.member_refillField, value) != true)) {
+                    this.member_refillField = value;
+                    this.RaisePropertyChanged("member_refill");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> order {
+            get {
+                return this.orderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.orderField, value) != true)) {
+                    this.orderField = value;
+                    this.RaisePropertyChanged("order");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string phone_num {
+            get {
+                return this.phone_numField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.phone_numField, value) != true)) {
+                    this.phone_numField = value;
+                    this.RaisePropertyChanged("phone_num");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int point {
+            get {
+                return this.pointField;
+            }
+            set {
+                if ((this.pointField.Equals(value) != true)) {
+                    this.pointField = value;
+                    this.RaisePropertyChanged("point");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="shift", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class shift : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> orderField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.shift_detail> shift_detailField;
+        
+        private string staff_idField;
+        
+        private decimal sumField;
+        
+        private System.DateTime timeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order> order {
+            get {
+                return this.orderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.orderField, value) != true)) {
+                    this.orderField = value;
+                    this.RaisePropertyChanged("order");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.shift_detail> shift_detail {
+            get {
+                return this.shift_detailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.shift_detailField, value) != true)) {
+                    this.shift_detailField = value;
+                    this.RaisePropertyChanged("shift_detail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string staff_id {
+            get {
+                return this.staff_idField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.staff_idField, value) != true)) {
+                    this.staff_idField = value;
+                    this.RaisePropertyChanged("staff_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal sum {
+            get {
+                return this.sumField;
+            }
+            set {
+                if ((this.sumField.Equals(value) != true)) {
+                    this.sumField = value;
+                    this.RaisePropertyChanged("sum");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime time {
+            get {
+                return this.timeField;
+            }
+            set {
+                if ((this.timeField.Equals(value) != true)) {
+                    this.timeField = value;
+                    this.RaisePropertyChanged("time");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="credit", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class credit : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private gcafeApp.gcafeSvc.member memberField;
+        
+        private System.Nullable<int> member_idField;
+        
+        private string nameField;
+        
+        private gcafeApp.gcafeSvc.order orderField;
+        
+        private int order_idField;
+        
+        private string phoneField;
+        
+        private System.Nullable<System.DateTime> repay_timeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.member member {
+            get {
+                return this.memberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.memberField, value) != true)) {
+                    this.memberField = value;
+                    this.RaisePropertyChanged("member");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> member_id {
+            get {
+                return this.member_idField;
+            }
+            set {
+                if ((this.member_idField.Equals(value) != true)) {
+                    this.member_idField = value;
+                    this.RaisePropertyChanged("member_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.order order {
+            get {
+                return this.orderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.orderField, value) != true)) {
+                    this.orderField = value;
+                    this.RaisePropertyChanged("order");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int order_id {
+            get {
+                return this.order_idField;
+            }
+            set {
+                if ((this.order_idField.Equals(value) != true)) {
+                    this.order_idField = value;
+                    this.RaisePropertyChanged("order_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string phone {
+            get {
+                return this.phoneField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.phoneField, value) != true)) {
+                    this.phoneField = value;
+                    this.RaisePropertyChanged("phone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> repay_time {
+            get {
+                return this.repay_timeField;
+            }
+            set {
+                if ((this.repay_timeField.Equals(value) != true)) {
+                    this.repay_timeField = value;
+                    this.RaisePropertyChanged("repay_time");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="shift_detail", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class shift_detail : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private gcafeApp.gcafeSvc.order orderField;
+        
+        private int order_idField;
+        
+        private gcafeApp.gcafeSvc.shift shiftField;
+        
+        private int shift_idField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.order order {
+            get {
+                return this.orderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.orderField, value) != true)) {
+                    this.orderField = value;
+                    this.RaisePropertyChanged("order");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int order_id {
+            get {
+                return this.order_idField;
+            }
+            set {
+                if ((this.order_idField.Equals(value) != true)) {
+                    this.order_idField = value;
+                    this.RaisePropertyChanged("order_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.shift shift {
+            get {
+                return this.shiftField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.shiftField, value) != true)) {
+                    this.shiftField = value;
+                    this.RaisePropertyChanged("shift");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int shift_id {
+            get {
+                return this.shift_idField;
+            }
+            set {
+                if ((this.shift_idField.Equals(value) != true)) {
+                    this.shift_idField = value;
+                    this.RaisePropertyChanged("shift_id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="member_refill", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class member_refill : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private gcafeApp.gcafeSvc.branch branchField;
+        
+        private int branch_idField;
+        
+        private int idField;
+        
+        private gcafeApp.gcafeSvc.member memberField;
+        
+        private int member_idField;
+        
+        private decimal refill_amountField;
+        
+        private System.DateTime refill_timeField;
+        
+        private gcafeApp.gcafeSvc.staff staffField;
+        
+        private int staff_idField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.branch branch {
+            get {
+                return this.branchField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.branchField, value) != true)) {
+                    this.branchField = value;
+                    this.RaisePropertyChanged("branch");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int branch_id {
+            get {
+                return this.branch_idField;
+            }
+            set {
+                if ((this.branch_idField.Equals(value) != true)) {
+                    this.branch_idField = value;
+                    this.RaisePropertyChanged("branch_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.member member {
+            get {
+                return this.memberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.memberField, value) != true)) {
+                    this.memberField = value;
+                    this.RaisePropertyChanged("member");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int member_id {
+            get {
+                return this.member_idField;
+            }
+            set {
+                if ((this.member_idField.Equals(value) != true)) {
+                    this.member_idField = value;
+                    this.RaisePropertyChanged("member_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal refill_amount {
+            get {
+                return this.refill_amountField;
+            }
+            set {
+                if ((this.refill_amountField.Equals(value) != true)) {
+                    this.refill_amountField = value;
+                    this.RaisePropertyChanged("refill_amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime refill_time {
+            get {
+                return this.refill_timeField;
+            }
+            set {
+                if ((this.refill_timeField.Equals(value) != true)) {
+                    this.refill_timeField = value;
+                    this.RaisePropertyChanged("refill_time");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.staff staff {
+            get {
+                return this.staffField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.staffField, value) != true)) {
+                    this.staffField = value;
+                    this.RaisePropertyChanged("staff");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int staff_id {
+            get {
+                return this.staff_idField;
+            }
+            set {
+                if ((this.staff_idField.Equals(value) != true)) {
+                    this.staff_idField = value;
+                    this.RaisePropertyChanged("staff_id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="printer_group", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class printer_group : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private gcafeApp.gcafeSvc.branch branchField;
+        
+        private int branch_idField;
+        
+        private int idField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.menu> menuField;
+        
+        private string nameField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.printer> printerField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.branch branch {
+            get {
+                return this.branchField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.branchField, value) != true)) {
+                    this.branchField = value;
+                    this.RaisePropertyChanged("branch");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int branch_id {
+            get {
+                return this.branch_idField;
+            }
+            set {
+                if ((this.branch_idField.Equals(value) != true)) {
+                    this.branch_idField = value;
+                    this.RaisePropertyChanged("branch_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.menu> menu {
+            get {
+                return this.menuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menuField, value) != true)) {
+                    this.menuField = value;
+                    this.RaisePropertyChanged("menu");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.printer> printer {
+            get {
+                return this.printerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.printerField, value) != true)) {
+                    this.printerField = value;
+                    this.RaisePropertyChanged("printer");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="sys_info", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class sys_info : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private gcafeApp.gcafeSvc.branch branchField;
+        
+        private int branch_idField;
+        
+        private int idField;
+        
+        private int order_cntField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.branch branch {
+            get {
+                return this.branchField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.branchField, value) != true)) {
+                    this.branchField = value;
+                    this.RaisePropertyChanged("branch");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int branch_id {
+            get {
+                return this.branch_idField;
+            }
+            set {
+                if ((this.branch_idField.Equals(value) != true)) {
+                    this.branch_idField = value;
+                    this.RaisePropertyChanged("branch_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int order_cnt {
+            get {
+                return this.order_cntField;
+            }
+            set {
+                if ((this.order_cntField.Equals(value) != true)) {
+                    this.order_cntField = value;
+                    this.RaisePropertyChanged("order_cnt");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="role", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class role : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private string nameField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.staff> staffField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.staff> staff {
+            get {
+                return this.staffField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.staffField, value) != true)) {
+                    this.staffField = value;
+                    this.RaisePropertyChanged("staff");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="menu_catalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class menu_catalog : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.menu> menuField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.menu_catalog> menu_catalog1Field;
+        
+        private gcafeApp.gcafeSvc.menu_catalog menu_catalog2Field;
+        
+        private string nameField;
+        
+        private System.Nullable<int> parent_idField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.menu> menu {
+            get {
+                return this.menuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menuField, value) != true)) {
+                    this.menuField = value;
+                    this.RaisePropertyChanged("menu");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.menu_catalog> menu_catalog1 {
+            get {
+                return this.menu_catalog1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menu_catalog1Field, value) != true)) {
+                    this.menu_catalog1Field = value;
+                    this.RaisePropertyChanged("menu_catalog1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.menu_catalog menu_catalog2 {
+            get {
+                return this.menu_catalog2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menu_catalog2Field, value) != true)) {
+                    this.menu_catalog2Field = value;
+                    this.RaisePropertyChanged("menu_catalog2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> parent_id {
+            get {
+                return this.parent_idField;
+            }
+            set {
+                if ((this.parent_idField.Equals(value) != true)) {
+                    this.parent_idField = value;
+                    this.RaisePropertyChanged("parent_id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="setmeal_item", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class setmeal_item : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private gcafeApp.gcafeSvc.menu menuField;
+        
+        private gcafeApp.gcafeSvc.menu menu1Field;
+        
+        private int setmeal_item_menu_idField;
+        
+        private int setmeal_menu_idField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.menu menu {
+            get {
+                return this.menuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menuField, value) != true)) {
+                    this.menuField = value;
+                    this.RaisePropertyChanged("menu");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.menu menu1 {
+            get {
+                return this.menu1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menu1Field, value) != true)) {
+                    this.menu1Field = value;
+                    this.RaisePropertyChanged("menu1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int setmeal_item_menu_id {
+            get {
+                return this.setmeal_item_menu_idField;
+            }
+            set {
+                if ((this.setmeal_item_menu_idField.Equals(value) != true)) {
+                    this.setmeal_item_menu_idField = value;
+                    this.RaisePropertyChanged("setmeal_item_menu_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int setmeal_menu_id {
+            get {
+                return this.setmeal_menu_idField;
+            }
+            set {
+                if ((this.setmeal_menu_idField.Equals(value) != true)) {
+                    this.setmeal_menu_idField = value;
+                    this.RaisePropertyChanged("setmeal_menu_id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="setmeal_item_opt", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class setmeal_item_opt : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private gcafeApp.gcafeSvc.menu menuField;
+        
+        private gcafeApp.gcafeSvc.menu menu1Field;
+        
+        private int menu_idField;
+        
+        private int setmeal_item_idField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.menu menu {
+            get {
+                return this.menuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menuField, value) != true)) {
+                    this.menuField = value;
+                    this.RaisePropertyChanged("menu");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.menu menu1 {
+            get {
+                return this.menu1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menu1Field, value) != true)) {
+                    this.menu1Field = value;
+                    this.RaisePropertyChanged("menu1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int menu_id {
+            get {
+                return this.menu_idField;
+            }
+            set {
+                if ((this.menu_idField.Equals(value) != true)) {
+                    this.menu_idField = value;
+                    this.RaisePropertyChanged("menu_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int setmeal_item_id {
+            get {
+                return this.setmeal_item_idField;
+            }
+            set {
+                if ((this.setmeal_item_idField.Equals(value) != true)) {
+                    this.setmeal_item_idField = value;
+                    this.RaisePropertyChanged("setmeal_item_id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="printer", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    public partial class printer : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int idField;
+        
+        private string nameField;
+        
+        private gcafeApp.gcafeSvc.printer_group printer_groupField;
+        
+        private System.Nullable<int> printer_group_idField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.printer_group printer_group {
+            get {
+                return this.printer_groupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.printer_groupField, value) != true)) {
+                    this.printer_groupField = value;
+                    this.RaisePropertyChanged("printer_group");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> printer_group_id {
+            get {
+                return this.printer_group_idField;
+            }
+            set {
+                if ((this.printer_group_idField.Equals(value) != true)) {
+                    this.printer_group_idField = value;
+                    this.RaisePropertyChanged("printer_group_id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="TableInfo", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
     public partial class TableInfo : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -253,7 +3523,7 @@ namespace gcafeApp.gcafeSvc {
         
         private string NumField;
         
-        private gcafeApp.gcafeSvc.Staff OpenTableStaffField;
+        private gcafeApp.gcafeSvc.Staff1 OpenTableStaffField;
         
         private System.DateTime OpenTableTimeField;
         
@@ -312,7 +3582,7 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public gcafeApp.gcafeSvc.Staff OpenTableStaff {
+        public gcafeApp.gcafeSvc.Staff1 OpenTableStaff {
             get {
                 return this.OpenTableStaffField;
             }
@@ -363,7 +3633,7 @@ namespace gcafeApp.gcafeSvc {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Staff", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
-    public partial class Staff : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Staff1 : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string BranchField;
         
@@ -776,12 +4046,12 @@ namespace gcafeApp.gcafeSvc {
     public partial class GetStaffByNumResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
-        public gcafeApp.gcafeSvc.Staff GetStaffByNumResult;
+        public gcafeApp.gcafeSvc.Staff1 GetStaffByNumResult;
         
         public GetStaffByNumResponse() {
         }
         
-        public GetStaffByNumResponse(gcafeApp.gcafeSvc.Staff GetStaffByNumResult) {
+        public GetStaffByNumResponse(gcafeApp.gcafeSvc.Staff1 GetStaffByNumResult) {
             this.GetStaffByNumResult = GetStaffByNumResult;
         }
     }

@@ -115,7 +115,7 @@
                                                 </StackPanel>
                                                 <toolkit:ContextMenuService.ContextMenu>
                                                     <toolkit:ContextMenu>
-                                                        <toolkit:MenuItem Header="可选内容" />
+                                                        <toolkit:MenuItem Header="选择做法" />
                                                     </toolkit:ContextMenu>
                                                 </toolkit:ContextMenuService.ContextMenu>
                                             </ListBoxItem>
@@ -129,7 +129,7 @@
                                                 <toolkit:ContextMenuService.ContextMenu>
                                                     <toolkit:ContextMenu>
                                                         <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-                                                        <toolkit:MenuItem Header="可选内容" Visibility="Collapsed" />
+                                                        <toolkit:MenuItem Header="可选内容" Visibility="{Binding Converter={StaticResource SelectableToVisableConverter}}" />
                                                     </toolkit:ContextMenu>
                                                 </toolkit:ContextMenuService.ContextMenu>
                                             </ListBoxItem>
@@ -155,7 +155,7 @@
 
                                                 <toolkit:ContextMenuService.ContextMenu>
                                                     <toolkit:ContextMenu>
-                                                        <toolkit:MenuItem Header="可选内容" />
+                                                        <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                                                     </toolkit:ContextMenu>
                                                 </toolkit:ContextMenuService.ContextMenu>
                                             </ListBoxItem>

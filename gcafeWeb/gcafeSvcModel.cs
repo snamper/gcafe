@@ -76,6 +76,8 @@ namespace gcafeWeb
         /// </summary>
         [DataMember]
         public List<SetmealItem> OptionItems { get; set; }
+        [DataMember]
+        public List<method> Methods { get; set; }
     }
 
     [DataContract(IsReference = true)]
@@ -93,6 +95,8 @@ namespace gcafeWeb
         public bool IsSetmeal { get; set; }
         [DataMember]
         public List<SetmealItem> SetmealItems { get; set; }
+        [DataMember]
+        public List<method> Methods { get; set; }
     }
 
     [DataContract(IsReference = true)]
