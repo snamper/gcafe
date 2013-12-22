@@ -5,7 +5,7 @@
     xmlns:svc="clr-namespace:gcafeApp.gcafeSvc">
 
     <vm:MainViewModel.MenuItems>
-        <svc:MenuItem ID="1" Name="火龙果芒果饮特大杯" Unit="杯" Price="16.00" IsSetmeal="False">
+        <svc:MenuItem ID="1" Name="火龙果芒果饮特大杯" Unit="杯" Price="16.00" IsSetmeal="True">
             <svc:MenuItem.SetmealItems>
                 <svc:SetmealItem Name="火龙果" />
             </svc:MenuItem.SetmealItems>

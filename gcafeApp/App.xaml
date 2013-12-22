@@ -17,7 +17,8 @@
             <local:LocalizedStrings xmlns:local="clr-namespace:gcafeApp" x:Key="LocalizedStrings" />
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:gcafeApp.ViewModel" />
 
-            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
         </ResourceDictionary>
     </Application.Resources>
   <Application.ApplicationLifetimeObjects>

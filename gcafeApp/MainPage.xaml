@@ -78,7 +78,7 @@
                                                       NonExpandableHeader="{Binding}"
                                                       Expander="{Binding}"
                                                       ItemsSource="{Binding SetmealItems}"
-                                                      IsNonExpandable="{Binding IsSetmeal}">
+                                                      IsNonExpandable="{Binding IsSetmeal, Converter={StaticResource InverseBooleanConverter}}">
                                     <toolkit:ExpanderView.HeaderTemplate>
                                         <DataTemplate>
                                             <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
