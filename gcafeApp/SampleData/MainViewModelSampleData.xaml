@@ -5,11 +5,14 @@
     xmlns:svc="clr-namespace:gcafeApp.gcafeSvc">
 
     <vm:MainViewModel.MenuItems>
-        <svc:MenuItem ID="1" Name="火龙果芒果饮特大杯" Unit="杯" Price="16.00" IsSetmeal="True">
+        <svc:MenuItem ID="1" Name="火龙果芒果饮特大杯" Unit="杯" Price="16.00" Quantity="1" IsSetmeal="True">
             <svc:MenuItem.SetmealItems>
+                <svc:SetmealItem Name="火龙果" />
                 <svc:SetmealItem Name="火龙果" />
             </svc:MenuItem.SetmealItems>
         </svc:MenuItem>
+
+        <svc:MenuItem ID="1" Name="特大rh牛扒" Unit="杯" Price="18.00" Quantity="1" IsSetmeal="False" />
     </vm:MainViewModel.MenuItems>
 
 </vm:MainViewModel>

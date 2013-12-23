@@ -108,7 +108,11 @@
                                         <DataTemplate>
                                             <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
                                                 <StackPanel>
-                                                    <TextBlock Text="张志强在19:30点菜" Foreground="red"  />
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="数量:" Foreground="{StaticResource PhoneAccentBrush}" />
+                                                        <TextBlock Margin="10, 0" Text="{Binding Quantity}" Foreground="{StaticResource PhoneAccentBrush}" />
+                                                        <TextBlock Text="{Binding Unit}" Foreground="{StaticResource PhoneAccentBrush}" />
+                                                    </StackPanel>
                                                     <TextBlock Foreground="Black">
                                                     <Run Text="{Binding SetmealItems, Converter={StaticResource ItemCountToTextConverter}}" />
                                                     </TextBlock>
@@ -139,23 +143,32 @@
                                     <toolkit:ExpanderView.NonExpandableHeaderTemplate>
                                         <DataTemplate>
                                             <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="360" />
-                                                        <ColumnDefinition Width="80" />
-                                                    </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="360" />
+                                                            <ColumnDefinition Width="80" />
+                                                        </Grid.ColumnDefinitions>
 
-                                                    <TextBlock Text="{Binding Name}" 
+                                                        <TextBlock Text="{Binding Name}" 
                                                                Foreground="{StaticResource PhoneForegroundBrush}"
                                                                FontSize="32"
                                                                TextWrapping="Wrap" />
 
-                                                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Price}" Foreground="Red" />
-                                                </Grid>
+                                                        <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Price}" Foreground="Red" />
+                                                    </Grid>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="数量:" Foreground="{StaticResource PhoneAccentBrush}" />
+                                                        <TextBlock Margin="10, 0" Text="{Binding Quantity}" Foreground="{StaticResource PhoneAccentBrush}"/>
+                                                        <TextBlock Text="{Binding Unit}" Foreground="{StaticResource PhoneAccentBrush}"/>
+                                                    </StackPanel>
+                                                    <TextBlock Text="hello" />
+                                                </StackPanel>
 
                                                 <toolkit:ContextMenuService.ContextMenu>
                                                     <toolkit:ContextMenu>
                                                         <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                                        <toolkit:MenuItem Header="选择数量" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                                                     </toolkit:ContextMenu>
                                                 </toolkit:ContextMenuService.ContextMenu>
                                             </ListBoxItem>

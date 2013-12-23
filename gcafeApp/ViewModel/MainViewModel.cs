@@ -61,6 +61,7 @@ namespace gcafeApp.ViewModel
                         Name = "火龙果芒果饮",
                         Price = (decimal)12.01,
                         Unit = "杯",
+                        Quantity = 1,
                         IsSetmeal = true,
                         SetmealItems = new ObservableCollection<SetmealItem>(setMeals),
                     });
@@ -71,6 +72,7 @@ namespace gcafeApp.ViewModel
                     Name = "开心大餐",
                     Price = (decimal)123.12,
                     Unit = "份",
+                    Quantity = 1,
                     IsSetmeal = false,
                 });
 
