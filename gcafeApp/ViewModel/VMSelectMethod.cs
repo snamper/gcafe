@@ -105,6 +105,7 @@ namespace gcafeApp.ViewModel
                 _svc = svc;
                 _svc.GetMethodCatalogsCompleted += _svc_GetMethodCatalogsCompleted;
 
+                IsBusy = true;
                 _svc.GetMethodCatalogsAsync();
             }
 
@@ -122,6 +123,8 @@ namespace gcafeApp.ViewModel
             {
                 MethodCatalog = new MethodCata(e.Result);
             }
+
+            IsBusy = false;
         }
 
         public MethodCata MethodCatalog

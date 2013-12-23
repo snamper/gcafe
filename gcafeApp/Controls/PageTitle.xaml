@@ -14,9 +14,9 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="330" />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"  />
+        <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" FontSize="22" />
         <StackPanel Grid.Column="1" HorizontalAlignment="Right">
-            <TextBlock x:Name="_loginStaff" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="_loginStaff" Style="{StaticResource PhoneTextNormalStyle}" FontSize="22" />
         </StackPanel>
     </Grid>
 </UserControl>
