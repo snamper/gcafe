@@ -30,8 +30,9 @@ namespace gcafeApp.ViewModel
         {
             IsBusy = false;
 
-            if (e.Result.GetMenuCatalogsResult != null)
-                this.Items = new ObservableCollection<MenuCatalog>(e.Result.GetMenuCatalogsResult);
+
+            if (e.Result != null)
+                this.Items = new ObservableCollection<MenuCatalog>(e.Result);
             else
                 this.Items = new ObservableCollection<MenuCatalog>();
         }
@@ -42,8 +43,7 @@ namespace gcafeApp.ViewModel
             {
                 IsBusy = true;
 
-                GetMenuCatalogsRequest req = new GetMenuCatalogsRequest(Settings.AppSettings.DeviceID, value);
-                _svc.GetMenuCatalogsAsync(req);
+                _svc.GetMenuCatalogsAsync(Settings.AppSettings.DeviceID, value);
             }
         }
 

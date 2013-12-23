@@ -32,7 +32,7 @@ namespace gcafeApp.ViewModel
 
         void _svc_IsTableAvaliableCompleted(object sender, IsTableAvaliableCompletedEventArgs e)
         {
-            if (e.Result.IsTableAvaliableResult != true)
+            if (e.Result != true)
             {
                 _isInputValid = false;
                 ErrorMsg = "台号已开，请重新选择台号";
@@ -55,10 +55,10 @@ namespace gcafeApp.ViewModel
 
         void _svc_GetTablesInfoCompleted(object sender, GetTablesInfoCompletedEventArgs e)
         {
-            if (e.Result.GetTablesInfoResult != null)
+            if (e.Result != null)
             {
                 List<TableViewModel> vmList = new List<TableViewModel>();
-                foreach (TableInfo tbl in e.Result.GetTablesInfoResult)
+                foreach (TableInfo tbl in e.Result)
                 {
                     vmList.Add(new TableViewModel()
                     {
@@ -76,7 +76,7 @@ namespace gcafeApp.ViewModel
 
         void _svc_TableOprCompleted(object sender, TableOprCompletedEventArgs e)
         {
-            string s = e.Result.TableOprResult;
+            string s = e.Result;
         }
 
         public void Reset()
@@ -136,8 +136,7 @@ namespace gcafeApp.ViewModel
                     _tableNum = value;
                     RaisePropertyChanged();
 
-                    IsTableAvaliableRequest req = new IsTableAvaliableRequest(_tableNum);
-                    _svc.IsTableAvaliableAsync(req);
+                    _svc.IsTableAvaliableAsync(_tableNum);
                 }
             }
         }
@@ -162,20 +161,16 @@ namespace gcafeApp.ViewModel
 
         public void OpenTable()
         {
-            TableOprRequest req = new TableOprRequest() 
-            { 
-                DeviceId = Settings.AppSettings.DeviceID, 
-                tableInfo = new TableInfo() { Num = TableNum, CustomerNum = CustomerNum, OpenTableStaff = Settings.AppSettings.LoginStaff }, 
-                oprType = TableOprType.OpenTable 
-            };
-
-            _svc.TableOprAsync(req);
+            _svc.TableOprAsync(Settings.AppSettings.DeviceID, 
+                new TableInfo() { Num = TableNum, CustomerNum = CustomerNum, OpenTableStaff = Settings.AppSettings.LoginStaff }, 
+                null, 
+                TableOprType.OpenTable);
         }
 
         public void GetOpenedTables()
         {
-            GetTablesInfoRequest req = new GetTablesInfoRequest(Settings.AppSettings.DeviceID);
-            _svc.GetTablesInfoAsync(req);
+            //GetTablesInfoRequest req = new GetTablesInfoRequest(Settings.AppSettings.DeviceID);
+            _svc.GetTablesInfoAsync(Settings.AppSettings.DeviceID);
         }
     }
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0b101270-c044-4dea-a7a9-a807ee0a454b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="201ec3aa-c002-4fa1-9a31-0827576e753e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
     <GenerateInternalTypes>false</GenerateInternalTypes>
-    <GenerateMessageContracts>true</GenerateMessageContracts>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
     <NamespaceMappings />
     <CollectionMappings>
       <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
@@ -23,11 +23,11 @@
     <MetadataSource Address="http://192.168.11.6:47773/gcafeSvc.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="gcafeSvc.xsd" MetadataType="Schema" ID="fece4f50-0bfe-45fb-b12d-541447f3870b" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd0" />
-    <MetadataFile FileName="gcafeSvc.disco" MetadataType="Disco" ID="89710c83-c955-4253-b7cd-3a76b10c89f8" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?disco" />
-    <MetadataFile FileName="gcafeSvc1.xsd" MetadataType="Schema" ID="1ccd2b02-fc7c-493d-8899-72e6b689af02" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd2" />
-    <MetadataFile FileName="gcafeSvc.wsdl" MetadataType="Wsdl" ID="a30eb595-2976-4458-9a2e-f67bdf0d3fde" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?wsdl" />
-    <MetadataFile FileName="gcafeSvc2.xsd" MetadataType="Schema" ID="2fdbc37b-d0cd-4b96-8658-da85d981befb" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd1" />
+    <MetadataFile FileName="gcafeSvc.xsd" MetadataType="Schema" ID="98637e59-b8fc-4164-b26a-92ba4041722a" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd0" />
+    <MetadataFile FileName="gcafeSvc.disco" MetadataType="Disco" ID="b5c2f776-1fe8-4e9b-9270-cfa8df6114c7" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?disco" />
+    <MetadataFile FileName="gcafeSvc1.xsd" MetadataType="Schema" ID="0e8ea7db-42dd-488e-86e2-89da912656a0" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd2" />
+    <MetadataFile FileName="gcafeSvc.wsdl" MetadataType="Wsdl" ID="a7eec77a-1825-443a-b9dc-476272f9d3c1" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?wsdl" />
+    <MetadataFile FileName="gcafeSvc2.xsd" MetadataType="Schema" ID="e58f6776-67e5-4bb9-9233-194d2d1df508" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

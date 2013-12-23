@@ -97,6 +97,8 @@ namespace gcafeWeb
         public List<SetmealItem> SetmealItems { get; set; }
         [DataMember]
         public List<method> Methods { get; set; }
+        [DataMember]
+        public int Quantity { get; set; }
     }
 
     [DataContract(IsReference = true)]

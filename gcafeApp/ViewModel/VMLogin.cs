@@ -20,7 +20,7 @@ namespace gcafeApp.ViewModel
 
         void _svc_GetStaffByNumCompleted(object sender, gcafeSvc.GetStaffByNumCompletedEventArgs e)
         {
-            _staff = e.Result.GetStaffByNumResult;
+            _staff = e.Result;
             if (_staff == null)
             {
                 IsUserError = true;
@@ -64,9 +64,7 @@ namespace gcafeApp.ViewModel
             get { return _loginStaffNo; }
             set
             {
-                gcafeSvc.GetStaffByNumRequest req = new gcafeSvc.GetStaffByNumRequest();
-                req.Num = value;
-                _svc.GetStaffByNumAsync(req);
+                _svc.GetStaffByNumAsync(Settings.AppSettings.DeviceID, value);
                 this._loginStaffNo = value;
                 RaisePropertyChanged();
             }

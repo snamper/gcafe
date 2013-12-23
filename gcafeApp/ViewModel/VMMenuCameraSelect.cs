@@ -42,9 +42,9 @@ namespace gcafeApp.ViewModel
         {
             try
             {
-                if (e.Result.GetMenuItemByNumberResult != null)
+                if (e.Result != null)
                 {
-                    MenuItem menuItem = e.Result.GetMenuItemByNumberResult;
+                    MenuItem menuItem = e.Result;
                     this.Result = menuItem.Name;
                     //System.Diagnostics.Debug.WriteLine(this.Result);
                 }
@@ -68,8 +68,7 @@ namespace gcafeApp.ViewModel
 
                 if (result != null)
                 {
-                    GetMenuItemByNumberRequest req = new GetMenuItemByNumberRequest(Settings.AppSettings.DeviceID, result.Text);
-                    _svc.GetMenuItemByNumberAsync(req);
+                    _svc.GetMenuItemByNumberAsync(Settings.AppSettings.DeviceID, result.Text);
                 }
                 //string s = result.Text;
                 //if (result != null)
