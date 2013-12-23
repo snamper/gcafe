@@ -102,4 +102,15 @@
         </Grid>
     </Grid>
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsMenuEnabled="True" Mode="Default"  Opacity=".6">
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/ApplicationBar.Check.png"
+                Text="确定" />
+            <shell:ApplicationBarIconButton
+                IconUri="/Images/ApplicationBar.Cancel.png"
+                Text="取消" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>
