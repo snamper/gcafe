@@ -160,6 +160,7 @@
     <Compile Include="ViewModel\VMMenuCameraSelect.cs" />
     <Compile Include="ViewModel\VMMenuCatalog.cs" />
     <Compile Include="ViewModel\VMMenuItem.cs" />
+    <Compile Include="ViewModel\VMSelectMethod.cs" />
     <Compile Include="ViewModel\VMSubMenuCatalog.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +255,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MenuItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.method.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.Staff1.datasource">

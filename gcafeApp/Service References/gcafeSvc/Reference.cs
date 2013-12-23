@@ -3813,6 +3813,11 @@ namespace gcafeApp.gcafeSvc {
         
         bool EndIsTableAvaliable(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetMethods", ReplyAction="http://tempuri.org/IgcafeSvc/GetMethodsResponse")]
+        System.IAsyncResult BeginGetMethods(System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> EndGetMethods(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetStaffByNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetStaffByNumResponse")]
         System.IAsyncResult BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState);
         
@@ -3939,6 +3944,25 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetMethodsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetMethodsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class GetStaffByNumCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -3995,6 +4019,12 @@ namespace gcafeApp.gcafeSvc {
         private EndOperationDelegate onEndIsTableAvaliableDelegate;
         
         private System.Threading.SendOrPostCallback onIsTableAvaliableCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetMethodsDelegate;
+        
+        private EndOperationDelegate onEndGetMethodsDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetMethodsCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetStaffByNumDelegate;
         
@@ -4066,6 +4096,8 @@ namespace gcafeApp.gcafeSvc {
         public event System.EventHandler<GetTablesInfoCompletedEventArgs> GetTablesInfoCompleted;
         
         public event System.EventHandler<IsTableAvaliableCompletedEventArgs> IsTableAvaliableCompleted;
+        
+        public event System.EventHandler<GetMethodsCompletedEventArgs> GetMethodsCompleted;
         
         public event System.EventHandler<GetStaffByNumCompletedEventArgs> GetStaffByNumCompleted;
         
@@ -4362,6 +4394,50 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetMethods(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetMethods(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> gcafeApp.gcafeSvc.IgcafeSvc.EndGetMethods(System.IAsyncResult result) {
+            return base.Channel.EndGetMethods(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetMethods(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginGetMethods(callback, asyncState);
+        }
+        
+        private object[] OnEndGetMethods(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetMethods(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetMethodsCompleted(object state) {
+            if ((this.GetMethodsCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetMethodsCompleted(this, new GetMethodsCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetMethodsAsync() {
+            this.GetMethodsAsync(null);
+        }
+        
+        public void GetMethodsAsync(object userState) {
+            if ((this.onBeginGetMethodsDelegate == null)) {
+                this.onBeginGetMethodsDelegate = new BeginOperationDelegate(this.OnBeginGetMethods);
+            }
+            if ((this.onEndGetMethodsDelegate == null)) {
+                this.onEndGetMethodsDelegate = new EndOperationDelegate(this.OnEndGetMethods);
+            }
+            if ((this.onGetMethodsCompletedDelegate == null)) {
+                this.onGetMethodsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetMethodsCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetMethodsDelegate, null, this.onEndGetMethodsDelegate, this.onGetMethodsCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginGetStaffByNum(DeviceId, Num, callback, asyncState);
         }
@@ -4566,6 +4642,18 @@ namespace gcafeApp.gcafeSvc {
             public bool EndIsTableAvaliable(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 bool _result = ((bool)(base.EndInvoke("IsTableAvaliable", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetMethods(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("GetMethods", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> EndGetMethods(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> _result = ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method>)(base.EndInvoke("GetMethods", _args, result)));
                 return _result;
             }
             

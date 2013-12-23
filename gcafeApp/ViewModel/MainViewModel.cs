@@ -48,7 +48,6 @@ namespace gcafeApp.ViewModel
             if (!IsInDesignMode)
             {
                 //_svc = svc;
-
                 List<SetmealItem> setMeals = new List<SetmealItem>();
                 setMeals.Add(new SetmealItem() { Name = "»ðÁú¹û" });
                 setMeals.Add(new SetmealItem() { Name = "Ã¢¹ûÒû" });

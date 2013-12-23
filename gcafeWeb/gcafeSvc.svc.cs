@@ -157,6 +157,14 @@ namespace gcafeWeb
             return true;
         }
 
+        public List<method> GetMethods()
+        {
+            using (var context = new gcafeEntities())
+            {
+                return context.method.Include(n => n.method_catalog).ToList();
+            }
+        }
+
 
         public Staff GetStaffByNum(string DeviceId, string Num)
         {

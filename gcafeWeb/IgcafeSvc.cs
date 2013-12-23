@@ -63,6 +63,9 @@ namespace gcafeWeb
         [OperationContract]
         bool IsTableAvaliable(string tableNum);
 
+        [OperationContract]
+        List<method> GetMethods();
+
         /// <summary>
         /// 根据Num取员工信息
         /// </summary>
