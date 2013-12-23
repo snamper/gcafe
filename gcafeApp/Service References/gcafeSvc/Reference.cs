@@ -3779,6 +3779,111 @@ namespace gcafeApp.gcafeSvc {
         ChangeCustomerNum = 2,
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MethodCatalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    public partial class MethodCatalog : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int IDField;
+        
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.Method1> MethodsField;
+        
+        private string NameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.Method1> Methods {
+            get {
+                return this.MethodsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MethodsField, value) != true)) {
+                    this.MethodsField = value;
+                    this.RaisePropertyChanged("Methods");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Method", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    public partial class Method1 : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int IDField;
+        
+        private string NameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="gcafeSvc.IgcafeSvc")]
     public interface IgcafeSvc {
@@ -3817,6 +3922,11 @@ namespace gcafeApp.gcafeSvc {
         System.IAsyncResult BeginGetMethods(System.AsyncCallback callback, object asyncState);
         
         System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> EndGetMethods(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetMethodCatalogs", ReplyAction="http://tempuri.org/IgcafeSvc/GetMethodCatalogsResponse")]
+        System.IAsyncResult BeginGetMethodCatalogs(System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MethodCatalog> EndGetMethodCatalogs(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetStaffByNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetStaffByNumResponse")]
         System.IAsyncResult BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState);
@@ -3963,6 +4073,25 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetMethodCatalogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetMethodCatalogsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MethodCatalog> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MethodCatalog>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class GetStaffByNumCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -4025,6 +4154,12 @@ namespace gcafeApp.gcafeSvc {
         private EndOperationDelegate onEndGetMethodsDelegate;
         
         private System.Threading.SendOrPostCallback onGetMethodsCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetMethodCatalogsDelegate;
+        
+        private EndOperationDelegate onEndGetMethodCatalogsDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetMethodCatalogsCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetStaffByNumDelegate;
         
@@ -4098,6 +4233,8 @@ namespace gcafeApp.gcafeSvc {
         public event System.EventHandler<IsTableAvaliableCompletedEventArgs> IsTableAvaliableCompleted;
         
         public event System.EventHandler<GetMethodsCompletedEventArgs> GetMethodsCompleted;
+        
+        public event System.EventHandler<GetMethodCatalogsCompletedEventArgs> GetMethodCatalogsCompleted;
         
         public event System.EventHandler<GetStaffByNumCompletedEventArgs> GetStaffByNumCompleted;
         
@@ -4438,6 +4575,50 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetMethodCatalogs(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetMethodCatalogs(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MethodCatalog> gcafeApp.gcafeSvc.IgcafeSvc.EndGetMethodCatalogs(System.IAsyncResult result) {
+            return base.Channel.EndGetMethodCatalogs(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetMethodCatalogs(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginGetMethodCatalogs(callback, asyncState);
+        }
+        
+        private object[] OnEndGetMethodCatalogs(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MethodCatalog> retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetMethodCatalogs(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetMethodCatalogsCompleted(object state) {
+            if ((this.GetMethodCatalogsCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetMethodCatalogsCompleted(this, new GetMethodCatalogsCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetMethodCatalogsAsync() {
+            this.GetMethodCatalogsAsync(null);
+        }
+        
+        public void GetMethodCatalogsAsync(object userState) {
+            if ((this.onBeginGetMethodCatalogsDelegate == null)) {
+                this.onBeginGetMethodCatalogsDelegate = new BeginOperationDelegate(this.OnBeginGetMethodCatalogs);
+            }
+            if ((this.onEndGetMethodCatalogsDelegate == null)) {
+                this.onEndGetMethodCatalogsDelegate = new EndOperationDelegate(this.OnEndGetMethodCatalogs);
+            }
+            if ((this.onGetMethodCatalogsCompletedDelegate == null)) {
+                this.onGetMethodCatalogsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetMethodCatalogsCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetMethodCatalogsDelegate, null, this.onEndGetMethodCatalogsDelegate, this.onGetMethodCatalogsCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginGetStaffByNum(DeviceId, Num, callback, asyncState);
         }
@@ -4654,6 +4835,18 @@ namespace gcafeApp.gcafeSvc {
             public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> EndGetMethods(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> _result = ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method>)(base.EndInvoke("GetMethods", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetMethodCatalogs(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("GetMethodCatalogs", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MethodCatalog> EndGetMethodCatalogs(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MethodCatalog> _result = ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MethodCatalog>)(base.EndInvoke("GetMethodCatalogs", _args, result)));
                 return _result;
             }
             

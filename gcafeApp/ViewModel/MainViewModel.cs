@@ -106,7 +106,7 @@ namespace gcafeApp.ViewModel
 
         public void Execute(object parameter)
         {
-            int i = 0;
+            App.RootFrame.Navigate(new Uri("/Pages/SelectMethodPage.xaml", UriKind.Relative));
         }
     }
 }

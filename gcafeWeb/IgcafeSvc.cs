@@ -66,6 +66,9 @@ namespace gcafeWeb
         [OperationContract]
         List<method> GetMethods();
 
+        [OperationContract]
+        List<MethodCatalog> GetMethodCatalogs();
+
         /// <summary>
         /// 根据Num取员工信息
         /// </summary>

@@ -12,15 +12,16 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding VMSelectMethod, Source={StaticResource Locator}}">
     
     <phone:PhoneApplicationPage.Resources>
-        <DataTemplate x:Key="BuddiesGroupHeaderTemplate">
+        <DataTemplate x:Key="MethodsGroupHeaderTemplate">
             <Border Background="Transparent" Margin="12,8,0,8">
                 <Border Background="{StaticResource PhoneAccentBrush}" 	
-                        Padding="8,0,0,0" Width="62" Height="62"
+                        Padding="8,0,0,0" Width="162" Height="62"
                         HorizontalAlignment="Left">
-                    <TextBlock Text="{Binding Key}" 
+                    <TextBlock Text="{Binding Name}" 
                                Foreground="#FFFFFF" 
                                FontSize="48"
                                FontFamily="{StaticResource PhoneFontFamilySemiLight}"
@@ -30,18 +31,18 @@
             </Border>
         </DataTemplate>
 
-        <Style TargetType="phone:LongListSelector" x:Key="BuddiesJumpListStyle">
-            <Setter Property="LayoutMode" Value="Grid"/>
-            <Setter Property="GridCellSize" Value="113,113"/>
+        <Style TargetType="phone:LongListSelector" x:Key="MethodsJumpListStyle">
+            <Setter Property="LayoutMode" Value="Grid" />
+            <Setter Property="GridCellSize" Value="163,113"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Border Background="Red" Width="99" Height="99" Margin="6">
-                            <TextBlock Text="{Binding Key}" 
+                        <Border Width="99" Height="99" Margin="6">
+                            <TextBlock Text="{Binding Name}" 
                                        FontFamily="{StaticResource PhoneFontFamilySemiBold}"
                                        FontSize="48"
                                        Margin="8,0,0,0"
-                                       Foreground="{Binding Converter={StaticResource GroupForeground}}"
+                                       Foreground="Red"
                                        VerticalAlignment="Bottom"/>
                         </Border>
                     </DataTemplate>
@@ -49,13 +50,13 @@
             </Setter>
         </Style>
 
-        <DataTemplate x:Key="BuddiesGridTemplate">
+        <DataTemplate x:Key="MethodsGridTemplate">
             <Grid Margin="1" Width="100" Height="100">
-                <Image Source="{Binding ImageUrl}" Stretch="UniformToFill"/>
+                <!--Image Source="{Binding ImageUrl}" Stretch="UniformToFill"/-->
                 <Border VerticalAlignment="Bottom"
                         HorizontalAlignment="Stretch"
                         Background="#C0808080">
-                    <TextBlock Text="{Binding FullName}"
+                    <TextBlock Text="{Binding Name}"
                                FontSize="12"
                                TextTrimming="WordEllipsis"
                                HorizontalAlignment="Center"/>
@@ -82,9 +83,15 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,0">
-            <toolkit:LongListMultiSelector>
-                
-            </toolkit:LongListMultiSelector>
+            <toolkit:LongListMultiSelector ItemsSource="{Binding MethodCatalog}" Background="Transparent" 
+                                           GridCellSize="104,108"
+                                           LayoutMode="Grid"
+                                           IsGroupingEnabled="True"
+                                           HideEmptyGroups="False"
+                                           EnforceIsSelectionEnabled="True"
+                                           GroupHeaderTemplate="{StaticResource MethodsGroupHeaderTemplate}"
+                                           JumpListStyle="{StaticResource MethodsJumpListStyle}"
+                                           ItemTemplate="{StaticResource MethodsGridTemplate}"/>
         </Grid>
     </Grid>
 

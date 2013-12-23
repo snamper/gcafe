@@ -165,6 +165,29 @@ namespace gcafeWeb
             }
         }
 
+        public List<MethodCatalog> GetMethodCatalogs()
+        {
+            List<MethodCatalog> rtn = new List<MethodCatalog>();
+
+            using (var context = new gcafeEntities())
+            {
+                List<method_catalog> methodCatalogs = context.method_catalog.Include(n => n.method).ToList();
+
+                foreach (var methodCatalog in methodCatalogs)
+                {
+                    List<Method> methods = new List<Method>();
+                    foreach (var method in methodCatalog.method)
+                    {
+                        methods.Add(new Method() { ID = method.id, Name = method.name });
+                    }
+
+                    rtn.Add(new MethodCatalog() { ID = methodCatalog.id, Name = methodCatalog.name, Methods = methods });
+                }
+            }
+
+            return rtn;
+        }
+
 
         public Staff GetStaffByNum(string DeviceId, string Num)
         {

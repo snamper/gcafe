@@ -1,0 +1,12 @@
+﻿<vm:VMSelectMethod
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:gcafeApp.ViewModel"
+    xmlns:svc="clr-namespace:gcafeApp.gcafeSvc">
+    
+    <vm:VMSelectMethod.Methods>
+        <svc:method id="1" name="helllo"/>
+    </vm:VMSelectMethod.Methods>
+    
+</vm:VMSelectMethod>
+    

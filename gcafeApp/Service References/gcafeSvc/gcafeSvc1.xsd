@@ -497,4 +497,35 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfTableInfo" nillable="true" type="tns:ArrayOfTableInfo" />
+  <xs:complexType name="ArrayOfMethodCatalog">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MethodCatalog" nillable="true" type="tns:MethodCatalog" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMethodCatalog" nillable="true" type="tns:ArrayOfMethodCatalog" />
+  <xs:complexType name="MethodCatalog">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Methods" nillable="true" type="tns:ArrayOfMethod" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MethodCatalog" nillable="true" type="tns:MethodCatalog" />
+  <xs:complexType name="ArrayOfMethod">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Method" nillable="true" type="tns:Method" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMethod" nillable="true" type="tns:ArrayOfMethod" />
+  <xs:complexType name="Method">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Method" nillable="true" type="tns:Method" />
 </xs:schema>

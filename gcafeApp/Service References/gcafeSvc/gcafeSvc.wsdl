@@ -49,6 +49,12 @@
   <wsdl:message name="IgcafeSvc_GetMethods_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMethodsResponse" />
   </wsdl:message>
+  <wsdl:message name="IgcafeSvc_GetMethodCatalogs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMethodCatalogs" />
+  </wsdl:message>
+  <wsdl:message name="IgcafeSvc_GetMethodCatalogs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMethodCatalogsResponse" />
+  </wsdl:message>
   <wsdl:message name="IgcafeSvc_GetStaffByNum_InputMessage">
     <wsdl:part name="parameters" element="tns:GetStaffByNum" />
   </wsdl:message>
@@ -83,6 +89,10 @@
     <wsdl:operation name="GetMethods">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetMethods" message="tns:IgcafeSvc_GetMethods_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/GetMethodsResponse" message="tns:IgcafeSvc_GetMethods_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMethodCatalogs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetMethodCatalogs" message="tns:IgcafeSvc_GetMethodCatalogs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/GetMethodCatalogsResponse" message="tns:IgcafeSvc_GetMethodCatalogs_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetStaffByNum">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetStaffByNum" message="tns:IgcafeSvc_GetStaffByNum_InputMessage" />
@@ -147,6 +157,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetMethods">
       <soap:operation soapAction="http://tempuri.org/IgcafeSvc/GetMethods" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMethodCatalogs">
+      <soap:operation soapAction="http://tempuri.org/IgcafeSvc/GetMethodCatalogs" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

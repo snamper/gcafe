@@ -121,6 +121,26 @@ namespace gcafeWeb
     }
 
     [DataContract(IsReference = true)]
+    public class Method
+    {
+        [DataMember]
+        public int ID { get; set; }
+        [DataMember]
+        public string Name { get; set; }
+    }
+
+    [DataContract(IsReference = true)]
+    public class MethodCatalog
+    {
+        [DataMember]
+        public int ID { get; set; }
+        [DataMember]
+        public string Name { get; set; }
+        [DataMember]
+        public List<Method> Methods { get; set; }
+    }
+    
+    [DataContract(IsReference = true)]
     public class Staff
     {
         [DataMember]
