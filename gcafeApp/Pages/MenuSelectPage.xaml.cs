@@ -16,5 +16,15 @@ namespace gcafeApp.Pages
         {
             InitializeComponent();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
+            {
+                object o = PhoneApplicationService.Current.State["SelectedMenuItem"];
+                PhoneApplicationService.Current.State.Remove("SelectedMenuItem");
+            }
+        }
     }
 }

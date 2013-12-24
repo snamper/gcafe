@@ -31,5 +31,12 @@ namespace gcafeApp.Pages
             }
         }
 
+        private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PhoneApplicationService.Current.State["SelectedMenuItem"] = e.AddedItems[0];
+
+            NavigationService.GoBack();
+        }
+
     }
 }

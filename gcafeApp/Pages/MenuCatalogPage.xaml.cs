@@ -16,5 +16,13 @@ namespace gcafeApp.Pages
         {
             InitializeComponent();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
+                NavigationService.GoBack();
+        }
     }
 }
