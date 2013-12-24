@@ -85,8 +85,23 @@
         <TextBlock Grid.Row="1" Margin="20, 0" Text="做法选择" />
         <ItemsControl Grid.Row="2" 
                       ItemsSource="{Binding SelectedItems, ElementName=MenuCatalog}"
-                      ItemTemplate="{StaticResource MethodsGridTemplate}"
-                      ItemsPanel="{StaticResource AttendeesPanelTemplate}"/>
+                      ItemsPanel="{StaticResource AttendeesPanelTemplate}">
+            <ItemsControl.Template>
+                <ControlTemplate TargetType="ItemsControl">
+                    <Border BorderBrush="Aqua" BorderThickness="1">
+                        <ItemsPresenter />
+                    </Border>
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="100">
+                        <TextBlock Text="{Binding Name}" />
+                    </Grid>
+                </DataTemplate>   
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+            
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="3" Margin="12,0,12,0">
