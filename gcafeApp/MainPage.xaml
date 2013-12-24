@@ -23,7 +23,7 @@
     
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
-    <Grid x:Name="LayoutRoot" Background="{StaticResource ModuleColor}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource MyBackground}">
 
         <!-- 本地化说明:
             若要本地化显示的字符串，请将其值复制到应用程序的非特定语言资源文件(AppResources.resx)
@@ -48,7 +48,7 @@
         <phone:Pivot Title="我的应用程序">
             <phone:Pivot.TitleTemplate>
                 <DataTemplate>
-                    <Grid Margin="-20, -15">
+                    <Grid Margin="-10, -15, 10, 10">
                         <Controls:PageTitle />
                     </Grid>
                 </DataTemplate>
@@ -89,7 +89,7 @@
                                                     </Grid.ColumnDefinitions>
 
                                                     <TextBlock Text="{Binding Name}" 
-                                                               Foreground="{StaticResource PhoneForegroundBrush}"
+                                                               Foreground="Orange"
                                                                FontSize="32"
                                                                TextWrapping="Wrap" />
                                                 
@@ -113,7 +113,7 @@
                                                         <TextBlock Margin="10, 0" Text="{Binding Quantity}" Foreground="{StaticResource PhoneAccentBrush}" />
                                                         <TextBlock Text="{Binding Unit}" Foreground="{StaticResource PhoneAccentBrush}" />
                                                     </StackPanel>
-                                                    <TextBlock Foreground="Black">
+                                                    <TextBlock Foreground="Aqua">
                                                     <Run Text="{Binding SetmealItems, Converter={StaticResource ItemCountToTextConverter}}" />
                                                     </TextBlock>
                                                 </StackPanel>
@@ -129,7 +129,7 @@
                                     <toolkit:ExpanderView.ItemTemplate>
                                         <DataTemplate>
                                             <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
-                                                <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" />
+                                                <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeLarge}" />
                                                 <toolkit:ContextMenuService.ContextMenu>
                                                     <toolkit:ContextMenu>
                                                         <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
@@ -151,7 +151,7 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <TextBlock Text="{Binding Name}" 
-                                                               Foreground="{StaticResource PhoneForegroundBrush}"
+                                                               Foreground="Orange"
                                                                FontSize="32"
                                                                TextWrapping="Wrap" />
 

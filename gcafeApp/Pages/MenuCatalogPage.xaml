@@ -16,7 +16,7 @@
     DataContext="{Binding VMMenuCatalog, Source={StaticResource Locator}}">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="{StaticResource BackgroundColor}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource MyBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

@@ -18,7 +18,7 @@
     DataContext="{Binding TablesViewModel, Source={StaticResource Locator}}">
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
-    <Grid x:Name="LayoutRoot" Background="{StaticResource ModuleColor}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource MyBackground}">
         <!--枢轴控件-->
         <phone:Pivot x:Name="_pivot" Title="台号选择">
             <!--枢轴项一-->

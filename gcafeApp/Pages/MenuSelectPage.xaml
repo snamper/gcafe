@@ -15,7 +15,7 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
-    <Grid x:Name="LayoutRoot" Background="{StaticResource ModuleColor}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource MyBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
