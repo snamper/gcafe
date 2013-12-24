@@ -38,13 +38,13 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="菜名"  Style="{StaticResource PhoneTextLargeStyle}" />
-            <TextBox Grid.Row="1" Width="380" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="1" Width="380" HorizontalAlignment="Left" Text="{Binding MenuItem.Name, Mode=TwoWay}" />
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <Button Command="{Binding NavigateToCommand}" CommandParameter="CameraSel" FontSize="30" Content="&#xE12D;" FontFamily="Segoe UI Symbol" />
                 <Button Margin="30, 0" Command="{Binding NavigateToCommand}" CommandParameter="CataSel" FontFamily="Segoe UI Symbol" FontSize="30" Content="&#xE179;" />
             </StackPanel>
             <TextBlock Margin="10, 20, 0, 0" Grid.Row="3" Text="数量" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"/>
-            <TextBox Grid.Row="4" Width="200" HorizontalAlignment="Left" />
+            <TextBox x:Name="Quantity" Grid.Row="4" Width="200" HorizontalAlignment="Left" Text="{Binding MenuItem.Quantity, Mode=TwoWay}" />
         </Grid>
     </Grid>
 
@@ -52,10 +52,10 @@
         <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/ApplicationBar.Check.png"
-                Text="确定" />
+                Text="确定" Click="ApplicationBarIconButton_Click" />
             <shell:ApplicationBarIconButton
                 IconUri="/Images/ApplicationBar.Cancel.png"
-                Text="取消" />
+                Text="取消" Click="ApplicationBarIconButton_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

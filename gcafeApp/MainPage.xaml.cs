@@ -36,6 +36,13 @@ namespace gcafeApp
             //{
             //    App.ViewModel.LoadData();
             //}
+
+            if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
+            {
+                mv.MenuItems.Add((gcafeSvc.MenuItem)PhoneApplicationService.Current.State["SelectedMenuItem"]);
+
+                PhoneApplicationService.Current.State.Remove("SelectedMenuItem");
+            }
         }
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
