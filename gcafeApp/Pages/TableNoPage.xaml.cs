@@ -60,6 +60,21 @@ namespace gcafeApp.Pages
                     }
                 }
             }
+            else
+            {
+                //Value = ((ViewModel.TableViewModel)TableList.SelectedItem).TableNo;
+            }
+        }
+
+        private void TableList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Value = ((ViewModel.TableViewModel)TableList.SelectedItem).TableNo;
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+
+            //ApplicationBarIconButton_Click(sender, null);
         }
     }
 }

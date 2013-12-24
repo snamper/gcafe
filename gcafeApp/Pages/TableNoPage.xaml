@@ -5,6 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:primitives="clr-namespace:gcafeApp.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -22,7 +23,9 @@
         <phone:Pivot x:Name="_pivot" Title="台号选择">
             <!--枢轴项一-->
             <phone:PivotItem Header="已开台">
-                <phone:LongListSelector Margin="0,0,-22,0" ItemsSource="{Binding Items}">
+                <phone:LongListSelector x:Name="TableList" Margin="0,0,-22,0" ItemsSource="{Binding Items}" 
+                                        SelectionChanged="TableList_SelectionChanged"
+                                        toolkit:TiltEffect.IsTiltEnabled="True">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="0,8,0,8" Background="Gray">
