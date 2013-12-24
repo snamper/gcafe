@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -30,7 +31,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <Button Style="{StaticResource MenuCatalogButton}" Command="{Binding NavigateToCommand}" CommandParameter="厨房">
+                <Button Style="{StaticResource MenuCatalogButton}" Command="{Binding NavigateToCommand}" CommandParameter="厨房" toolkit:TiltEffect.IsTiltEnabled="True">
                     <Button.Content>
                         <StackPanel>
                             <Image Source="/Assets/KitchenIcon.png" Stretch="None"></Image>
@@ -39,7 +40,7 @@
                     </Button.Content>
                 </Button>
 
-                <Button Margin="0, 60" Style="{StaticResource MenuCatalogButton}" Command="{Binding NavigateToCommand}" CommandParameter="酒吧">
+                <Button Margin="0, 60" Style="{StaticResource MenuCatalogButton}" Command="{Binding NavigateToCommand}" CommandParameter="酒吧" toolkit:TiltEffect.IsTiltEnabled="True">
                     <Button.Content>
                         <StackPanel>
                             <Image Source="/Assets/BarIcon.png" Stretch="None"></Image>

@@ -30,27 +30,21 @@
         <!--ContentPanel - 在此处放置其他内容-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="75" />
-                <RowDefinition Height="75" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="90*" />
-                <ColumnDefinition Width="28*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="菜名:"  Style="{StaticResource PhoneTextExtraLargeStyle}" />
-            <TextBox Grid.Row="0" Grid.Column="1" Text="0001" VerticalAlignment="Center" />
-            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="数量:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="0001" VerticalAlignment="Center" />
-            <Button Grid.Row="0" Grid.Column="2" Command="{Binding NavigateToCommand}" CommandParameter="CataSel">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Margin="10" BorderBrush="Yellow" BorderThickness="4" CornerRadius="50">
-                            <Image Source="/Images/ApplicationBar.Check.png" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+
+            <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="菜名"  Style="{StaticResource PhoneTextLargeStyle}" />
+            <TextBox Grid.Row="1" Width="380" HorizontalAlignment="Left" />
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <Button Command="{Binding NavigateToCommand}" CommandParameter="CameraSel" FontSize="30" Content="&#xE12D;" FontFamily="Segoe UI Symbol" />
+                <Button Margin="30, 0" Command="{Binding NavigateToCommand}" CommandParameter="CataSel" FontFamily="Segoe UI Symbol" FontSize="30" Content="&#xE179;" />
+            </StackPanel>
+            <TextBlock Margin="10, 20, 0, 0" Grid.Row="3" Text="数量" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"/>
+            <TextBox Grid.Row="4" Width="200" HorizontalAlignment="Left" />
         </Grid>
     </Grid>
 
