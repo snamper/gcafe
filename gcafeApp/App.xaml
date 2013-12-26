@@ -21,6 +21,7 @@
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
             <converters:ItemCountToTextConverter x:Key="ItemCountToTextConverter" />
             <converters:SelectableToVisableConverter x:Key="SelectableToVisableConverter" />
+            <converters:MethodsToTextConverter x:Key="MethodsToTextConverter" />
         </ResourceDictionary>
     </Application.Resources>
   <Application.ApplicationLifetimeObjects>
