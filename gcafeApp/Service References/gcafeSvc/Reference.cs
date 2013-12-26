@@ -305,6 +305,8 @@ namespace gcafeApp.gcafeSvc {
     [System.Runtime.Serialization.DataContractAttribute(Name="SetmealItem", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
     public partial class SetmealItem : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private int MenuIDField;
+        
         private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> MethodsField;
         
         private string NameField;
@@ -312,6 +314,19 @@ namespace gcafeApp.gcafeSvc {
         private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.SetmealItem> OptionItemsField;
         
         private string UnitField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int MenuID {
+            get {
+                return this.MenuIDField;
+            }
+            set {
+                if ((this.MenuIDField.Equals(value) != true)) {
+                    this.MenuIDField = value;
+                    this.RaisePropertyChanged("MenuID");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.method> Methods {
@@ -1136,8 +1151,6 @@ namespace gcafeApp.gcafeSvc {
         
         private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item_opt> setmeal_item_optField;
         
-        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item_opt> setmeal_item_opt1Field;
-        
         private bool sold_outField;
         
         private string unitField;
@@ -1372,19 +1385,6 @@ namespace gcafeApp.gcafeSvc {
                 if ((object.ReferenceEquals(this.setmeal_item_optField, value) != true)) {
                     this.setmeal_item_optField = value;
                     this.RaisePropertyChanged("setmeal_item_opt");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item_opt> setmeal_item_opt1 {
-            get {
-                return this.setmeal_item_opt1Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.setmeal_item_opt1Field, value) != true)) {
-                    this.setmeal_item_opt1Field = value;
-                    this.RaisePropertyChanged("setmeal_item_opt1");
                 }
             }
         }
@@ -3041,6 +3041,8 @@ namespace gcafeApp.gcafeSvc {
         
         private int idField;
         
+        private bool is_festivalField;
+        
         private int order_cntField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -3078,6 +3080,19 @@ namespace gcafeApp.gcafeSvc {
                 if ((this.idField.Equals(value) != true)) {
                     this.idField = value;
                     this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool is_festival {
+            get {
+                return this.is_festivalField;
+            }
+            set {
+                if ((this.is_festivalField.Equals(value) != true)) {
+                    this.is_festivalField = value;
+                    this.RaisePropertyChanged("is_festival");
                 }
             }
         }
@@ -3283,6 +3298,8 @@ namespace gcafeApp.gcafeSvc {
         
         private int setmeal_item_menu_idField;
         
+        private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item_opt> setmeal_item_optField;
+        
         private int setmeal_menu_idField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -3338,6 +3355,19 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.setmeal_item_opt> setmeal_item_opt {
+            get {
+                return this.setmeal_item_optField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.setmeal_item_optField, value) != true)) {
+                    this.setmeal_item_optField = value;
+                    this.RaisePropertyChanged("setmeal_item_opt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int setmeal_menu_id {
             get {
                 return this.setmeal_menu_idField;
@@ -3369,9 +3399,9 @@ namespace gcafeApp.gcafeSvc {
         
         private gcafeApp.gcafeSvc.menu menuField;
         
-        private gcafeApp.gcafeSvc.menu menu1Field;
-        
         private int menu_idField;
+        
+        private gcafeApp.gcafeSvc.setmeal_item setmeal_itemField;
         
         private int setmeal_item_idField;
         
@@ -3402,19 +3432,6 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public gcafeApp.gcafeSvc.menu menu1 {
-            get {
-                return this.menu1Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.menu1Field, value) != true)) {
-                    this.menu1Field = value;
-                    this.RaisePropertyChanged("menu1");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public int menu_id {
             get {
                 return this.menu_idField;
@@ -3423,6 +3440,19 @@ namespace gcafeApp.gcafeSvc {
                 if ((this.menu_idField.Equals(value) != true)) {
                     this.menu_idField = value;
                     this.RaisePropertyChanged("menu_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public gcafeApp.gcafeSvc.setmeal_item setmeal_item {
+            get {
+                return this.setmeal_itemField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.setmeal_itemField, value) != true)) {
+                    this.setmeal_itemField = value;
+                    this.RaisePropertyChanged("setmeal_item");
                 }
             }
         }

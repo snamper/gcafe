@@ -68,6 +68,8 @@ namespace gcafeWeb
     public class SetmealItem
     {
         [DataMember]
+        public int MenuID { get; set; }
+        [DataMember]
         public string Name { get; set; }
         [DataMember]
         public string Unit { get; set; }

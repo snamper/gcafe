@@ -54,12 +54,19 @@ namespace gcafeWeb
                         foreach (var smitem in menu.setmeal_item)
                         {
                             gcafeWeb.menu m = context.menu.FirstOrDefault(n => n.id == smitem.setmeal_item_menu_id);
-                            setmeals.Add(new SetmealItem() { Name = m.name, Unit = menu.unit });
 
                             if (smitem.setmeal_item_opt.Count > 0)
                             {
-                                int i = 0;
+                                List<SetmealItem> opts = new List<SetmealItem>();
+                                foreach (var opt in smitem.setmeal_item_opt)
+                                {
+                                    gcafeWeb.menu m1 = context.menu.FirstOrDefault(n => n.id == opt.menu_id);
+                                    opts.Add(new SetmealItem() { MenuID = m1.id, Name = m1.name, Unit = m1.unit });
+                                }
+                                setmeals.Add(new SetmealItem() { MenuID = m.id, Name = m.name, Unit = menu.unit, OptionItems = opts });
                             }
+                            else
+                                setmeals.Add(new SetmealItem() { MenuID = m.id, Name = m.name, Unit = menu.unit });
                         }
 
                         menuList.Add(new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = true, Quantity = 1, SetmealItems = setmeals });
