@@ -17,6 +17,7 @@ namespace gcafeWeb
         public int id { get; set; }
         public int branch_id { get; set; }
         public int order_cnt { get; set; }
+        public bool is_festival { get; set; }
     
         public virtual branch branch { get; set; }
     }

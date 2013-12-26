@@ -273,16 +273,8 @@
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.TableInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc.disco" />
     <None Include="Service References\gcafeSvc\configuration91.svcinfo" />
     <None Include="Service References\gcafeSvc\configuration.svcinfo" />
-    <None Include="Service References\gcafeSvc\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="ServiceReferences.ClientConfig">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Service References\gcafeSvc\gcafeSvc.wsdl" />
     <None Include="Service References\gcafeSvc\gcafeSvc.xsd">
       <SubType>Designer</SubType>
@@ -293,6 +285,14 @@
     <None Include="Service References\gcafeSvc\gcafeSvc2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\gcafeSvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\gcafeSvc\gcafeSvc.disco" />
+    <Content Include="ServiceReferences.ClientConfig">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />

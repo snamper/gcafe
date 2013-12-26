@@ -14,11 +14,17 @@ namespace gcafeWeb
     
     public partial class setmeal_item
     {
+        public setmeal_item()
+        {
+            this.setmeal_item_opt = new HashSet<setmeal_item_opt>();
+        }
+    
         public int id { get; set; }
         public int setmeal_menu_id { get; set; }
         public int setmeal_item_menu_id { get; set; }
     
         public virtual menu menu { get; set; }
         public virtual menu menu1 { get; set; }
+        public virtual ICollection<setmeal_item_opt> setmeal_item_opt { get; set; }
     }
 }

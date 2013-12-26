@@ -23,11 +23,11 @@
     <MetadataSource Address="http://192.168.11.6:47773/gcafeSvc.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="gcafeSvc.xsd" MetadataType="Schema" ID="bd469c36-fc96-48d1-8a07-22daf6d3dace" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd0" />
-    <MetadataFile FileName="gcafeSvc.disco" MetadataType="Disco" ID="d3f09c88-ae8c-43ed-b16e-30aa41a760ce" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?disco" />
-    <MetadataFile FileName="gcafeSvc1.xsd" MetadataType="Schema" ID="cc2d0a18-bf13-4fc3-be0a-efe46f9b0aa1" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd2" />
-    <MetadataFile FileName="gcafeSvc.wsdl" MetadataType="Wsdl" ID="151e564a-4599-44b4-bd35-8ab0cab22226" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?wsdl" />
-    <MetadataFile FileName="gcafeSvc2.xsd" MetadataType="Schema" ID="99c2ee47-406b-4a37-aca4-b611a5d8c336" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd1" />
+    <MetadataFile FileName="gcafeSvc.xsd" MetadataType="Schema" ID="9767d7ac-261a-4441-ae04-24d7b81e4aea" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd0" />
+    <MetadataFile FileName="gcafeSvc.disco" MetadataType="Disco" ID="f0090f2b-f2fd-4100-a645-b18ed6de7b22" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?disco" />
+    <MetadataFile FileName="gcafeSvc1.xsd" MetadataType="Schema" ID="02ed441c-f591-4aa6-9a41-0db49c9e62f8" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd2" />
+    <MetadataFile FileName="gcafeSvc.wsdl" MetadataType="Wsdl" ID="6c6f20b0-8316-4812-a6da-5ccbb0e89ea6" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?wsdl" />
+    <MetadataFile FileName="gcafeSvc2.xsd" MetadataType="Schema" ID="260fb75d-a332-4d54-9abc-19065246c000" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

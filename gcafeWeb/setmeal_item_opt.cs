@@ -19,6 +19,6 @@ namespace gcafeWeb
         public int menu_id { get; set; }
     
         public virtual menu menu { get; set; }
-        public virtual menu menu1 { get; set; }
+        public virtual setmeal_item setmeal_item { get; set; }
     }
 }

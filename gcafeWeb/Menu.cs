@@ -20,7 +20,6 @@ namespace gcafeWeb
             this.order_detail_setmeal = new HashSet<order_detail_setmeal>();
             this.setmeal_item = new HashSet<setmeal_item>();
             this.setmeal_item_opt = new HashSet<setmeal_item_opt>();
-            this.setmeal_item_opt1 = new HashSet<setmeal_item_opt>();
             this.setmeal_item1 = new HashSet<setmeal_item>();
         }
     
@@ -44,7 +43,6 @@ namespace gcafeWeb
         public virtual ICollection<order_detail_setmeal> order_detail_setmeal { get; set; }
         public virtual ICollection<setmeal_item> setmeal_item { get; set; }
         public virtual ICollection<setmeal_item_opt> setmeal_item_opt { get; set; }
-        public virtual ICollection<setmeal_item_opt> setmeal_item_opt1 { get; set; }
         public virtual ICollection<setmeal_item> setmeal_item1 { get; set; }
     }
 }

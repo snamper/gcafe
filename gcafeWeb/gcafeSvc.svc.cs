@@ -45,10 +45,27 @@ namespace gcafeWeb
 
             using (var context = new gcafeEntities())
             {
-                List<menu> menus = context.menu.Where(n => (n.menu_catalog_id == cataId) && (n.branch_id == branchId)).OrderBy(n => n.name).ToList();
+                List<menu> menus = context.menu.Include(n => n.setmeal_item1).Where(n => (n.menu_catalog_id == cataId) && (n.branch_id == branchId)).OrderBy(n => n.name).ToList();
                 foreach (menu menu in menus)
                 {
-                    menuList.Add(new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = menu.is_setmeal });
+                    if (menu.setmeal_item.Count > 0)
+                    {
+                        List<SetmealItem> setmeals = new List<SetmealItem>();
+                        foreach (var smitem in menu.setmeal_item)
+                        {
+                            gcafeWeb.menu m = context.menu.FirstOrDefault(n => n.id == smitem.setmeal_item_menu_id);
+                            setmeals.Add(new SetmealItem() { Name = m.name, Unit = menu.unit });
+
+                            if (smitem.setmeal_item_opt.Count > 0)
+                            {
+                                int i = 0;
+                            }
+                        }
+
+                        menuList.Add(new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = true, Quantity = 1, SetmealItems = setmeals });
+                    }
+                    else
+                        menuList.Add(new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = false, Quantity = 1 });
                 }
             }
 

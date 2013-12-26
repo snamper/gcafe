@@ -241,6 +241,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="branch_id" Type="int" Nullable="false" />
           <Property Name="order_cnt" Type="int" Nullable="false" />
+          <Property Name="is_festival" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_credit_member">
           <End Role="member" Type="Self.member" Multiplicity="0..1" />
@@ -603,10 +604,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_setmeal_item_opt_setmeal_item">
-          <End Role="menu" Type="Self.menu" Multiplicity="1" />
+          <End Role="setmeal_item" Type="Self.setmeal_item" Multiplicity="1" />
           <End Role="setmeal_item_opt" Type="Self.setmeal_item_opt" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="menu">
+            <Principal Role="setmeal_item">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="setmeal_item_opt">
@@ -831,7 +832,7 @@
             <End Role="setmeal_item_opt" EntitySet="setmeal_item_opt" />
           </AssociationSet>
           <AssociationSet Name="FK_setmeal_item_opt_setmeal_item" Association="Self.FK_setmeal_item_opt_setmeal_item">
-            <End Role="menu" EntitySet="menu" />
+            <End Role="setmeal_item" EntitySet="setmeal_item" />
             <End Role="setmeal_item_opt" EntitySet="setmeal_item_opt" />
           </AssociationSet>
           <AssociationSet Name="FK_setmeal_item_setmeal_item" Association="Self.FK_setmeal_item_setmeal_item">
@@ -955,7 +956,6 @@
           <NavigationProperty Name="order_detail_setmeal" Relationship="Self.FK_order_detail_setmeal_menu" FromRole="menu" ToRole="order_detail_setmeal" />
           <NavigationProperty Name="setmeal_item" Relationship="Self.FK_setmeal_item_menu" FromRole="menu" ToRole="setmeal_item" />
           <NavigationProperty Name="setmeal_item_opt" Relationship="Self.FK_setmeal_item_opt_menu" FromRole="menu" ToRole="setmeal_item_opt" />
-          <NavigationProperty Name="setmeal_item_opt1" Relationship="Self.FK_setmeal_item_opt_setmeal_item" FromRole="menu" ToRole="setmeal_item_opt" />
           <NavigationProperty Name="setmeal_item1" Relationship="Self.FK_setmeal_item_setmeal_item" FromRole="menu" ToRole="setmeal_item" />
         </EntityType>
         <EntityType Name="menu_catalog">
@@ -1114,6 +1114,7 @@
           <Property Name="setmeal_item_menu_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="menu" Relationship="Self.FK_setmeal_item_menu" FromRole="setmeal_item" ToRole="menu" />
           <NavigationProperty Name="menu1" Relationship="Self.FK_setmeal_item_setmeal_item" FromRole="setmeal_item" ToRole="menu" />
+          <NavigationProperty Name="setmeal_item_opt" Relationship="Self.FK_setmeal_item_opt_setmeal_item" FromRole="setmeal_item" ToRole="setmeal_item_opt" />
         </EntityType>
         <EntityType Name="setmeal_item_opt">
           <Key>
@@ -1123,7 +1124,7 @@
           <Property Name="setmeal_item_id" Type="Int32" Nullable="false" />
           <Property Name="menu_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="menu" Relationship="Self.FK_setmeal_item_opt_menu" FromRole="setmeal_item_opt" ToRole="menu" />
-          <NavigationProperty Name="menu1" Relationship="Self.FK_setmeal_item_opt_setmeal_item" FromRole="setmeal_item_opt" ToRole="menu" />
+          <NavigationProperty Name="setmeal_item" Relationship="Self.FK_setmeal_item_opt_setmeal_item" FromRole="setmeal_item_opt" ToRole="setmeal_item" />
         </EntityType>
         <EntityType Name="shift">
           <Key>
@@ -1173,6 +1174,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="branch_id" Type="Int32" Nullable="false" />
           <Property Name="order_cnt" Type="Int32" Nullable="false" />
+          <Property Name="is_festival" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="branch" Relationship="Self.FK_sys_info_branch" FromRole="sys_info" ToRole="branch" />
         </EntityType>
         <Association Name="FK_member_refill_branch">
@@ -1403,18 +1405,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_setmeal_item_opt_setmeal_item">
-          <End Role="menu" Type="Self.menu" Multiplicity="1" />
-          <End Role="setmeal_item_opt" Type="Self.setmeal_item_opt" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="menu">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="setmeal_item_opt">
-              <PropertyRef Name="setmeal_item_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_setmeal_item_setmeal_item">
           <End Role="menu" Type="Self.menu" Multiplicity="1" />
           <End Role="setmeal_item" Type="Self.setmeal_item" Multiplicity="*" />
@@ -1607,6 +1597,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_setmeal_item_opt_setmeal_item">
+          <End Role="setmeal_item" Type="Self.setmeal_item" Multiplicity="1" />
+          <End Role="setmeal_item_opt" Type="Self.setmeal_item_opt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="setmeal_item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="setmeal_item_opt">
+              <PropertyRef Name="setmeal_item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_shift_detail_shift">
           <End Role="shift" Type="Self.shift" Multiplicity="1" />
           <End Role="shift_detail" Type="Self.shift_detail" Multiplicity="*" />
@@ -1719,10 +1721,6 @@
             <End Role="menu" EntitySet="menu" />
             <End Role="setmeal_item_opt" EntitySet="setmeal_item_opt" />
           </AssociationSet>
-          <AssociationSet Name="FK_setmeal_item_opt_setmeal_item" Association="Self.FK_setmeal_item_opt_setmeal_item">
-            <End Role="menu" EntitySet="menu" />
-            <End Role="setmeal_item_opt" EntitySet="setmeal_item_opt" />
-          </AssociationSet>
           <AssociationSet Name="FK_setmeal_item_setmeal_item" Association="Self.FK_setmeal_item_setmeal_item">
             <End Role="menu" EntitySet="menu" />
             <End Role="setmeal_item" EntitySet="setmeal_item" />
@@ -1786,6 +1784,10 @@
           <AssociationSet Name="FK_staff_role" Association="Self.FK_staff_role">
             <End Role="role" EntitySet="role" />
             <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_setmeal_item_opt_setmeal_item" Association="Self.FK_setmeal_item_opt_setmeal_item">
+            <End Role="setmeal_item" EntitySet="setmeal_item" />
+            <End Role="setmeal_item_opt" EntitySet="setmeal_item_opt" />
           </AssociationSet>
           <AssociationSet Name="FK_shift_detail_shift" Association="Self.FK_shift_detail_shift">
             <End Role="shift" EntitySet="shift" />
@@ -2055,6 +2057,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="branch_id" ColumnName="branch_id" />
                 <ScalarProperty Name="order_cnt" ColumnName="order_cnt" />
+                <ScalarProperty Name="is_festival" ColumnName="is_festival" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
