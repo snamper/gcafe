@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -24,7 +26,7 @@ namespace gcafeApp
             // 用于本地化 ApplicationBar 的示例代码
             //BuildLocalizedApplicationBar();
 
-            object o = this.Resources["mydata"];
+            //object o = this.Resources["mydata"];
 
         }
 
@@ -42,6 +44,14 @@ namespace gcafeApp
                 mv.MenuItems.Add((gcafeSvc.MenuItem)PhoneApplicationService.Current.State["SelectedMenuItem"]);
 
                 PhoneApplicationService.Current.State.Remove("SelectedMenuItem");
+            }
+
+            if (PhoneApplicationService.Current.State.ContainsKey("SelectedMethods"))
+            {
+                List<ViewModel.Method> methods = (List<ViewModel.Method>)PhoneApplicationService.Current.State["SelectedMethods"];
+                mv.SetMethods(methods);
+
+                PhoneApplicationService.Current.State.Remove("SelectedMethods");
             }
         }
 

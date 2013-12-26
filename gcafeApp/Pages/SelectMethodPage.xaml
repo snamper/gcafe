@@ -121,10 +121,10 @@
         <shell:ApplicationBar IsMenuEnabled="True" Mode="Default"  Opacity=".6">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/ApplicationBar.Check.png"
-                Text="确定" />
+                Text="确定" Click="ApplicationBarIconButton_Click" />
             <shell:ApplicationBarIconButton
                 IconUri="/Images/ApplicationBar.Cancel.png"
-                Text="取消" />
+                Text="取消" Click="ApplicationBarIconButton_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using Microsoft.Phone.Info;
 using gcafeApp.gcafeSvc;
 
@@ -24,28 +25,16 @@ namespace gcafeApp.ViewModel
     public class MainViewModel : VMBase
     {
         private readonly IgcafeSvcClient _svc;
+        private MenuItem _methodMenuItem;
+        private SetmealItem _methodSetmealItem;
 
-        public ICommand MethodCommand 
-        {
-            get { return _methodCommand; }
-            private set
-            {
-                _methodCommand = value;
-                RaisePropertyChanged();
-            }
-        }
-        private ICommand _methodCommand;
-
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
-        public MainViewModel(/*IgcafeSvcClient svc*/)
+        public MainViewModel(IgcafeSvcClient svc)
         {
             System.Diagnostics.Debug.WriteLine("========================================================");
 
-            MethodCommand = new MethodCommand();
+            //MethodCommand = new MethodCommand(this);
 
-            if (!IsInDesignMode)
+            if (IsInDesignMode)
             {
                 //_svc = svc;
                 List<SetmealItem> setMeals = new List<SetmealItem>();
@@ -77,6 +66,35 @@ namespace gcafeApp.ViewModel
 
                 MenuItems = new ObservableCollection<MenuItem>(menuItems);
             }
+            else
+            {
+                _svc = svc;
+
+                MenuItems = new ObservableCollection<MenuItem>();
+            }
+        }
+
+        public RelayCommand<object> MethodCommand
+        {
+            get
+            {
+                if (_methodCommand == null)
+                    _methodCommand = new RelayCommand<object>(OnMethodCommand);
+
+                return _methodCommand;
+            }
+        }
+        private RelayCommand<object> _methodCommand;
+
+        private void OnMethodCommand(object param)
+        {
+            if (param.GetType() == typeof(MenuItem))
+                _methodMenuItem = (MenuItem)param;
+            else if (param.GetType() == typeof(SetmealItem))
+                _methodSetmealItem = (SetmealItem)param;
+
+            App.RootFrame.Navigate(new Uri("/Pages/SelectMethodPage.xaml", UriKind.Relative));
+
         }
 
         public ObservableCollection<MenuItem> MenuItems
@@ -93,20 +111,15 @@ namespace gcafeApp.ViewModel
         }
         private ObservableCollection<MenuItem> _menuItems;
 
-    }
-
-    public class MethodCommand : ICommand
-    {
-        public bool CanExecute(object parameter)
+        public void SetMethods(List<ViewModel.Method> methods)
         {
-            return true;
+            if (_methodMenuItem != null)
+            {
+                _methodMenuItem.Methods = new ObservableCollection<method>();
+                _methodMenuItem.Methods.Add(new method() { id = 1 });
+            }
         }
 
-        public event EventHandler CanExecuteChanged;
-
-        public void Execute(object parameter)
-        {
-            App.RootFrame.Navigate(new Uri("/Pages/SelectMethodPage.xaml", UriKind.Relative));
-        }
     }
-}
+
+ }

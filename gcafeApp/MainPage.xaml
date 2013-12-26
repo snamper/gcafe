@@ -129,7 +129,10 @@
                                     <toolkit:ExpanderView.ItemTemplate>
                                         <DataTemplate>
                                             <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
-                                                <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeLarge}" />
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="Blue" />
+                                                    <TextBlock Text="做法:" Visibility="Collapsed" />
+                                                </StackPanel>
                                                 <toolkit:ContextMenuService.ContextMenu>
                                                     <toolkit:ContextMenu>
                                                         <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
@@ -162,13 +165,13 @@
                                                         <TextBlock Margin="10, 0" Text="{Binding Quantity}" Foreground="{StaticResource PhoneAccentBrush}"/>
                                                         <TextBlock Text="{Binding Unit}" Foreground="{StaticResource PhoneAccentBrush}"/>
                                                     </StackPanel>
-                                                    <TextBlock Text="hello" />
+                                                    <TextBlock Text="做法:" />
                                                 </StackPanel>
 
                                                 <toolkit:ContextMenuService.ContextMenu>
                                                     <toolkit:ContextMenu>
                                                         <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-                                                        <toolkit:MenuItem Header="选择数量" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                                        <toolkit:MenuItem Header="删除此菜品" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                                                     </toolkit:ContextMenu>
                                                 </toolkit:ContextMenuService.ContextMenu>
                                             </ListBoxItem>
