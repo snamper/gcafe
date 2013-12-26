@@ -44,7 +44,11 @@
                 <Button Margin="30, 0" Command="{Binding NavigateToCommand}" CommandParameter="CataSel" FontFamily="Segoe UI Symbol" FontSize="30" Content="&#xE179;" />
             </StackPanel>
             <TextBlock Margin="10, 20, 0, 0" Grid.Row="3" Text="数量" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"/>
-            <TextBox x:Name="Quantity" Grid.Row="4" Width="200" HorizontalAlignment="Left" Text="{Binding MenuItem.Quantity, Mode=TwoWay}" />
+            <StackPanel Grid.Row="4" Orientation="Horizontal">
+                <TextBlock Margin="20, 0, 0, 0" x:Name="Quantity" Grid.Row="4" Width="100" HorizontalAlignment="Left" Text="{Binding MenuItem.Quantity, Mode=TwoWay}" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center"/>
+                <Button FontSize="30" Content="&#xE109;" FontFamily="Segoe UI Symbol" Click="ButtonPlus_Click" IsEnabled="{Binding ElementName=Quantity, Path=Text.Length}" />
+                <Button FontSize="30" Content="&#xE108;" FontFamily="Segoe UI Symbol" Click="ButtonMinu_Click" IsEnabled="{Binding ElementName=Quantity, Path=Text.Length}" />
+            </StackPanel>
         </Grid>
     </Grid>
 

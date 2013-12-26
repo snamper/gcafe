@@ -76,5 +76,20 @@ namespace gcafeApp.Pages
 
             //ApplicationBarIconButton_Click(sender, null);
         }
+
+        private void ButtonPlus_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.TablesViewModel vm = (ViewModel.TablesViewModel)DataContext;
+
+            vm.CustomerNum++;
+        }
+
+        private void ButtonMinu_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.TablesViewModel vm = (ViewModel.TablesViewModel)DataContext;
+
+            if (vm.CustomerNum > 1)
+                vm.CustomerNum--;
+        }
     }
 }

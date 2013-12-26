@@ -42,17 +42,20 @@ namespace gcafeApp.Pages
             if (btn.Text == "确定")
             {
                 ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
-                int quantity;
-                if (Int32.TryParse(Quantity.Text, out quantity))
-                {
-                    vm.MenuItem.Quantity = quantity;
-                    PhoneApplicationService.Current.State["SelectedMenuItem"] = vm.MenuItem;
-                    NavigationService.GoBack();
-                }
-                else
-                {
+                PhoneApplicationService.Current.State["SelectedMenuItem"] = vm.MenuItem;
+                NavigationService.GoBack();
 
-                }
+                //int quantity;
+                //if (Int32.TryParse(Quantity.Text, out quantity))
+                //{
+                //    vm.MenuItem.Quantity = quantity;
+                //    PhoneApplicationService.Current.State["SelectedMenuItem"] = vm.MenuItem;
+                //    NavigationService.GoBack();
+                //}
+                //else
+                //{
+
+                //}
             }
             else
             {
@@ -62,6 +65,21 @@ namespace gcafeApp.Pages
                 NavigationService.GoBack();
             }
 
+        }
+
+        private void ButtonPlus_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
+
+            vm.MenuItem.Quantity++;
+        }
+
+        private void ButtonMinu_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
+
+            if (vm.MenuItem.Quantity > 1)
+                vm.MenuItem.Quantity--;
         }
     }
 }

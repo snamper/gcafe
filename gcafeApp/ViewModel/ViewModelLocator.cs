@@ -12,6 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using System.ServiceModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -35,7 +36,10 @@ namespace gcafeApp.ViewModel
             SimpleIoc.Default.Reset();
             SimpleIoc.Default.Register<IgcafeSvcClient>(() =>
                 {
-                    return new IgcafeSvcClient();
+                    BasicHttpBinding binding = new BasicHttpBinding();
+                    EndpointAddress address = new EndpointAddress("http://192.168.11.6:47773/gcafeSvc.svc");
+
+                    return new IgcafeSvcClient(binding, address);
                 });
 
             ////if (ViewModelBase.IsInDesignModeStatic)

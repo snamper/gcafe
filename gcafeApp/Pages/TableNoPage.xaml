@@ -67,19 +67,21 @@
             <phone:PivotItem Header="开台">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="75" />
-                        <RowDefinition Height="75" />
-                        <RowDefinition Height="75" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="100*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="台号:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TableNum, Mode=TwoWay}" VerticalAlignment="Center" />
-                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="人数:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CustomerNum,  UpdateSourceTrigger=Explicit, Mode=TwoWay}" VerticalAlignment="Center" />
-                    <TextBlock Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding ErrorMsg}" Style="{StaticResource PhoneTextExtraLargeStyle}" Foreground="Red" TextWrapping="Wrap" FontSize="18"/>
+                    <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="台号:" Style="{StaticResource PhoneTextLargeStyle}" />
+                    <TextBox Grid.Row="1" Text="{Binding TableNum, Mode=TwoWay}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="人数:" Style="{StaticResource PhoneTextLargeStyle}" />
+                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+                        <TextBlock Grid.Row="3" Width="100" Text="{Binding CustomerNum,  UpdateSourceTrigger=Explicit, Mode=TwoWay}" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <Button FontSize="30" Content="&#xE109;" FontFamily="Segoe UI Symbol" Click="ButtonPlus_Click" />
+                        <Button FontSize="30" Content="&#xE108;" FontFamily="Segoe UI Symbol" Click="ButtonMinu_Click" />
+                    </StackPanel>
+                    <TextBlock Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding ErrorMsg}" Style="{StaticResource PhoneTextLargeStyle}" Foreground="Red" TextWrapping="Wrap" FontSize="18"/>
                 </Grid>
             </phone:PivotItem>
         </phone:Pivot>
