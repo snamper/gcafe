@@ -131,7 +131,7 @@
                                             <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
                                                 <StackPanel>
                                                     <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="Blue" />
-                                                    <TextBlock Text="做法:" Visibility="Collapsed" />
+                                                    <TextBlock Text="{Binding Methods, Converter={StaticResource MethodsToTextConverter}}" Visibility="{Binding Methods, Converter={StaticResource MethodsToVisibilityConverter}}" />
                                                 </StackPanel>
                                                 <toolkit:ContextMenuService.ContextMenu>
                                                     <toolkit:ContextMenu>
@@ -165,7 +165,7 @@
                                                         <TextBlock Margin="10, 0" Text="{Binding Quantity}" Foreground="{StaticResource PhoneAccentBrush}"/>
                                                         <TextBlock Text="{Binding Unit}" Foreground="{StaticResource PhoneAccentBrush}"/>
                                                     </StackPanel>
-                                                    <TextBlock Text="{Binding Converter={StaticResource MethodsToTextConverter}}" />
+                                                    <TextBlock Text="{Binding Methods, Converter={StaticResource MethodsToTextConverter}}" Visibility="{Binding Methods, Converter={StaticResource MethodsToVisibilityConverter}}" />
                                                 </StackPanel>
 
                                                 <toolkit:ContextMenuService.ContextMenu>

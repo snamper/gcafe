@@ -9,34 +9,18 @@ using System.Windows.Data;
 
 namespace gcafeApp.Converters
 {
-    public class MethodsToTextConverter : IValueConverter
+    public class MethodsToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            string rtn = string.Empty;
+            Visibility rtn = Visibility.Collapsed;
 
             if (value != null)
             {
-                rtn = "做法: ";
-
                 ObservableCollection<gcafeSvc.method> methods = (ObservableCollection<gcafeSvc.method>)value;
-                foreach (var method in methods)
-                    rtn += method.name + " ";
+                if (methods.Count > 0)
+                    rtn = Visibility.Visible;
             }
-
-            //if (value.GetType() == typeof(gcafeSvc.MenuItem))
-            //{
-            //    gcafeSvc.MenuItem mi = (gcafeSvc.MenuItem)value;
-            //    if (mi.Methods != null)
-            //    {
-            //        foreach (var method in mi.Methods)
-            //            rtn += method.name + " ";
-            //    }
-            //}
-            //else if (value.GetType() == typeof(gcafeSvc.SetmealItem))
-            //{
-
-            //}
 
             return rtn;
         }

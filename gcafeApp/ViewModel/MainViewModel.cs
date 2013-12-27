@@ -113,13 +113,17 @@ namespace gcafeApp.ViewModel
 
         public void SetMethods(List<ViewModel.Method> methods)
         {
+            List<method> ms = new List<method>();
+            foreach (var method in methods)
+                ms.Add(new method() { id = method.Id, name = method.Name });
+
             if (_methodMenuItem != null)
             {
-                _methodMenuItem.Methods = new ObservableCollection<method>();
-                foreach (var method in methods)
-                    _methodMenuItem.Methods.Add(new method() { id = method.Id, name = method.Name });
-
-                RaisePropertyChanged("MenuItems");
+                _methodMenuItem.Methods = new ObservableCollection<method>(ms);
+            }
+            else if (_methodSetmealItem != null)
+            {
+                _methodSetmealItem.Methods = new ObservableCollection<method>(ms);
             }
 
             _methodMenuItem = null;

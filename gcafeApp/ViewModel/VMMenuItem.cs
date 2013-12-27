@@ -47,6 +47,7 @@ namespace gcafeApp.ViewModel
             {
                 IsBusy = true;
 
+                Items = new ObservableCollection<MenuItem>();
                 _svc.GetMenuItemsByCatalogIdAsync(Settings.AppSettings.DeviceID, value);
             }
         }

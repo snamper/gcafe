@@ -22,6 +22,7 @@
             <converters:ItemCountToTextConverter x:Key="ItemCountToTextConverter" />
             <converters:SelectableToVisableConverter x:Key="SelectableToVisableConverter" />
             <converters:MethodsToTextConverter x:Key="MethodsToTextConverter" />
+            <converters:MethodsToVisibilityConverter x:Key="MethodsToVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
   <Application.ApplicationLifetimeObjects>

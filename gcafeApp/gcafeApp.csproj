@@ -108,6 +108,7 @@
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\ItemCountToTextConverter.cs" />
     <Compile Include="Converters\MethodsToTextConverter.cs" />
+    <Compile Include="Converters\MethodsToVisibilityConverter.cs" />
     <Compile Include="Converters\SelectableToVisableConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
