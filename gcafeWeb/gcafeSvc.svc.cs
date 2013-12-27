@@ -212,6 +212,12 @@ namespace gcafeWeb
             return rtn;
         }
 
+        public string OrderMeal(int staffId, string tableNum, List<MenuItem> meals)
+        {
+            string rtn = string.Empty;
+
+            return "点菜成功";
+        }
 
         public Staff GetStaffByNum(string DeviceId, string Num)
         {

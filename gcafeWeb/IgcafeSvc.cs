@@ -69,6 +69,9 @@ namespace gcafeWeb
         [OperationContract]
         List<MethodCatalog> GetMethodCatalogs();
 
+        [OperationContract]
+        string OrderMeal(int staffId, string tableNum, List<MenuItem> meals);
+
         /// <summary>
         /// 根据Num取员工信息
         /// </summary>

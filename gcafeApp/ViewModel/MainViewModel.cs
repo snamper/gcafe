@@ -27,6 +27,7 @@ namespace gcafeApp.ViewModel
         private readonly IgcafeSvcClient _svc;
         private MenuItem _methodMenuItem;
         private SetmealItem _methodSetmealItem;
+        private Action<string> _callBack;
 
         public MainViewModel(IgcafeSvcClient svc)
         {
@@ -69,9 +70,15 @@ namespace gcafeApp.ViewModel
             else
             {
                 _svc = svc;
+                _svc.OrderMealCompleted += _svc_OrderMealCompleted;
 
                 MenuItems = new ObservableCollection<MenuItem>();
             }
+        }
+
+        void _svc_OrderMealCompleted(object sender, OrderMealCompletedEventArgs e)
+        {
+            _callBack(e.Result);
         }
 
         public RelayCommand<object> MethodCommand
@@ -94,7 +101,6 @@ namespace gcafeApp.ViewModel
                 _methodSetmealItem = (SetmealItem)param;
 
             App.RootFrame.Navigate(new Uri("/Pages/SelectMethodPage.xaml", UriKind.Relative));
-
         }
 
         public ObservableCollection<MenuItem> MenuItems
@@ -130,6 +136,11 @@ namespace gcafeApp.ViewModel
             _methodSetmealItem = null;
         }
 
+        public void OrderMeals(string tableNum, Action<string> callback)
+        {
+            _callBack = callback;
+            _svc.OrderMealAsync(gcafeApp.Settings.AppSettings.LoginStaff.ID, tableNum, MenuItems);
+        }
     }
 
  }

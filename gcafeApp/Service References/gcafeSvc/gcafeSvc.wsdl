@@ -55,6 +55,12 @@
   <wsdl:message name="IgcafeSvc_GetMethodCatalogs_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMethodCatalogsResponse" />
   </wsdl:message>
+  <wsdl:message name="IgcafeSvc_OrderMeal_InputMessage">
+    <wsdl:part name="parameters" element="tns:OrderMeal" />
+  </wsdl:message>
+  <wsdl:message name="IgcafeSvc_OrderMeal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OrderMealResponse" />
+  </wsdl:message>
   <wsdl:message name="IgcafeSvc_GetStaffByNum_InputMessage">
     <wsdl:part name="parameters" element="tns:GetStaffByNum" />
   </wsdl:message>
@@ -93,6 +99,10 @@
     <wsdl:operation name="GetMethodCatalogs">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetMethodCatalogs" message="tns:IgcafeSvc_GetMethodCatalogs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/GetMethodCatalogsResponse" message="tns:IgcafeSvc_GetMethodCatalogs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderMeal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/OrderMeal" message="tns:IgcafeSvc_OrderMeal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/OrderMealResponse" message="tns:IgcafeSvc_OrderMeal_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetStaffByNum">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetStaffByNum" message="tns:IgcafeSvc_GetStaffByNum_InputMessage" />
@@ -166,6 +176,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetMethodCatalogs">
       <soap:operation soapAction="http://tempuri.org/IgcafeSvc/GetMethodCatalogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderMeal">
+      <soap:operation soapAction="http://tempuri.org/IgcafeSvc/OrderMeal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

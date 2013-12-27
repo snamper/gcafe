@@ -71,6 +71,25 @@ namespace gcafeApp
             int i = 0;
         }
 
+        private void ShowMsg(string msg)
+        {
+            int i = 0;
+        }
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            ApplicationBarIconButton btn = (ApplicationBarIconButton)sender;
+            if (btn.Text == "确定")
+            {
+                ViewModel.MainViewModel mv = (ViewModel.MainViewModel)DataContext;
+                mv.OrderMeals(OrderCtrl.TableNum, ShowMsg);
+            }
+            else
+            {
+                OrderCtrl.TableNum = "请点击这里选择台号";
+            }
+        }
+
 
         // 用于生成本地化 ApplicationBar 的示例代码
         //private void BuildLocalizedApplicationBar()

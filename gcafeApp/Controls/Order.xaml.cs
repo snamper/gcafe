@@ -16,5 +16,14 @@ namespace gcafeApp.Controls
         {
             InitializeComponent();
         }
+
+        public string TableNum
+        {
+            get { return tblPicker.Value; }
+            set
+            {
+                tblPicker.Value = value;
+            }
+        }
     }
 }

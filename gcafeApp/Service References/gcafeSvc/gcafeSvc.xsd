@@ -115,6 +115,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="OrderMeal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="staffId" type="xs:int" />
+        <xs:element minOccurs="0" name="tableNum" nillable="true" type="xs:string" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="meals" nillable="true" type="q9:ArrayOfMenuItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OrderMealResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="OrderMealResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetStaffByNum">
     <xs:complexType>
       <xs:sequence>
@@ -126,7 +142,7 @@
   <xs:element name="GetStaffByNumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q9:Staff" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q10:Staff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

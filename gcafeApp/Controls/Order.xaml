@@ -30,7 +30,7 @@
 
             <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="台号:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
             <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="菜品:" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-            <primitives:TableNoPicker VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
+            <primitives:TableNoPicker x:Name="tblPicker" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
             <primitives:MenuPicker VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
         </Grid>
     </Grid>
