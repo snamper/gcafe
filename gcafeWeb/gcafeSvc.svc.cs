@@ -244,7 +244,7 @@ namespace gcafeWeb
                         context.order_detail.Add(orderDetail);
                         context.SaveChanges();
 
-                        if (meal.Methods.Count > 0)
+                        if (meal.Methods != null)
                         {
                             foreach (var method in meal.Methods)
                                 context.order_detail_method.Add(new order_detail_method() { order_detail_id = orderDetail.id, method_id = method.id });
@@ -264,7 +264,7 @@ namespace gcafeWeb
                                 context.order_detail_setmeal.Add(ods);
                                 context.SaveChanges();
 
-                                if (setmeal.Methods.Count > 0)
+                                if (setmeal.Methods != null)
                                 {
                                     foreach (var method in setmeal.Methods)
                                         context.order_detail_method.Add(new order_detail_method() { order_detail_setmeal_id = ods.id, method_id = method.id });

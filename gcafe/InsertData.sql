@@ -43,3 +43,7 @@ SET IDENTITY_INSERT [dbo].[menu_catalog] OFF
 SET IDENTITY_INSERT [dbo].[device] ON 
 INSERT [dbo].[device] ([id], [device_id], [register_ticket], [register_time], [is_deny]) VALUES (1, N'Ne66UXi2gD5kBlIDD0LVFRlUWs8=', N'Ne66UXi2gD5kBlIDD0LVFRlUWs8=', CAST(0x0000A29900000000 AS DateTime), 0)
 SET IDENTITY_INSERT [dbo].[device] OFF
+
+SET IDENTITY_INSERT [dbo].[sys_info] ON 
+INSERT [dbo].[sys_info] ([id], [branch_id], [order_cnt], [is_festival]) VALUES (1, 1, 0, 0)
+SET IDENTITY_INSERT [dbo].[sys_info] OFF
