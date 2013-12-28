@@ -1,0 +1,7 @@
+﻿CREATE TRIGGER [tgr_orders]
+	ON [dbo].[order]
+	FOR INSERT, UPDATE
+	AS
+	BEGIN
+		SET NOCOUNT ON
+	END

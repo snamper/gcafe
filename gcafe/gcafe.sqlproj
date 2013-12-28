@@ -73,6 +73,7 @@
     <Build Include="Tables\device.sql" />
     <Build Include="Tables\shift_detail.sql" />
     <Build Include="Tables\sys_info.sql" />
+    <Build Include="tgr_orders.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="gcafe.refactorlog" />
