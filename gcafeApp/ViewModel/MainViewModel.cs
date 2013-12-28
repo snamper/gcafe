@@ -139,7 +139,7 @@ namespace gcafeApp.ViewModel
         public void OrderMeals(string tableNum, Action<string> callback)
         {
             _callBack = callback;
-            _svc.OrderMealAsync(gcafeApp.Settings.AppSettings.LoginStaff.ID, tableNum, MenuItems);
+            _svc.OrderMealAsync(gcafeApp.Settings.AppSettings.DeviceID, gcafeApp.Settings.AppSettings.LoginStaff.ID, tableNum, MenuItems);
         }
     }
 

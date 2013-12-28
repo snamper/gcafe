@@ -3959,7 +3959,7 @@ namespace gcafeApp.gcafeSvc {
         System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MethodCatalog> EndGetMethodCatalogs(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/OrderMeal", ReplyAction="http://tempuri.org/IgcafeSvc/OrderMealResponse")]
-        System.IAsyncResult BeginOrderMeal(int staffId, string tableNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginOrderMeal(string deviceId, int staffId, string tableNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals, System.AsyncCallback callback, object asyncState);
         
         string EndOrderMeal(System.IAsyncResult result);
         
@@ -4681,8 +4681,8 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginOrderMeal(int staffId, string tableNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginOrderMeal(staffId, tableNum, meals, callback, asyncState);
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginOrderMeal(string deviceId, int staffId, string tableNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginOrderMeal(deviceId, staffId, tableNum, meals, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -4691,10 +4691,11 @@ namespace gcafeApp.gcafeSvc {
         }
         
         private System.IAsyncResult OnBeginOrderMeal(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            int staffId = ((int)(inValues[0]));
-            string tableNum = ((string)(inValues[1]));
-            System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals = ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem>)(inValues[2]));
-            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginOrderMeal(staffId, tableNum, meals, callback, asyncState);
+            string deviceId = ((string)(inValues[0]));
+            int staffId = ((int)(inValues[1]));
+            string tableNum = ((string)(inValues[2]));
+            System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals = ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem>)(inValues[3]));
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginOrderMeal(deviceId, staffId, tableNum, meals, callback, asyncState);
         }
         
         private object[] OnEndOrderMeal(System.IAsyncResult result) {
@@ -4710,11 +4711,11 @@ namespace gcafeApp.gcafeSvc {
             }
         }
         
-        public void OrderMealAsync(int staffId, string tableNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals) {
-            this.OrderMealAsync(staffId, tableNum, meals, null);
+        public void OrderMealAsync(string deviceId, int staffId, string tableNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals) {
+            this.OrderMealAsync(deviceId, staffId, tableNum, meals, null);
         }
         
-        public void OrderMealAsync(int staffId, string tableNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals, object userState) {
+        public void OrderMealAsync(string deviceId, int staffId, string tableNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals, object userState) {
             if ((this.onBeginOrderMealDelegate == null)) {
                 this.onBeginOrderMealDelegate = new BeginOperationDelegate(this.OnBeginOrderMeal);
             }
@@ -4725,6 +4726,7 @@ namespace gcafeApp.gcafeSvc {
                 this.onOrderMealCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnOrderMealCompleted);
             }
             base.InvokeAsync(this.onBeginOrderMealDelegate, new object[] {
+                        deviceId,
                         staffId,
                         tableNum,
                         meals}, this.onEndOrderMealDelegate, this.onOrderMealCompletedDelegate, userState);
@@ -4962,11 +4964,12 @@ namespace gcafeApp.gcafeSvc {
                 return _result;
             }
             
-            public System.IAsyncResult BeginOrderMeal(int staffId, string tableNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[3];
-                _args[0] = staffId;
-                _args[1] = tableNum;
-                _args[2] = meals;
+            public System.IAsyncResult BeginOrderMeal(string deviceId, int staffId, string tableNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> meals, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[4];
+                _args[0] = deviceId;
+                _args[1] = staffId;
+                _args[2] = tableNum;
+                _args[3] = meals;
                 System.IAsyncResult _result = base.BeginInvoke("OrderMeal", _args, callback, asyncState);
                 return _result;
             }

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b72cb1f316a94a238b0c3cdb57bfa0fd" Name="Diagram1">
+      <Diagram DiagramId="a1fd4a68495648c680caa274fdebfe16" Name="Diagram1">
         <EntityTypeShape EntityType="gcafeModel.branch" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.credit" Width="1.5" PointX="8.25" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.device" Width="1.5" PointX="3.75" PointY="7.125" IsExpanded="true" />

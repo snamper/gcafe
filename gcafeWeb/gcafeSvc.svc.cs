@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Transactions;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
@@ -212,9 +213,71 @@ namespace gcafeWeb
             return rtn;
         }
 
-        public string OrderMeal(int staffId, string tableNum, List<MenuItem> meals)
+        public string OrderMeal(string deviceId, int staffId, string tableNum, List<MenuItem> meals)
         {
             string rtn = string.Empty;
+
+            using (var context = new gcafeEntities())
+            {
+                device dev = context.device.FirstOrDefault(n => n.device_id == deviceId && n.is_deny == false);
+                order order = context.order.FirstOrDefault(n => n.table_no == tableNum && n.check_out_staff_id == null);
+
+                if (dev == null)
+                    return "设备未验证";
+
+                if (order == null)
+                    return string.Format("{0} 台还没开", tableNum);
+
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    foreach (var meal in meals)
+                    {
+                        order_detail orderDetail = new order_detail() { 
+                            device_id = dev.id,
+                            order_id = order.id,
+                            menu_id = meal.ID,
+                            price = meal.Price,
+                            quantity = meal.Quantity,
+                            order_staff_id = staffId,
+                            order_time = System.DateTime.Now,
+                        };
+                        context.order_detail.Add(orderDetail);
+                        context.SaveChanges();
+
+                        if (meal.Methods.Count > 0)
+                        {
+                            foreach (var method in meal.Methods)
+                                context.order_detail_method.Add(new order_detail_method() { order_detail_id = orderDetail.id, method_id = method.id });
+
+                            context.SaveChanges();
+                        }
+
+                        if (meal.SetmealItems != null)
+                        {
+                            foreach (var setmeal in meal.SetmealItems)
+                            {
+                                order_detail_setmeal ods = new order_detail_setmeal()
+                                {
+                                    order_detail_id = orderDetail.id,
+                                    menu_id = setmeal.MenuID,
+                                };
+                                context.order_detail_setmeal.Add(ods);
+                                context.SaveChanges();
+
+                                if (setmeal.Methods.Count > 0)
+                                {
+                                    foreach (var method in setmeal.Methods)
+                                        context.order_detail_method.Add(new order_detail_method() { order_detail_setmeal_id = ods.id, method_id = method.id });
+
+                                    context.SaveChanges();
+                                }
+                            }
+                        }
+                    }
+
+                    scope.Complete();
+                }
+            }
 
             return "点菜成功";
         }
