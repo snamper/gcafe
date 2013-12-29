@@ -8,7 +8,7 @@
 	[customer_number] INT NOT NULL DEFAULT 1, 
     [open_table_staff_id] INT NOT NULL, 
     [table_opened_time] DATETIME NOT NULL, 
-    [receivable] DECIMAL(8, 2) NULL , 
+    [receivable] DECIMAL(8, 2) NULL  , 
 	[net_receipts] DECIMAL(8, 2) NULL, 
     [discount] DECIMAL(4, 2) NULL , 
     [discount_staff_id] INT NULL, 
