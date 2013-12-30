@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="gcafePrnDebug.gcafePrn" CodeBehind="gcafePrn.svc.cs" %>
