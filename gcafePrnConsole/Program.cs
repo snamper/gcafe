@@ -19,6 +19,8 @@ namespace gcafePrnConsole
                 // Open the ServiceHost to create listeners and start listening for messages.
                 serviceHost.Open();
 
+                log.Error("test");
+
                 // The service can now be accessed.
                 Console.WriteLine("The service is ready.");
                 Console.WriteLine("Press <ENTER> to terminate service.");
