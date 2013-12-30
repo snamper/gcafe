@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuPrint", "MenuPrint\Menu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualPrint", "VisualPrint\VisualPrint.csproj", "{D239EFD3-2871-47FA-BE04-F13209FF2225}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafePrnConsole", "gcafePrnConsole\gcafePrnConsole.csproj", "{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,16 @@ Global
 		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Release|ARM.ActiveCfg = Release|Any CPU
 		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Release|x64.ActiveCfg = Release|Any CPU
 		{D239EFD3-2871-47FA-BE04-F13209FF2225}.Release|x86.ActiveCfg = Release|Any CPU
+		{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}.Release|x64.ActiveCfg = Release|Any CPU
+		{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
