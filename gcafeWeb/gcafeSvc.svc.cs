@@ -17,7 +17,7 @@ namespace gcafeWeb
     public class gcafeSvc : IgcafeSvc
     {
         private static readonly NLog.Logger _log = NLog.LogManager.GetCurrentClassLogger();
-        private static readonly gcafePrnSvc.IgcafePrn _gcafePrn = new gcafePrnSvc.IgcafePrnClient();
+        private static gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient();
 
         private static string TraceMessage(
             [CallerMemberName] string memberName = "",
@@ -397,6 +397,9 @@ namespace gcafeWeb
             catch (Exception ex)
             {
                 _log.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
+
+                if (_gcafePrn.State == CommunicationState.Faulted)
+                    _gcafePrn = new gcafePrnSvc.IgcafePrnClient();
             }
 
             _log.Trace(TraceMessage());

@@ -22,6 +22,8 @@ namespace gcafePrnConsole
                 Console.WriteLine("Press <ENTER> to terminate service.");
                 Console.WriteLine();
                 Console.ReadLine();
+
+                serviceHost.Close();
             }
         }
     }
