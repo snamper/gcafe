@@ -291,6 +291,11 @@
     <Compile Include="role.cs">
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Service References\gcafePrnSvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="service.cs">
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
@@ -417,6 +422,12 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <None Include="Service References\gcafePrnSvc\configuration91.svcinfo" />
+    <None Include="Service References\gcafePrnSvc\configuration.svcinfo" />
+    <None Include="Service References\gcafePrnSvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -463,6 +474,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\_Login.cshtml" />
     <Content Include="Views\Home\_Register.cshtml" />
+    <None Include="Service References\gcafePrnSvc\gcafePrn.wsdl" />
+    <None Include="Service References\gcafePrnSvc\Mex.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\gcafePrnSvc\Mex1.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -472,6 +490,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\gcafePrnSvc\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

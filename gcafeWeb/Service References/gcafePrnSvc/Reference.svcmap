@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="60b7dbda-d7bb-479a-857f-25d43b403dd4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9001/gcafePrnSvc/Mex" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Mex.xsd" MetadataType="Schema" ID="53a37a77-cab3-4523-8623-fec3efebf0ec" SourceId="1" SourceUrl="http://localhost:9001/gcafePrnSvc/Mex?xsd=xsd0" />
+    <MetadataFile FileName="gcafePrn.wsdl" MetadataType="Wsdl" ID="1ff2df13-5e22-4fdb-91f7-f186bd5d4913" SourceId="1" SourceUrl="http://localhost:9001/gcafePrnSvc/Mex" />
+    <MetadataFile FileName="Mex1.xsd" MetadataType="Schema" ID="9007dd15-9fa8-48b3-98ac-17f540cff76c" SourceId="1" SourceUrl="http://localhost:9001/gcafePrnSvc/Mex?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

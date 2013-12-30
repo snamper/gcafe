@@ -10,6 +10,8 @@ namespace gcafePrnConsole
 {
     class Program
     {
+        private static readonly NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+
         static void Main(string[] args)
         {
             using (ServiceHost serviceHost = new ServiceHost(typeof(gcafeSvc.gcafePrn)/*, new Uri("net.tcp://localhost:9000/gcafePrnSvc/service")*/))
