@@ -17,6 +17,7 @@ namespace gcafeWeb
     public class gcafeSvc : IgcafeSvc
     {
         private static readonly NLog.Logger _log = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly gcafePrnSvc.IgcafePrn _gcafePrn = new gcafePrnSvc.IgcafePrnClient();
 
         private static string TraceMessage(
             [CallerMemberName] string memberName = "",
@@ -318,6 +319,7 @@ namespace gcafeWeb
         public string OrderMeal(string deviceId, int staffId, string tableNum, List<MenuItem> meals)
         {
             string rtn = string.Empty;
+            int orderId;
 
             _log.Trace(TraceMessage());
 
@@ -333,6 +335,8 @@ namespace gcafeWeb
 
                     if (order == null)
                         return string.Format("{0} 台还没开", tableNum);
+                    else
+                        orderId = order.id;
 
                     using (TransactionScope scope = new TransactionScope())
                     {
@@ -384,6 +388,10 @@ namespace gcafeWeb
 
                         scope.Complete();
                     }
+
+                    _gcafePrn.PrintChuPing(orderId, -1);
+                    _gcafePrn.PrintChuPing(orderId, -1);
+                    _gcafePrn.PrintLiuTai(orderId, -1);
                 }
             }
             catch (Exception ex)
