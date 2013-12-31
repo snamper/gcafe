@@ -9,6 +9,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using System.Data;
+using System.Data.Entity;
+
+
 namespace gcafePrnConsole
 {
     public class PrintTask
@@ -90,22 +94,21 @@ namespace gcafePrnConsole
         {
             try
             {
-                PrintDialog printDlg = new PrintDialog();
-                printDlg.ShowDialog();
-                //var printers = new LocalPrintServer().GetPrintQueues();
-                //var selectedPrinter = printers.FirstOrDefault(p => p.Name == "Microsoft XPS Document Writer");
-                //printDlg.PrintQueue = selectedPrinter;
-
                 List<order_detail> orderDetails;
                 using (var context = new gcafeEntities())
                 {
-                    //var query = context.order_detail.Include("menu").Include("order_detail_method.method").Include("order_detail_setmeal.menu").Include("staff").Where(n => n.order_id == 1).GroupBy(n => n.group_cnt);
-                    var query = context.order_detail.Where(n => n.order_id == printTask.OrderId).OrderBy(n => n.group_cnt).GroupBy(n => n.group_cnt);
+                    var query = context.order_detail.Where(n => n.order_id == printTask.OrderId).OrderBy(n => n.group_cnt).GroupBy(n => n.group_cnt).ToList();
 
-                    var kk = query.ToList().Last();
-                    int key = kk.Key;
+                    int key = query.Last().Key;
                     orderDetails = context.order_detail.Include("menu").Include("order_detail_method.method").Include("order_detail_setmeal.menu").Include("order_detail_setmeal.order_detail_method.method").Include("staff").Where(n => n.order_id == 1 && n.group_cnt == key).ToList();
                 }
+
+                PrintDialog printDlg = new PrintDialog();
+                //printDlg.ShowDialog();
+
+                var printers = new LocalPrintServer().GetPrintQueues();
+                var selectedPrinter = printers.FirstOrDefault(p => p.Name == "PDFCreator");
+                printDlg.PrintQueue = selectedPrinter;
 
 
                 gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan();
