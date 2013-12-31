@@ -4,6 +4,7 @@
 	[device_id] INT NOT NULL, 
     [order_id] INT NOT NULL, 
     [menu_id] INT NOT NULL, 
+	[group_cnt] INT NOT NULL , 
     [quantity] DECIMAL(8, 2) NOT NULL, 
     [price] DECIMAL(8, 2) NOT NULL, 
     [order_staff_id] INT NOT NULL, 
@@ -64,3 +65,12 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level1name = N'order_detail',
     @level2type = N'COLUMN',
     @level2name = N'cancel_time'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'第几次点菜，每次可以点几个品种',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'order_detail',
+    @level2type = N'COLUMN',
+    @level2name = N'group_cnt'

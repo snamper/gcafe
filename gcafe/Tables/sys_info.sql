@@ -4,6 +4,7 @@
     [branch_id] INT NOT NULL, 
     [order_cnt] INT NOT NULL DEFAULT 0, 
     [is_festival] BIT NOT NULL DEFAULT 0, 
+    [order_detail_cnt] INT NOT NULL DEFAULT 0, 
     CONSTRAINT [FK_sys_info_branch] FOREIGN KEY ([branch_id]) REFERENCES [branch]([id]),
 )
 
