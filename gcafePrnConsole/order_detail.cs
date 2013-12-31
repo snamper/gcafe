@@ -24,6 +24,7 @@ namespace gcafePrnConsole
         public int device_id { get; set; }
         public int order_id { get; set; }
         public int menu_id { get; set; }
+        public int group_cnt { get; set; }
         public decimal quantity { get; set; }
         public decimal price { get; set; }
         public int order_staff_id { get; set; }

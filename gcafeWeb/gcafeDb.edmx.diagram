@@ -4,29 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a1fd4a68495648c680caa274fdebfe16" Name="Diagram1">
-        <EntityTypeShape EntityType="gcafeModel.branch" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.credit" Width="1.5" PointX="8.25" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.device" Width="1.5" PointX="3.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.member" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.member_refill" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+      <Diagram DiagramId="8e0a19f65c244510a1ccefb00625c7f0" Name="Diagram1">
+        <EntityTypeShape EntityType="gcafeModel.branch" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.credit" Width="1.5" PointX="8.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.device" Width="1.5" PointX="3.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.member" Width="1.5" PointX="0.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.member_refill" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.menu" Width="1.5" PointX="5.25" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.menu_catalog" Width="1.5" PointX="3" PointY="23" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.method" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.method" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.method_catalog" Width="1.5" PointX="6" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.order" Width="1.5" PointX="6" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.order" Width="1.5" PointX="6" PointY="13.625" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.order_detail" Width="1.5" PointX="8.25" PointY="19.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.order_detail_method" Width="1.5" PointX="10.5" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.order_detail_method" Width="1.5" PointX="10.5" PointY="20.5" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.order_detail_setmeal" Width="1.5" PointX="12.5" PointY="23.875" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.printer" Width="1.5" PointX="5.25" PointY="30.625" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.printer_group" Width="1.5" PointX="3" PointY="30.5" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.role" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.service" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.setmeal_item" Width="1.5" PointX="7.5" PointY="28.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.setmeal_item_opt" Width="1.5" PointX="9.75" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.setmeal_item" Width="1.5" PointX="7.5" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.setmeal_item_opt" Width="1.5" PointX="9.75" PointY="25.25" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.shift" Width="1.5" PointX="3.75" PointY="27.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.shift_detail" Width="1.5" PointX="8.25" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.staff" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.shift_detail" Width="1.5" PointX="8.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.staff" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.sys_info" Width="1.5" PointX="3" PointY="37.875" IsExpanded="true" />
         <AssociationConnector Association="gcafeModel.FK_member_refill_branch" ManuallyRouted="false" />
         <AssociationConnector Association="gcafeModel.FK_Menu_branch" ManuallyRouted="false" />

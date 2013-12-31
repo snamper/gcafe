@@ -338,6 +338,9 @@ namespace gcafeWeb
                     else
                         orderId = order.id;
 
+                    int groupCnt = context.sys_info.FirstOrDefault().order_detail_cnt++;
+                    context.SaveChanges();
+
                     using (TransactionScope scope = new TransactionScope())
                     {
                         foreach (var meal in meals)
@@ -347,6 +350,7 @@ namespace gcafeWeb
                                 device_id = dev.id,
                                 order_id = order.id,
                                 menu_id = meal.ID,
+                                group_cnt = groupCnt + 1,
                                 price = meal.Price,
                                 quantity = meal.Quantity,
                                 order_staff_id = staffId,

@@ -130,6 +130,7 @@
           <Property Name="device_id" Type="int" Nullable="false" />
           <Property Name="order_id" Type="int" Nullable="false" />
           <Property Name="menu_id" Type="int" Nullable="false" />
+          <Property Name="group_cnt" Type="int" Nullable="false" />
           <Property Name="quantity" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="order_staff_id" Type="int" Nullable="false" />
@@ -242,6 +243,7 @@
           <Property Name="branch_id" Type="int" Nullable="false" />
           <Property Name="order_cnt" Type="int" Nullable="false" />
           <Property Name="is_festival" Type="bit" Nullable="false" />
+          <Property Name="order_detail_cnt" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_credit_member">
           <End Role="member" Type="Self.member" Multiplicity="0..1" />
@@ -1030,6 +1032,7 @@
           <Property Name="device_id" Type="Int32" Nullable="false" />
           <Property Name="order_id" Type="Int32" Nullable="false" />
           <Property Name="menu_id" Type="Int32" Nullable="false" />
+          <Property Name="group_cnt" Type="Int32" Nullable="false" />
           <Property Name="quantity" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="order_staff_id" Type="Int32" Nullable="false" />
@@ -1175,6 +1178,7 @@
           <Property Name="branch_id" Type="Int32" Nullable="false" />
           <Property Name="order_cnt" Type="Int32" Nullable="false" />
           <Property Name="is_festival" Type="Boolean" Nullable="false" />
+          <Property Name="order_detail_cnt" Type="Int32" Nullable="false" />
           <NavigationProperty Name="branch" Relationship="Self.FK_sys_info_branch" FromRole="sys_info" ToRole="branch" />
         </EntityType>
         <Association Name="FK_member_refill_branch">
@@ -1934,6 +1938,7 @@
                 <ScalarProperty Name="device_id" ColumnName="device_id" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+                <ScalarProperty Name="group_cnt" ColumnName="group_cnt" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="order_staff_id" ColumnName="order_staff_id" />
@@ -2058,6 +2063,7 @@
                 <ScalarProperty Name="branch_id" ColumnName="branch_id" />
                 <ScalarProperty Name="order_cnt" ColumnName="order_cnt" />
                 <ScalarProperty Name="is_festival" ColumnName="is_festival" />
+                <ScalarProperty Name="order_detail_cnt" ColumnName="order_detail_cnt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -15,20 +15,20 @@ namespace gcafePrnConsole
     {
         public enum PrintType { PrintLiuTai, PrintChuPin, PringHuaDan };
 
-        PrintType _type;
-        int _orderId;
-        int _prnType;
-        int _orderDetailId;
-        int _setmealId;
-
         public PrintTask(PrintType type, int orderId, int prnType, int orderDetailId = -1, int setmealId = -1)
         {
-            _type = type;
-            _prnType = prnType;
-            _orderId = orderId;
-            _orderDetailId = orderDetailId;
-            _setmealId = setmealId;
+            Type = type;
+            PrnType = prnType;
+            OrderId = orderId;
+            OrderDetailId = orderDetailId;
+            SetmealId = setmealId;
         }
+
+        public PrintType Type { get; private set; }
+        public int OrderId { get; private set; }
+        public int PrnType { get; private set; }
+        public int OrderDetailId { get; private set; }
+        public int SetmealId { get; private set; }
     }
 
     public class PrintTaskMgr : Queue<PrintTask>, IDisposable
@@ -99,11 +99,12 @@ namespace gcafePrnConsole
                 List<order_detail> orderDetails;
                 using (var context = new gcafeEntities())
                 {
-                    var query = context.order_detail.Include("menu").Include("order_detail_method.method").Include("order_detail_setmeal.menu").Include("staff").Where(n => n.order_id == 1).GroupBy(n => (System.DateTime.Now - n.order_time).TotalSeconds);
-                    foreach (var vg in query)
-                    {
-                        Console.WriteLine("Age group: {0}  Number of pets: {1}", vg.Key, vg.Count());
-                    }
+                    //var query = context.order_detail.Include("menu").Include("order_detail_method.method").Include("order_detail_setmeal.menu").Include("staff").Where(n => n.order_id == 1).GroupBy(n => n.group_cnt);
+                    var query = context.order_detail.Where(n => n.order_id == printTask.OrderId).OrderBy(n => n.group_cnt).GroupBy(n => n.group_cnt);
+
+                    var kk = query.ToList().Last();
+                    int key = kk.Key;
+                    orderDetails = context.order_detail.Include("menu").Include("order_detail_method.method").Include("order_detail_setmeal.menu").Include("order_detail_setmeal.order_detail_method.method").Include("staff").Where(n => n.order_id == 1 && n.group_cnt == key).ToList();
                 }
 
 

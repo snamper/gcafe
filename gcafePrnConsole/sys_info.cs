@@ -18,6 +18,7 @@ namespace gcafePrnConsole
         public int branch_id { get; set; }
         public int order_cnt { get; set; }
         public bool is_festival { get; set; }
+        public int order_detail_cnt { get; set; }
     
         public virtual branch branch { get; set; }
     }
