@@ -166,6 +166,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="printer_group_id" Type="int" />
+          <Property Name="print_cnt" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="printer_group">
           <Key>
@@ -244,6 +245,7 @@
           <Property Name="order_cnt" Type="int" Nullable="false" />
           <Property Name="is_festival" Type="bit" Nullable="false" />
           <Property Name="order_detail_cnt" Type="int" Nullable="false" />
+          <Property Name="print_cnt" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_credit_member">
           <End Role="member" Type="Self.member" Multiplicity="0..1" />
@@ -1080,6 +1082,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="printer_group_id" Type="Int32" />
+          <Property Name="print_cnt" Type="Int32" Nullable="false" />
           <NavigationProperty Name="printer_group" Relationship="Self.FK_printer_printer_group" FromRole="printer" ToRole="printer_group" />
         </EntityType>
         <EntityType Name="printer_group">
@@ -1179,6 +1182,7 @@
           <Property Name="order_cnt" Type="Int32" Nullable="false" />
           <Property Name="is_festival" Type="Boolean" Nullable="false" />
           <Property Name="order_detail_cnt" Type="Int32" Nullable="false" />
+          <Property Name="print_cnt" Type="Int32" Nullable="false" />
           <NavigationProperty Name="branch" Relationship="Self.FK_sys_info_branch" FromRole="sys_info" ToRole="branch" />
         </EntityType>
         <Association Name="FK_member_refill_branch">
@@ -1977,6 +1981,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="printer_group_id" ColumnName="printer_group_id" />
+                <ScalarProperty Name="print_cnt" ColumnName="print_cnt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2064,6 +2069,7 @@
                 <ScalarProperty Name="order_cnt" ColumnName="order_cnt" />
                 <ScalarProperty Name="is_festival" ColumnName="is_festival" />
                 <ScalarProperty Name="order_detail_cnt" ColumnName="order_detail_cnt" />
+                <ScalarProperty Name="print_cnt" ColumnName="print_cnt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -17,6 +17,7 @@ namespace gcafePrnConsole
         public int id { get; set; }
         public string name { get; set; }
         public Nullable<int> printer_group_id { get; set; }
+        public int print_cnt { get; set; }
     
         public virtual printer_group printer_group { get; set; }
     }
