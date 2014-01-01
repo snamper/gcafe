@@ -3,6 +3,7 @@
 	[id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [name] NVARCHAR(20) NOT NULL, 
     [printer_group_id] INT NULL, 
+    [print_cnt] INT NOT NULL, 
     CONSTRAINT [FK_printer_printer_group] FOREIGN KEY ([printer_group_id]) REFERENCES [printer_group]([id]),
 )
 
@@ -24,3 +25,12 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level1name = N'printer',
     @level2type = N'COLUMN',
     @level2name = N'printer_group_id'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'这部机打了多少张单',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'printer',
+    @level2type = N'COLUMN',
+    @level2name = N'print_cnt'

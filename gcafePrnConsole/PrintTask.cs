@@ -26,6 +26,7 @@ namespace gcafePrnConsole
             OrderId = orderId;
             OrderDetailId = orderDetailId;
             SetmealId = setmealId;
+            IsUrge = !(OrderDetailId == -1 && SetmealId == -1);
         }
 
         public PrintType Type { get; private set; }
@@ -33,6 +34,7 @@ namespace gcafePrnConsole
         public int PrnType { get; private set; }
         public int OrderDetailId { get; private set; }
         public int SetmealId { get; private set; }
+        public bool IsUrge { get; set; }
     }
 
     public class PrintTaskMgr : Queue<PrintTask>, IDisposable
@@ -106,12 +108,30 @@ namespace gcafePrnConsole
                 PrintDialog printDlg = new PrintDialog();
                 //printDlg.ShowDialog();
 
+                gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan();
+
+                foreach (order_detail orderDetail in orderDetails)
+                {
+                    if ((orderDetail.order_detail_setmeal != null) &&
+                        (orderDetail.order_detail_setmeal.Count() > 0))
+                    {
+                        foreach (order_detail_setmeal setmealItem in orderDetail.order_detail_setmeal)
+                        {
+                            cpd.AddItem(setmealItem, false);
+                        }
+                    }
+                    else
+                    {
+                        cpd.AddItem(orderDetail);
+                    }
+                }
+
                 var printers = new LocalPrintServer().GetPrintQueues();
                 var selectedPrinter = printers.FirstOrDefault(p => p.Name == "PDFCreator");
                 printDlg.PrintQueue = selectedPrinter;
 
 
-                gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan();
+                
                 cpd.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
                 cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
                 printDlg.PrintVisual(new gcafePrnConsole.PrintVisual.ChuPinDan(), "test");

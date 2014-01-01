@@ -33,6 +33,7 @@ SET IDENTITY_INSERT [dbo].[staff] OFF
 
 SET IDENTITY_INSERT [dbo].[printer_group] ON
 INSERT [dbo].[printer_group] ([id], [branch_id], [name]) VALUES (1, 1, N'厨房组');
+INSERT [dbo].[printer_group] ([id], [branch_id], [name]) VALUES (2, 1, N'酒吧组');
 SET IDENTITY_INSERT [dbo].[printer_group] OFF
 
 SET IDENTITY_INSERT [dbo].[menu_catalog] ON
@@ -45,5 +46,5 @@ INSERT [dbo].[device] ([id], [device_id], [register_ticket], [register_time], [i
 SET IDENTITY_INSERT [dbo].[device] OFF
 
 SET IDENTITY_INSERT [dbo].[sys_info] ON 
-INSERT [dbo].[sys_info] ([id], [branch_id], [order_cnt], [is_festival]) VALUES (1, 1, 0, 0)
+INSERT [dbo].[sys_info] ([id], [branch_id], [order_cnt], [is_festival], [print_cnt]) VALUES (1, 1, 0, 0, 0)
 SET IDENTITY_INSERT [dbo].[sys_info] OFF

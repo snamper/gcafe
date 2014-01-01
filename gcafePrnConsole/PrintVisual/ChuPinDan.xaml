@@ -31,6 +31,23 @@
         <TextBlock x:Name="_pageCnt" Grid.Row="2" FontSize="16" HorizontalAlignment="Left" Text="1222" />
         <TextBlock x:Name="_orderNum" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Text="1231212" />
         <TextBlock x:Name="tbTime" Grid.Row="3" FontSize="16" Text="" Height="100" TextWrapping="Wrap" />
+        <Grid x:Name="_gridItems" Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="20*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="2" />
+            </Grid.RowDefinitions>
+
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Text="品名" Grid.Column="0" />
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Text="数量" Grid.Column="1" />
+
+            <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="0, 0" BorderBrush="Black" BorderThickness="2" />
+
+        </Grid>
 
         <TextBlock Grid.Row="5" Text="." VerticalAlignment="Bottom" HorizontalAlignment="Center" />
     </Grid>

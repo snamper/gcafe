@@ -23,6 +23,8 @@ namespace gcafePrnConsole.PrintVisual
         public ChuPinDan()
         {
             InitializeComponent();
+
+            Time = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString());
         }
 
         public string Department
@@ -79,6 +81,21 @@ namespace gcafePrnConsole.PrintVisual
             {
                 tbTime.Text = value;
             }
+        }
+
+        /// <summary>
+        /// 增加一条记录到列表中
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="showRealQuantity">true表示显示真正数量，false时数量总是1</param>
+        public void AddItem(order_detail_setmeal item, bool showRealQuantity = false)
+        {
+            int i = 0;
+        }
+
+        public void AddItem(order_detail item, bool showRealQuantity = false)
+        {
+            int i = 0;
         }
     }
 }

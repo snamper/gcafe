@@ -5,6 +5,7 @@
     [order_cnt] INT NOT NULL DEFAULT 0, 
     [is_festival] BIT NOT NULL DEFAULT 0, 
     [order_detail_cnt] INT NOT NULL DEFAULT 0, 
+    [print_cnt] INT NOT NULL DEFAULT 0, 
     CONSTRAINT [FK_sys_info_branch] FOREIGN KEY ([branch_id]) REFERENCES [branch]([id]),
 )
 
@@ -17,3 +18,12 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level1name = N'sys_info',
     @level2type = N'COLUMN',
     @level2name = N'is_festival'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'打印次数',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'sys_info',
+    @level2type = N'COLUMN',
+    @level2name = N'print_cnt'
