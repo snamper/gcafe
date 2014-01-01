@@ -49,7 +49,7 @@ namespace gcafeSvc
 
             try
             {
-                _printTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PringHuaDan, 1, -1));
+                _printTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintHuaDan, 1, -1));
                 //System.Windows.Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Background, new DoTask(Print), printTask);
                 //_printTaskMgr.Print(new PrintTask(PrintTask.PrintType.PringHuaDan, 1, -1));
 
