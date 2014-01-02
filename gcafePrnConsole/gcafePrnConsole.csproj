@@ -156,6 +156,12 @@
     <Compile Include="PrintVisual\ChuPinDan.xaml.cs">
       <DependentUpon>ChuPinDan.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PrintVisual\HuaDan.xaml.cs">
+      <DependentUpon>HuaDan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PrintVisual\LiuTaiDan.xaml.cs">
+      <DependentUpon>LiuTaiDan.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="role.cs">
@@ -220,6 +226,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="PrintVisual\ChuPinDan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrintVisual\HuaDan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrintVisual\LiuTaiDan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

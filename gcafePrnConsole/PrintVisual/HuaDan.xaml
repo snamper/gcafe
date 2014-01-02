@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="gcafePrnConsole.PrintVisual.HuaDan"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Width="7cm" HorizontalAlignment="Left" Margin="10, 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8cm" />
+            <RowDefinition Height="0.6cm" />
+            <RowDefinition Height="0.6cm" />
+            <RowDefinition Height="0.6cm" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1.6cm" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="tbDepart" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="22" />
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock x:Name="tbTableNum" Text="1231" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="25" />
+            <TextBlock Text="(出品)" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <TextBlock Text="点菜员：" FontSize="16" />
+            <TextBlock x:Name="tbWaiter" FontSize="16" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <TextBlock Text="流水号: " FontSize="16" />
+            <TextBlock x:Name="tbSerialNum" FontSize="16" />
+        </StackPanel>
+        <TextBlock x:Name="tbPageCnt" Grid.Row="2" FontSize="16" HorizontalAlignment="Left" Text="1222" />
+        <TextBlock x:Name="tbOrderNum" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Text="1231212" />
+        <TextBlock x:Name="tbTime" Grid.Row="3" FontSize="16" Text="" Height="100" TextWrapping="Wrap" />
+        <Grid x:Name="_gridItems" Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="20*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="2" />
+            </Grid.RowDefinitions>
+
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Text="品名" Grid.Column="0" />
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Text="数量" Grid.Column="1" />
+
+            <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="0, 0" BorderBrush="Black" BorderThickness="2" />
+
+        </Grid>
+
+        <TextBlock Grid.Row="5" Text="结束标记" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+    </Grid>
+</UserControl>
