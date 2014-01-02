@@ -23,6 +23,49 @@ namespace gcafePrnConsole.PrintVisual
         public HuaDan()
         {
             InitializeComponent();
+
+            Time = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString());
         }
+
+        public string Department
+        {
+            set
+            {
+                tbDepart.Text = value;
+            }
+        }
+
+        public string TableNum
+        {
+            set
+            {
+                tbTableNum.Text = value;
+            }
+        }
+
+        public string SerialNum
+        {
+            set
+            {
+                tbSerialNum.Text = value;
+            }
+        }
+
+        public string StaffName
+        {
+            set
+            {
+                tbWaiter.Text = value;
+            }
+        }
+
+        public string Time
+        {
+            set
+            {
+                tbTime.Text = value;
+            }
+        }
+
     }
 }

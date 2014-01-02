@@ -18,7 +18,7 @@
         <TextBlock x:Name="tbDepart" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="22" />
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock x:Name="tbTableNum" Text="1231" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="25" />
-            <TextBlock Text="(出品)" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" />
+            <TextBlock Text="(划单)" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" />
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
             <TextBlock Text="点菜员：" FontSize="16" />

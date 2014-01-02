@@ -24,5 +24,61 @@ namespace gcafePrnConsole.PrintVisual
         {
             InitializeComponent();
         }
+
+        public string Department
+        {
+            set
+            {
+                tbDepart.Text = value;
+            }
+        }
+
+        public string TableNum
+        {
+            set
+            {
+                tbTableNum.Text = value;
+            }
+        }
+
+        public string OrderNum
+        {
+            set
+            {
+                tbOrderNum.Text = value;
+            }
+        }
+
+        public string StaffName
+        {
+            set
+            {
+                tbWaiter.Text = value;
+            }
+        }
+
+        public string Time
+        {
+            set
+            {
+                tbTime.Text = value;
+            }
+        }
+
+        public decimal TotalPrice
+        {
+            set
+            {
+                tbTotalPrice.Text = value.ToString("f2");
+            }
+        }
+
+        public int CustomerNum
+        {
+            set
+            {
+                tbCustomNum.Text = value.ToString();
+            }
+        }
     }
 }
