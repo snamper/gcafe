@@ -11,6 +11,12 @@ namespace gcafePrnConsole
     public class Global
     {
         private static readonly NLog.Logger _log = NLog.LogManager.GetCurrentClassLogger();
+        private static PrintTaskMgr _printTaskMgr = new PrintTaskMgr();
+
+        public static PrintTaskMgr PrintTaskMgr
+        {
+            get { return _printTaskMgr; }
+        }
 
         public static NLog.Logger Logger
         {

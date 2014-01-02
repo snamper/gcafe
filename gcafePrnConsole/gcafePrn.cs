@@ -15,11 +15,11 @@ namespace gcafeSvc
     {
         private bool _isStop = false;
         private Thread _thrPrint = null;
-        private PrintTaskMgr _printTaskMgr;
+        //private PrintTaskMgr _printTaskMgr;
 
         public gcafePrn()
         {
-            _printTaskMgr = new PrintTaskMgr();
+            //_printTaskMgr = new PrintTaskMgr();
             //_thrPrint = new Thread(new ThreadStart(PrintThread));
             //_thrPrint.Start();
         }
@@ -80,7 +80,7 @@ namespace gcafeSvc
 
             try
             {
-                _printTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintChuPin, orderId, -1));
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintChuPin, orderId, -1));
             }
             catch (Exception ex)
             {
@@ -114,7 +114,7 @@ namespace gcafeSvc
         {
             _isStop = true;
             System.Diagnostics.Debug.WriteLine("============================================================");
-            _printTaskMgr.Dispose();
+            //_printTaskMgr.Dispose();
         }
     }
 }

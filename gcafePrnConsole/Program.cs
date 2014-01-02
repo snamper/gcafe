@@ -24,6 +24,8 @@ namespace gcafePrnConsole
                 Console.ReadLine();
 
                 serviceHost.Close();
+
+                Global.PrintTaskMgr.Dispose();
             }
         }
     }

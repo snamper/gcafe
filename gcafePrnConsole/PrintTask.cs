@@ -105,6 +105,8 @@ namespace gcafePrnConsole
 
                 Thread.Sleep(1000);
             }
+
+            int i = 0;
         }
 
         async Task<string> PrintHuaDan(int orderId, int prnType)
@@ -229,6 +231,7 @@ namespace gcafePrnConsole
                                 {
                                     cpd.Department = pgName;
                                     cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
+                                    cpd.SerialNum = prnCnt.ToString();
                                     cpd.AddItem((order_detail)obj);
                                     cpd.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
                                     cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
@@ -243,6 +246,7 @@ namespace gcafePrnConsole
                                 {
                                     cpd.Department = pgName;
                                     cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
+                                    cpd.SerialNum = prnCnt.ToString();
                                     cpd.AddItem((order_detail_setmeal)obj);
                                     cpd.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
                                     cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
@@ -411,8 +415,6 @@ namespace gcafePrnConsole
             _mutex.WaitOne();
             Enqueue(printTask);
             _mutex.ReleaseMutex();
-
-            System.Diagnostics.Debug.WriteLine("========================================= p");
         }
 
         public void Dispose()
