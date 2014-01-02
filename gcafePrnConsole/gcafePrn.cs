@@ -35,38 +35,30 @@ namespace gcafeSvc
             System.Diagnostics.Debug.WriteLine("***************++++++++++++++++++++++++++++========================");
         }
 
-        private static string TraceMessage(
-            [CallerMemberName] string memberName = "",
-            [CallerLineNumber] int lineNum = 0)
-        {
-            return string.Format("Call {0} at {1}", memberName, lineNum);
-        }
-
-
         public string PrintLiuTai(int orderId, int prnType)
         {
-            Global.Logger.Trace(TraceMessage());
+            Global.Logger.Trace(Global.TraceMessage());
 
             try
             {
-                _printTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintHuaDan, 1, -1));
+                //_printTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintHuaDan, 1, -1));
                 //System.Windows.Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Background, new DoTask(Print), printTask);
                 //_printTaskMgr.Print(new PrintTask(PrintTask.PrintType.PringHuaDan, 1, -1));
 
             }
             catch (Exception ex)
             {
-                Global.Logger.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
+                Global.Logger.Error(string.Format("{0}, msg:{1}", Global.TraceMessage(), ex.Message));
             }
 
-            Global.Logger.Trace(TraceMessage());
+            Global.Logger.Trace(Global.TraceMessage());
 
             return "";
         }
 
         public string PrintHuaDan(int orderId, int prnType)
         {
-            Global.Logger.Trace(TraceMessage());
+            Global.Logger.Trace(Global.TraceMessage());
 
             try
             {
@@ -74,35 +66,35 @@ namespace gcafeSvc
             }
             catch (Exception ex)
             {
-                Global.Logger.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
+                Global.Logger.Error(string.Format("{0}, msg:{1}", Global.TraceMessage(), ex.Message));
             }
 
-            Global.Logger.Trace(TraceMessage());
+            Global.Logger.Trace(Global.TraceMessage());
 
             return "";
         }
 
         public string PrintChuPing(int orderId, int prnType)
         {
-            Global.Logger.Trace(TraceMessage());
+            Global.Logger.Trace(Global.TraceMessage());
 
             try
             {
-
+                _printTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintChuPin, orderId, -1));
             }
             catch (Exception ex)
             {
-                Global.Logger.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
+                Global.Logger.Error(string.Format("{0}, msg:{1}", Global.TraceMessage(), ex.Message));
             }
 
-            Global.Logger.Trace(TraceMessage());
+            Global.Logger.Trace(Global.TraceMessage());
 
             return "";
         }
 
         public string PrintChuPingCui(int orderId, int orderDetailId, int setmailId)
         {
-            Global.Logger.Trace(TraceMessage());
+            Global.Logger.Trace(Global.TraceMessage());
 
             try
             {
@@ -110,10 +102,10 @@ namespace gcafeSvc
             }
             catch (Exception ex)
             {
-                Global.Logger.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
+                Global.Logger.Error(string.Format("{0}, msg:{1}", Global.TraceMessage(), ex.Message));
             }
 
-            Global.Logger.Trace(TraceMessage());
+            Global.Logger.Trace(Global.TraceMessage());
 
             return "";
         }

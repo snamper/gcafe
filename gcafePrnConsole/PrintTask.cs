@@ -83,6 +83,8 @@ namespace gcafePrnConsole
                     PrintTask printTask = this.Dequeue();
                     _mutex.ReleaseMutex();
 
+                    System.Diagnostics.Debug.WriteLine("==== {0}, {1} ====", printTask.Type, Count);
+
                     switch (printTask.Type)
                     {
                         case PrintTask.PrintType.PrintHuaDan:
@@ -98,7 +100,7 @@ namespace gcafePrnConsole
                             break;
                     }
 
-                    await Print(printTask);
+                    //await Print(printTask);
                 }
 
                 Thread.Sleep(1000);
@@ -121,6 +123,8 @@ namespace gcafePrnConsole
 
         async Task<string> PrintChuPin(int orderId, int prnType)
         {
+            Global.Logger.Trace(Global.TraceMessage());
+
             try
             {
                 List<order_detail> orderDetails;
@@ -163,13 +167,13 @@ namespace gcafePrnConsole
                             .Include("order_detail_setmeal.menu")
                             .Include("order_detail_setmeal.order_detail_method.method")
                             .Include("staff")
-                            .Where(n => n.order_id == 1 && n.is_cancle == false && n.group_cnt == query.Last().Key)
+                            .Where(n => n.order_id == 1 && n.is_cancle == false && n.group_cnt == key)
                             .OrderBy(n => n.order_time)
                             .ToList();
                     }
 
-                    #region 用了区分不同打印组下有哪些条目
-                    // 用了区分不同打印组下有哪些条目, 以打印组的id为key
+                    #region 用来区分不同打印组下有哪些条目
+                    // 用来区分不同打印组下有哪些条目, 以打印组的id为key
                     Dictionary<string, List<object>> prnGrp = new Dictionary<string, List<object>>();
 
                     foreach (order_detail orderDetail in orderDetails)
@@ -182,7 +186,9 @@ namespace gcafePrnConsole
                                 if (prnGrp.ContainsKey(setmealItem.menu.printer_group_id.ToString()) == false)
                                     prnGrp.Add(setmealItem.menu.printer_group_id.ToString(), new List<object>());
 
-                                prnGrp[setmealItem.menu.printer_group_id.ToString()].Add(setmealItem);
+                                // 如果数量大于1，每张单只代表一个量，因为这单要跟碟
+                                for (int i = 0; i < setmealItem.order_detail.quantity; i++)
+                                    prnGrp[setmealItem.menu.printer_group_id.ToString()].Add(setmealItem);
                             }
                         }
                         else
@@ -190,45 +196,71 @@ namespace gcafePrnConsole
                             if (prnGrp.ContainsKey(orderDetail.menu.printer_group_id.ToString()) == false)
                                 prnGrp.Add(orderDetail.menu.printer_group_id.ToString(), new List<object>());
 
-                            prnGrp[orderDetail.menu.printer_group_id.ToString()].Add(orderDetail);
+                            // 如果数量大于1，每张单只代表一个量，因为这单要跟碟
+                            for (int i = 0; i < orderDetail.quantity; i++)
+                                prnGrp[orderDetail.menu.printer_group_id.ToString()].Add(orderDetail);
                         }
                     }
-                    #endregion 用了区分不同打印组下有哪些条目
+                    #endregion 用来区分不同打印组下有哪些条目
 
                     PrintDialog printDlg = new PrintDialog();
 
                     #region 将数据填入visual
-                    gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan();
                     foreach (var key in prnGrp.Keys)
                     {
                         string printerName = await GetPrinterNameByGroupId(Int32.Parse(key));
+                        string pgName = await GetPrinterGroupNameByGroupId(Int32.Parse(key));
+
+                        var printers = new LocalPrintServer().GetPrintQueues();
+                        var selectedPrinter = printers.FirstOrDefault(p => p.Name == printerName);
+                        printDlg.PrintQueue = selectedPrinter;
 
                         int currItem = 0;
                         int totalItem = prnGrp[key].Count();
-
-
                         foreach (var obj in prnGrp[key])
                         {
+                            currItem++;
+
                             if (obj.GetType().BaseType == typeof(order_detail))
                             {
-                                cpd.AddItem((order_detail)obj);
+                                using (gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
+                                {
+                                    cpd.Department = pgName;
+                                    cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
+                                    cpd.AddItem((order_detail)obj);
+                                    cpd.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
+                                    cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
+                                    printDlg.PrintVisual(cpd, "出品单打印");
+
+                                    Global.Logger.Debug(string.Format("共{0}张单的第{1}张 to {2}", totalItem, currItem, printerName));
+                                }
                             }
                             else if (obj.GetType().BaseType == typeof(order_detail_setmeal))
                             {
-                                cpd.AddItem((order_detail_setmeal)obj);
+                                using (gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
+                                {
+                                    cpd.Department = pgName;
+                                    cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
+                                    cpd.AddItem((order_detail_setmeal)obj);
+                                    cpd.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
+                                    cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
+                                    printDlg.PrintVisual(cpd, "出品单打印");
+
+                                    Global.Logger.Debug(string.Format("共{0}张单的第{1}张 to {2}", totalItem, currItem, printerName));
+                                }
                             }
 
                         }
                     }
                     #endregion 将数据填入visual
-
-
                 }
             }
             catch (Exception ex)
             {
-
+                Global.Logger.Error(ex.Message);
             }
+
+            Global.Logger.Trace(Global.TraceMessage());
 
             return "";
         }
@@ -256,7 +288,25 @@ namespace gcafePrnConsole
         {
             using (var context = new gcafeEntities())
             {
-                return "";
+                printer_group pg = context.printer_group.Include("printer").Where(n => n.id == groupId && n.branch_id == Global.BranchId).FirstOrDefault();
+
+                if (pg != null && pg.printer != null && pg.printer.Count() > 0)
+                    return pg.printer.FirstOrDefault().name;
+                else
+                    return string.Empty;
+            }
+        }
+
+        async Task<string> GetPrinterGroupNameByGroupId(int groupId)
+        {
+            using (var context = new gcafeEntities())
+            {
+                printer_group pg = context.printer_group.Where(n => n.id == groupId && n.branch_id == Global.BranchId).FirstOrDefault();
+
+                if (pg != null)
+                    return pg.name;
+                else
+                    return string.Empty;
             }
         }
 
@@ -346,6 +396,8 @@ namespace gcafePrnConsole
             _mutex.WaitOne();
             Enqueue(printTask);
             _mutex.ReleaseMutex();
+
+            System.Diagnostics.Debug.WriteLine("========================================= p");
         }
 
         public void Dispose()

@@ -15,7 +15,7 @@
             <RowDefinition Height="1.6cm" />
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="Depart" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" />
+        <TextBlock x:Name="Depart" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="22" />
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock x:Name="TableNo" Text="1231" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="25" />
             <TextBlock Text="(出品)" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" />
@@ -49,6 +49,6 @@
 
         </Grid>
 
-        <TextBlock Grid.Row="5" Text="." VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+        <TextBlock Grid.Row="5" Text="结束标记" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
     </Grid>
 </UserControl>

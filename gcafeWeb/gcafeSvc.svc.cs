@@ -72,7 +72,13 @@ namespace gcafeWeb
             {
                 using (var context = new gcafeEntities())
                 {
-                    List<menu> menus = context.menu.Include(n => n.setmeal_item1).Where(n => (n.menu_catalog_id == cataId) && (n.branch_id == branchId)).OrderBy(n => n.name).ToList();
+                    List<menu> menus = context.menu
+                        .Include(n => n.setmeal_item.Select(m => m.menu1))
+                        .Include(n => n.setmeal_item.Select(m => m.setmeal_item_opt))
+                        .Where(n => (n.menu_catalog_id == cataId) && (n.branch_id == branchId))
+                        .OrderBy(n => n.name)
+                        .ToList();
+
                     foreach (menu menu in menus)
                     {
                         if (menu.setmeal_item.Count > 0)
@@ -80,20 +86,20 @@ namespace gcafeWeb
                             List<SetmealItem> setmeals = new List<SetmealItem>();
                             foreach (var smitem in menu.setmeal_item)
                             {
-                                gcafeWeb.menu m = context.menu.FirstOrDefault(n => n.id == smitem.setmeal_item_menu_id);
+                                //gcafeWeb.menu m = context.menu.FirstOrDefault(n => n.id == smitem.setmeal_item_menu_id);
 
                                 if (smitem.setmeal_item_opt.Count > 0)
                                 {
                                     List<SetmealItem> opts = new List<SetmealItem>();
                                     foreach (var opt in smitem.setmeal_item_opt)
                                     {
-                                        gcafeWeb.menu m1 = context.menu.FirstOrDefault(n => n.id == opt.menu_id);
-                                        opts.Add(new SetmealItem() { MenuID = m1.id, Name = m1.name, Unit = m1.unit });
+                                        //gcafeWeb.menu m1 = context.menu.FirstOrDefault(n => n.id == opt.menu_id);
+                                        opts.Add(new SetmealItem() { MenuID = opt.menu.id, Name = opt.menu.name, Unit = opt.menu.unit });
                                     }
-                                    setmeals.Add(new SetmealItem() { MenuID = m.id, Name = m.name, Unit = menu.unit, OptionItems = opts });
+                                    setmeals.Add(new SetmealItem() { MenuID = smitem.menu1.id, Name = smitem.menu1.name, Unit = smitem.menu1.unit, OptionItems = opts });
                                 }
                                 else
-                                    setmeals.Add(new SetmealItem() { MenuID = m.id, Name = m.name, Unit = menu.unit });
+                                    setmeals.Add(new SetmealItem() { MenuID = smitem.menu1.id, Name = smitem.menu1.name, Unit = smitem.menu1.unit });
                             }
 
                             menuList.Add(new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = true, Quantity = 1, SetmealItems = setmeals });
@@ -394,7 +400,7 @@ namespace gcafeWeb
                     }
 
                     _gcafePrn.PrintChuPing(orderId, -1);
-                    _gcafePrn.PrintChuPing(orderId, -1);
+                    _gcafePrn.PrintHuaDan(orderId, -1);
                     _gcafePrn.PrintLiuTai(orderId, -1);
                 }
             }
