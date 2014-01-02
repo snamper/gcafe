@@ -58,6 +58,8 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="Trigger" />
+    <Folder Include="Procedure" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\branch.sql" />
@@ -73,7 +75,9 @@
     <Build Include="Tables\device.sql" />
     <Build Include="Tables\shift_detail.sql" />
     <Build Include="Tables\sys_info.sql" />
-    <Build Include="tgr_orders.sql" />
+    <Build Include="Trigger\tgr_orders.sql" />
+    <Build Include="Procedure\IncreaseAndResetPrintCnt.sql" />
+    <Build Include="Trigger\tgr_printcnt.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="gcafe.refactorlog" />
@@ -97,6 +101,6 @@
     <Build Include="Tables\setmeal_item_opt.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="InsertData.sql" />
+    <None Include="InsertData.sql" />
   </ItemGroup>
 </Project>

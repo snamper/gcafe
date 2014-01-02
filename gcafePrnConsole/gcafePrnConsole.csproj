@@ -75,12 +75,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="branch.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="credit.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="device.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="gcafeDb.Context.cs">
@@ -89,8 +92,8 @@
       <DependentUpon>gcafeDb.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="gcafeDb.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="gcafeDb.Designer.cs">
@@ -102,39 +105,51 @@
     <Compile Include="Global.cs" />
     <Compile Include="IgcafePrn.cs" />
     <Compile Include="member.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="member_refill.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="menu.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="menu_catalog.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="method.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="method_catalog.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="order.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="order_detail.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="order_detail_method.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="order_detail_setmeal.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="printer.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="printer_group.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="PrintTask.cs" />
@@ -144,27 +159,35 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="role.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="service.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="setmeal_item.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="setmeal_item_opt.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="shift.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="shift_detail.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="staff.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_info.cs">
+      <SubType>Code</SubType>
       <DependentUpon>gcafeDb.tt</DependentUpon>
     </Compile>
   </ItemGroup>

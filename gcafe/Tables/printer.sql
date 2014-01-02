@@ -4,6 +4,7 @@
     [name] NVARCHAR(20) NOT NULL, 
     [printer_group_id] INT NULL, 
     [print_cnt] INT NOT NULL, 
+    [print_total_cnt] INT NOT NULL DEFAULT 0, 
     CONSTRAINT [FK_printer_printer_group] FOREIGN KEY ([printer_group_id]) REFERENCES [printer_group]([id]),
 )
 

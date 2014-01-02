@@ -23,6 +23,8 @@ namespace gcafeWeb
         public int id { get; set; }
         public int branch_id { get; set; }
         public string name { get; set; }
+        public int print_cnt { get; set; }
+        public int print_total_cnt { get; set; }
     
         public virtual branch branch { get; set; }
         public virtual ICollection<menu> menu { get; set; }

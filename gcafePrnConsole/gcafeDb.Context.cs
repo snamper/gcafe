@@ -12,6 +12,8 @@ namespace gcafePrnConsole
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class gcafeEntities : DbContext
     {
@@ -48,5 +50,18 @@ namespace gcafePrnConsole
         public virtual DbSet<shift_detail> shift_detail { get; set; }
         public virtual DbSet<staff> staff { get; set; }
         public virtual DbSet<sys_info> sys_info { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> IncreaseAndResetPrintCnt(Nullable<int> printerId, Nullable<bool> isIncrease)
+        {
+            var printerIdParameter = printerId.HasValue ?
+                new ObjectParameter("printerId", printerId) :
+                new ObjectParameter("printerId", typeof(int));
+    
+            var isIncreaseParameter = isIncrease.HasValue ?
+                new ObjectParameter("isIncrease", isIncrease) :
+                new ObjectParameter("isIncrease", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("IncreaseAndResetPrintCnt", printerIdParameter, isIncreaseParameter);
+        }
     }
 }

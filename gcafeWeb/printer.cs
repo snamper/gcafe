@@ -18,6 +18,7 @@ namespace gcafeWeb
         public string name { get; set; }
         public Nullable<int> printer_group_id { get; set; }
         public int print_cnt { get; set; }
+        public int print_total_cnt { get; set; }
     
         public virtual printer_group printer_group { get; set; }
     }

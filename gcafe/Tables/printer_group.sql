@@ -3,6 +3,8 @@
 	[id] INT NOT NULL PRIMARY KEY IDENTITY, 
 	[branch_id] INT NOT NULL,
     [name] NVARCHAR(50) NOT NULL, 
+    [print_cnt] INT NOT NULL DEFAULT 0, 
+    [print_total_cnt] INT NOT NULL DEFAULT 0, 
     CONSTRAINT [FK_printer_group_branch] FOREIGN KEY ([branch_id]) REFERENCES [branch]([id]),
 )
 

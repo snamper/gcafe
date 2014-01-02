@@ -167,6 +167,7 @@
           <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="printer_group_id" Type="int" />
           <Property Name="print_cnt" Type="int" Nullable="false" />
+          <Property Name="print_total_cnt" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="printer_group">
           <Key>
@@ -175,6 +176,8 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="branch_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="print_cnt" Type="int" Nullable="false" />
+          <Property Name="print_total_cnt" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -691,6 +694,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="IncreaseAndResetPrintCnt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="printerId" Type="int" Mode="In" />
+          <Parameter Name="isIncrease" Type="bit" Mode="In" />
+        </Function>
         <EntityContainer Name="gcafeModelStoreContainer">
           <EntitySet Name="branch" EntityType="Self.branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="credit" EntityType="Self.credit" Schema="dbo" store:Type="Tables" />
@@ -1083,6 +1090,7 @@
           <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="printer_group_id" Type="Int32" />
           <Property Name="print_cnt" Type="Int32" Nullable="false" />
+          <Property Name="print_total_cnt" Type="Int32" Nullable="false" />
           <NavigationProperty Name="printer_group" Relationship="Self.FK_printer_printer_group" FromRole="printer" ToRole="printer_group" />
         </EntityType>
         <EntityType Name="printer_group">
@@ -1092,6 +1100,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="branch_id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="print_cnt" Type="Int32" Nullable="false" />
+          <Property Name="print_total_cnt" Type="Int32" Nullable="false" />
           <NavigationProperty Name="branch" Relationship="Self.FK_printer_group_branch" FromRole="printer_group" ToRole="branch" />
           <NavigationProperty Name="menu" Relationship="Self.FK_Menu_printer_group" FromRole="printer_group" ToRole="menu" />
           <NavigationProperty Name="printer" Relationship="Self.FK_printer_printer_group" FromRole="printer_group" ToRole="printer" />
@@ -1801,6 +1811,10 @@
             <End Role="shift" EntitySet="shift" />
             <End Role="shift_detail" EntitySet="shift_detail" />
           </AssociationSet>
+          <FunctionImport Name="IncreaseAndResetPrintCnt" ReturnType="Collection(Int32)">
+            <Parameter Name="printerId" Mode="In" Type="Int32" />
+            <Parameter Name="isIncrease" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1982,6 +1996,7 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="printer_group_id" ColumnName="printer_group_id" />
                 <ScalarProperty Name="print_cnt" ColumnName="print_cnt" />
+                <ScalarProperty Name="print_total_cnt" ColumnName="print_total_cnt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1991,6 +2006,8 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="branch_id" ColumnName="branch_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="print_cnt" ColumnName="print_cnt" />
+                <ScalarProperty Name="print_total_cnt" ColumnName="print_total_cnt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2073,6 +2090,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="IncreaseAndResetPrintCnt" FunctionName="gcafeModel.Store.IncreaseAndResetPrintCnt" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

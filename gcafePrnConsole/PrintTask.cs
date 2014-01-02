@@ -215,6 +215,8 @@ namespace gcafePrnConsole
                         var selectedPrinter = printers.FirstOrDefault(p => p.Name == printerName);
                         printDlg.PrintQueue = selectedPrinter;
 
+                        int? prnCnt = await GetAndAddPrintCnt(1);
+
                         int currItem = 0;
                         int totalItem = prnGrp[key].Count();
                         foreach (var obj in prnGrp[key])
@@ -307,6 +309,19 @@ namespace gcafePrnConsole
                     return pg.name;
                 else
                     return string.Empty;
+            }
+        }
+
+        async Task<int?> GetAndAddPrintCnt(int printerId, bool isInc = true)
+        {
+            int? rtn = 0;
+            using (var context = new gcafeEntities())
+            {
+                _mutex.WaitOne();
+                rtn = context.IncreaseAndResetPrintCnt(printerId, isInc).FirstOrDefault();
+                _mutex.ReleaseMutex();
+
+                return rtn;
             }
         }
 
