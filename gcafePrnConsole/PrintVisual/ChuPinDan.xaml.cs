@@ -108,7 +108,7 @@ namespace gcafePrnConsole.PrintVisual
 
             // 加一行
             RowDefinition rd = new RowDefinition();
-            rd.Height = new GridLength(((int)size.Width / (int)180 + 1) * 35);
+            rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
             _gridItems.RowDefinitions.Add(rd);
 
             // 将品名加入到grid中
@@ -129,7 +129,8 @@ namespace gcafePrnConsole.PrintVisual
 
             // 加一行
             rd = new RowDefinition();
-            rd.Height = new GridLength(((int)size.Width / (int)180 + 1) * 35);
+            //var ss = _gridItems.ColumnDefinitions[0].Width;
+            rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
             _gridItems.RowDefinitions.Add(rd);
 
             // 将套餐内容加入到grid中
@@ -173,7 +174,7 @@ namespace gcafePrnConsole.PrintVisual
 
                 // 加一行
                 rd = new RowDefinition();
-                rd.Height = new GridLength(((int)size.Width / (int)180 + 1) * 35);
+                rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
                 _gridItems.RowDefinitions.Add(rd);
 
                 // 将做法加入到grid中
@@ -204,7 +205,7 @@ namespace gcafePrnConsole.PrintVisual
 
             // 加一行
             RowDefinition rd = new RowDefinition();
-            rd.Height = new GridLength(((int)size.Width / (int)180 + 1) * 35);
+            rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
             _gridItems.RowDefinitions.Add(rd);
 
             // 将品名加入到grid中
@@ -249,7 +250,7 @@ namespace gcafePrnConsole.PrintVisual
 
                 // 加一行
                 rd = new RowDefinition();
-                rd.Height = new GridLength(((int)size.Width / (int)180 + 1) * 35);
+                rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
                 _gridItems.RowDefinitions.Add(rd);
 
                 // 将做法加入到grid中

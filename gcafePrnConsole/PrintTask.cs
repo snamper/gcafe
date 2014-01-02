@@ -208,14 +208,14 @@ namespace gcafePrnConsole
                     #region 将数据填入visual
                     foreach (var key in prnGrp.Keys)
                     {
-                        string printerName = await GetPrinterNameByGroupId(Int32.Parse(key));
-                        string pgName = await GetPrinterGroupNameByGroupId(Int32.Parse(key));
+                        printer pnt = await GetPrinterNameByGroupId(Int32.Parse(key));
+                        string pgName = pnt.printer_group.name;
 
                         var printers = new LocalPrintServer().GetPrintQueues();
-                        var selectedPrinter = printers.FirstOrDefault(p => p.Name == printerName);
+                        var selectedPrinter = printers.FirstOrDefault(p => p.Name == pnt.name);
                         printDlg.PrintQueue = selectedPrinter;
 
-                        int? prnCnt = await GetAndAddPrintCnt(1);
+                        int? prnCnt = await GetAndAddPrintCnt(pnt.id);
 
                         int currItem = 0;
                         int totalItem = prnGrp[key].Count();
@@ -234,7 +234,7 @@ namespace gcafePrnConsole
                                     cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
                                     printDlg.PrintVisual(cpd, "出品单打印");
 
-                                    Global.Logger.Debug(string.Format("共{0}张单的第{1}张 to {2}", totalItem, currItem, printerName));
+                                    Global.Logger.Debug(string.Format("共{0}张单的第{1}张 to {2}", totalItem, currItem, pnt.name));
                                 }
                             }
                             else if (obj.GetType().BaseType == typeof(order_detail_setmeal))
@@ -248,7 +248,7 @@ namespace gcafePrnConsole
                                     cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
                                     printDlg.PrintVisual(cpd, "出品单打印");
 
-                                    Global.Logger.Debug(string.Format("共{0}张单的第{1}张 to {2}", totalItem, currItem, printerName));
+                                    Global.Logger.Debug(string.Format("共{0}张单的第{1}张 to {2}", totalItem, currItem, pnt.name));
                                 }
                             }
 
@@ -286,16 +286,16 @@ namespace gcafePrnConsole
         /// </summary>
         /// <param name="groupId"></param>
         /// <returns></returns>
-        async Task<string> GetPrinterNameByGroupId(int groupId)
+        async Task<printer> GetPrinterNameByGroupId(int groupId)
         {
             using (var context = new gcafeEntities())
             {
                 printer_group pg = context.printer_group.Include("printer").Where(n => n.id == groupId && n.branch_id == Global.BranchId).FirstOrDefault();
 
                 if (pg != null && pg.printer != null && pg.printer.Count() > 0)
-                    return pg.printer.FirstOrDefault().name;
+                    return pg.printer.FirstOrDefault();
                 else
-                    return string.Empty;
+                    return (printer)null;
             }
         }
 
