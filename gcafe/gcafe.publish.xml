@@ -5,6 +5,6 @@
     <TargetDatabaseName>gcafe</TargetDatabaseName>
     <DeployScriptFileName>gcafe.sql</DeployScriptFileName>
     <ProfileVersionNumber>1</ProfileVersionNumber>
-    <TargetConnectionString>Data Source=192.168.11.5;Persist Security Info=True;User ID=sa;Pooling=False</TargetConnectionString>
+    <TargetConnectionString>Data Source=(localdb)\Projects;Integrated Security=True;Pooling=False</TargetConnectionString>
   </PropertyGroup>
 </Project>

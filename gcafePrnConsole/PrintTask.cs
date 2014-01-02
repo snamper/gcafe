@@ -111,14 +111,63 @@ namespace gcafePrnConsole
 
         async Task<string> PrintHuaDan(int orderId, int prnType)
         {
+            Global.Logger.Trace(Global.TraceMessage());
+
             try
             {
+                List<order_detail> orderDetails;
+                using (var context = new gcafeEntities())
+                {
+                    if (prnType == 0)
+                    {
+                        orderDetails = context.order_detail
+                            .Include("menu")
+                            .Include("order_detail_method.method")
+                            .Include("order_detail_setmeal.menu")
+                            .Include("order_detail_setmeal.order_detail_method.method")
+                            .Include("staff")
+                            .Where(n => n.order_id == 1 && n.is_cancle == false)
+                            .OrderBy(n => n.order_time)
+                            .ToList();
+                    }
+                    else
+                    {
+                        var query = context.order_detail
+                            .Where(n => n.order_id == orderId)
+                            .OrderBy(n => n.group_cnt)
+                            .GroupBy(n => n.group_cnt)
+                            .ToList();
+
+                        int key;
+                        if (prnType == -1)
+                            key = query.Last().Key;
+                        else
+                        {
+                            if (prnType < query.Count)
+                                key = query.ElementAt(prnType - 1).Key;
+                            else
+                                return "超出边界";
+                        }
+
+                        orderDetails = context.order_detail
+                            .Include("menu")
+                            .Include("order_detail_method.method")
+                            .Include("order_detail_setmeal.menu")
+                            .Include("order_detail_setmeal.order_detail_method.method")
+                            .Include("staff")
+                            .Where(n => n.order_id == 1 && n.is_cancle == false && n.group_cnt == key)
+                            .OrderBy(n => n.order_time)
+                            .ToList();
+                    }
+                }
 
             }
             catch (Exception ex)
             {
-
+                Global.Logger.Error(ex.Message);
             }
+
+            Global.Logger.Trace(Global.TraceMessage());
 
             return "";
         }
@@ -273,14 +322,22 @@ namespace gcafePrnConsole
 
         async Task<string> PrintLiuTai(int orderId, int prnType)
         {
+            Global.Logger.Trace(Global.TraceMessage());
+
             try
             {
+                List<order_detail> orderDetails;
+                using (var context = new gcafeEntities())
+                {
 
+                }
             }
             catch (Exception ex)
             {
-
+                Global.Logger.Error(ex.Message);
             }
+
+            Global.Logger.Trace(Global.TraceMessage());
 
             return "";
         }

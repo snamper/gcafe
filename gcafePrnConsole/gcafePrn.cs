@@ -44,7 +44,7 @@ namespace gcafeSvc
                 //_printTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintHuaDan, 1, -1));
                 //System.Windows.Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Background, new DoTask(Print), printTask);
                 //_printTaskMgr.Print(new PrintTask(PrintTask.PrintType.PringHuaDan, 1, -1));
-
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintLiuTai, orderId, prnType));
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace gcafeSvc
 
             try
             {
-
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintHuaDan, orderId, prnType));
             }
             catch (Exception ex)
             {
@@ -80,7 +80,7 @@ namespace gcafeSvc
 
             try
             {
-                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintChuPin, orderId, -1));
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintChuPin, orderId, prnType));
             }
             catch (Exception ex)
             {
