@@ -59,6 +59,14 @@ namespace gcafePrnConsole.PrintVisual
             }
         }
 
+        public string OrderNum
+        {
+            set
+            {
+                tbOrderNum.Text = value;
+            }
+        }
+
         public string Time
         {
             set

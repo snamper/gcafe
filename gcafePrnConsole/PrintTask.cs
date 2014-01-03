@@ -132,9 +132,9 @@ namespace gcafePrnConsole
                     {
                         orderDetails = context.order_detail
                             .Include("menu")
-                            .Include("order_detail_method.method")
-                            .Include("order_detail_setmeal.menu")
-                            .Include("order_detail_setmeal.order_detail_method.method")
+                            .Include(n => n.order_detail_method.Select(m => m.method))
+                            .Include(n => n.order_detail_setmeal.Select(m => m.menu))
+                            .Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
                             .Include("staff")
                             .Where(n => n.order_id == 1 && n.is_cancle == false)
                             .OrderBy(n => n.order_time)
@@ -161,9 +161,9 @@ namespace gcafePrnConsole
 
                         orderDetails = context.order_detail
                             .Include("menu")
-                            .Include("order_detail_method.method")
-                            .Include("order_detail_setmeal.menu")
-                            .Include("order_detail_setmeal.order_detail_method.method")
+                            .Include(n => n.order_detail_method.Select(m => m.method))
+                            .Include(n => n.order_detail_setmeal.Select(m => m.menu))
+                            .Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
                             .Include("staff")
                             .Where(n => n.order_id == 1 && n.is_cancle == false && n.group_cnt == key)
                             .OrderBy(n => n.order_time)
@@ -171,13 +171,17 @@ namespace gcafePrnConsole
                     }
                     #endregion Get orderDetails
 
+                    #region 打印
                     // 打印
                     PrintDialog printDlg = new PrintDialog();
                     var printers = new LocalPrintServer().GetPrintQueues();
                     var selectedPrinter = printers.FirstOrDefault(p => p.Name == "PDFCreator");
                     printDlg.PrintQueue = selectedPrinter;
 
-                    PrintVisual.HuaDan huaDan = new PrintVisual.HuaDan();
+                    PrintVisual.HuaDan huaDan = new PrintVisual.HuaDan() { 
+                        StaffName = orderDetails[0].staff.name,
+                        OrderNum = orderDetails[0].order.order_num,
+                    };
 
                     foreach (var orderDetail in orderDetails)
                     {
@@ -187,6 +191,8 @@ namespace gcafePrnConsole
                     huaDan.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
                     huaDan.Arrange(new Rect(new Point(0, 0), huaDan.DesiredSize));
                     printDlg.PrintVisual(huaDan, "划单打印");
+
+                    #endregion 打印
 
                     Global.Logger.Debug(string.Format("({0}) - 划单打印", Global.TraceMessage()));
                 }
@@ -217,8 +223,8 @@ namespace gcafePrnConsole
                         orderDetails = context.order_detail
                             .Include(n => n.menu)
                             .Include(n => n.order_detail_method.Select(m => m.method))
-                            .Include("order_detail_setmeal.menu")
-                            .Include("order_detail_setmeal.order_detail_method.method")
+                            .Include(n => n.order_detail_setmeal.Select(m => m.menu))
+                            .Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
                             .Include("staff")
                             .Where(n => n.order_id == 1 && n.is_cancle == false)
                             .OrderBy(n => n.order_time)
@@ -245,9 +251,9 @@ namespace gcafePrnConsole
 
                         orderDetails = context.order_detail
                             .Include("menu")
-                            .Include("order_detail_method.method")
-                            .Include("order_detail_setmeal.menu")
-                            .Include("order_detail_setmeal.order_detail_method.method")
+                            .Include(n => n.order_detail_method.Select(m => m.method))
+                            .Include(n => n.order_detail_setmeal.Select(m => m.menu))
+                            .Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
                             .Include("staff")
                             .Where(n => n.order_id == 1 && n.is_cancle == false && n.group_cnt == key)
                             .OrderBy(n => n.order_time)
