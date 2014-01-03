@@ -165,7 +165,7 @@ namespace gcafePrnConsole.PrintVisual
                 tb = new TextBlock()
                 {
                     FontSize = 22.00,
-                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     VerticalAlignment = System.Windows.VerticalAlignment.Center,
                     Text = zuofa,
                 };
@@ -241,7 +241,7 @@ namespace gcafePrnConsole.PrintVisual
                 tb = new TextBlock()
                 {
                     FontSize = 22.00,
-                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                     VerticalAlignment = System.Windows.VerticalAlignment.Center,
                     Text = zuofa,
                 };

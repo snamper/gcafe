@@ -5,6 +5,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="orderId" type="xs:int" />
         <xs:element minOccurs="0" name="prnType" type="xs:int" />
+        <xs:element minOccurs="0" name="rePrint" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -20,6 +21,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="orderId" type="xs:int" />
         <xs:element minOccurs="0" name="prnType" type="xs:int" />
+        <xs:element minOccurs="0" name="rePrint" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -35,6 +37,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="orderId" type="xs:int" />
         <xs:element minOccurs="0" name="prnType" type="xs:int" />
+        <xs:element minOccurs="0" name="rePrint" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -42,6 +45,22 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="PrintChuPingResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OrderPrint">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orderId" type="xs:int" />
+        <xs:element minOccurs="0" name="prnType" type="xs:int" />
+        <xs:element minOccurs="0" name="rePrint" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OrderPrintResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="OrderPrintResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

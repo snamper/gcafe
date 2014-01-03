@@ -401,9 +401,9 @@ namespace gcafeWeb
 
                     using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
                     {
-                        _gcafePrn.PrintChuPing(orderId, -1);
-                        _gcafePrn.PrintHuaDan(orderId, -1);
-                        _gcafePrn.PrintLiuTai(orderId, -1);
+                        _gcafePrn.PrintChuPing(orderId, -1, false);
+                        _gcafePrn.PrintHuaDan(orderId, -1, false);
+                        _gcafePrn.PrintLiuTai(orderId, -1, false);
                     }
                 }
             }

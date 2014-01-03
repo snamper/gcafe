@@ -17,14 +17,15 @@ namespace gcafePrnConsole
 {
     public class PrintTask
     {
-        public enum PrintType { PrintLiuTai, PrintChuPin, PrintHuaDan };
+        public enum PrintType { OrderPrint, PrintLiuTai, PrintChuPin, PrintHuaDan };
 
-        public PrintTask(PrintType type, int orderId, int prnType, int orderDetailId = -1, int setmealId = -1)
+        public PrintTask(PrintType type, int orderId, int prnType, bool rePrint = false, int orderDetailId = -1, int setmealId = -1)
         {
             Type = type;
             PrnType = prnType;
             OrderId = orderId;
             OrderDetailId = orderDetailId;
+            RePrint = rePrint;
             SetmealId = setmealId;
             IsUrge = !(OrderDetailId == -1 && SetmealId == -1);
         }
@@ -35,6 +36,7 @@ namespace gcafePrnConsole
         public int OrderDetailId { get; private set; }
         public int SetmealId { get; private set; }
         public bool IsUrge { get; set; }
+        public bool RePrint { get; set; }
     }
 
     public class PrintTaskMgr : Queue<PrintTask>, IDisposable
@@ -98,6 +100,12 @@ namespace gcafePrnConsole
                         case PrintTask.PrintType.PrintLiuTai:
                             await PrintLiuTai(printTask.OrderId, printTask.PrnType);
                             break;
+
+                        case PrintTask.PrintType.OrderPrint:
+                            //await PrintChuPin(printTask.OrderId, printTask.PrnType);
+                            //List<order_detail> orderDetails = await GetOrderDetailList(printTask.OrderId, printTask.PrnType);
+                            //await PrintChuPin(orderDetails, printTask.RePrint);
+                            break;
                     }
 
                     //await Print(printTask);
@@ -109,7 +117,8 @@ namespace gcafePrnConsole
             int i = 0;
         }
 
-        async Task<string> PrintHuaDan(int orderId, int prnType)
+
+        async Task<string> PrintHuaDan(int orderId, int prnType, bool rePrint = false)
         {
             Global.Logger.Trace(Global.TraceMessage());
 
@@ -118,6 +127,7 @@ namespace gcafePrnConsole
                 List<order_detail> orderDetails;
                 using (var context = new gcafeEntities())
                 {
+                    #region Get orderDetails
                     if (prnType == 0)
                     {
                         orderDetails = context.order_detail
@@ -159,6 +169,26 @@ namespace gcafePrnConsole
                             .OrderBy(n => n.order_time)
                             .ToList();
                     }
+                    #endregion Get orderDetails
+
+                    // 打印
+                    PrintDialog printDlg = new PrintDialog();
+                    var printers = new LocalPrintServer().GetPrintQueues();
+                    var selectedPrinter = printers.FirstOrDefault(p => p.Name == "PDFCreator");
+                    printDlg.PrintQueue = selectedPrinter;
+
+                    PrintVisual.HuaDan huaDan = new PrintVisual.HuaDan();
+
+                    foreach (var orderDetail in orderDetails)
+                    {
+                        huaDan.AddItem(orderDetail);
+                    }
+
+                    huaDan.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
+                    huaDan.Arrange(new Rect(new Point(0, 0), huaDan.DesiredSize));
+                    printDlg.PrintVisual(huaDan, "划单打印");
+
+                    Global.Logger.Debug(string.Format("({0}) - 划单打印", Global.TraceMessage()));
                 }
 
             }
@@ -172,7 +202,7 @@ namespace gcafePrnConsole
             return "";
         }
 
-        async Task<string> PrintChuPin(int orderId, int prnType)
+        async Task<string> PrintChuPin(int orderId, int prnType, bool rePrint = false)
         {
             Global.Logger.Trace(Global.TraceMessage());
 
@@ -181,11 +211,12 @@ namespace gcafePrnConsole
                 List<order_detail> orderDetails;
                 using (var context = new gcafeEntities())
                 {
+                    #region Get orderDetails
                     if (prnType == 0)
                     {
                         orderDetails = context.order_detail
-                            .Include("menu")
-                            .Include("order_detail_method.method")
+                            .Include(n => n.menu)
+                            .Include(n => n.order_detail_method.Select(m => m.method))
                             .Include("order_detail_setmeal.menu")
                             .Include("order_detail_setmeal.order_detail_method.method")
                             .Include("staff")
@@ -222,6 +253,7 @@ namespace gcafePrnConsole
                             .OrderBy(n => n.order_time)
                             .ToList();
                     }
+                #endregion Get orderDetails
 
                     #region 用来区分不同打印组下有哪些条目
                     // 用来区分不同打印组下有哪些条目, 以打印组的id为key
@@ -286,7 +318,7 @@ namespace gcafePrnConsole
                                     cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
                                     printDlg.PrintVisual(cpd, "出品单打印");
 
-                                    Global.Logger.Debug(string.Format("共{0}张单的第{1}张 to {2}", totalItem, currItem, pnt.name));
+                                    Global.Logger.Debug(string.Format("({3}) - 共{0}张单的第{1}张 to {2}", totalItem, currItem, pnt.name, Global.TraceMessage()));
                                 }
                             }
                             else if (obj.GetType().BaseType == typeof(order_detail_setmeal))
@@ -301,7 +333,7 @@ namespace gcafePrnConsole
                                     cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
                                     printDlg.PrintVisual(cpd, "出品单打印");
 
-                                    Global.Logger.Debug(string.Format("共{0}张单的第{1}张 to {2}", totalItem, currItem, pnt.name));
+                                    Global.Logger.Debug(string.Format("({3}) - 共{0}张单的第{1}张 to {2}", totalItem, currItem, pnt.name, Global.TraceMessage()));
                                 }
                             }
 
@@ -384,87 +416,6 @@ namespace gcafePrnConsole
 
                 return rtn;
             }
-        }
-
-
-        public async Task<string> Print(PrintTask printTask)
-        {
-            try
-            {
-                List<order_detail> orderDetails;
-                using (var context = new gcafeEntities())
-                {
-                    var query = context.order_detail.Where(n => n.order_id == printTask.OrderId).OrderBy(n => n.group_cnt).GroupBy(n => n.group_cnt).ToList();
-
-                    int key = query.Last().Key;
-                    orderDetails = context.order_detail.Include("menu").Include("order_detail_method.method").Include("order_detail_setmeal.menu").Include("order_detail_setmeal.order_detail_method.method").Include("staff").Where(n => n.order_id == 1 && n.group_cnt == key).ToList();
-                }
-
-                Dictionary<string, List<object>> prnGrp = new Dictionary<string, List<object>>();
-
-                PrintDialog printDlg = new PrintDialog();
-                //printDlg.ShowDialog();
-
-                gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan();
-
-                foreach (order_detail orderDetail in orderDetails)
-                {
-                    if ((orderDetail.order_detail_setmeal != null) &&
-                        (orderDetail.order_detail_setmeal.Count() > 0))
-                    {
-                        foreach (order_detail_setmeal setmealItem in orderDetail.order_detail_setmeal)
-                        {
-                            if (prnGrp.ContainsKey(setmealItem.menu.printer_group_id.ToString()) == false)
-                                prnGrp.Add(setmealItem.menu.printer_group_id.ToString(), new List<object>());
-
-                            prnGrp[setmealItem.menu.printer_group_id.ToString()].Add(setmealItem);
-                        }
-                    }
-                    else
-                    {
-                        if (prnGrp.ContainsKey(orderDetail.menu.printer_group_id.ToString()) == false)
-                            prnGrp.Add(orderDetail.menu.printer_group_id.ToString(), new List<object>());
-
-                        prnGrp[orderDetail.menu.printer_group_id.ToString()].Add(orderDetail);
-                    }
-                }
-
-                foreach (var key in prnGrp.Keys)
-                {
-                    int currItem = 0;
-                    int totalItem = prnGrp[key].Count();
-                    foreach (var obj in prnGrp[key])
-                    {
-                        if (obj.GetType().BaseType == typeof(order_detail))
-                        {
-                            cpd.AddItem((order_detail)obj);
-                        }
-                        else if (obj.GetType().BaseType == typeof(order_detail_setmeal))
-                        {
-                            cpd.AddItem((order_detail_setmeal)obj);
-                        }
-
-                    }
-                }
-
-                
-
-                var printers = new LocalPrintServer().GetPrintQueues();
-                var selectedPrinter = printers.FirstOrDefault(p => p.Name == "PDFCreator");
-                printDlg.PrintQueue = selectedPrinter;
-
-
-                
-                cpd.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
-                cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
-                printDlg.PrintVisual(new gcafePrnConsole.PrintVisual.ChuPinDan(), "test");
-            }
-            catch (Exception ex)
-            {
-                string s = ex.Message;
-            }
-
-            return "";
         }
 
         public void AddTask(PrintTask printTask)

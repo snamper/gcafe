@@ -16,22 +16,28 @@ namespace gcafeWeb.gcafePrnSvc {
     public interface IgcafePrn {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/PrintLiuTai", ReplyAction="http://tempuri.org/IgcafePrn/PrintLiuTaiResponse")]
-        string PrintLiuTai(int orderId, int prnType);
+        string PrintLiuTai(int orderId, int prnType, bool rePrint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/PrintLiuTai", ReplyAction="http://tempuri.org/IgcafePrn/PrintLiuTaiResponse")]
-        System.Threading.Tasks.Task<string> PrintLiuTaiAsync(int orderId, int prnType);
+        System.Threading.Tasks.Task<string> PrintLiuTaiAsync(int orderId, int prnType, bool rePrint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/PrintHuaDan", ReplyAction="http://tempuri.org/IgcafePrn/PrintHuaDanResponse")]
-        string PrintHuaDan(int orderId, int prnType);
+        string PrintHuaDan(int orderId, int prnType, bool rePrint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/PrintHuaDan", ReplyAction="http://tempuri.org/IgcafePrn/PrintHuaDanResponse")]
-        System.Threading.Tasks.Task<string> PrintHuaDanAsync(int orderId, int prnType);
+        System.Threading.Tasks.Task<string> PrintHuaDanAsync(int orderId, int prnType, bool rePrint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/PrintChuPing", ReplyAction="http://tempuri.org/IgcafePrn/PrintChuPingResponse")]
-        string PrintChuPing(int orderId, int prnType);
+        string PrintChuPing(int orderId, int prnType, bool rePrint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/PrintChuPing", ReplyAction="http://tempuri.org/IgcafePrn/PrintChuPingResponse")]
-        System.Threading.Tasks.Task<string> PrintChuPingAsync(int orderId, int prnType);
+        System.Threading.Tasks.Task<string> PrintChuPingAsync(int orderId, int prnType, bool rePrint);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/OrderPrint", ReplyAction="http://tempuri.org/IgcafePrn/OrderPrintResponse")]
+        string OrderPrint(int orderId, int prnType, bool rePrint);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/OrderPrint", ReplyAction="http://tempuri.org/IgcafePrn/OrderPrintResponse")]
+        System.Threading.Tasks.Task<string> OrderPrintAsync(int orderId, int prnType, bool rePrint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/PrintChuPingCui", ReplyAction="http://tempuri.org/IgcafePrn/PrintChuPingCuiResponse")]
         string PrintChuPingCui(int orderId, int orderDetailId, int setmailId);
@@ -67,28 +73,36 @@ namespace gcafeWeb.gcafePrnSvc {
                 base(binding, remoteAddress) {
         }
         
-        public string PrintLiuTai(int orderId, int prnType) {
-            return base.Channel.PrintLiuTai(orderId, prnType);
+        public string PrintLiuTai(int orderId, int prnType, bool rePrint) {
+            return base.Channel.PrintLiuTai(orderId, prnType, rePrint);
         }
         
-        public System.Threading.Tasks.Task<string> PrintLiuTaiAsync(int orderId, int prnType) {
-            return base.Channel.PrintLiuTaiAsync(orderId, prnType);
+        public System.Threading.Tasks.Task<string> PrintLiuTaiAsync(int orderId, int prnType, bool rePrint) {
+            return base.Channel.PrintLiuTaiAsync(orderId, prnType, rePrint);
         }
         
-        public string PrintHuaDan(int orderId, int prnType) {
-            return base.Channel.PrintHuaDan(orderId, prnType);
+        public string PrintHuaDan(int orderId, int prnType, bool rePrint) {
+            return base.Channel.PrintHuaDan(orderId, prnType, rePrint);
         }
         
-        public System.Threading.Tasks.Task<string> PrintHuaDanAsync(int orderId, int prnType) {
-            return base.Channel.PrintHuaDanAsync(orderId, prnType);
+        public System.Threading.Tasks.Task<string> PrintHuaDanAsync(int orderId, int prnType, bool rePrint) {
+            return base.Channel.PrintHuaDanAsync(orderId, prnType, rePrint);
         }
         
-        public string PrintChuPing(int orderId, int prnType) {
-            return base.Channel.PrintChuPing(orderId, prnType);
+        public string PrintChuPing(int orderId, int prnType, bool rePrint) {
+            return base.Channel.PrintChuPing(orderId, prnType, rePrint);
         }
         
-        public System.Threading.Tasks.Task<string> PrintChuPingAsync(int orderId, int prnType) {
-            return base.Channel.PrintChuPingAsync(orderId, prnType);
+        public System.Threading.Tasks.Task<string> PrintChuPingAsync(int orderId, int prnType, bool rePrint) {
+            return base.Channel.PrintChuPingAsync(orderId, prnType, rePrint);
+        }
+        
+        public string OrderPrint(int orderId, int prnType, bool rePrint) {
+            return base.Channel.OrderPrint(orderId, prnType, rePrint);
+        }
+        
+        public System.Threading.Tasks.Task<string> OrderPrintAsync(int orderId, int prnType, bool rePrint) {
+            return base.Channel.OrderPrintAsync(orderId, prnType, rePrint);
         }
         
         public string PrintChuPingCui(int orderId, int orderDetailId, int setmailId) {

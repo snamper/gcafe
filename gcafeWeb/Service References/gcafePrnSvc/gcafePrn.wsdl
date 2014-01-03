@@ -32,6 +32,12 @@
   <wsdl:message name="IgcafePrn_PrintChuPing_OutputMessage">
     <wsdl:part name="parameters" element="tns:PrintChuPingResponse" />
   </wsdl:message>
+  <wsdl:message name="IgcafePrn_OrderPrint_InputMessage">
+    <wsdl:part name="parameters" element="tns:OrderPrint" />
+  </wsdl:message>
+  <wsdl:message name="IgcafePrn_OrderPrint_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OrderPrintResponse" />
+  </wsdl:message>
   <wsdl:message name="IgcafePrn_PrintChuPingCui_InputMessage">
     <wsdl:part name="parameters" element="tns:PrintChuPingCui" />
   </wsdl:message>
@@ -50,6 +56,10 @@
     <wsdl:operation name="PrintChuPing">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafePrn/PrintChuPing" message="tns:IgcafePrn_PrintChuPing_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IgcafePrn/PrintChuPingResponse" message="tns:IgcafePrn_PrintChuPing_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderPrint">
+      <wsdl:input wsaw:Action="http://tempuri.org/IgcafePrn/OrderPrint" message="tns:IgcafePrn_OrderPrint_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IgcafePrn/OrderPrintResponse" message="tns:IgcafePrn_OrderPrint_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PrintChuPingCui">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafePrn/PrintChuPingCui" message="tns:IgcafePrn_PrintChuPingCui_InputMessage" />
@@ -79,6 +89,15 @@
     </wsdl:operation>
     <wsdl:operation name="PrintChuPing">
       <soap12:operation soapAction="http://tempuri.org/IgcafePrn/PrintChuPing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderPrint">
+      <soap12:operation soapAction="http://tempuri.org/IgcafePrn/OrderPrint" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -35,7 +35,7 @@ namespace gcafeSvc
             System.Diagnostics.Debug.WriteLine("***************++++++++++++++++++++++++++++========================");
         }
 
-        public string PrintLiuTai(int orderId, int prnType)
+        public string PrintLiuTai(int orderId, int prnType, bool rePrint = false)
         {
             Global.Logger.Trace(Global.TraceMessage());
 
@@ -44,7 +44,7 @@ namespace gcafeSvc
                 //_printTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintHuaDan, 1, -1));
                 //System.Windows.Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Background, new DoTask(Print), printTask);
                 //_printTaskMgr.Print(new PrintTask(PrintTask.PrintType.PringHuaDan, 1, -1));
-                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintLiuTai, orderId, prnType));
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintLiuTai, orderId, prnType, rePrint));
             }
             catch (Exception ex)
             {
@@ -56,13 +56,13 @@ namespace gcafeSvc
             return "";
         }
 
-        public string PrintHuaDan(int orderId, int prnType)
+        public string PrintHuaDan(int orderId, int prnType, bool rePrint = false)
         {
             Global.Logger.Trace(Global.TraceMessage());
 
             try
             {
-                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintHuaDan, orderId, prnType));
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintHuaDan, orderId, prnType, rePrint));
             }
             catch (Exception ex)
             {
@@ -74,13 +74,31 @@ namespace gcafeSvc
             return "";
         }
 
-        public string PrintChuPing(int orderId, int prnType)
+        public string PrintChuPing(int orderId, int prnType, bool rePrint = false)
         {
             Global.Logger.Trace(Global.TraceMessage());
 
             try
             {
-                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintChuPin, orderId, prnType));
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintChuPin, orderId, prnType, rePrint));
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(string.Format("{0}, msg:{1}", Global.TraceMessage(), ex.Message));
+            }
+
+            Global.Logger.Trace(Global.TraceMessage());
+
+            return "";
+        }
+
+        public string OrderPrint(int orderId, int prnType, bool rePrint = false)
+        {
+            Global.Logger.Trace(Global.TraceMessage());
+
+            try
+            {
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.OrderPrint, orderId, prnType, rePrint));
             }
             catch (Exception ex)
             {

@@ -15,27 +15,40 @@ namespace gcafeSvc
         /// </summary>
         /// <param name="orderId">要打印的order id</param>
         /// <param name="prnType">打印的类型，-1 = 最后一次的点菜，0 = 所有的点菜，> 1的代表要打印第几次的点菜</param>
+        /// <param name="rePrint">是否重打</param>
         /// <returns></returns>
         [OperationContract]
-        string PrintLiuTai(int orderId, int prnType);
+        string PrintLiuTai(int orderId, int prnType, bool rePrint = false);
 
         /// <summary>
         /// 划单打印
         /// </summary>
         /// <param name="orderId">要打印的order id</param>
         /// <param name="prnType">打印的类型，-1 = 最后一次的点菜，0 = 所有的点菜，> 1的代表要打印第几次的点菜</param>
+        /// <param name="rePrint">是否重打</param>
         /// <returns></returns>
         [OperationContract]
-        string PrintHuaDan(int orderId, int prnType);
+        string PrintHuaDan(int orderId, int prnType, bool rePrint = false);
 
         /// <summary>
         /// 出品单打印
         /// </summary>
         /// <param name="orderId">要打印的order id</param>
         /// <param name="prnType">打印的类型，-1 = 最后一次的点菜，0 = 所有的点菜，> 1的代表要打印第几次的点菜</param>
+        /// <param name="rePrint">是否重打</param>
         /// <returns></returns>
         [OperationContract]
-        string PrintChuPing(int orderId, int prnType);
+        string PrintChuPing(int orderId, int prnType, bool rePrint = false);
+
+        /// <summary>
+        /// 下单打印，调用printliutai, printhuadan, printchuping
+        /// </summary>
+        /// <param name="orderId">要打印的order id</param>
+        /// <param name="prnType">打印的类型，-1 = 最后一次的点菜，0 = 所有的点菜，> 1的代表要打印第几次的点菜</param>
+        /// <param name="rePrint">是否重打</param>
+        /// <returns></returns>
+        [OperationContract]
+        string OrderPrint(int orderId, int prnType, bool rePrint = false);
 
         /// <summary>
         /// 出品单打印，催单时用
