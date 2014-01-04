@@ -41,5 +41,22 @@ namespace gcafePrnConsole
                 return Int32.Parse(ConfigurationSettings.AppSettings["BranchID"]);
             }
         }
+
+        public static string KitchenHuaDanPrinter
+        {
+            get
+            {
+                return ConfigurationSettings.AppSettings["厨房划单打印机"];
+            }
+        }
+
+        public static string BarHuaDanPrinter
+        {
+            get
+            {
+                return ConfigurationSettings.AppSettings["酒吧划单打印机"];
+            }
+        }
+
     }
 }

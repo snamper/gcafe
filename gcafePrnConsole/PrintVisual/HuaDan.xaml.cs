@@ -83,7 +83,7 @@ namespace gcafePrnConsole.PrintVisual
             if (orderDetail.menu.number.Substring(0, 2) == "22")
                 return;
 
-            // 套餐品名
+            // 品名
             TextBlock tb = new TextBlock()
             {
                 FontSize = 22.00,
@@ -91,12 +91,10 @@ namespace gcafePrnConsole.PrintVisual
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 Text = orderDetail.menu.name,
             };
-            tb.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-            size = tb.DesiredSize;
 
             // 加一行
             RowDefinition rd = new RowDefinition();
-            rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
+            rd.Height = GridLength.Auto;
             _gridItems.RowDefinitions.Add(rd);
 
             // 将品名加入到grid中
@@ -135,12 +133,10 @@ namespace gcafePrnConsole.PrintVisual
                     VerticalAlignment = System.Windows.VerticalAlignment.Center,
                     Text = zuofa,
                 };
-                tb.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-                size = tb.DesiredSize;
 
                 // 加一行
                 rd = new RowDefinition();
-                rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
+                rd.Height = GridLength.Auto;
                 _gridItems.RowDefinitions.Add(rd);
 
                 // 将做法加入到grid中
@@ -149,7 +145,7 @@ namespace gcafePrnConsole.PrintVisual
                 _gridItems.Children.Add(tb);
             }
 
-
+            // 套餐内容
             if (orderDetail.order_detail_setmeal.Count > 0)
             {
                 foreach (var setmeal in orderDetail.order_detail_setmeal)
@@ -166,13 +162,11 @@ namespace gcafePrnConsole.PrintVisual
                         VerticalAlignment = System.Windows.VerticalAlignment.Center,
                         Text = ">>" + setmeal.menu.name,
                     };
-                    tb.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-                    size = tb.DesiredSize;
 
                     // 加一行
                     rd = new RowDefinition();
                     //var ss = _gridItems.ColumnDefinitions[0].Width;
-                    rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
+                    rd.Height = GridLength.Auto;
                     _gridItems.RowDefinitions.Add(rd);
 
                     // 将套餐内容加入到grid中
@@ -199,12 +193,10 @@ namespace gcafePrnConsole.PrintVisual
                             VerticalAlignment = System.Windows.VerticalAlignment.Center,
                             Text = zuofa,
                         };
-                        tb.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-                        size = tb.DesiredSize;
 
                         // 加一行
                         rd = new RowDefinition();
-                        rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
+                        rd.Height = GridLength.Auto;
                         _gridItems.RowDefinitions.Add(rd);
 
                         // 将做法加入到grid中

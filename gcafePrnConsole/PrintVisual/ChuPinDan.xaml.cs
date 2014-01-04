@@ -90,8 +90,6 @@ namespace gcafePrnConsole.PrintVisual
         /// <param name="showRealQuantity">true表示显示真正数量，false时数量总是1</param>
         public void AddItem(order_detail_setmeal item, bool showRealQuantity = false)
         {
-            Size size;
-
             StaffName = item.order_detail.staff.name;
             TableNum = item.order_detail.order.table_no;
             OrderNum = item.order_detail.order.order_num;
@@ -103,12 +101,10 @@ namespace gcafePrnConsole.PrintVisual
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 Text = item.order_detail.menu.name,
             };
-            tb.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-            size = tb.DesiredSize;
 
             // 加一行
             RowDefinition rd = new RowDefinition();
-            rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
+            rd.Height = GridLength.Auto;
             _gridItems.RowDefinitions.Add(rd);
 
             // 将品名加入到grid中
@@ -124,13 +120,11 @@ namespace gcafePrnConsole.PrintVisual
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 Text = ">>" + item.menu.name,
             };
-            tb.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-            size = tb.DesiredSize;
 
             // 加一行
             rd = new RowDefinition();
             //var ss = _gridItems.ColumnDefinitions[0].Width;
-            rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
+            rd.Height = GridLength.Auto;
             _gridItems.RowDefinitions.Add(rd);
 
             // 将套餐内容加入到grid中
@@ -169,12 +163,10 @@ namespace gcafePrnConsole.PrintVisual
                     VerticalAlignment = System.Windows.VerticalAlignment.Center,
                     Text = zuofa,
                 };
-                tb.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-                size = tb.DesiredSize;
 
                 // 加一行
                 rd = new RowDefinition();
-                rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
+                rd.Height = GridLength.Auto;
                 _gridItems.RowDefinitions.Add(rd);
 
                 // 将做法加入到grid中
@@ -186,8 +178,6 @@ namespace gcafePrnConsole.PrintVisual
 
         public void AddItem(order_detail item, bool showRealQuantity = false)
         {
-            Size size;
-
             StaffName = item.staff.name;
             TableNum = item.order.table_no;
             OrderNum = item.order.order_num;
@@ -200,12 +190,10 @@ namespace gcafePrnConsole.PrintVisual
                 VerticalAlignment = System.Windows.VerticalAlignment.Center,
                 Text = item.menu.name,
             };
-            tb.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-            size = tb.DesiredSize;
 
             // 加一行
             RowDefinition rd = new RowDefinition();
-            rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
+            rd.Height = GridLength.Auto;
             _gridItems.RowDefinitions.Add(rd);
 
             // 将品名加入到grid中
@@ -245,12 +233,10 @@ namespace gcafePrnConsole.PrintVisual
                     VerticalAlignment = System.Windows.VerticalAlignment.Center,
                     Text = zuofa,
                 };
-                tb.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
-                size = tb.DesiredSize;
 
                 // 加一行
                 rd = new RowDefinition();
-                rd.Height = new GridLength(((int)size.Width / (int)187 + 1) * 35);
+                rd.Height = GridLength.Auto;
                 _gridItems.RowDefinitions.Add(rd);
 
                 // 将做法加入到grid中

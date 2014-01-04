@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Width="7cm">
+    <Grid Width="7cm" HorizontalAlignment="Left" Margin="10, 5">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.6cm" />
             <RowDefinition Height="0.6cm" />
@@ -15,7 +15,7 @@
             <RowDefinition Height="1.6cm" />
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="tbDepart" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" />
+        <TextBlock x:Name="tbDepart" Text="留台单" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" />
         <TextBlock x:Name="tbTableNum" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" />
         <TextBlock x:Name="tbOrderCnt" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="22" />
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
@@ -42,9 +42,9 @@
 
         <Grid Grid.Row="4" x:Name="_gridItems">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70*" />
+                <ColumnDefinition Width="65*" />
                 <ColumnDefinition Width="15*" />
-                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="20*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>

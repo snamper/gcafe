@@ -175,7 +175,7 @@ namespace gcafePrnConsole
                     // 打印
                     PrintDialog printDlg = new PrintDialog();
                     var printers = new LocalPrintServer().GetPrintQueues();
-                    var selectedPrinter = printers.FirstOrDefault(p => p.Name == "PDFCreator");
+                    var selectedPrinter = printers.FirstOrDefault(p => p.Name == Global.KitchenHuaDanPrinter);
                     printDlg.PrintQueue = selectedPrinter;
 
                     PrintVisual.HuaDan huaDan = new PrintVisual.HuaDan() { 
@@ -362,12 +362,88 @@ namespace gcafePrnConsole
         {
             Global.Logger.Trace(Global.TraceMessage());
 
+            string orderCount = string.Empty;
+
             try
             {
                 List<order_detail> orderDetails;
                 using (var context = new gcafeEntities())
                 {
+                    #region Get orderDetails
+                    if (prnType == 0)
+                    {
+                        orderDetails = context.order_detail
+                            .Include(n => n.menu)
+                            .Include(n => n.order_detail_method.Select(m => m.method))
+                            //.Include(n => n.order_detail_setmeal.Select(m => m.menu))
+                            //.Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
+                            .Include("staff")
+                            .Where(n => n.order_id == 1 && n.is_cancle == false)
+                            .OrderBy(n => n.order_time)
+                            .ToList();
 
+                        orderCount = "所有";
+                    }
+                    else
+                    {
+                        var query = context.order_detail
+                            .Where(n => n.order_id == orderId)
+                            .OrderBy(n => n.group_cnt)
+                            .GroupBy(n => n.group_cnt)
+                            .ToList();
+
+                        int key;
+                        if (prnType == -1)
+                        {
+                            key = query.Last().Key;
+                            orderCount = query.Count.ToString();
+                        }
+                        else
+                        {
+                            if (prnType < query.Count)
+                                key = query.ElementAt(prnType - 1).Key;
+                            else
+                                return "超出边界";
+
+                            orderCount = prnType.ToString();
+                        }
+
+                        orderDetails = context.order_detail
+                            .Include("menu")
+                            .Include(n => n.order_detail_method.Select(m => m.method))
+                            //.Include(n => n.order_detail_setmeal.Select(m => m.menu))
+                            //.Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
+                            .Include("staff")
+                            .Where(n => n.order_id == 1 && n.is_cancle == false && n.group_cnt == key)
+                            .OrderBy(n => n.order_time)
+                            .ToList();
+                    }
+                    #endregion Get orderDetails
+
+                    PrintDialog printDlg = new PrintDialog();
+                    var printers = new LocalPrintServer().GetPrintQueues();
+                    var selectedPrinter = printers.FirstOrDefault(p => p.Name == GetPrinterNameByTableNum(orderDetails[0].order.table_no));
+                    printDlg.PrintQueue = selectedPrinter;
+
+                    PrintVisual.LiuTaiDan liuTai = new PrintVisual.LiuTaiDan()
+                    {
+                        OrderCount = orderCount,
+                        TableNum = orderDetails[0].order.table_no,
+                        StaffName = orderDetails[0].staff.name,
+                        OrderNum = orderDetails[0].order.order_num,
+                        TotalPrice = (decimal)orderDetails[0].order.receivable,
+                    };
+
+                    foreach (var orderDetail in orderDetails)
+                    {
+                        liuTai.AddItem(orderDetail);
+                    }
+
+                    liuTai.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
+                    liuTai.Arrange(new Rect(new Point(0, 0), liuTai.DesiredSize));
+                    printDlg.PrintVisual(liuTai, "留台单打印");
+
+                    Global.Logger.Debug(string.Format("({0}) - 留台单打印", Global.TraceMessage()));
                 }
             }
             catch (Exception ex)
@@ -378,6 +454,11 @@ namespace gcafePrnConsole
             Global.Logger.Trace(Global.TraceMessage());
 
             return "";
+        }
+
+        string GetPrinterNameByTableNum(string tableNum)
+        {
+            return "PDFCreator";
         }
 
         /// <summary>
