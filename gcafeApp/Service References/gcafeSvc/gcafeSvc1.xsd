@@ -87,6 +87,7 @@
       <xs:element minOccurs="0" name="cancel_time" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="device" nillable="true" type="tns:device" />
       <xs:element minOccurs="0" name="device_id" type="xs:int" />
+      <xs:element minOccurs="0" name="group_cnt" type="xs:int" />
       <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="is_cancle" type="xs:boolean" />
       <xs:element minOccurs="0" name="memo" nillable="true" type="xs:string" />
@@ -338,6 +339,8 @@
       <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="menu" nillable="true" type="tns:ArrayOfmenu" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="print_cnt" type="xs:int" />
+      <xs:element minOccurs="0" name="print_total_cnt" type="xs:int" />
       <xs:element minOccurs="0" name="printer" nillable="true" type="tns:ArrayOfprinter" />
     </xs:sequence>
   </xs:complexType>
@@ -352,6 +355,8 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="print_cnt" type="xs:int" />
+      <xs:element minOccurs="0" name="print_total_cnt" type="xs:int" />
       <xs:element minOccurs="0" name="printer_group" nillable="true" type="tns:printer_group" />
       <xs:element minOccurs="0" name="printer_group_id" nillable="true" type="xs:int" />
     </xs:sequence>
@@ -409,6 +414,8 @@
       <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="is_festival" type="xs:boolean" />
       <xs:element minOccurs="0" name="order_cnt" type="xs:int" />
+      <xs:element minOccurs="0" name="order_detail_cnt" type="xs:int" />
+      <xs:element minOccurs="0" name="print_cnt" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="sys_info" nillable="true" type="tns:sys_info" />

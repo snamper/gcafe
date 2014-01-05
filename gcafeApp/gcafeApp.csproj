@@ -269,6 +269,9 @@
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MethodCatalog.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.order_detail.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.Staff1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

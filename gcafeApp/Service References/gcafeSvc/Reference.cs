@@ -598,6 +598,8 @@ namespace gcafeApp.gcafeSvc {
         
         private int device_idField;
         
+        private int group_cntField;
+        
         private int idField;
         
         private bool is_cancleField;
@@ -676,6 +678,19 @@ namespace gcafeApp.gcafeSvc {
                 if ((this.device_idField.Equals(value) != true)) {
                     this.device_idField = value;
                     this.RaisePropertyChanged("device_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int group_cnt {
+            get {
+                return this.group_cntField;
+            }
+            set {
+                if ((this.group_cntField.Equals(value) != true)) {
+                    this.group_cntField = value;
+                    this.RaisePropertyChanged("group_cnt");
                 }
             }
         }
@@ -2940,6 +2955,10 @@ namespace gcafeApp.gcafeSvc {
         
         private string nameField;
         
+        private int print_cntField;
+        
+        private int print_total_cntField;
+        
         private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.printer> printerField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -3008,6 +3027,32 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int print_cnt {
+            get {
+                return this.print_cntField;
+            }
+            set {
+                if ((this.print_cntField.Equals(value) != true)) {
+                    this.print_cntField = value;
+                    this.RaisePropertyChanged("print_cnt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int print_total_cnt {
+            get {
+                return this.print_total_cntField;
+            }
+            set {
+                if ((this.print_total_cntField.Equals(value) != true)) {
+                    this.print_total_cntField = value;
+                    this.RaisePropertyChanged("print_total_cnt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.printer> printer {
             get {
                 return this.printerField;
@@ -3044,6 +3089,10 @@ namespace gcafeApp.gcafeSvc {
         private bool is_festivalField;
         
         private int order_cntField;
+        
+        private int order_detail_cntField;
+        
+        private int print_cntField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public gcafeApp.gcafeSvc.branch branch {
@@ -3106,6 +3155,32 @@ namespace gcafeApp.gcafeSvc {
                 if ((this.order_cntField.Equals(value) != true)) {
                     this.order_cntField = value;
                     this.RaisePropertyChanged("order_cnt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int order_detail_cnt {
+            get {
+                return this.order_detail_cntField;
+            }
+            set {
+                if ((this.order_detail_cntField.Equals(value) != true)) {
+                    this.order_detail_cntField = value;
+                    this.RaisePropertyChanged("order_detail_cnt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int print_cnt {
+            get {
+                return this.print_cntField;
+            }
+            set {
+                if ((this.print_cntField.Equals(value) != true)) {
+                    this.print_cntField = value;
+                    this.RaisePropertyChanged("print_cnt");
                 }
             }
         }
@@ -3489,6 +3564,10 @@ namespace gcafeApp.gcafeSvc {
         
         private string nameField;
         
+        private int print_cntField;
+        
+        private int print_total_cntField;
+        
         private gcafeApp.gcafeSvc.printer_group printer_groupField;
         
         private System.Nullable<int> printer_group_idField;
@@ -3515,6 +3594,32 @@ namespace gcafeApp.gcafeSvc {
                 if ((object.ReferenceEquals(this.nameField, value) != true)) {
                     this.nameField = value;
                     this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int print_cnt {
+            get {
+                return this.print_cntField;
+            }
+            set {
+                if ((this.print_cntField.Equals(value) != true)) {
+                    this.print_cntField = value;
+                    this.RaisePropertyChanged("print_cnt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int print_total_cnt {
+            get {
+                return this.print_total_cntField;
+            }
+            set {
+                if ((this.print_total_cntField.Equals(value) != true)) {
+                    this.print_total_cntField = value;
+                    this.RaisePropertyChanged("print_total_cnt");
                 }
             }
         }
@@ -3963,6 +4068,11 @@ namespace gcafeApp.gcafeSvc {
         
         string EndOrderMeal(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetOrderDetailByOrderNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetOrderDetailByOrderNumResponse")]
+        System.IAsyncResult BeginGetOrderDetailByOrderNum(string orderNum, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> EndGetOrderDetailByOrderNum(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetStaffByNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetStaffByNumResponse")]
         System.IAsyncResult BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState);
         
@@ -4146,6 +4256,25 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetOrderDetailByOrderNumCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetOrderDetailByOrderNumCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class GetStaffByNumCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -4220,6 +4349,12 @@ namespace gcafeApp.gcafeSvc {
         private EndOperationDelegate onEndOrderMealDelegate;
         
         private System.Threading.SendOrPostCallback onOrderMealCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetOrderDetailByOrderNumDelegate;
+        
+        private EndOperationDelegate onEndGetOrderDetailByOrderNumDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetOrderDetailByOrderNumCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetStaffByNumDelegate;
         
@@ -4297,6 +4432,8 @@ namespace gcafeApp.gcafeSvc {
         public event System.EventHandler<GetMethodCatalogsCompletedEventArgs> GetMethodCatalogsCompleted;
         
         public event System.EventHandler<OrderMealCompletedEventArgs> OrderMealCompleted;
+        
+        public event System.EventHandler<GetOrderDetailByOrderNumCompletedEventArgs> GetOrderDetailByOrderNumCompleted;
         
         public event System.EventHandler<GetStaffByNumCompletedEventArgs> GetStaffByNumCompleted;
         
@@ -4733,6 +4870,52 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetOrderDetailByOrderNum(string orderNum, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetOrderDetailByOrderNum(orderNum, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> gcafeApp.gcafeSvc.IgcafeSvc.EndGetOrderDetailByOrderNum(System.IAsyncResult result) {
+            return base.Channel.EndGetOrderDetailByOrderNum(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetOrderDetailByOrderNum(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string orderNum = ((string)(inValues[0]));
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginGetOrderDetailByOrderNum(orderNum, callback, asyncState);
+        }
+        
+        private object[] OnEndGetOrderDetailByOrderNum(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetOrderDetailByOrderNum(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetOrderDetailByOrderNumCompleted(object state) {
+            if ((this.GetOrderDetailByOrderNumCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetOrderDetailByOrderNumCompleted(this, new GetOrderDetailByOrderNumCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetOrderDetailByOrderNumAsync(string orderNum) {
+            this.GetOrderDetailByOrderNumAsync(orderNum, null);
+        }
+        
+        public void GetOrderDetailByOrderNumAsync(string orderNum, object userState) {
+            if ((this.onBeginGetOrderDetailByOrderNumDelegate == null)) {
+                this.onBeginGetOrderDetailByOrderNumDelegate = new BeginOperationDelegate(this.OnBeginGetOrderDetailByOrderNum);
+            }
+            if ((this.onEndGetOrderDetailByOrderNumDelegate == null)) {
+                this.onEndGetOrderDetailByOrderNumDelegate = new EndOperationDelegate(this.OnEndGetOrderDetailByOrderNum);
+            }
+            if ((this.onGetOrderDetailByOrderNumCompletedDelegate == null)) {
+                this.onGetOrderDetailByOrderNumCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetOrderDetailByOrderNumCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetOrderDetailByOrderNumDelegate, new object[] {
+                        orderNum}, this.onEndGetOrderDetailByOrderNumDelegate, this.onGetOrderDetailByOrderNumCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginGetStaffByNum(DeviceId, Num, callback, asyncState);
         }
@@ -4977,6 +5160,19 @@ namespace gcafeApp.gcafeSvc {
             public string EndOrderMeal(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 string _result = ((string)(base.EndInvoke("OrderMeal", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetOrderDetailByOrderNum(string orderNum, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = orderNum;
+                System.IAsyncResult _result = base.BeginInvoke("GetOrderDetailByOrderNum", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> EndGetOrderDetailByOrderNum(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> _result = ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail>)(base.EndInvoke("GetOrderDetailByOrderNum", _args, result)));
                 return _result;
             }
             

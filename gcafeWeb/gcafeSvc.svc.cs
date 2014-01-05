@@ -420,6 +420,35 @@ namespace gcafeWeb
             return "点菜成功";
         }
 
+        public List<order_detail> GetOrderDetailByOrderNum(string orderNum)
+        {
+            List<order_detail> orderDetails = null;
+
+            _log.Trace(TraceMessage());
+
+            try
+            {
+                using (var context = new gcafeEntities())
+                {
+                    orderDetails = context.order_detail
+                        .Include("menu")
+                        .Include(n => n.order_detail_method.Select(m => m.method))
+                        .Include(n => n.order_detail_setmeal.Select(m => m.menu))
+                        .Where(n => n.order.order_num == orderNum)
+                        .ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _log.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
+            }
+
+            _log.Trace(TraceMessage());
+
+            return orderDetails;
+        }
+
         public Staff GetStaffByNum(string DeviceId, string Num)
         {
             _log.Trace(TraceMessage());

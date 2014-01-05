@@ -61,6 +61,12 @@
   <wsdl:message name="IgcafeSvc_OrderMeal_OutputMessage">
     <wsdl:part name="parameters" element="tns:OrderMealResponse" />
   </wsdl:message>
+  <wsdl:message name="IgcafeSvc_GetOrderDetailByOrderNum_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderDetailByOrderNum" />
+  </wsdl:message>
+  <wsdl:message name="IgcafeSvc_GetOrderDetailByOrderNum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderDetailByOrderNumResponse" />
+  </wsdl:message>
   <wsdl:message name="IgcafeSvc_GetStaffByNum_InputMessage">
     <wsdl:part name="parameters" element="tns:GetStaffByNum" />
   </wsdl:message>
@@ -103,6 +109,10 @@
     <wsdl:operation name="OrderMeal">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/OrderMeal" message="tns:IgcafeSvc_OrderMeal_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/OrderMealResponse" message="tns:IgcafeSvc_OrderMeal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetailByOrderNum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetOrderDetailByOrderNum" message="tns:IgcafeSvc_GetOrderDetailByOrderNum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/GetOrderDetailByOrderNumResponse" message="tns:IgcafeSvc_GetOrderDetailByOrderNum_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetStaffByNum">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetStaffByNum" message="tns:IgcafeSvc_GetStaffByNum_InputMessage" />
@@ -185,6 +195,15 @@
     </wsdl:operation>
     <wsdl:operation name="OrderMeal">
       <soap:operation soapAction="http://tempuri.org/IgcafeSvc/OrderMeal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetailByOrderNum">
+      <soap:operation soapAction="http://tempuri.org/IgcafeSvc/GetOrderDetailByOrderNum" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

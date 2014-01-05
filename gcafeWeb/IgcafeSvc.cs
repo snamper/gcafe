@@ -72,6 +72,9 @@ namespace gcafeWeb
         [OperationContract]
         string OrderMeal(string deviceId, int staffId, string tableNum, List<MenuItem> meals);
 
+        [OperationContract]
+        List<order_detail> GetOrderDetailByOrderNum(string orderNum);
+
         /// <summary>
         /// 根据Num取员工信息
         /// </summary>

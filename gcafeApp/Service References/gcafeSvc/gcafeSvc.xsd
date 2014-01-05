@@ -132,6 +132,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetOrderDetailByOrderNum">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orderNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderDetailByOrderNumResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetOrderDetailByOrderNumResult" nillable="true" type="q10:ArrayOforder_detail" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetStaffByNum">
     <xs:complexType>
       <xs:sequence>
@@ -143,7 +157,7 @@
   <xs:element name="GetStaffByNumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q10:Staff" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q11:Staff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
