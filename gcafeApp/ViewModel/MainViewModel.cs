@@ -71,8 +71,31 @@ namespace gcafeApp.ViewModel
             {
                 _svc = svc;
                 _svc.OrderMealCompleted += _svc_OrderMealCompleted;
+                _svc.GetTablesInfoCompleted += _svc_GetTablesInfoCompleted;
 
                 MenuItems = new ObservableCollection<MenuItem>();
+            }
+        }
+
+        void _svc_GetTablesInfoCompleted(object sender, GetTablesInfoCompletedEventArgs e)
+        {
+            if (e.Result != null)
+            {
+                List<TableViewModel> vmList = new List<TableViewModel>();
+                foreach (TableInfo tbl in e.Result)
+                {
+                    vmList.Add(new TableViewModel()
+                    {
+                        OrderNum = tbl.OrderNum,
+                        TableNo = tbl.Num,
+                        CustomerNum = tbl.CustomerNum,
+                        OpenTableStaff = tbl.OpenTableStaff.Name,
+                        TableOpenedTime = tbl.OpenTableTime,
+                        Amount = tbl.Amount,
+                    });
+                }
+
+                this.OpenedTables = new ObservableCollection<TableViewModel>(vmList);
             }
         }
 
@@ -140,6 +163,25 @@ namespace gcafeApp.ViewModel
         {
             _callBack = callback;
             _svc.OrderMealAsync(gcafeApp.Settings.AppSettings.DeviceID, gcafeApp.Settings.AppSettings.LoginStaff.ID, tableNum, MenuItems);
+        }
+
+        public ObservableCollection<TableViewModel> OpenedTables
+        {
+            get { return _openedTables; }
+            private set
+            {
+                if (!ReferenceEquals(_openedTables, value))
+                {
+                    _openedTables = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        public ObservableCollection<TableViewModel> _openedTables;
+
+        public void GetOpenedTables()
+        {
+            _svc.GetTablesInfoAsync(Settings.AppSettings.DeviceID);
         }
     }
 

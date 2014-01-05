@@ -9,7 +9,7 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:data="clr-namespace:gcafeApp.ViewModel"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -45,7 +45,7 @@
          -->
 
         <!--枢轴控件-->
-        <phone:Pivot Title="我的应用程序">
+        <phone:Pivot Title="我的应用程序" SelectionChanged="Pivot_SelectionChanged">
             <phone:Pivot.TitleTemplate>
                 <DataTemplate>
                     <Grid Margin="-10, -15, 10, 10">
@@ -191,14 +191,42 @@
             <!--枢轴项二-->
             <phone:PivotItem Header="账单">
                 <!--无文字环绕的双线列表-->
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                <phone:LongListSelector x:Name="TableList" Margin="0,0,-22,0" ItemsSource="{Binding OpenedTables}" 
+                                        SelectionChanged="TableList_SelectionChanged"
+                                        toolkit:TiltEffect.IsTiltEnabled="True">
                     <phone:LongListSelector.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="0,0,0,17">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="NoWrap" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineThree}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                        <DataTemplate>
+                            <Grid Margin="0,8,0,8" Background="Gray">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Background="Red">
+                                    <StackPanel Width="120" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding TableNo}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalAlignment="Center" />
+                                        <TextBlock Margin="0, 20" Text="{Binding OrderNum}" HorizontalAlignment="Center" FontSize="15" />
+                                    </StackPanel>
+
                                 </StackPanel>
-                            </DataTemplate>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="已消费:" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                                        <TextBlock Text="{Binding Amount}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                                        <TextBlock Text="元" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="客人数:" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                        <TextBlock Text="{Binding CustomerNum}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                        <TextBlock Text="人" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding OpenTableStaff}" Style="{StaticResource PhoneTextSmallStyle}"/>
+                                        <TextBlock Text="{Binding TableOpenedTime, StringFormat=HH:mm}" Style="{StaticResource PhoneTextSmallStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                        <TextBlock Text="开台" Style="{StaticResource PhoneTextSmallStyle}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
                 </phone:LongListSelector>
             </phone:PivotItem>

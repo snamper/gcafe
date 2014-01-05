@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Windows.Foundation;
+using Microsoft.Phone.Shell;
 using Windows.Phone.Media.Capture;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -22,6 +23,11 @@ namespace gcafeApp.ViewModel
     {
         private readonly IgcafeSvcClient _svc;
         bool _notfocus = false;
+        bool _found = false;
+        bool _break = false;
+        DateTime _dt;
+        Thread _thrFocus;
+        Thread _thrDetect;
 
         public VMMenuCameraSelect(IgcafeSvcClient svc)
         {
@@ -46,6 +52,11 @@ namespace gcafeApp.ViewModel
                 {
                     MenuItem menuItem = e.Result;
                     this.Result = menuItem.Name;
+
+                    PhoneApplicationService.Current.State["SelectedMenuItem"] = menuItem;
+
+                    RaisePropertyChanged("SelectedMenuItem");
+
                     //System.Diagnostics.Debug.WriteLine(this.Result);
                 }
             }
@@ -61,44 +72,97 @@ namespace gcafeApp.ViewModel
             await InitializePhotoCaptureDevice(CaptureResolution);
             await StartCapturingAsync();
             await PhotoCaptureDevice.FocusAsync();
-            int i = 0;
-            while (true)
+
+            _break = false;
+
+            //_found = false;
+
+            System.Diagnostics.Debug.WriteLine(string.Format("init : ===== {0}", _break));
+            while (!_break)
             {
                 Result result = await GetBarcodeAsync();
 
                 if (result != null)
                 {
-                    _svc.GetMenuItemByNumberAsync(Settings.AppSettings.DeviceID, result.Text);
+                    if (result.Text.Substring(0, 2) == "11" ||
+                        result.Text.Substring(0, 2) == "22")
+                    {
+                        _svc.GetMenuItemByNumberAsync(Settings.AppSettings.DeviceID, result.Text);
+                        _break = true;
+                    }
                 }
-                //string s = result.Text;
-                //if (result != null)
-                //{
-                //    System.Diagnostics.Debug.WriteLine(result);
-                //    if (result.Length > 2)
-                //    {
-                //        System.Diagnostics.Debug.WriteLine(result);
-                //        if (result.Substring(0, 2) == "11" || result.Substring(0, 2) == "22")
-                //        {
-                //            System.Diagnostics.Debug.WriteLine(result);
-                //            Result = result;
-                //            System.Diagnostics.Debug.WriteLine(result);
-                //            if (i++ > 5)
-                //                break;
-                //        }
-                //    }
-                //}
-
-                //result = "m";
             }
 
             PhotoCaptureDevice.Dispose();
             PhotoCaptureDevice = null;
+
+            System.Diagnostics.Debug.WriteLine("======================================== break..");
+
+            _break = false;
+
+            //_thrFocus = new Thread(new ThreadStart(ThreadFocus));
+            //_thrFocus.Start();
+            //_thrDetect = new Thread(new ThreadStart(ThreadDetect));
+            //_thrDetect.Start();
+
+            //_thrDetect.Join();
+        }
+
+        public void Uninitialize()
+        {
+            _break = true;
+        }
+
+        async void ThreadFocus()
+        {
+            while (!_found)
+            {
+                if (PhotoCaptureDevice != null)
+                {
+                    await Task.Delay(100);
+                    await PhotoCaptureDevice.FocusAsync();
+                }
+            }
+
+            System.Diagnostics.Debug.WriteLine("=====================   Thread Focus exit, {0}", (DateTime.Now - _dt).TotalMilliseconds);
+
+            PhotoCaptureDevice.Dispose();
+            PhotoCaptureDevice = null;
+
+            System.Diagnostics.Debug.WriteLine("=====================   Thread Focus exit, {0}", (DateTime.Now - _dt).TotalMilliseconds);
+        }
+
+        async void ThreadDetect()
+        {
+            int cnt = 0;
+            while (!_found)
+            {
+                Result result = await DetectBarcodeAsync();
+
+                System.Diagnostics.Debug.WriteLine(string.Format("========= {0}", cnt++));
+
+                if (result != null)
+                {
+                    if (result.Text.Substring(0, 2) == "11" ||
+                        result.Text.Substring(0, 2) == "22")
+                    {
+                        _dt = DateTime.Now;
+                        System.Diagnostics.Debug.WriteLine("dddddddddddddddddddddtect 0000000000");
+                        //_svc.GetMenuItemByNumberAsync(Settings.AppSettings.DeviceID, result.Text);
+                        _found = true;
+                    }
+                }
+            }
+
+            _thrFocus.Join();
+
+            System.Diagnostics.Debug.WriteLine("====================== Thread Detect exit");
         }
 
         private async Task<Result> GetBarcodeAsync()
         {
-            if (!_notfocus)
-                await PhotoCaptureDevice.FocusAsync();
+            //if (!_notfocus)
+            await PhotoCaptureDevice.FocusAsync();
             //PhotoCaptureDevice.FocusAsync();
             return await DetectBarcodeAsync();
         }
@@ -112,20 +176,23 @@ namespace gcafeApp.ViewModel
             PhotoCaptureDevice.GetPreviewBufferY(previewBuffer);
 
             var barcodeReader = new BarcodeReader();
-            barcodeReader.TryHarder = true;
+            //barcodeReader.TryHarder = true;
             //barcodeReader.TryInverted = true;
             //barcodeReader.AutoRotate = true;
 
             var result = barcodeReader.Decode(previewBuffer, width, height, RGBLuminanceSource.BitmapFormat.Gray8);
             if (result != null)
             {
-                if (!_notfocus)
+                if (result.Text.Substring(0, 2) == "11" ||
+                    result.Text.Substring(0, 2) == "22")
                 {
-                    PhotoCaptureDevice.SetProperty(KnownCameraPhotoProperties.LockedAutoFocusParameters, AutoFocusParameters.Focus);
-                    _notfocus = true;
+                    if (!_notfocus)
+                    {
+                        PhotoCaptureDevice.SetProperty(KnownCameraPhotoProperties.LockedAutoFocusParameters, AutoFocusParameters.Focus);
+                        _notfocus = true;
+                    }
                 }
-
-                await Task.Delay(10);
+                //await Task.Delay(10);
                 //System.Diagnostics.Debug.WriteLine(result.Text);
             }
 

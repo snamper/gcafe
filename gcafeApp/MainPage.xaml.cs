@@ -90,6 +90,20 @@ namespace gcafeApp
             }
         }
 
+        private void TableList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PivotItem pivotItem = (PivotItem)e.AddedItems[0];
+            string header = (string)pivotItem.Header;
+
+            if (header == "账单")
+                ((ViewModel.MainViewModel)DataContext).GetOpenedTables();
+        }
+
 
         // 用于生成本地化 ApplicationBar 的示例代码
         //private void BuildLocalizedApplicationBar()
