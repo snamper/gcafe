@@ -80,6 +80,8 @@ namespace gcafeApp.gcafeSvc {
     [System.Runtime.Serialization.DataContractAttribute(Name="MenuItem", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
     public partial class MenuItem : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private int GroupCntField;
+        
         private int IDField;
         
         private bool IsSetmealField;
@@ -88,13 +90,32 @@ namespace gcafeApp.gcafeSvc {
         
         private string NameField;
         
+        private string OrderStaffNameField;
+        
+        private System.DateTime OrderTimeField;
+        
         private decimal PriceField;
+        
+        private System.Nullable<System.DateTime> ProduceTimeField;
         
         private int QuantityField;
         
         private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.SetmealItem> SetmealItemsField;
         
         private string UnitField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GroupCnt {
+            get {
+                return this.GroupCntField;
+            }
+            set {
+                if ((this.GroupCntField.Equals(value) != true)) {
+                    this.GroupCntField = value;
+                    this.RaisePropertyChanged("GroupCnt");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int ID {
@@ -149,6 +170,32 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string OrderStaffName {
+            get {
+                return this.OrderStaffNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrderStaffNameField, value) != true)) {
+                    this.OrderStaffNameField = value;
+                    this.RaisePropertyChanged("OrderStaffName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime OrderTime {
+            get {
+                return this.OrderTimeField;
+            }
+            set {
+                if ((this.OrderTimeField.Equals(value) != true)) {
+                    this.OrderTimeField = value;
+                    this.RaisePropertyChanged("OrderTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public decimal Price {
             get {
                 return this.PriceField;
@@ -157,6 +204,19 @@ namespace gcafeApp.gcafeSvc {
                 if ((this.PriceField.Equals(value) != true)) {
                     this.PriceField = value;
                     this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> ProduceTime {
+            get {
+                return this.ProduceTimeField;
+            }
+            set {
+                if ((this.ProduceTimeField.Equals(value) != true)) {
+                    this.ProduceTimeField = value;
+                    this.RaisePropertyChanged("ProduceTime");
                 }
             }
         }
@@ -4071,7 +4131,7 @@ namespace gcafeApp.gcafeSvc {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetOrderDetailByOrderNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetOrderDetailByOrderNumResponse")]
         System.IAsyncResult BeginGetOrderDetailByOrderNum(string orderNum, System.AsyncCallback callback, object asyncState);
         
-        System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> EndGetOrderDetailByOrderNum(System.IAsyncResult result);
+        System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> EndGetOrderDetailByOrderNum(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetStaffByNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetStaffByNumResponse")]
         System.IAsyncResult BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState);
@@ -4265,10 +4325,10 @@ namespace gcafeApp.gcafeSvc {
             this.results = results;
         }
         
-        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> Result {
+        public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail>)(this.results[0]));
+                return ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem>)(this.results[0]));
             }
         }
     }
@@ -4875,7 +4935,7 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> gcafeApp.gcafeSvc.IgcafeSvc.EndGetOrderDetailByOrderNum(System.IAsyncResult result) {
+        System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> gcafeApp.gcafeSvc.IgcafeSvc.EndGetOrderDetailByOrderNum(System.IAsyncResult result) {
             return base.Channel.EndGetOrderDetailByOrderNum(result);
         }
         
@@ -4885,7 +4945,7 @@ namespace gcafeApp.gcafeSvc {
         }
         
         private object[] OnEndGetOrderDetailByOrderNum(System.IAsyncResult result) {
-            System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetOrderDetailByOrderNum(result);
+            System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetOrderDetailByOrderNum(result);
             return new object[] {
                     retVal};
         }
@@ -5170,9 +5230,9 @@ namespace gcafeApp.gcafeSvc {
                 return _result;
             }
             
-            public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> EndGetOrderDetailByOrderNum(System.IAsyncResult result) {
+            public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> EndGetOrderDetailByOrderNum(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail> _result = ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.order_detail>)(base.EndInvoke("GetOrderDetailByOrderNum", _args, result)));
+                System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> _result = ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem>)(base.EndInvoke("GetOrderDetailByOrderNum", _args, result)));
                 return _result;
             }
             

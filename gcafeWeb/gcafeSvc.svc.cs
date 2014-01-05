@@ -420,9 +420,11 @@ namespace gcafeWeb
             return "点菜成功";
         }
 
-        public List<order_detail> GetOrderDetailByOrderNum(string orderNum)
+        public List<MenuItem> GetOrderDetailByOrderNum(string orderNum)
         {
-            List<order_detail> orderDetails = null;
+            List<MenuItem> menuItems = new List<MenuItem>();
+
+            //return menuItems;
 
             _log.Trace(TraceMessage());
 
@@ -430,12 +432,61 @@ namespace gcafeWeb
             {
                 using (var context = new gcafeEntities())
                 {
-                    orderDetails = context.order_detail
+                    List<order_detail> orderDetails = context.order_detail
                         .Include("menu")
+                        .Include(n => n.staff)
                         .Include(n => n.order_detail_method.Select(m => m.method))
                         .Include(n => n.order_detail_setmeal.Select(m => m.menu))
+                        .Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
                         .Where(n => n.order.order_num == orderNum)
                         .ToList();
+
+                    foreach (var orderDetail in orderDetails)
+                    {
+                        MenuItem menuItem = new MenuItem() 
+                        {
+                            ID = orderDetail.menu_id,
+                            Name = orderDetail.menu.name,
+                            Unit = orderDetail.menu.unit,
+                            Price = orderDetail.price,
+                            Quantity = (int)orderDetail.quantity,
+                            OrderStaffName = orderDetail.staff.name,
+                            OrderTime = orderDetail.order_time,
+                            ProduceTime = orderDetail.produced_time,
+                            GroupCnt = orderDetail.group_cnt,
+                            IsSetmeal = orderDetail.order_detail_setmeal.Count > 0,
+                        };
+
+                        if (orderDetail.order_detail_method.Count > 0)
+                        {
+                            menuItem.Methods = new List<method>();
+                            foreach (var method in orderDetail.order_detail_method)
+                            {
+                                menuItem.Methods.Add(new method() { id = method.method.id, name = method.method.name });
+                            }
+                        }
+
+                        if (orderDetail.order_detail_setmeal.Count > 0)
+                        {
+                            menuItem.SetmealItems = new List<SetmealItem>();
+                            foreach (var setmeal in orderDetail.order_detail_setmeal)
+                            {
+                                if (setmeal.order_detail_method.Count > 0)
+                                {
+                                    List<method> methods = new List<method>();
+                                    foreach (var method in setmeal.order_detail_method)
+                                        methods.Add(new method() { id = method.method.id, name = method.method.name });
+
+                                    menuItem.SetmealItems.Add(new SetmealItem() { Name = setmeal.menu.name, Unit = setmeal.menu.unit, Methods = methods });
+                                }
+                                else
+                                    menuItem.SetmealItems.Add(new SetmealItem() { Name = setmeal.menu.name, Unit = setmeal.menu.unit });
+
+                            }
+                        }
+
+                        menuItems.Add(menuItem);
+                    }
                 }
 
             }
@@ -446,7 +497,7 @@ namespace gcafeWeb
 
             _log.Trace(TraceMessage());
 
-            return orderDetails;
+            return menuItems;
         }
 
         public Staff GetStaffByNum(string DeviceId, string Num)

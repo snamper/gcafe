@@ -72,8 +72,34 @@ namespace gcafeApp.ViewModel
                 _svc = svc;
                 _svc.OrderMealCompleted += _svc_OrderMealCompleted;
                 _svc.GetTablesInfoCompleted += _svc_GetTablesInfoCompleted;
+                _svc.GetOrderDetailByOrderNumCompleted += _svc_GetOrderDetailByOrderNumCompleted;
 
                 MenuItems = new ObservableCollection<MenuItem>();
+            }
+        }
+
+        void _svc_GetOrderDetailByOrderNumCompleted(object sender, GetOrderDetailByOrderNumCompletedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("=========================== ByOrderNum Completed ===============================");
+
+            foreach (var menuItem in e.Result)
+            {
+                //System.Diagnostics.Debug.WriteLine(menuItem.Name);
+                if (menuItem.Methods != null)
+                {
+                    foreach (var method in menuItem.Methods)
+                    {
+                        System.Diagnostics.Debug.WriteLine(method.name);
+                    }
+                }
+
+                if (menuItem.SetmealItems != null)
+                {
+                    foreach (var setmeal in menuItem.SetmealItems)
+                    {
+                        //System.Diagnostics.Debug.WriteLine(setmeal.Name);
+                    }
+                }
             }
         }
 
@@ -181,7 +207,8 @@ namespace gcafeApp.ViewModel
 
         public void GetOpenedTables()
         {
-            _svc.GetTablesInfoAsync(Settings.AppSettings.DeviceID);
+            //_svc.GetTablesInfoAsync(Settings.AppSettings.DeviceID);
+            _svc.GetOrderDetailByOrderNumAsync("201412010001");
         }
     }
 

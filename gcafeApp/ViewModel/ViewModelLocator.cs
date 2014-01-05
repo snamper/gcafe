@@ -37,6 +37,8 @@ namespace gcafeApp.ViewModel
             SimpleIoc.Default.Register<IgcafeSvcClient>(() =>
                 {
                     BasicHttpBinding binding = new BasicHttpBinding();
+                    binding.MaxBufferSize = 2147483647;
+                    binding.MaxReceivedMessageSize = 2147483647;
                     EndpointAddress address = new EndpointAddress("http://192.168.11.6:47773/gcafeSvc.svc");
 
                     return new IgcafeSvcClient(binding, address);

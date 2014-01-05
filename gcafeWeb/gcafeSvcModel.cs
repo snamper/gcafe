@@ -101,6 +101,14 @@ namespace gcafeWeb
         public List<method> Methods { get; set; }
         [DataMember]
         public int Quantity { get; set; }
+        [DataMember]
+        public DateTime OrderTime { get; set; }
+        [DataMember]
+        public DateTime? ProduceTime { get; set; }
+        [DataMember]
+        public string OrderStaffName { get; set; }
+        [DataMember]
+        public int GroupCnt { get; set; }
     }
 
     [DataContract(IsReference = true)]

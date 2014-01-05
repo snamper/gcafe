@@ -142,7 +142,7 @@
   <xs:element name="GetOrderDetailByOrderNumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetOrderDetailByOrderNumResult" nillable="true" type="q10:ArrayOforder_detail" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetOrderDetailByOrderNumResult" nillable="true" type="q10:ArrayOfMenuItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
