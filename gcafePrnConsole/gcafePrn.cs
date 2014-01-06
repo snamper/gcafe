@@ -9,6 +9,8 @@ using System.Text;
 using System.Runtime.CompilerServices;
 using gcafePrnConsole;
 
+using System.Data.OleDb;
+
 namespace gcafeSvc
 {
     public class gcafePrn : IgcafePrn, IDisposable
@@ -117,6 +119,35 @@ namespace gcafeSvc
             try
             {
 
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(string.Format("{0}, msg:{1}", Global.TraceMessage(), ex.Message));
+            }
+
+            Global.Logger.Trace(Global.TraceMessage());
+
+            return "";
+        }
+
+        public string OpenTable(string orderNum, string tableNum, string staffName, int customerNum)
+        {
+            Global.Logger.Trace(Global.TraceMessage());
+
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("INSERT INTO orders(orderno, ordertime, custkind, personum, waiter, tableno, paid) VALUES('{0}', { fn NOW() }, ' ', {1}, '{2}', '{3}', 0)",
+                        orderNum, customerNum, staffName, tableNum);
+
+                    OleDbCommand cmd = new OleDbCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+
+                    conn.Close();
+                }
             }
             catch (Exception ex)
             {

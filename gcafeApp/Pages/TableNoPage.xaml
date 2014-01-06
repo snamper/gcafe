@@ -74,7 +74,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="台号:" Style="{StaticResource PhoneTextLargeStyle}" />
-                    <TextBox Grid.Row="1" Text="{Binding TableNum, Mode=TwoWay}" VerticalAlignment="Center" />
+                    <TextBox x:Name="tbTableNum" Grid.Row="1" Text="{Binding TableNum, Mode=TwoWay}" VerticalAlignment="Center" />
                     <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="人数:" Style="{StaticResource PhoneTextLargeStyle}" />
                     <StackPanel Grid.Row="3" Orientation="Horizontal">
                         <TextBlock Grid.Row="3" Width="100" Text="{Binding CustomerNum,  UpdateSourceTrigger=Explicit, Mode=TwoWay}" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"/>

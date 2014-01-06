@@ -58,5 +58,13 @@ namespace gcafePrnConsole
             }
         }
 
+        public static string FoxproPath
+        {
+            get
+            {
+                return gcafePrnConsole.Properties.Settings.Default.FoxproPath;
+            }
+        }
+
     }
 }

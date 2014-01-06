@@ -52,6 +52,8 @@ namespace gcafeApp.Pages
                 if (btn.Text == "确定")
                 {
                     ViewModel.TablesViewModel vm = (ViewModel.TablesViewModel)DataContext;
+                    if (vm.TableNum != tbTableNum.Text)
+                        vm.TableNum = tbTableNum.Text;
 
                     if (vm.IsInputValid)
                     {

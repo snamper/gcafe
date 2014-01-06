@@ -42,6 +42,8 @@ namespace gcafeApp.ViewModel
                 _isInputValid = true;
                 ErrorMsg = string.Empty;
             }
+
+            IsBusy = false;
         }
 
         protected override void Dispose(bool dispose)
@@ -72,6 +74,8 @@ namespace gcafeApp.ViewModel
                 }
                 this.Items = new ObservableCollection<TableViewModel>(vmList);
             }
+
+            IsBusy = false;
         }
 
         void _svc_TableOprCompleted(object sender, TableOprCompletedEventArgs e)
@@ -136,6 +140,7 @@ namespace gcafeApp.ViewModel
                     _tableNum = value;
                     RaisePropertyChanged();
 
+                    IsBusy = true;
                     _svc.IsTableAvaliableAsync(_tableNum);
                 }
             }
@@ -165,6 +170,8 @@ namespace gcafeApp.ViewModel
                 new TableInfo() { Num = TableNum, CustomerNum = CustomerNum, OpenTableStaff = Settings.AppSettings.LoginStaff }, 
                 null, 
                 TableOprType.OpenTable);
+
+            IsBusy = true;
         }
 
         public void GetOpenedTables()

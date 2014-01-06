@@ -73,19 +73,21 @@ namespace gcafeApp
 
         private void ShowMsg(string msg)
         {
-            int i = 0;
+            OrderCtrl.TableNum = "请点击这里选择台号";
         }
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
             ApplicationBarIconButton btn = (ApplicationBarIconButton)sender;
+            ViewModel.MainViewModel mv = (ViewModel.MainViewModel)DataContext;
+
             if (btn.Text == "确定")
             {
-                ViewModel.MainViewModel mv = (ViewModel.MainViewModel)DataContext;
                 mv.OrderMeals(OrderCtrl.TableNum, ShowMsg);
             }
             else
             {
+                mv.CancelOrder();
                 OrderCtrl.TableNum = "请点击这里选择台号";
             }
         }

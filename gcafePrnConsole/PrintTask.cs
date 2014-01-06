@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 using System.Data;
 using System.Data.Entity;
-
+using System.Data.OleDb;
 
 namespace gcafePrnConsole
 {
@@ -46,6 +46,7 @@ namespace gcafePrnConsole
         Task _taskListScanner;
         CancellationTokenSource tokenSource = new CancellationTokenSource();
         Mutex _mutex = new Mutex();
+        Mutex _mutexFoxpro = new Mutex();
 
         public PrintTaskMgr()
         {
@@ -186,6 +187,18 @@ namespace gcafePrnConsole
                     foreach (var orderDetail in orderDetails)
                     {
                         huaDan.AddItem(orderDetail);
+
+                        #region 写入foxpro
+                        _mutexFoxpro.WaitOne();
+                        using (var conn = new OleDbConnection(Global.FoxproPath))
+                        {
+                            conn.Open();
+
+
+                            conn.Close();
+                        }
+                        _mutexFoxpro.ReleaseMutex();
+                        #endregion 写入foxpro
                     }
 
                     huaDan.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));

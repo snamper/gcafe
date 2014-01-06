@@ -59,5 +59,8 @@ namespace gcafeSvc
         /// <returns></returns>
         [OperationContract]
         string PrintChuPingCui(int orderId, int orderDetailId, int setmailId);
+
+        [OperationContract]
+        string OpenTable(string orderNum, string tableNum, string staffName, int customerNum);
     }
 }

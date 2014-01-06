@@ -127,6 +127,7 @@ namespace gcafeApp.ViewModel
 
         void _svc_OrderMealCompleted(object sender, OrderMealCompletedEventArgs e)
         {
+            IsBusy = false;
             _callBack(e.Result);
         }
 
@@ -187,8 +188,17 @@ namespace gcafeApp.ViewModel
 
         public void OrderMeals(string tableNum, Action<string> callback)
         {
-            _callBack = callback;
-            _svc.OrderMealAsync(gcafeApp.Settings.AppSettings.DeviceID, gcafeApp.Settings.AppSettings.LoginStaff.ID, tableNum, MenuItems);
+            if (MenuItems.Count > 0)
+            {
+                IsBusy = true;
+                _callBack = callback;
+                _svc.OrderMealAsync(gcafeApp.Settings.AppSettings.DeviceID, gcafeApp.Settings.AppSettings.LoginStaff.ID, tableNum, MenuItems);
+            }
+        }
+
+        public void CancelOrder()
+        {
+            MenuItems = new ObservableCollection<MenuItem>();
         }
 
         public ObservableCollection<TableViewModel> OpenedTables
