@@ -117,6 +117,9 @@
     <Compile Include="Pages\AuthenticationPage.xaml.cs">
       <DependentUpon>AuthenticationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BillDetailPage.xaml.cs">
+      <DependentUpon>BillDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MenuCameraSelect.xaml.cs">
       <DependentUpon>MenuCameraSelect.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,7 @@
     <Compile Include="ViewModel\TableViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\VMBase.cs" />
+    <Compile Include="ViewModel\VMBillDetail.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />
     <Compile Include="ViewModel\VMMenuCameraSelect.cs" />
     <Compile Include="ViewModel\VMMenuCatalog.cs" />
@@ -187,6 +191,10 @@
       <SubType>Designer</SubType>
     </DesignData>
     <Page Include="Pages\AuthenticationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BillDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
