@@ -20,14 +20,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.11.6:47773/gcafeSvc.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.15.210/gcafeSvc.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="gcafeSvc.xsd" MetadataType="Schema" ID="9767d7ac-261a-4441-ae04-24d7b81e4aea" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd0" />
-    <MetadataFile FileName="gcafeSvc.disco" MetadataType="Disco" ID="f0090f2b-f2fd-4100-a645-b18ed6de7b22" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?disco" />
-    <MetadataFile FileName="gcafeSvc1.xsd" MetadataType="Schema" ID="02ed441c-f591-4aa6-9a41-0db49c9e62f8" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd2" />
-    <MetadataFile FileName="gcafeSvc.wsdl" MetadataType="Wsdl" ID="6c6f20b0-8316-4812-a6da-5ccbb0e89ea6" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?wsdl" />
-    <MetadataFile FileName="gcafeSvc2.xsd" MetadataType="Schema" ID="260fb75d-a332-4d54-9abc-19065246c000" SourceId="1" SourceUrl="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd1" />
+    <MetadataFile FileName="gcafeSvc.xsd" MetadataType="Schema" ID="028577a6-9d8e-4e7e-9ae7-dc12a290edda" SourceId="1" SourceUrl="http://192.168.15.210/gcafeSvc.svc?xsd=xsd2" />
+    <MetadataFile FileName="gcafeSvc.disco" MetadataType="Disco" ID="70adc081-efe7-44b9-addb-723b4b5de83d" SourceId="1" SourceUrl="http://192.168.15.210/gcafeSvc.svc?disco" />
+    <MetadataFile FileName="gcafeSvc1.xsd" MetadataType="Schema" ID="258caec3-412d-4e3f-8750-0d7dddc22208" SourceId="1" SourceUrl="http://192.168.15.210/gcafeSvc.svc?xsd=xsd1" />
+    <MetadataFile FileName="gcafeSvc.wsdl" MetadataType="Wsdl" ID="3781377b-c09e-4936-95a8-99644cf604e5" SourceId="1" SourceUrl="http://192.168.15.210/gcafeSvc.svc?wsdl" />
+    <MetadataFile FileName="gcafeSvc2.xsd" MetadataType="Schema" ID="9b0ba2f1-25b3-4203-8907-fca9e5c29fed" SourceId="1" SourceUrl="http://192.168.15.210/gcafeSvc.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

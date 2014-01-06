@@ -2,19 +2,21 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using GalaSoft.MvvmLight;
+using gcafeApp.gcafeSvc;
 
 namespace gcafeApp.ViewModel
 {
     public class VMLogin : VMBase
     {
         gcafeSvc.Staff1 _staff = new gcafeSvc.Staff1();
-        gcafeSvc.IgcafeSvcClient _svc = new gcafeSvc.IgcafeSvcClient();
+        gcafeSvc.IgcafeSvcClient _svc;
 
-        public VMLogin()
+        public VMLogin(IgcafeSvcClient svc)
         {
             IsUserError = false;
             IsPasswordError = false;
 
+            _svc = svc;
             _svc.GetStaffByNumCompleted += _svc_GetStaffByNumCompleted;
         }
 

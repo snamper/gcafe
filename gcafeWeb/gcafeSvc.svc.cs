@@ -170,7 +170,7 @@ namespace gcafeWeb
                             else
                             {
                                 sys_info sysInfo = context.sys_info.FirstOrDefault();
-                                string orderNum = string.Format("{0}{1}{2}{3:D2}{4:D4}", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 1, ++sysInfo.order_cnt);
+                                string orderNum = string.Format("{0}{1:D2}{2:D2}{3:D2}{4:D4}", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, ConfigurationManager.AppSettings.GetValues("BranchID")[0], ++sysInfo.order_cnt);
 
                                 order = new order()
                                 {
@@ -185,6 +185,12 @@ namespace gcafeWeb
 
                                 context.order.Add(order);
                                 context.SaveChanges();
+
+                                using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
+                                {
+                                    _gcafePrn.OpenTable(orderNum, tableInfo.Num, tableInfo.OpenTableStaff.Name, tableInfo.CustomerNum);
+                                }
+
 
                                 rtn = "开台成功";
                             }

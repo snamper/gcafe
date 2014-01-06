@@ -15,13 +15,13 @@ namespace gcafeApp.ViewModel
     {
         gcafeSvc.IgcafeSvcClient _svc;
 
-        public VMSubMenuCatalog()
+        public VMSubMenuCatalog(IgcafeSvcClient svc)
         {
             this.Items = new ObservableCollection<MenuCatalog>();
 
             if (!IsInDesignMode)
             {
-                _svc = new IgcafeSvcClient();
+                _svc = svc;
                 _svc.GetMenuCatalogsCompleted += _svc_GetMenuCatalogsCompleted;
             }
         }

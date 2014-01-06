@@ -1,164 +1,544 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.11.6:47773/gcafeSvc.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/gcafeWeb" />
-  <xs:element name="GetMenuCatalogs">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="rootCata" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMenuCatalogsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetMenuCatalogsResult" nillable="true" type="q1:ArrayOfMenuCatalog" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMenuItemsByCatalogId">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="cataId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMenuItemsByCatalogIdResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetMenuItemsByCatalogIdResult" nillable="true" type="q2:ArrayOfMenuItem" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMenuItemByNumber">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="number" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMenuItemByNumberResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetMenuItemByNumberResult" nillable="true" type="q3:MenuItem" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="TableOpr">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="tableInfo" nillable="true" type="q4:TableInfo" />
-        <xs:element minOccurs="0" name="oldTableNum" nillable="true" type="xs:string" />
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="oprType" type="q5:TableOprType" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="TableOprResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="TableOprResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetTablesInfo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetTablesInfoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetTablesInfoResult" nillable="true" type="q6:ArrayOfTableInfo" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsTableAvaliable">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="tableNum" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsTableAvaliableResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="IsTableAvaliableResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMethods">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMethodsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetMethodsResult" nillable="true" type="q7:ArrayOfmethod" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMethodCatalogs">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMethodCatalogsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetMethodCatalogsResult" nillable="true" type="q8:ArrayOfMethodCatalog" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="OrderMeal">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="deviceId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="staffId" type="xs:int" />
-        <xs:element minOccurs="0" name="tableNum" nillable="true" type="xs:string" />
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="meals" nillable="true" type="q9:ArrayOfMenuItem" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="OrderMealResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="OrderMealResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrderDetailByOrderNum">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="orderNum" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrderDetailByOrderNumResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetOrderDetailByOrderNumResult" nillable="true" type="q10:ArrayOfMenuItem" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetStaffByNum">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Num" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetStaffByNumResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/gcafeWeb" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q11:Staff" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/gcafeWeb" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/gcafeWeb" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.15.210/gcafeSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfMenuCatalog">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MenuCatalog" nillable="true" type="tns:MenuCatalog" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMenuCatalog" nillable="true" type="tns:ArrayOfMenuCatalog" />
+  <xs:complexType name="MenuCatalog">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentID" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MenuCatalog" nillable="true" type="tns:MenuCatalog" />
+  <xs:complexType name="ArrayOfMenuItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MenuItem" nillable="true" type="tns:MenuItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMenuItem" nillable="true" type="tns:ArrayOfMenuItem" />
+  <xs:complexType name="MenuItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GroupCnt" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsSetmeal" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Methods" nillable="true" type="tns:ArrayOfmethod" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderStaffName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProduceTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="SetmealItems" nillable="true" type="tns:ArrayOfSetmealItem" />
+      <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MenuItem" nillable="true" type="tns:MenuItem" />
+  <xs:complexType name="ArrayOfmethod">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="method" nillable="true" type="tns:method" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfmethod" nillable="true" type="tns:ArrayOfmethod" />
+  <xs:complexType name="method">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="method_catalog" nillable="true" type="tns:method_catalog" />
+      <xs:element minOccurs="0" name="method_catalog_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="order_detail_method" nillable="true" type="tns:ArrayOforder_detail_method" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="method" nillable="true" type="tns:method" />
+  <xs:complexType name="method_catalog">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="method" nillable="true" type="tns:ArrayOfmethod" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="method_catalog" nillable="true" type="tns:method_catalog" />
+  <xs:complexType name="ArrayOforder_detail_method">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="order_detail_method" nillable="true" type="tns:order_detail_method" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOforder_detail_method" nillable="true" type="tns:ArrayOforder_detail_method" />
+  <xs:complexType name="order_detail_method">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="method" nillable="true" type="tns:method" />
+      <xs:element minOccurs="0" name="method_id" type="xs:int" />
+      <xs:element minOccurs="0" name="order_detail" nillable="true" type="tns:order_detail" />
+      <xs:element minOccurs="0" name="order_detail_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="order_detail_setmeal" nillable="true" type="tns:order_detail_setmeal" />
+      <xs:element minOccurs="0" name="order_detail_setmeal_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="price" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="order_detail_method" nillable="true" type="tns:order_detail_method" />
+  <xs:complexType name="order_detail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cancel_staff_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="cancel_time" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="device" nillable="true" type="tns:device" />
+      <xs:element minOccurs="0" name="device_id" type="xs:int" />
+      <xs:element minOccurs="0" name="group_cnt" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="is_cancle" type="xs:boolean" />
+      <xs:element minOccurs="0" name="memo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="menu" nillable="true" type="tns:menu" />
+      <xs:element minOccurs="0" name="menu_id" type="xs:int" />
+      <xs:element minOccurs="0" name="order" nillable="true" type="tns:order" />
+      <xs:element minOccurs="0" name="order_detail_method" nillable="true" type="tns:ArrayOforder_detail_method" />
+      <xs:element minOccurs="0" name="order_detail_setmeal" nillable="true" type="tns:ArrayOforder_detail_setmeal" />
+      <xs:element minOccurs="0" name="order_id" type="xs:int" />
+      <xs:element minOccurs="0" name="order_staff_id" type="xs:int" />
+      <xs:element minOccurs="0" name="order_time" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="produced_time" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="staff" nillable="true" type="tns:staff" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="order_detail" nillable="true" type="tns:order_detail" />
+  <xs:complexType name="device">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="device_id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="is_deny" type="xs:boolean" />
+      <xs:element minOccurs="0" name="order" nillable="true" type="tns:ArrayOforder" />
+      <xs:element minOccurs="0" name="order_detail" nillable="true" type="tns:ArrayOforder_detail" />
+      <xs:element minOccurs="0" name="register_ticket" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="register_time" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="device" nillable="true" type="tns:device" />
+  <xs:complexType name="ArrayOforder">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="order" nillable="true" type="tns:order" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOforder" nillable="true" type="tns:ArrayOforder" />
+  <xs:complexType name="order">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="branch" nillable="true" type="tns:branch" />
+      <xs:element minOccurs="0" name="branch_id" type="xs:int" />
+      <xs:element minOccurs="0" name="cancel_staff_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="cancel_time" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="check_out_staff_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="check_out_time" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="credit" nillable="true" type="tns:ArrayOfcredit" />
+      <xs:element minOccurs="0" name="customer_number" type="xs:int" />
+      <xs:element minOccurs="0" name="device" nillable="true" type="tns:device" />
+      <xs:element minOccurs="0" name="device_id" type="xs:int" />
+      <xs:element minOccurs="0" name="discount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="discount_staff_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="is_cancel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="member" nillable="true" type="tns:member" />
+      <xs:element minOccurs="0" name="member_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="memo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="net_receipts" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="open_table_staff_id" type="xs:int" />
+      <xs:element minOccurs="0" name="order_detail" nillable="true" type="tns:ArrayOforder_detail" />
+      <xs:element minOccurs="0" name="order_num" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="receivable" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="shift" nillable="true" type="tns:shift" />
+      <xs:element minOccurs="0" name="shift_detail" nillable="true" type="tns:ArrayOfshift_detail" />
+      <xs:element minOccurs="0" name="shift_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="staff" nillable="true" type="tns:staff" />
+      <xs:element minOccurs="0" name="staff1" nillable="true" type="tns:staff" />
+      <xs:element minOccurs="0" name="staff2" nillable="true" type="tns:staff" />
+      <xs:element minOccurs="0" name="table_no" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="table_opened_time" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="order" nillable="true" type="tns:order" />
+  <xs:complexType name="branch">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="member_refill" nillable="true" type="tns:ArrayOfmember_refill" />
+      <xs:element minOccurs="0" name="menu" nillable="true" type="tns:ArrayOfmenu" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="order" nillable="true" type="tns:ArrayOforder" />
+      <xs:element minOccurs="0" name="printer_group" nillable="true" type="tns:ArrayOfprinter_group" />
+      <xs:element minOccurs="0" name="staff" nillable="true" type="tns:ArrayOfstaff" />
+      <xs:element minOccurs="0" name="sys_info" nillable="true" type="tns:ArrayOfsys_info" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="branch" nillable="true" type="tns:branch" />
+  <xs:complexType name="ArrayOfmember_refill">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="member_refill" nillable="true" type="tns:member_refill" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfmember_refill" nillable="true" type="tns:ArrayOfmember_refill" />
+  <xs:complexType name="member_refill">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="branch" nillable="true" type="tns:branch" />
+      <xs:element minOccurs="0" name="branch_id" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="member" nillable="true" type="tns:member" />
+      <xs:element minOccurs="0" name="member_id" type="xs:int" />
+      <xs:element minOccurs="0" name="refill_amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="refill_time" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="staff" nillable="true" type="tns:staff" />
+      <xs:element minOccurs="0" name="staff_id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="member_refill" nillable="true" type="tns:member_refill" />
+  <xs:complexType name="member">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="credit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="credit1" nillable="true" type="tns:ArrayOfcredit" />
+      <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="idcard_number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="join_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="member_refill" nillable="true" type="tns:ArrayOfmember_refill" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="order" nillable="true" type="tns:ArrayOforder" />
+      <xs:element minOccurs="0" name="phone_num" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="point" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="member" nillable="true" type="tns:member" />
+  <xs:complexType name="ArrayOfcredit">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="credit" nillable="true" type="tns:credit" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfcredit" nillable="true" type="tns:ArrayOfcredit" />
+  <xs:complexType name="credit">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="member" nillable="true" type="tns:member" />
+      <xs:element minOccurs="0" name="member_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="order" nillable="true" type="tns:order" />
+      <xs:element minOccurs="0" name="order_id" type="xs:int" />
+      <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="repay_time" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="credit" nillable="true" type="tns:credit" />
+  <xs:complexType name="staff">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="branch" nillable="true" type="tns:branch" />
+      <xs:element minOccurs="0" name="branch_id" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="is_deleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="join_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="member_refill" nillable="true" type="tns:ArrayOfmember_refill" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="order" nillable="true" type="tns:ArrayOforder" />
+      <xs:element minOccurs="0" name="order1" nillable="true" type="tns:ArrayOforder" />
+      <xs:element minOccurs="0" name="order2" nillable="true" type="tns:ArrayOforder" />
+      <xs:element minOccurs="0" name="order_detail" nillable="true" type="tns:ArrayOforder_detail" />
+      <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="role" nillable="true" type="tns:role" />
+      <xs:element minOccurs="0" name="role_id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="staff" nillable="true" type="tns:staff" />
+  <xs:complexType name="ArrayOforder_detail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="order_detail" nillable="true" type="tns:order_detail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOforder_detail" nillable="true" type="tns:ArrayOforder_detail" />
+  <xs:complexType name="role">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="staff" nillable="true" type="tns:ArrayOfstaff" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="role" nillable="true" type="tns:role" />
+  <xs:complexType name="ArrayOfstaff">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="staff" nillable="true" type="tns:staff" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfstaff" nillable="true" type="tns:ArrayOfstaff" />
+  <xs:complexType name="ArrayOfmenu">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="menu" nillable="true" type="tns:menu" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfmenu" nillable="true" type="tns:ArrayOfmenu" />
+  <xs:complexType name="menu">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="branch" nillable="true" type="tns:branch" />
+      <xs:element minOccurs="0" name="branch_id" type="xs:int" />
+      <xs:element minOccurs="0" name="fprice" type="xs:decimal" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="is_locked" type="xs:boolean" />
+      <xs:element minOccurs="0" name="is_setmeal" type="xs:boolean" />
+      <xs:element minOccurs="0" name="menu_catalog" nillable="true" type="tns:menu_catalog" />
+      <xs:element minOccurs="0" name="menu_catalog_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="order_detail" nillable="true" type="tns:ArrayOforder_detail" />
+      <xs:element minOccurs="0" name="order_detail_setmeal" nillable="true" type="tns:ArrayOforder_detail_setmeal" />
+      <xs:element minOccurs="0" name="price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="printer_group" nillable="true" type="tns:printer_group" />
+      <xs:element minOccurs="0" name="printer_group_id" type="xs:int" />
+      <xs:element minOccurs="0" name="setmeal_item" nillable="true" type="tns:ArrayOfsetmeal_item" />
+      <xs:element minOccurs="0" name="setmeal_item1" nillable="true" type="tns:ArrayOfsetmeal_item" />
+      <xs:element minOccurs="0" name="setmeal_item_opt" nillable="true" type="tns:ArrayOfsetmeal_item_opt" />
+      <xs:element minOccurs="0" name="sold_out" type="xs:boolean" />
+      <xs:element minOccurs="0" name="unit" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="menu" nillable="true" type="tns:menu" />
+  <xs:complexType name="menu_catalog">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="menu" nillable="true" type="tns:ArrayOfmenu" />
+      <xs:element minOccurs="0" name="menu_catalog1" nillable="true" type="tns:ArrayOfmenu_catalog" />
+      <xs:element minOccurs="0" name="menu_catalog2" nillable="true" type="tns:menu_catalog" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="parent_id" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="menu_catalog" nillable="true" type="tns:menu_catalog" />
+  <xs:complexType name="ArrayOfmenu_catalog">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="menu_catalog" nillable="true" type="tns:menu_catalog" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfmenu_catalog" nillable="true" type="tns:ArrayOfmenu_catalog" />
+  <xs:complexType name="ArrayOforder_detail_setmeal">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="order_detail_setmeal" nillable="true" type="tns:order_detail_setmeal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOforder_detail_setmeal" nillable="true" type="tns:ArrayOforder_detail_setmeal" />
+  <xs:complexType name="order_detail_setmeal">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="menu" nillable="true" type="tns:menu" />
+      <xs:element minOccurs="0" name="menu_id" type="xs:int" />
+      <xs:element minOccurs="0" name="order_detail" nillable="true" type="tns:order_detail" />
+      <xs:element minOccurs="0" name="order_detail_id" type="xs:int" />
+      <xs:element minOccurs="0" name="order_detail_method" nillable="true" type="tns:ArrayOforder_detail_method" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="order_detail_setmeal" nillable="true" type="tns:order_detail_setmeal" />
+  <xs:complexType name="printer_group">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="branch" nillable="true" type="tns:branch" />
+      <xs:element minOccurs="0" name="branch_id" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="menu" nillable="true" type="tns:ArrayOfmenu" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="print_cnt" type="xs:int" />
+      <xs:element minOccurs="0" name="print_total_cnt" type="xs:int" />
+      <xs:element minOccurs="0" name="printer" nillable="true" type="tns:ArrayOfprinter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="printer_group" nillable="true" type="tns:printer_group" />
+  <xs:complexType name="ArrayOfprinter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="printer" nillable="true" type="tns:printer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfprinter" nillable="true" type="tns:ArrayOfprinter" />
+  <xs:complexType name="printer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="print_cnt" type="xs:int" />
+      <xs:element minOccurs="0" name="print_total_cnt" type="xs:int" />
+      <xs:element minOccurs="0" name="printer_group" nillable="true" type="tns:printer_group" />
+      <xs:element minOccurs="0" name="printer_group_id" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="printer" nillable="true" type="tns:printer" />
+  <xs:complexType name="ArrayOfsetmeal_item">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="setmeal_item" nillable="true" type="tns:setmeal_item" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfsetmeal_item" nillable="true" type="tns:ArrayOfsetmeal_item" />
+  <xs:complexType name="setmeal_item">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="menu" nillable="true" type="tns:menu" />
+      <xs:element minOccurs="0" name="menu1" nillable="true" type="tns:menu" />
+      <xs:element minOccurs="0" name="setmeal_item_menu_id" type="xs:int" />
+      <xs:element minOccurs="0" name="setmeal_item_opt" nillable="true" type="tns:ArrayOfsetmeal_item_opt" />
+      <xs:element minOccurs="0" name="setmeal_menu_id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="setmeal_item" nillable="true" type="tns:setmeal_item" />
+  <xs:complexType name="ArrayOfsetmeal_item_opt">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="setmeal_item_opt" nillable="true" type="tns:setmeal_item_opt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfsetmeal_item_opt" nillable="true" type="tns:ArrayOfsetmeal_item_opt" />
+  <xs:complexType name="setmeal_item_opt">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="menu" nillable="true" type="tns:menu" />
+      <xs:element minOccurs="0" name="menu_id" type="xs:int" />
+      <xs:element minOccurs="0" name="setmeal_item" nillable="true" type="tns:setmeal_item" />
+      <xs:element minOccurs="0" name="setmeal_item_id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="setmeal_item_opt" nillable="true" type="tns:setmeal_item_opt" />
+  <xs:complexType name="ArrayOfprinter_group">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="printer_group" nillable="true" type="tns:printer_group" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfprinter_group" nillable="true" type="tns:ArrayOfprinter_group" />
+  <xs:complexType name="ArrayOfsys_info">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="sys_info" nillable="true" type="tns:sys_info" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfsys_info" nillable="true" type="tns:ArrayOfsys_info" />
+  <xs:complexType name="sys_info">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="branch" nillable="true" type="tns:branch" />
+      <xs:element minOccurs="0" name="branch_id" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="is_festival" type="xs:boolean" />
+      <xs:element minOccurs="0" name="order_cnt" type="xs:int" />
+      <xs:element minOccurs="0" name="order_detail_cnt" type="xs:int" />
+      <xs:element minOccurs="0" name="print_cnt" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="sys_info" nillable="true" type="tns:sys_info" />
+  <xs:complexType name="shift">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="order" nillable="true" type="tns:ArrayOforder" />
+      <xs:element minOccurs="0" name="shift_detail" nillable="true" type="tns:ArrayOfshift_detail" />
+      <xs:element minOccurs="0" name="staff_id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="sum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="time" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="shift" nillable="true" type="tns:shift" />
+  <xs:complexType name="ArrayOfshift_detail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="shift_detail" nillable="true" type="tns:shift_detail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfshift_detail" nillable="true" type="tns:ArrayOfshift_detail" />
+  <xs:complexType name="shift_detail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="order" nillable="true" type="tns:order" />
+      <xs:element minOccurs="0" name="order_id" type="xs:int" />
+      <xs:element minOccurs="0" name="shift" nillable="true" type="tns:shift" />
+      <xs:element minOccurs="0" name="shift_id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="shift_detail" nillable="true" type="tns:shift_detail" />
+  <xs:complexType name="ArrayOfSetmealItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SetmealItem" nillable="true" type="tns:SetmealItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSetmealItem" nillable="true" type="tns:ArrayOfSetmealItem" />
+  <xs:complexType name="SetmealItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MenuID" type="xs:int" />
+      <xs:element minOccurs="0" name="Methods" nillable="true" type="tns:ArrayOfmethod" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OptionItems" nillable="true" type="tns:ArrayOfSetmealItem" />
+      <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="SetmealItem" nillable="true" type="tns:SetmealItem" />
+  <xs:complexType name="TableInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CustomerNum" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Num" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpenTableStaff" nillable="true" type="tns:Staff" />
+      <xs:element minOccurs="0" name="OpenTableTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OrderNum" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="TableInfo" nillable="true" type="tns:TableInfo" />
+  <xs:complexType name="Staff">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Branch" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BranchID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RoleID" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Staff" nillable="true" type="tns:Staff" />
+  <xs:simpleType name="TableOprType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OpenTable" />
+      <xs:enumeration value="ChangeTable" />
+      <xs:enumeration value="ChangeCustomerNum" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TableOprType" nillable="true" type="tns:TableOprType" />
+  <xs:complexType name="ArrayOfTableInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TableInfo" nillable="true" type="tns:TableInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTableInfo" nillable="true" type="tns:ArrayOfTableInfo" />
+  <xs:complexType name="ArrayOfMethodCatalog">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MethodCatalog" nillable="true" type="tns:MethodCatalog" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMethodCatalog" nillable="true" type="tns:ArrayOfMethodCatalog" />
+  <xs:complexType name="MethodCatalog">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Methods" nillable="true" type="tns:ArrayOfMethod" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MethodCatalog" nillable="true" type="tns:MethodCatalog" />
+  <xs:complexType name="ArrayOfMethod">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Method" nillable="true" type="tns:Method" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMethod" nillable="true" type="tns:ArrayOfMethod" />
+  <xs:complexType name="Method">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Method" nillable="true" type="tns:Method" />
 </xs:schema>

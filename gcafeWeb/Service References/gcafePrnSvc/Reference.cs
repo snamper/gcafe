@@ -44,6 +44,12 @@ namespace gcafeWeb.gcafePrnSvc {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/PrintChuPingCui", ReplyAction="http://tempuri.org/IgcafePrn/PrintChuPingCuiResponse")]
         System.Threading.Tasks.Task<string> PrintChuPingCuiAsync(int orderId, int orderDetailId, int setmailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/OpenTable", ReplyAction="http://tempuri.org/IgcafePrn/OpenTableResponse")]
+        string OpenTable(string orderNum, string tableNum, string staffName, int customerNum);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IgcafePrn/OpenTable", ReplyAction="http://tempuri.org/IgcafePrn/OpenTableResponse")]
+        System.Threading.Tasks.Task<string> OpenTableAsync(string orderNum, string tableNum, string staffName, int customerNum);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +117,14 @@ namespace gcafeWeb.gcafePrnSvc {
         
         public System.Threading.Tasks.Task<string> PrintChuPingCuiAsync(int orderId, int orderDetailId, int setmailId) {
             return base.Channel.PrintChuPingCuiAsync(orderId, orderDetailId, setmailId);
+        }
+        
+        public string OpenTable(string orderNum, string tableNum, string staffName, int customerNum) {
+            return base.Channel.OpenTable(orderNum, tableNum, staffName, customerNum);
+        }
+        
+        public System.Threading.Tasks.Task<string> OpenTableAsync(string orderNum, string tableNum, string staffName, int customerNum) {
+            return base.Channel.OpenTableAsync(orderNum, tableNum, staffName, customerNum);
         }
     }
 }

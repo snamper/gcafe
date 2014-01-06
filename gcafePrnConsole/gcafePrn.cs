@@ -140,8 +140,8 @@ namespace gcafeSvc
                 {
                     conn.Open();
 
-                    string sql = string.Format("INSERT INTO orders(orderno, ordertime, custkind, personum, waiter, tableno, paid) VALUES('{0}', { fn NOW() }, ' ', {1}, '{2}', '{3}', 0)",
-                        orderNum, customerNum, staffName, tableNum);
+                    string sql = string.Format("INSERT INTO orders(orderno, ordertime, custkind, personum, waiter, tableno, paid) VALUES('{0}', {4}, ' ', {1}, '{2}', '{3}', 0)",
+                        orderNum, customerNum, staffName, tableNum, "{ fn NOW() }");
 
                     OleDbCommand cmd = new OleDbCommand(sql, conn);
                     cmd.ExecuteNonQuery();

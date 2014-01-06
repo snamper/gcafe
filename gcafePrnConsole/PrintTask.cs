@@ -137,7 +137,7 @@ namespace gcafePrnConsole
                             .Include(n => n.order_detail_setmeal.Select(m => m.menu))
                             .Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
                             .Include("staff")
-                            .Where(n => n.order_id == 1 && n.is_cancle == false)
+                            .Where(n => n.order_id == orderId && n.is_cancle == false)
                             .OrderBy(n => n.order_time)
                             .ToList();
                     }
@@ -166,7 +166,7 @@ namespace gcafePrnConsole
                             .Include(n => n.order_detail_setmeal.Select(m => m.menu))
                             .Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
                             .Include("staff")
-                            .Where(n => n.order_id == 1 && n.is_cancle == false && n.group_cnt == key)
+                            .Where(n => n.order_id == orderId && n.is_cancle == false && n.group_cnt == key)
                             .OrderBy(n => n.order_time)
                             .ToList();
                     }
@@ -194,6 +194,30 @@ namespace gcafePrnConsole
                         {
                             conn.Open();
 
+                            string sql;
+
+                            sql = string.Format("SELECT price2, productnn FROM product WHERE productno = '{0}'", orderDetail.menu.number);
+                            OleDbCommand cmd = new OleDbCommand(sql, conn);
+                            OleDbDataReader reader = cmd.ExecuteReader();
+                            if (reader.Read())
+                            {
+                                decimal price2 = reader.GetDecimal(0);
+                                string prodNn = reader.GetString(1);
+
+                                sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '')",
+                                    "{ fn NOW() }",
+                                    orderDetails[0].order.order_num,
+                                    orderDetail.menu.number,
+                                    orderDetail.menu.name,
+                                    orderDetail.price,
+                                    price2,
+                                    orderDetail.quantity,
+                                    "A",
+                                    prodNn);
+
+                                cmd = new OleDbCommand(sql, conn);
+                                cmd.ExecuteNonQuery();
+                            }
 
                             conn.Close();
                         }
@@ -239,7 +263,7 @@ namespace gcafePrnConsole
                             .Include(n => n.order_detail_setmeal.Select(m => m.menu))
                             .Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
                             .Include("staff")
-                            .Where(n => n.order_id == 1 && n.is_cancle == false)
+                            .Where(n => n.order_id == orderId && n.is_cancle == false)
                             .OrderBy(n => n.order_time)
                             .ToList();
                     }
@@ -268,7 +292,7 @@ namespace gcafePrnConsole
                             .Include(n => n.order_detail_setmeal.Select(m => m.menu))
                             .Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
                             .Include("staff")
-                            .Where(n => n.order_id == 1 && n.is_cancle == false && n.group_cnt == key)
+                            .Where(n => n.order_id == orderId && n.is_cancle == false && n.group_cnt == key)
                             .OrderBy(n => n.order_time)
                             .ToList();
                     }
@@ -391,7 +415,7 @@ namespace gcafePrnConsole
                             //.Include(n => n.order_detail_setmeal.Select(m => m.menu))
                             //.Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
                             .Include("staff")
-                            .Where(n => n.order_id == 1 && n.is_cancle == false)
+                            .Where(n => n.order_id == orderId && n.is_cancle == false)
                             .OrderBy(n => n.order_time)
                             .ToList();
 
@@ -427,7 +451,7 @@ namespace gcafePrnConsole
                             //.Include(n => n.order_detail_setmeal.Select(m => m.menu))
                             //.Include(n => n.order_detail_setmeal.Select(m => m.order_detail_method.Select(o => o.method)))
                             .Include("staff")
-                            .Where(n => n.order_id == 1 && n.is_cancle == false && n.group_cnt == key)
+                            .Where(n => n.order_id == orderId && n.is_cancle == false && n.group_cnt == key)
                             .OrderBy(n => n.order_time)
                             .ToList();
                     }

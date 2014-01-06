@@ -80,4 +80,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="OpenTable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orderNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tableNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="staffName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="customerNum" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OpenTableResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="OpenTableResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

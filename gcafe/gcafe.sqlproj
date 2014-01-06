@@ -87,6 +87,7 @@
     <None Include="Konons.publish.xml" />
     <None Include="gcafe.publish.xml" />
     <None Include="gcafe_1.publish.xml" />
+    <None Include="laiyin.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\member.sql" />
@@ -101,6 +102,6 @@
     <Build Include="Tables\setmeal_item_opt.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="InsertData.sql" />
+    <PostDeploy Include="InsertData.sql" />
   </ItemGroup>
 </Project>
