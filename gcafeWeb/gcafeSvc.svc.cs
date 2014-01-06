@@ -225,7 +225,11 @@ namespace gcafeWeb
             {
                 using (var context = new gcafeEntities())
                 {
-                    List<order> orders = context.order.Include("staff2").Where(n => n.branch_id == branchId && n.check_out_staff_id == null).ToList();
+                    List<order> orders = context.order
+                        .Include("staff2")
+                        .Where(n => n.branch_id == branchId && n.check_out_staff_id == null)
+                        .OrderBy(n => n.table_no)
+                        .ToList();
                     foreach (var order in orders)
                     {
                         tableInfoList.Add(new TableInfo()

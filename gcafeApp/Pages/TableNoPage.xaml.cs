@@ -57,7 +57,7 @@ namespace gcafeApp.Pages
 
                     if (vm.IsInputValid)
                     {
-                        vm.OpenTable();
+                        vm.OpenTable(OpenTableCallback);
                         Value = vm.TableNum;
                     }
                 }
@@ -66,6 +66,11 @@ namespace gcafeApp.Pages
             {
                 //Value = ((ViewModel.TableViewModel)TableList.SelectedItem).TableNo;
             }
+        }
+
+        private void OpenTableCallback(string msg)
+        {
+
         }
 
         private void TableList_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -12,6 +12,7 @@ namespace gcafeApp.ViewModel
     {
         private readonly IgcafeSvcClient _svc;
         private bool _isInputValid = true;
+        private Action<string> _openTableCallBack;
 
         /// <summary>
         /// 初始化
@@ -80,7 +81,8 @@ namespace gcafeApp.ViewModel
 
         void _svc_TableOprCompleted(object sender, TableOprCompletedEventArgs e)
         {
-            string s = e.Result;
+            _openTableCallBack(e.Result);
+            //string s = e.Result;
         }
 
         public void Reset()
@@ -164,8 +166,10 @@ namespace gcafeApp.ViewModel
         }
         private int _customerNum;
 
-        public void OpenTable()
+        public void OpenTable(Action<string> callback)
         {
+            _openTableCallBack = callback;
+
             _svc.TableOprAsync(Settings.AppSettings.DeviceID, 
                 new TableInfo() { Num = TableNum, CustomerNum = CustomerNum, OpenTableStaff = Settings.AppSettings.LoginStaff }, 
                 null, 
