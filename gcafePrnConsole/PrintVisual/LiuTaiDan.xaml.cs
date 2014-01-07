@@ -23,6 +23,8 @@ namespace gcafePrnConsole.PrintVisual
         public LiuTaiDan()
         {
             InitializeComponent();
+
+            Time = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString());
         }
 
 

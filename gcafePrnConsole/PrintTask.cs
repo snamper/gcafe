@@ -180,6 +180,7 @@ namespace gcafePrnConsole
                     printDlg.PrintQueue = selectedPrinter;
 
                     PrintVisual.HuaDan huaDan = new PrintVisual.HuaDan() { 
+                        TableNum = orderDetails[0].order.table_no,
                         StaffName = orderDetails[0].staff.name,
                         OrderNum = orderDetails[0].order.order_num,
                     };
@@ -196,32 +197,42 @@ namespace gcafePrnConsole
 
                             string sql;
 
-                            sql = string.Format("SELECT price2, productnn FROM product WHERE productno = '{0}'", orderDetail.menu.number);
-                            OleDbCommand cmd = new OleDbCommand(sql, conn);
-                            OleDbDataReader reader = cmd.ExecuteReader();
-                            if (reader.Read())
+                            sql = string.Format("SELECT orderno FROM orders WHERE tableno = '{0}' AND paid = 0", orderDetails[0].order.table_no);
+                            using (var cmd1 = new OleDbCommand(sql, conn))
                             {
-                                decimal price2 = reader.GetDecimal(0);
-                                string prodNn = reader.GetString(1);
+                                string orderNum = (string)cmd1.ExecuteScalar();
+                                if (orderNum != null && orderNum.Length > 0)
+                                {
+                                    huaDan.OrderNum = orderNum;
 
-                                sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '')",
-                                    "{ fn NOW() }",
-                                    orderDetails[0].order.order_num,
-                                    orderDetail.menu.number,
-                                    orderDetail.menu.name,
-                                    orderDetail.price,
-                                    price2,
-                                    orderDetail.quantity,
-                                    "A",
-                                    prodNn);
+                                    sql = string.Format("SELECT price2, productnn FROM product WHERE productno = '{0}'", orderDetail.menu.number);
+                                    OleDbCommand cmd = new OleDbCommand(sql, conn);
+                                    OleDbDataReader reader = cmd.ExecuteReader();
+                                    if (reader.Read())
+                                    {
+                                        decimal price2 = reader.GetDecimal(0);
+                                        string prodNn = reader.GetString(1);
 
-                                cmd = new OleDbCommand(sql, conn);
-                                cmd.ExecuteNonQuery();
+                                        sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '')",
+                                            "{ fn NOW() }",
+                                            orderNum,
+                                            orderDetail.menu.number,
+                                            orderDetail.menu.name,
+                                            orderDetail.price,
+                                            price2,
+                                            orderDetail.quantity,
+                                            "A",
+                                            prodNn);
+
+                                        cmd = new OleDbCommand(sql, conn);
+                                        cmd.ExecuteNonQuery();
+                                    }
+
+                                    conn.Close();
+                                }
                             }
-
-                            conn.Close();
+                            _mutexFoxpro.ReleaseMutex();
                         }
-                        _mutexFoxpro.ReleaseMutex();
                         #endregion 写入foxpro
                     }
 
@@ -330,6 +341,7 @@ namespace gcafePrnConsole
                     #endregion 用来区分不同打印组下有哪些条目
 
                     PrintDialog printDlg = new PrintDialog();
+                    string foxproOrderNum = GetOrderNumFromFoxproByTablenNum(orderDetails[0].order.table_no);
 
                     #region 将数据填入visual
                     foreach (var key in prnGrp.Keys)
@@ -353,6 +365,7 @@ namespace gcafePrnConsole
                             {
                                 using (gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
                                 {
+                                    cpd.OrderNum = foxproOrderNum;
                                     cpd.Department = pgName;
                                     cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
                                     cpd.SerialNum = prnCnt.ToString();
@@ -368,6 +381,7 @@ namespace gcafePrnConsole
                             {
                                 using (gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
                                 {
+                                    cpd.OrderNum = foxproOrderNum;
                                     cpd.Department = pgName;
                                     cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
                                     cpd.SerialNum = prnCnt.ToString();
@@ -467,7 +481,7 @@ namespace gcafePrnConsole
                         OrderCount = orderCount,
                         TableNum = orderDetails[0].order.table_no,
                         StaffName = orderDetails[0].staff.name,
-                        OrderNum = orderDetails[0].order.order_num,
+                        OrderNum = GetOrderNumFromFoxproByTablenNum(orderDetails[0].order.table_no),
                         TotalPrice = (decimal)orderDetails[0].order.receivable,
                     };
 
@@ -495,7 +509,7 @@ namespace gcafePrnConsole
 
         string GetPrinterNameByTableNum(string tableNum)
         {
-            return "PDFCreator";
+            return "留台4";
         }
 
         /// <summary>
@@ -547,6 +561,28 @@ namespace gcafePrnConsole
             _mutex.WaitOne();
             Enqueue(printTask);
             _mutex.ReleaseMutex();
+        }
+
+        string GetOrderNumFromFoxproByTablenNum(string tableNum)
+        {
+            string rtn = string.Empty;
+
+            using (var conn = new OleDbConnection(Global.FoxproPath))
+            {
+                conn.Open();
+
+                string sql = string.Format("SELECT orderno FROM orders WHERE tableno = '{0}' AND paid = 0", tableNum);
+                using (var cmd = new OleDbCommand(sql, conn))
+                {
+                    rtn = (string)cmd.ExecuteScalar();
+                    if (rtn == null)
+                        rtn = string.Empty;
+                }
+
+                conn.Close();
+            }
+
+            return rtn;
         }
 
         public void Dispose()

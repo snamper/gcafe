@@ -92,7 +92,7 @@ namespace gcafePrnConsole.PrintVisual
         {
             StaffName = item.order_detail.staff.name;
             TableNum = item.order_detail.order.table_no;
-            OrderNum = item.order_detail.order.order_num;
+            //OrderNum = item.order_detail.order.order_num;
 
             // 套餐品名
             TextBlock tb = new TextBlock() { 
@@ -180,7 +180,7 @@ namespace gcafePrnConsole.PrintVisual
         {
             StaffName = item.staff.name;
             TableNum = item.order.table_no;
-            OrderNum = item.order.order_num;
+            //OrderNum = item.order.order_num;
 
             // 品名
             TextBlock tb = new TextBlock()

@@ -130,7 +130,7 @@ namespace gcafeSvc
             return "";
         }
 
-        public string OpenTable(string orderNum, string tableNum, string staffName, int customerNum)
+        public string OpenTable(string orderNum, string tableNum, string staffId, int customerNum)
         {
             Global.Logger.Trace(Global.TraceMessage());
 
@@ -141,7 +141,7 @@ namespace gcafeSvc
                     conn.Open();
 
                     string sql = string.Format("INSERT INTO orders(orderno, ordertime, custkind, personum, waiter, tableno, paid) VALUES('{0}', {4}, ' ', {1}, '{2}', '{3}', 0)",
-                        orderNum, customerNum, staffName, tableNum, "{ fn NOW() }");
+                        GenOrderNo(), customerNum, staffId, tableNum, "{ fn NOW() }");
 
                     OleDbCommand cmd = new OleDbCommand(sql, conn);
                     cmd.ExecuteNonQuery();
@@ -158,6 +158,61 @@ namespace gcafeSvc
 
             return "";
         }
+
+        private string GenOrderNo()
+        {
+            string strRtn = string.Empty;
+            string fax = string.Empty;
+            int orderNo = 0;
+
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    // 取 sysinfo.fax
+                    using (var cmd = new OleDbCommand("SELECT fax FROM sysinfo", conn))
+                    {
+                        fax = cmd.ExecuteScalar() as string;
+                        fax = fax.Trim();
+                    }
+
+                    // 取 lastsn.orderno
+                    while (true)
+                    {
+                        using (var cmd = new OleDbCommand("SELECT orderno FROM lastsn", conn))
+                        {
+                            orderNo = Int32.Parse(cmd.ExecuteScalar() as string) + 1;
+
+                            // 更新lastsn.orderno
+                            using (var cmd1 = new OleDbCommand(string.Format("UPDATE lastsn SET orderno = '{0}'", orderNo), conn))
+                            {
+                                cmd1.ExecuteNonQuery();
+                            }
+
+                            using (var cmd1 = new OleDbCommand(string.Format("SELECT orderno FROM orders WHERE orderno = '{0}'", orderNo), conn))
+                            {
+                                if (cmd1.ExecuteScalar() == null)
+                                    break;
+                            }
+                        }
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(string.Format("{0}, msg:{1}", Global.TraceMessage(), ex.Message));
+            }
+
+            strRtn = string.Format("{0}{1}{2:D2}{3:D2}{4:D4}", fax, System.DateTime.Now.Year.ToString().Substring(2, 2),
+                System.DateTime.Now.Month, System.DateTime.Now.Day, orderNo);
+
+            return strRtn;
+        }
+
 
         public void Dispose()
         {
