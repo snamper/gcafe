@@ -140,11 +140,22 @@ namespace gcafeSvc
                 {
                     conn.Open();
 
-                    string sql = string.Format("INSERT INTO orders(orderno, ordertime, custkind, personum, waiter, tableno, paid) VALUES('{0}', {4}, ' ', {1}, '{2}', '{3}', 0)",
-                        GenOrderNo(), customerNum, staffId, tableNum, "{ fn NOW() }");
+                    string foxproOrderNum = GenOrderNo();
 
-                    OleDbCommand cmd = new OleDbCommand(sql, conn);
-                    cmd.ExecuteNonQuery();
+                    string sql = string.Format("INSERT INTO orders(orderno, ordertime, custkind, personum, waiter, tableno, paid) VALUES('{0}', {4}, ' ', {1}, '{2}', '{3}', 0)",
+                        foxproOrderNum, customerNum, staffId, tableNum, "{ fn NOW() }");
+
+                    using (OleDbCommand cmd = new OleDbCommand(sql, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    sql = string.Format("SELECT orderno FROM orders WHERE orderno = '{0}'", foxproOrderNum);
+                    using (OleDbCommand cmd = new OleDbCommand(sql, conn))
+                    {
+                        if (cmd.ExecuteScalar() == null)
+                            throw new Exception("error");
+                    }
 
                     conn.Close();
                 }

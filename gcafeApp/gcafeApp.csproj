@@ -256,6 +256,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="gcafeApp_2014_01_07_23_18_03.sap" />
+    <None Include="gcafeApp_2014_01_08_10_04_27.sap" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

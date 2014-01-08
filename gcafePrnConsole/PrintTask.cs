@@ -578,8 +578,17 @@ namespace gcafePrnConsole
                             "A",
                             prodNn);
 
-                        cmd = new OleDbCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
+                        using (var cmd1 = new OleDbCommand(sql, conn))
+                        {
+                            cmd1.ExecuteNonQuery();
+                        }
+                        sql = string.Format("SELECT orderno FROM orditem WHERE orderno = '{0}'", orderNum);
+                        using (var cmd1 = new OleDbCommand(sql, conn))
+                        {
+                            OleDbDataReader r = cmd1.ExecuteReader();
+                            if (!r.Read())
+                                throw new Exception("error");
+                        }
 
                         if (orderDetail.order_detail_setmeal.Count > 0)
                         {
@@ -589,8 +598,11 @@ namespace gcafePrnConsole
                                 sql = string.Format("INSERT INTO poh(department, ordertime, orderno, serialno, prodname, machineid, quantity, tableno, itemno, printgroup, remark1, remark2, waiter, serial) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13:D2}')",
                                      setmeal.menu.number.Substring(0, 2), "{ fn NOW() }", orderNum, GenSerialNo(setmeal.menu.number), setmeal.menu.name, setmeal.order_detail.device_id, setmeal.order_detail.quantity, setmeal.order_detail.order.table_no, "0", GetPrintGroup(setmeal.menu.number), setmeal.order_detail.menu.name, GetZuoFa(setmeal.order_detail_method), setmeal.order_detail.order.staff2.number, serial);
 
-                                cmd = new OleDbCommand(sql, conn);
-                                cmd.ExecuteNonQuery();
+                                using (var cmd1 = new OleDbCommand(sql, conn))
+                                {
+                                    cmd1.ExecuteNonQuery();
+                                }
+
                             }
                         }
                         else
@@ -599,9 +611,20 @@ namespace gcafePrnConsole
                             sql = string.Format("INSERT INTO poh(department, ordertime, orderno, serialno, prodname, machineid, quantity, tableno, itemno, printgroup, remark1, remark2, waiter, serial) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13:D2}')",
                                 orderDetail.menu.number.Substring(0, 2), "{ fn NOW() }", orderNum, GenSerialNo(orderDetail.menu.number), orderDetail.menu.name, orderDetail.device_id, orderDetail.quantity, orderDetail.order.table_no, "0", GetPrintGroup(orderDetail.menu.number), "", GetZuoFa(orderDetail.order_detail_method), orderDetail.order.staff2.number, serial);
 
-                            cmd = new OleDbCommand(sql, conn);
-                            cmd.ExecuteNonQuery();
+                            using (var cmd1 = new OleDbCommand(sql, conn))
+                            {
+                                cmd1.ExecuteNonQuery();
+                            }
                         }
+
+                        sql = string.Format("SELECT orderno FROM poh WHERE orderno = '{0}'", orderNum);
+                        using (var cmd1 = new OleDbCommand(sql, conn))
+                        {
+                            OleDbDataReader r = cmd1.ExecuteReader();
+                            if (!r.Read())
+                                throw new Exception("error");
+                        }
+
                     }
 
                     conn.Close();
