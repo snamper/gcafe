@@ -287,21 +287,21 @@
     </None>
     <None Include="Service References\gcafeSvc\configuration91.svcinfo" />
     <None Include="Service References\gcafeSvc\configuration.svcinfo" />
-    <None Include="Service References\gcafeSvc\gcafeSvc.wsdl" />
-    <None Include="Service References\gcafeSvc\gcafeSvc.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc1.wsdl" />
+    <None Include="Service References\gcafeSvc\gcafeSvc3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc1.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc2.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\gcafeSvc\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc.disco" />
+    <None Include="Service References\gcafeSvc\gcafeSvc1.disco" />
     <Content Include="ServiceReferences.ClientConfig">
       <SubType>Designer</SubType>
     </Content>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fa0a2fa6151d43709fbb0446a3e9ea18" Name="Diagram1">
+        <EntityTypeShape EntityType="gcafeModel.branch" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.credit" Width="1.5" PointX="8.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.device" Width="1.5" PointX="3.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.member" Width="1.5" PointX="0.75" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.member_refill" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.menu" Width="1.5" PointX="5.25" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.menu_catalog" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.method" Width="1.5" PointX="8.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.method_catalog" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.order" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.order_detail" Width="1.5" PointX="8.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.order_detail_method" Width="1.5" PointX="10.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.order_detail_setmeal" Width="1.5" PointX="12.5" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.printer" Width="1.5" PointX="5.25" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.printer_group" Width="1.5" PointX="3" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.role" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.service" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.setmeal_item" Width="1.5" PointX="7.5" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.setmeal_item_opt" Width="1.5" PointX="9.75" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.shift" Width="1.5" PointX="3.75" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.shift_detail" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.staff" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.sys_info" Width="1.5" PointX="3" PointY="38.25" IsExpanded="true" />
+        <AssociationConnector Association="gcafeModel.FK_member_refill_branch" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_Menu_branch" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_branch" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_printer_group_branch" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_staff_branch" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_sys_info_branch" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_credit_member" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_credit_order" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_detail_device" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_device" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_member_refill_member" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_member" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_member_refill_staff" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_menu_menu_catalog" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_Menu_printer_group" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_detail_menu" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_detail_setmeal_menu" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_setmeal_item_menu" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_setmeal_item_opt_menu" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_setmeal_item_setmeal_item" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_menu_catalog_this" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_method_method_catalog" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_detail_method_method" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_co_staff" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_dc_staff" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_detail_order" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_shift" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_to_staff" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_shift_detail_order" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_detail_method_order_detail" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_detail_setmeal_order_detail" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_detail_staff" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_order_detail_method_order_detail_setmeal" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_printer_printer_group" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_staff_role" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_setmeal_item_opt_setmeal_item" ManuallyRouted="false" />
+        <AssociationConnector Association="gcafeModel.FK_shift_detail_shift" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

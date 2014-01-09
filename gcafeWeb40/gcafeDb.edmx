@@ -1,0 +1,2117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="gcafeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="branch">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="credit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="member_id" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="repay_time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="device">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="device_id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="register_ticket" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="register_time" Type="datetime" Nullable="false" />
+          <Property Name="is_deny" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idcard_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="phone_num" Type="nvarchar" MaxLength="20" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="point" Type="int" Nullable="false" />
+          <Property Name="credit" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="join_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="member_refill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="branch_id" Type="int" Nullable="false" />
+          <Property Name="member_id" Type="int" Nullable="false" />
+          <Property Name="refill_amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="staff_id" Type="int" Nullable="false" />
+          <Property Name="refill_time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="branch_id" Type="int" Nullable="false" />
+          <Property Name="menu_catalog_id" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="unit" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="fprice" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="printer_group_id" Type="int" Nullable="false" />
+          <Property Name="is_setmeal" Type="bit" Nullable="false" />
+          <Property Name="is_locked" Type="bit" Nullable="false" />
+          <Property Name="sold_out" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="menu_catalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="parent_id" Type="int" />
+        </EntityType>
+        <EntityType Name="method">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="method_catalog_id" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="method_catalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="branch_id" Type="int" Nullable="false" />
+          <Property Name="device_id" Type="int" Nullable="false" />
+          <Property Name="order_num" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="table_no" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="customer_number" Type="int" Nullable="false" />
+          <Property Name="open_table_staff_id" Type="int" Nullable="false" />
+          <Property Name="table_opened_time" Type="datetime" Nullable="false" />
+          <Property Name="receivable" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="net_receipts" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="discount" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="discount_staff_id" Type="int" />
+          <Property Name="check_out_staff_id" Type="int" />
+          <Property Name="check_out_time" Type="datetime" />
+          <Property Name="member_id" Type="int" />
+          <Property Name="shift_id" Type="int" />
+          <Property Name="is_cancel" Type="bit" Nullable="false" />
+          <Property Name="cancel_staff_id" Type="int" />
+          <Property Name="cancel_time" Type="datetime" />
+          <Property Name="memo" Type="ntext" />
+        </EntityType>
+        <EntityType Name="order_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="device_id" Type="int" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="menu_id" Type="int" Nullable="false" />
+          <Property Name="group_cnt" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="order_staff_id" Type="int" Nullable="false" />
+          <Property Name="order_time" Type="datetime" Nullable="false" />
+          <Property Name="produced_time" Type="datetime" />
+          <Property Name="is_cancle" Type="bit" Nullable="false" />
+          <Property Name="cancel_staff_id" Type="int" />
+          <Property Name="cancel_time" Type="date" />
+          <Property Name="memo" Type="text" />
+        </EntityType>
+        <EntityType Name="order_detail_method">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_detail_id" Type="int" />
+          <Property Name="order_detail_setmeal_id" Type="int" />
+          <Property Name="method_id" Type="int" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order_detail_setmeal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_detail_id" Type="int" Nullable="false" />
+          <Property Name="menu_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="printer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="printer_group_id" Type="int" />
+          <Property Name="print_cnt" Type="int" Nullable="false" />
+          <Property Name="print_total_cnt" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="printer_group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="branch_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="print_cnt" Type="int" Nullable="false" />
+          <Property Name="print_total_cnt" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="service">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="setmeal_item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="setmeal_menu_id" Type="int" Nullable="false" />
+          <Property Name="setmeal_item_menu_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="setmeal_item_opt">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="setmeal_item_id" Type="int" Nullable="false" />
+          <Property Name="menu_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="shift">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sum" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="time" Type="datetime" Nullable="false" />
+          <Property Name="staff_id" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="shift_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shift_id" Type="int" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="20" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="branch_id" Type="int" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="join_date" Type="date" Nullable="false" />
+          <Property Name="is_deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sys_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="branch_id" Type="int" Nullable="false" />
+          <Property Name="order_cnt" Type="int" Nullable="false" />
+          <Property Name="is_festival" Type="bit" Nullable="false" />
+          <Property Name="order_detail_cnt" Type="int" Nullable="false" />
+          <Property Name="print_cnt" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_credit_member">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="credit" Type="Self.credit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="credit">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_order">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="credit" Type="Self.credit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="credit">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_member_refill_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="member_refill" Type="Self.member_refill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="member_refill">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_member_refill_member">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="member_refill" Type="Self.member_refill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="member_refill">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_member_refill_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="member_refill" Type="Self.member_refill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="member_refill">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_catalog_this">
+          <End Role="menu_catalog" Type="Self.menu_catalog" Multiplicity="0..1" />
+          <End Role="menu_catalog1" Type="Self.menu_catalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu_catalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu_catalog1">
+              <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_menu_catalog">
+          <End Role="menu_catalog" Type="Self.menu_catalog" Multiplicity="0..1" />
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu_catalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="menu_catalog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_printer_group">
+          <End Role="printer_group" Type="Self.printer_group" Multiplicity="1" />
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="printer_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="printer_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_method_method_catalog">
+          <End Role="method_catalog" Type="Self.method_catalog" Multiplicity="0..1" />
+          <End Role="method" Type="Self.method" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="method_catalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="method">
+              <PropertyRef Name="method_catalog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_co_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="check_out_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_dc_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="discount_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_device">
+          <End Role="device" Type="Self.device" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_menu">
+          <End Role="menu" Type="Self.menu" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="menu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_method_method">
+          <End Role="method" Type="Self.method" Multiplicity="1" />
+          <End Role="order_detail_method" Type="Self.order_detail_method" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="method">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail_method">
+              <PropertyRef Name="method_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_method_order_detail">
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="0..1" />
+          <End Role="order_detail_method" Type="Self.order_detail_method" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order_detail">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail_method">
+              <PropertyRef Name="order_detail_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_method_order_detail_setmeal">
+          <End Role="order_detail_setmeal" Type="Self.order_detail_setmeal" Multiplicity="0..1" />
+          <End Role="order_detail_method" Type="Self.order_detail_method" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order_detail_setmeal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail_method">
+              <PropertyRef Name="order_detail_setmeal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_order">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_setmeal_menu">
+          <End Role="menu" Type="Self.menu" Multiplicity="1" />
+          <End Role="order_detail_setmeal" Type="Self.order_detail_setmeal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail_setmeal">
+              <PropertyRef Name="menu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_setmeal_order_detail">
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="1" />
+          <End Role="order_detail_setmeal" Type="Self.order_detail_setmeal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order_detail">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail_setmeal">
+              <PropertyRef Name="order_detail_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="order_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_device">
+          <End Role="device" Type="Self.device" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_member">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_shift">
+          <End Role="shift" Type="Self.shift" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shift">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_to_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="open_table_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_printer_group_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="printer_group" Type="Self.printer_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="printer_group">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_printer_printer_group">
+          <End Role="printer_group" Type="Self.printer_group" Multiplicity="0..1" />
+          <End Role="printer" Type="Self.printer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="printer_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="printer">
+              <PropertyRef Name="printer_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_setmeal_item_menu">
+          <End Role="menu" Type="Self.menu" Multiplicity="1" />
+          <End Role="setmeal_item" Type="Self.setmeal_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="setmeal_item">
+              <PropertyRef Name="setmeal_menu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_setmeal_item_opt_menu">
+          <End Role="menu" Type="Self.menu" Multiplicity="1" />
+          <End Role="setmeal_item_opt" Type="Self.setmeal_item_opt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="setmeal_item_opt">
+              <PropertyRef Name="menu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_setmeal_item_opt_setmeal_item">
+          <End Role="setmeal_item" Type="Self.setmeal_item" Multiplicity="1" />
+          <End Role="setmeal_item_opt" Type="Self.setmeal_item_opt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="setmeal_item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="setmeal_item_opt">
+              <PropertyRef Name="setmeal_item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_setmeal_item_setmeal_item">
+          <End Role="menu" Type="Self.menu" Multiplicity="1" />
+          <End Role="setmeal_item" Type="Self.setmeal_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="setmeal_item">
+              <PropertyRef Name="setmeal_item_menu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_shift_detail_order">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="shift_detail" Type="Self.shift_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shift_detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_shift_detail_shift">
+          <End Role="shift" Type="Self.shift" Multiplicity="1" />
+          <End Role="shift_detail" Type="Self.shift_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shift">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shift_detail">
+              <PropertyRef Name="shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staff_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staff_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sys_info_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="sys_info" Type="Self.sys_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sys_info">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="IncreaseAndResetPrintCnt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="printerId" Type="int" Mode="In" />
+          <Parameter Name="isIncrease" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="gcafeModelStoreContainer">
+          <EntitySet Name="branch" EntityType="Self.branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="credit" EntityType="Self.credit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="device" EntityType="Self.device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member_refill" EntityType="Self.member_refill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="menu_catalog" EntityType="Self.menu_catalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="method" EntityType="Self.method" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="method_catalog" EntityType="Self.method_catalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_detail" EntityType="Self.order_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_detail_method" EntityType="Self.order_detail_method" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_detail_setmeal" EntityType="Self.order_detail_setmeal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="printer" EntityType="Self.printer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="printer_group" EntityType="Self.printer_group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="service" EntityType="Self.service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="setmeal_item" EntityType="Self.setmeal_item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="setmeal_item_opt" EntityType="Self.setmeal_item_opt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shift" EntityType="Self.shift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shift_detail" EntityType="Self.shift_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sys_info" EntityType="Self.sys_info" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_credit_member" Association="Self.FK_credit_member">
+            <End Role="member" EntitySet="member" />
+            <End Role="credit" EntitySet="credit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_order" Association="Self.FK_credit_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="credit" EntitySet="credit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_member_refill_branch" Association="Self.FK_member_refill_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="member_refill" EntitySet="member_refill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_member_refill_member" Association="Self.FK_member_refill_member">
+            <End Role="member" EntitySet="member" />
+            <End Role="member_refill" EntitySet="member_refill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_member_refill_staff" Association="Self.FK_member_refill_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="member_refill" EntitySet="member_refill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_branch" Association="Self.FK_Menu_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="menu" EntitySet="menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_catalog_this" Association="Self.FK_menu_catalog_this">
+            <End Role="menu_catalog" EntitySet="menu_catalog" />
+            <End Role="menu_catalog1" EntitySet="menu_catalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_menu_catalog" Association="Self.FK_menu_menu_catalog">
+            <End Role="menu_catalog" EntitySet="menu_catalog" />
+            <End Role="menu" EntitySet="menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_printer_group" Association="Self.FK_Menu_printer_group">
+            <End Role="printer_group" EntitySet="printer_group" />
+            <End Role="menu" EntitySet="menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_method_method_catalog" Association="Self.FK_method_method_catalog">
+            <End Role="method_catalog" EntitySet="method_catalog" />
+            <End Role="method" EntitySet="method" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_branch" Association="Self.FK_order_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_co_staff" Association="Self.FK_order_co_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_dc_staff" Association="Self.FK_order_dc_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_device" Association="Self.FK_order_detail_device">
+            <End Role="device" EntitySet="device" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_menu" Association="Self.FK_order_detail_menu">
+            <End Role="menu" EntitySet="menu" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_method_method" Association="Self.FK_order_detail_method_method">
+            <End Role="method" EntitySet="method" />
+            <End Role="order_detail_method" EntitySet="order_detail_method" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_method_order_detail" Association="Self.FK_order_detail_method_order_detail">
+            <End Role="order_detail" EntitySet="order_detail" />
+            <End Role="order_detail_method" EntitySet="order_detail_method" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_method_order_detail_setmeal" Association="Self.FK_order_detail_method_order_detail_setmeal">
+            <End Role="order_detail_setmeal" EntitySet="order_detail_setmeal" />
+            <End Role="order_detail_method" EntitySet="order_detail_method" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_order" Association="Self.FK_order_detail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_setmeal_menu" Association="Self.FK_order_detail_setmeal_menu">
+            <End Role="menu" EntitySet="menu" />
+            <End Role="order_detail_setmeal" EntitySet="order_detail_setmeal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_setmeal_order_detail" Association="Self.FK_order_detail_setmeal_order_detail">
+            <End Role="order_detail" EntitySet="order_detail" />
+            <End Role="order_detail_setmeal" EntitySet="order_detail_setmeal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_staff" Association="Self.FK_order_detail_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_device" Association="Self.FK_order_device">
+            <End Role="device" EntitySet="device" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_member" Association="Self.FK_order_member">
+            <End Role="member" EntitySet="member" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_shift" Association="Self.FK_order_shift">
+            <End Role="shift" EntitySet="shift" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_to_staff" Association="Self.FK_order_to_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_printer_group_branch" Association="Self.FK_printer_group_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="printer_group" EntitySet="printer_group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_printer_printer_group" Association="Self.FK_printer_printer_group">
+            <End Role="printer_group" EntitySet="printer_group" />
+            <End Role="printer" EntitySet="printer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_setmeal_item_menu" Association="Self.FK_setmeal_item_menu">
+            <End Role="menu" EntitySet="menu" />
+            <End Role="setmeal_item" EntitySet="setmeal_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_setmeal_item_opt_menu" Association="Self.FK_setmeal_item_opt_menu">
+            <End Role="menu" EntitySet="menu" />
+            <End Role="setmeal_item_opt" EntitySet="setmeal_item_opt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_setmeal_item_opt_setmeal_item" Association="Self.FK_setmeal_item_opt_setmeal_item">
+            <End Role="setmeal_item" EntitySet="setmeal_item" />
+            <End Role="setmeal_item_opt" EntitySet="setmeal_item_opt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_setmeal_item_setmeal_item" Association="Self.FK_setmeal_item_setmeal_item">
+            <End Role="menu" EntitySet="menu" />
+            <End Role="setmeal_item" EntitySet="setmeal_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shift_detail_order" Association="Self.FK_shift_detail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="shift_detail" EntitySet="shift_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shift_detail_shift" Association="Self.FK_shift_detail_shift">
+            <End Role="shift" EntitySet="shift" />
+            <End Role="shift_detail" EntitySet="shift_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staff_branch" Association="Self.FK_staff_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staff_role" Association="Self.FK_staff_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sys_info_branch" Association="Self.FK_sys_info_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="sys_info" EntitySet="sys_info" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="gcafeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="branch">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="member_refill" Relationship="Self.FK_member_refill_branch" FromRole="branch" ToRole="member_refill" />
+          <NavigationProperty Name="menu" Relationship="Self.FK_Menu_branch" FromRole="branch" ToRole="menu" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_branch" FromRole="branch" ToRole="order" />
+          <NavigationProperty Name="printer_group" Relationship="Self.FK_printer_group_branch" FromRole="branch" ToRole="printer_group" />
+          <NavigationProperty Name="staff" Relationship="Self.FK_staff_branch" FromRole="branch" ToRole="staff" />
+          <NavigationProperty Name="sys_info" Relationship="Self.FK_sys_info_branch" FromRole="branch" ToRole="sys_info" />
+        </EntityType>
+        <EntityType Name="credit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="member_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="repay_time" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="member" Relationship="Self.FK_credit_member" FromRole="credit" ToRole="member" />
+          <NavigationProperty Name="order" Relationship="Self.FK_credit_order" FromRole="credit" ToRole="order" />
+        </EntityType>
+        <EntityType Name="device">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="device_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="register_ticket" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="register_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_deny" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_device" FromRole="device" ToRole="order_detail" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_device" FromRole="device" ToRole="order" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idcard_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone_num" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="point" Type="Int32" Nullable="false" />
+          <Property Name="credit" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="join_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="credit1" Relationship="Self.FK_credit_member" FromRole="member" ToRole="credit" />
+          <NavigationProperty Name="member_refill" Relationship="Self.FK_member_refill_member" FromRole="member" ToRole="member_refill" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_member" FromRole="member" ToRole="order" />
+        </EntityType>
+        <EntityType Name="member_refill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="branch_id" Type="Int32" Nullable="false" />
+          <Property Name="member_id" Type="Int32" Nullable="false" />
+          <Property Name="refill_amount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="staff_id" Type="Int32" Nullable="false" />
+          <Property Name="refill_time" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="branch" Relationship="Self.FK_member_refill_branch" FromRole="member_refill" ToRole="branch" />
+          <NavigationProperty Name="member" Relationship="Self.FK_member_refill_member" FromRole="member_refill" ToRole="member" />
+          <NavigationProperty Name="staff" Relationship="Self.FK_member_refill_staff" FromRole="member_refill" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="branch_id" Type="Int32" Nullable="false" />
+          <Property Name="menu_catalog_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="unit" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="fprice" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="printer_group_id" Type="Int32" Nullable="false" />
+          <Property Name="is_setmeal" Type="Boolean" Nullable="false" />
+          <Property Name="is_locked" Type="Boolean" Nullable="false" />
+          <Property Name="sold_out" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="branch" Relationship="Self.FK_Menu_branch" FromRole="menu" ToRole="branch" />
+          <NavigationProperty Name="menu_catalog" Relationship="Self.FK_menu_menu_catalog" FromRole="menu" ToRole="menu_catalog" />
+          <NavigationProperty Name="printer_group" Relationship="Self.FK_Menu_printer_group" FromRole="menu" ToRole="printer_group" />
+          <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_menu" FromRole="menu" ToRole="order_detail" />
+          <NavigationProperty Name="order_detail_setmeal" Relationship="Self.FK_order_detail_setmeal_menu" FromRole="menu" ToRole="order_detail_setmeal" />
+          <NavigationProperty Name="setmeal_item" Relationship="Self.FK_setmeal_item_menu" FromRole="menu" ToRole="setmeal_item" />
+          <NavigationProperty Name="setmeal_item_opt" Relationship="Self.FK_setmeal_item_opt_menu" FromRole="menu" ToRole="setmeal_item_opt" />
+          <NavigationProperty Name="setmeal_item1" Relationship="Self.FK_setmeal_item_setmeal_item" FromRole="menu" ToRole="setmeal_item" />
+        </EntityType>
+        <EntityType Name="menu_catalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="parent_id" Type="Int32" />
+          <NavigationProperty Name="menu" Relationship="Self.FK_menu_menu_catalog" FromRole="menu_catalog" ToRole="menu" />
+          <NavigationProperty Name="menu_catalog1" Relationship="Self.FK_menu_catalog_this" FromRole="menu_catalog" ToRole="menu_catalog1" />
+          <NavigationProperty Name="menu_catalog2" Relationship="Self.FK_menu_catalog_this" FromRole="menu_catalog1" ToRole="menu_catalog" />
+        </EntityType>
+        <EntityType Name="method">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="method_catalog_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="method_catalog" Relationship="Self.FK_method_method_catalog" FromRole="method" ToRole="method_catalog" />
+          <NavigationProperty Name="order_detail_method" Relationship="Self.FK_order_detail_method_method" FromRole="method" ToRole="order_detail_method" />
+        </EntityType>
+        <EntityType Name="method_catalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="method" Relationship="Self.FK_method_method_catalog" FromRole="method_catalog" ToRole="method" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="branch_id" Type="Int32" Nullable="false" />
+          <Property Name="device_id" Type="Int32" Nullable="false" />
+          <Property Name="order_num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="table_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customer_number" Type="Int32" Nullable="false" />
+          <Property Name="open_table_staff_id" Type="Int32" Nullable="false" />
+          <Property Name="table_opened_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="receivable" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="net_receipts" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="discount" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="discount_staff_id" Type="Int32" />
+          <Property Name="check_out_staff_id" Type="Int32" />
+          <Property Name="check_out_time" Type="DateTime" Precision="3" />
+          <Property Name="member_id" Type="Int32" />
+          <Property Name="shift_id" Type="Int32" />
+          <Property Name="is_cancel" Type="Boolean" Nullable="false" />
+          <Property Name="cancel_staff_id" Type="Int32" />
+          <Property Name="cancel_time" Type="DateTime" Precision="3" />
+          <Property Name="memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="branch" Relationship="Self.FK_order_branch" FromRole="order" ToRole="branch" />
+          <NavigationProperty Name="credit" Relationship="Self.FK_credit_order" FromRole="order" ToRole="credit" />
+          <NavigationProperty Name="device" Relationship="Self.FK_order_device" FromRole="order" ToRole="device" />
+          <NavigationProperty Name="member" Relationship="Self.FK_order_member" FromRole="order" ToRole="member" />
+          <NavigationProperty Name="staff" Relationship="Self.FK_order_co_staff" FromRole="order" ToRole="staff" />
+          <NavigationProperty Name="staff1" Relationship="Self.FK_order_dc_staff" FromRole="order" ToRole="staff" />
+          <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_order" FromRole="order" ToRole="order_detail" />
+          <NavigationProperty Name="shift" Relationship="Self.FK_order_shift" FromRole="order" ToRole="shift" />
+          <NavigationProperty Name="staff2" Relationship="Self.FK_order_to_staff" FromRole="order" ToRole="staff" />
+          <NavigationProperty Name="shift_detail" Relationship="Self.FK_shift_detail_order" FromRole="order" ToRole="shift_detail" />
+        </EntityType>
+        <EntityType Name="order_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="device_id" Type="Int32" Nullable="false" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="menu_id" Type="Int32" Nullable="false" />
+          <Property Name="group_cnt" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="order_staff_id" Type="Int32" Nullable="false" />
+          <Property Name="order_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="produced_time" Type="DateTime" Precision="3" />
+          <Property Name="is_cancle" Type="Boolean" Nullable="false" />
+          <Property Name="cancel_staff_id" Type="Int32" />
+          <Property Name="cancel_time" Type="DateTime" Precision="0" />
+          <Property Name="memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="device" Relationship="Self.FK_order_detail_device" FromRole="order_detail" ToRole="device" />
+          <NavigationProperty Name="menu" Relationship="Self.FK_order_detail_menu" FromRole="order_detail" ToRole="menu" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_detail_order" FromRole="order_detail" ToRole="order" />
+          <NavigationProperty Name="order_detail_method" Relationship="Self.FK_order_detail_method_order_detail" FromRole="order_detail" ToRole="order_detail_method" />
+          <NavigationProperty Name="order_detail_setmeal" Relationship="Self.FK_order_detail_setmeal_order_detail" FromRole="order_detail" ToRole="order_detail_setmeal" />
+          <NavigationProperty Name="staff" Relationship="Self.FK_order_detail_staff" FromRole="order_detail" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="order_detail_method">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_detail_id" Type="Int32" />
+          <Property Name="order_detail_setmeal_id" Type="Int32" />
+          <Property Name="method_id" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <NavigationProperty Name="method" Relationship="Self.FK_order_detail_method_method" FromRole="order_detail_method" ToRole="method" />
+          <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_method_order_detail" FromRole="order_detail_method" ToRole="order_detail" />
+          <NavigationProperty Name="order_detail_setmeal" Relationship="Self.FK_order_detail_method_order_detail_setmeal" FromRole="order_detail_method" ToRole="order_detail_setmeal" />
+        </EntityType>
+        <EntityType Name="order_detail_setmeal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_detail_id" Type="Int32" Nullable="false" />
+          <Property Name="menu_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="menu" Relationship="Self.FK_order_detail_setmeal_menu" FromRole="order_detail_setmeal" ToRole="menu" />
+          <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_setmeal_order_detail" FromRole="order_detail_setmeal" ToRole="order_detail" />
+          <NavigationProperty Name="order_detail_method" Relationship="Self.FK_order_detail_method_order_detail_setmeal" FromRole="order_detail_setmeal" ToRole="order_detail_method" />
+        </EntityType>
+        <EntityType Name="printer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="printer_group_id" Type="Int32" />
+          <Property Name="print_cnt" Type="Int32" Nullable="false" />
+          <Property Name="print_total_cnt" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="printer_group" Relationship="Self.FK_printer_printer_group" FromRole="printer" ToRole="printer_group" />
+        </EntityType>
+        <EntityType Name="printer_group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="branch_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="print_cnt" Type="Int32" Nullable="false" />
+          <Property Name="print_total_cnt" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="branch" Relationship="Self.FK_printer_group_branch" FromRole="printer_group" ToRole="branch" />
+          <NavigationProperty Name="menu" Relationship="Self.FK_Menu_printer_group" FromRole="printer_group" ToRole="menu" />
+          <NavigationProperty Name="printer" Relationship="Self.FK_printer_printer_group" FromRole="printer_group" ToRole="printer" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="staff" Relationship="Self.FK_staff_role" FromRole="role" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="service">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="setmeal_item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="setmeal_menu_id" Type="Int32" Nullable="false" />
+          <Property Name="setmeal_item_menu_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="menu" Relationship="Self.FK_setmeal_item_menu" FromRole="setmeal_item" ToRole="menu" />
+          <NavigationProperty Name="menu1" Relationship="Self.FK_setmeal_item_setmeal_item" FromRole="setmeal_item" ToRole="menu" />
+          <NavigationProperty Name="setmeal_item_opt" Relationship="Self.FK_setmeal_item_opt_setmeal_item" FromRole="setmeal_item" ToRole="setmeal_item_opt" />
+        </EntityType>
+        <EntityType Name="setmeal_item_opt">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="setmeal_item_id" Type="Int32" Nullable="false" />
+          <Property Name="menu_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="menu" Relationship="Self.FK_setmeal_item_opt_menu" FromRole="setmeal_item_opt" ToRole="menu" />
+          <NavigationProperty Name="setmeal_item" Relationship="Self.FK_setmeal_item_opt_setmeal_item" FromRole="setmeal_item_opt" ToRole="setmeal_item" />
+        </EntityType>
+        <EntityType Name="shift">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sum" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="staff_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_shift" FromRole="shift" ToRole="order" />
+          <NavigationProperty Name="shift_detail" Relationship="Self.FK_shift_detail_shift" FromRole="shift" ToRole="shift_detail" />
+        </EntityType>
+        <EntityType Name="shift_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shift_id" Type="Int32" Nullable="false" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="order" Relationship="Self.FK_shift_detail_order" FromRole="shift_detail" ToRole="order" />
+          <NavigationProperty Name="shift" Relationship="Self.FK_shift_detail_shift" FromRole="shift_detail" ToRole="shift" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="branch_id" Type="Int32" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <Property Name="join_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="is_deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="branch" Relationship="Self.FK_staff_branch" FromRole="staff" ToRole="branch" />
+          <NavigationProperty Name="member_refill" Relationship="Self.FK_member_refill_staff" FromRole="staff" ToRole="member_refill" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_co_staff" FromRole="staff" ToRole="order" />
+          <NavigationProperty Name="order1" Relationship="Self.FK_order_dc_staff" FromRole="staff" ToRole="order" />
+          <NavigationProperty Name="order2" Relationship="Self.FK_order_to_staff" FromRole="staff" ToRole="order" />
+          <NavigationProperty Name="order_detail" Relationship="Self.FK_order_detail_staff" FromRole="staff" ToRole="order_detail" />
+          <NavigationProperty Name="role" Relationship="Self.FK_staff_role" FromRole="staff" ToRole="role" />
+        </EntityType>
+        <EntityType Name="sys_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="branch_id" Type="Int32" Nullable="false" />
+          <Property Name="order_cnt" Type="Int32" Nullable="false" />
+          <Property Name="is_festival" Type="Boolean" Nullable="false" />
+          <Property Name="order_detail_cnt" Type="Int32" Nullable="false" />
+          <Property Name="print_cnt" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="branch" Relationship="Self.FK_sys_info_branch" FromRole="sys_info" ToRole="branch" />
+        </EntityType>
+        <Association Name="FK_member_refill_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="member_refill" Type="Self.member_refill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="member_refill">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_printer_group_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="printer_group" Type="Self.printer_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="printer_group">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staff_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sys_info_branch">
+          <End Role="branch" Type="Self.branch" Multiplicity="1" />
+          <End Role="sys_info" Type="Self.sys_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sys_info">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_member">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="credit" Type="Self.credit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="credit">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_order">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="credit" Type="Self.credit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="credit">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_device">
+          <End Role="device" Type="Self.device" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_device">
+          <End Role="device" Type="Self.device" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_member_refill_member">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="member_refill" Type="Self.member_refill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="member_refill">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_member">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_member_refill_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="member_refill" Type="Self.member_refill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="member_refill">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_menu_catalog">
+          <End Role="menu_catalog" Type="Self.menu_catalog" Multiplicity="0..1" />
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu_catalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="menu_catalog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_printer_group">
+          <End Role="printer_group" Type="Self.printer_group" Multiplicity="1" />
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="printer_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="printer_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_menu">
+          <End Role="menu" Type="Self.menu" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="menu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_setmeal_menu">
+          <End Role="menu" Type="Self.menu" Multiplicity="1" />
+          <End Role="order_detail_setmeal" Type="Self.order_detail_setmeal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail_setmeal">
+              <PropertyRef Name="menu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_setmeal_item_menu">
+          <End Role="menu" Type="Self.menu" Multiplicity="1" />
+          <End Role="setmeal_item" Type="Self.setmeal_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="setmeal_item">
+              <PropertyRef Name="setmeal_menu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_setmeal_item_opt_menu">
+          <End Role="menu" Type="Self.menu" Multiplicity="1" />
+          <End Role="setmeal_item_opt" Type="Self.setmeal_item_opt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="setmeal_item_opt">
+              <PropertyRef Name="menu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_setmeal_item_setmeal_item">
+          <End Role="menu" Type="Self.menu" Multiplicity="1" />
+          <End Role="setmeal_item" Type="Self.setmeal_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="setmeal_item">
+              <PropertyRef Name="setmeal_item_menu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_catalog_this">
+          <End Role="menu_catalog" Type="Self.menu_catalog" Multiplicity="0..1" />
+          <End Role="menu_catalog1" Type="Self.menu_catalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu_catalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu_catalog1">
+              <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_method_method_catalog">
+          <End Role="method_catalog" Type="Self.method_catalog" Multiplicity="0..1" />
+          <End Role="method" Type="Self.method" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="method_catalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="method">
+              <PropertyRef Name="method_catalog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_method_method">
+          <End Role="method" Type="Self.method" Multiplicity="1" />
+          <End Role="order_detail_method" Type="Self.order_detail_method" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="method">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail_method">
+              <PropertyRef Name="method_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_co_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="check_out_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_dc_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="discount_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_order">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_shift">
+          <End Role="shift" Type="Self.shift" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shift">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_to_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="open_table_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_shift_detail_order">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="shift_detail" Type="Self.shift_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shift_detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_method_order_detail">
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="0..1" />
+          <End Role="order_detail_method" Type="Self.order_detail_method" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order_detail">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail_method">
+              <PropertyRef Name="order_detail_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_setmeal_order_detail">
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="1" />
+          <End Role="order_detail_setmeal" Type="Self.order_detail_setmeal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order_detail">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail_setmeal">
+              <PropertyRef Name="order_detail_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="order_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_method_order_detail_setmeal">
+          <End Role="order_detail_setmeal" Type="Self.order_detail_setmeal" Multiplicity="0..1" />
+          <End Role="order_detail_method" Type="Self.order_detail_method" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order_detail_setmeal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail_method">
+              <PropertyRef Name="order_detail_setmeal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_printer_printer_group">
+          <End Role="printer_group" Type="Self.printer_group" Multiplicity="0..1" />
+          <End Role="printer" Type="Self.printer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="printer_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="printer">
+              <PropertyRef Name="printer_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staff_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_setmeal_item_opt_setmeal_item">
+          <End Role="setmeal_item" Type="Self.setmeal_item" Multiplicity="1" />
+          <End Role="setmeal_item_opt" Type="Self.setmeal_item_opt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="setmeal_item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="setmeal_item_opt">
+              <PropertyRef Name="setmeal_item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_shift_detail_shift">
+          <End Role="shift" Type="Self.shift" Multiplicity="1" />
+          <End Role="shift_detail" Type="Self.shift_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shift">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shift_detail">
+              <PropertyRef Name="shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gcafeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="branch" EntityType="Self.branch" />
+          <EntitySet Name="credit" EntityType="Self.credit" />
+          <EntitySet Name="device" EntityType="Self.device" />
+          <EntitySet Name="member" EntityType="Self.member" />
+          <EntitySet Name="member_refill" EntityType="Self.member_refill" />
+          <EntitySet Name="menu" EntityType="Self.menu" />
+          <EntitySet Name="menu_catalog" EntityType="Self.menu_catalog" />
+          <EntitySet Name="method" EntityType="Self.method" />
+          <EntitySet Name="method_catalog" EntityType="Self.method_catalog" />
+          <EntitySet Name="order" EntityType="Self.order" />
+          <EntitySet Name="order_detail" EntityType="Self.order_detail" />
+          <EntitySet Name="order_detail_method" EntityType="Self.order_detail_method" />
+          <EntitySet Name="order_detail_setmeal" EntityType="Self.order_detail_setmeal" />
+          <EntitySet Name="printer" EntityType="Self.printer" />
+          <EntitySet Name="printer_group" EntityType="Self.printer_group" />
+          <EntitySet Name="role" EntityType="Self.role" />
+          <EntitySet Name="service" EntityType="Self.service" />
+          <EntitySet Name="setmeal_item" EntityType="Self.setmeal_item" />
+          <EntitySet Name="setmeal_item_opt" EntityType="Self.setmeal_item_opt" />
+          <EntitySet Name="shift" EntityType="Self.shift" />
+          <EntitySet Name="shift_detail" EntityType="Self.shift_detail" />
+          <EntitySet Name="staff" EntityType="Self.staff" />
+          <EntitySet Name="sys_info" EntityType="Self.sys_info" />
+          <AssociationSet Name="FK_member_refill_branch" Association="Self.FK_member_refill_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="member_refill" EntitySet="member_refill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_branch" Association="Self.FK_Menu_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="menu" EntitySet="menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_branch" Association="Self.FK_order_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_printer_group_branch" Association="Self.FK_printer_group_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="printer_group" EntitySet="printer_group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staff_branch" Association="Self.FK_staff_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sys_info_branch" Association="Self.FK_sys_info_branch">
+            <End Role="branch" EntitySet="branch" />
+            <End Role="sys_info" EntitySet="sys_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_member" Association="Self.FK_credit_member">
+            <End Role="member" EntitySet="member" />
+            <End Role="credit" EntitySet="credit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_order" Association="Self.FK_credit_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="credit" EntitySet="credit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_device" Association="Self.FK_order_detail_device">
+            <End Role="device" EntitySet="device" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_device" Association="Self.FK_order_device">
+            <End Role="device" EntitySet="device" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_member_refill_member" Association="Self.FK_member_refill_member">
+            <End Role="member" EntitySet="member" />
+            <End Role="member_refill" EntitySet="member_refill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_member" Association="Self.FK_order_member">
+            <End Role="member" EntitySet="member" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_member_refill_staff" Association="Self.FK_member_refill_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="member_refill" EntitySet="member_refill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_menu_catalog" Association="Self.FK_menu_menu_catalog">
+            <End Role="menu_catalog" EntitySet="menu_catalog" />
+            <End Role="menu" EntitySet="menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_printer_group" Association="Self.FK_Menu_printer_group">
+            <End Role="printer_group" EntitySet="printer_group" />
+            <End Role="menu" EntitySet="menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_menu" Association="Self.FK_order_detail_menu">
+            <End Role="menu" EntitySet="menu" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_setmeal_menu" Association="Self.FK_order_detail_setmeal_menu">
+            <End Role="menu" EntitySet="menu" />
+            <End Role="order_detail_setmeal" EntitySet="order_detail_setmeal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_setmeal_item_menu" Association="Self.FK_setmeal_item_menu">
+            <End Role="menu" EntitySet="menu" />
+            <End Role="setmeal_item" EntitySet="setmeal_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_setmeal_item_opt_menu" Association="Self.FK_setmeal_item_opt_menu">
+            <End Role="menu" EntitySet="menu" />
+            <End Role="setmeal_item_opt" EntitySet="setmeal_item_opt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_setmeal_item_setmeal_item" Association="Self.FK_setmeal_item_setmeal_item">
+            <End Role="menu" EntitySet="menu" />
+            <End Role="setmeal_item" EntitySet="setmeal_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_catalog_this" Association="Self.FK_menu_catalog_this">
+            <End Role="menu_catalog" EntitySet="menu_catalog" />
+            <End Role="menu_catalog1" EntitySet="menu_catalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_method_method_catalog" Association="Self.FK_method_method_catalog">
+            <End Role="method_catalog" EntitySet="method_catalog" />
+            <End Role="method" EntitySet="method" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_method_method" Association="Self.FK_order_detail_method_method">
+            <End Role="method" EntitySet="method" />
+            <End Role="order_detail_method" EntitySet="order_detail_method" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_co_staff" Association="Self.FK_order_co_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_dc_staff" Association="Self.FK_order_dc_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_order" Association="Self.FK_order_detail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_shift" Association="Self.FK_order_shift">
+            <End Role="shift" EntitySet="shift" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_to_staff" Association="Self.FK_order_to_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shift_detail_order" Association="Self.FK_shift_detail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="shift_detail" EntitySet="shift_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_method_order_detail" Association="Self.FK_order_detail_method_order_detail">
+            <End Role="order_detail" EntitySet="order_detail" />
+            <End Role="order_detail_method" EntitySet="order_detail_method" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_setmeal_order_detail" Association="Self.FK_order_detail_setmeal_order_detail">
+            <End Role="order_detail" EntitySet="order_detail" />
+            <End Role="order_detail_setmeal" EntitySet="order_detail_setmeal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_staff" Association="Self.FK_order_detail_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_method_order_detail_setmeal" Association="Self.FK_order_detail_method_order_detail_setmeal">
+            <End Role="order_detail_setmeal" EntitySet="order_detail_setmeal" />
+            <End Role="order_detail_method" EntitySet="order_detail_method" />
+          </AssociationSet>
+          <AssociationSet Name="FK_printer_printer_group" Association="Self.FK_printer_printer_group">
+            <End Role="printer_group" EntitySet="printer_group" />
+            <End Role="printer" EntitySet="printer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staff_role" Association="Self.FK_staff_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_setmeal_item_opt_setmeal_item" Association="Self.FK_setmeal_item_opt_setmeal_item">
+            <End Role="setmeal_item" EntitySet="setmeal_item" />
+            <End Role="setmeal_item_opt" EntitySet="setmeal_item_opt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shift_detail_shift" Association="Self.FK_shift_detail_shift">
+            <End Role="shift" EntitySet="shift" />
+            <End Role="shift_detail" EntitySet="shift_detail" />
+          </AssociationSet>
+          <FunctionImport Name="IncreaseAndResetPrintCnt" ReturnType="Collection(Int32)">
+            <Parameter Name="printerId" Mode="In" Type="Int32" />
+            <Parameter Name="isIncrease" Mode="In" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="gcafeModelStoreContainer" CdmEntityContainer="gcafeEntities">
+          <EntitySetMapping Name="branch">
+            <EntityTypeMapping TypeName="gcafeModel.branch">
+              <MappingFragment StoreEntitySet="branch">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="credit">
+            <EntityTypeMapping TypeName="gcafeModel.credit">
+              <MappingFragment StoreEntitySet="credit">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="repay_time" ColumnName="repay_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="device">
+            <EntityTypeMapping TypeName="gcafeModel.device">
+              <MappingFragment StoreEntitySet="device">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="register_ticket" ColumnName="register_ticket" />
+                <ScalarProperty Name="register_time" ColumnName="register_time" />
+                <ScalarProperty Name="is_deny" ColumnName="is_deny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="member">
+            <EntityTypeMapping TypeName="gcafeModel.member">
+              <MappingFragment StoreEntitySet="member">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idcard_number" ColumnName="idcard_number" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone_num" ColumnName="phone_num" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="point" ColumnName="point" />
+                <ScalarProperty Name="credit" ColumnName="credit" />
+                <ScalarProperty Name="join_date" ColumnName="join_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="member_refill">
+            <EntityTypeMapping TypeName="gcafeModel.member_refill">
+              <MappingFragment StoreEntitySet="member_refill">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="refill_amount" ColumnName="refill_amount" />
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+                <ScalarProperty Name="refill_time" ColumnName="refill_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="menu">
+            <EntityTypeMapping TypeName="gcafeModel.menu">
+              <MappingFragment StoreEntitySet="menu">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+                <ScalarProperty Name="menu_catalog_id" ColumnName="menu_catalog_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="fprice" ColumnName="fprice" />
+                <ScalarProperty Name="printer_group_id" ColumnName="printer_group_id" />
+                <ScalarProperty Name="is_setmeal" ColumnName="is_setmeal" />
+                <ScalarProperty Name="is_locked" ColumnName="is_locked" />
+                <ScalarProperty Name="sold_out" ColumnName="sold_out" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="menu_catalog">
+            <EntityTypeMapping TypeName="gcafeModel.menu_catalog">
+              <MappingFragment StoreEntitySet="menu_catalog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="method">
+            <EntityTypeMapping TypeName="gcafeModel.method">
+              <MappingFragment StoreEntitySet="method">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="method_catalog_id" ColumnName="method_catalog_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="method_catalog">
+            <EntityTypeMapping TypeName="gcafeModel.method_catalog">
+              <MappingFragment StoreEntitySet="method_catalog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order">
+            <EntityTypeMapping TypeName="gcafeModel.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="order_num" ColumnName="order_num" />
+                <ScalarProperty Name="table_no" ColumnName="table_no" />
+                <ScalarProperty Name="customer_number" ColumnName="customer_number" />
+                <ScalarProperty Name="open_table_staff_id" ColumnName="open_table_staff_id" />
+                <ScalarProperty Name="table_opened_time" ColumnName="table_opened_time" />
+                <ScalarProperty Name="receivable" ColumnName="receivable" />
+                <ScalarProperty Name="net_receipts" ColumnName="net_receipts" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="discount_staff_id" ColumnName="discount_staff_id" />
+                <ScalarProperty Name="check_out_staff_id" ColumnName="check_out_staff_id" />
+                <ScalarProperty Name="check_out_time" ColumnName="check_out_time" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="shift_id" ColumnName="shift_id" />
+                <ScalarProperty Name="is_cancel" ColumnName="is_cancel" />
+                <ScalarProperty Name="cancel_staff_id" ColumnName="cancel_staff_id" />
+                <ScalarProperty Name="cancel_time" ColumnName="cancel_time" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_detail">
+            <EntityTypeMapping TypeName="gcafeModel.order_detail">
+              <MappingFragment StoreEntitySet="order_detail">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+                <ScalarProperty Name="group_cnt" ColumnName="group_cnt" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="order_staff_id" ColumnName="order_staff_id" />
+                <ScalarProperty Name="order_time" ColumnName="order_time" />
+                <ScalarProperty Name="produced_time" ColumnName="produced_time" />
+                <ScalarProperty Name="is_cancle" ColumnName="is_cancle" />
+                <ScalarProperty Name="cancel_staff_id" ColumnName="cancel_staff_id" />
+                <ScalarProperty Name="cancel_time" ColumnName="cancel_time" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_detail_method">
+            <EntityTypeMapping TypeName="gcafeModel.order_detail_method">
+              <MappingFragment StoreEntitySet="order_detail_method">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="order_detail_id" ColumnName="order_detail_id" />
+                <ScalarProperty Name="order_detail_setmeal_id" ColumnName="order_detail_setmeal_id" />
+                <ScalarProperty Name="method_id" ColumnName="method_id" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_detail_setmeal">
+            <EntityTypeMapping TypeName="gcafeModel.order_detail_setmeal">
+              <MappingFragment StoreEntitySet="order_detail_setmeal">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="order_detail_id" ColumnName="order_detail_id" />
+                <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="printer">
+            <EntityTypeMapping TypeName="gcafeModel.printer">
+              <MappingFragment StoreEntitySet="printer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="printer_group_id" ColumnName="printer_group_id" />
+                <ScalarProperty Name="print_cnt" ColumnName="print_cnt" />
+                <ScalarProperty Name="print_total_cnt" ColumnName="print_total_cnt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="printer_group">
+            <EntityTypeMapping TypeName="gcafeModel.printer_group">
+              <MappingFragment StoreEntitySet="printer_group">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="print_cnt" ColumnName="print_cnt" />
+                <ScalarProperty Name="print_total_cnt" ColumnName="print_total_cnt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role">
+            <EntityTypeMapping TypeName="gcafeModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="service">
+            <EntityTypeMapping TypeName="gcafeModel.service">
+              <MappingFragment StoreEntitySet="service">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="setmeal_item">
+            <EntityTypeMapping TypeName="gcafeModel.setmeal_item">
+              <MappingFragment StoreEntitySet="setmeal_item">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="setmeal_menu_id" ColumnName="setmeal_menu_id" />
+                <ScalarProperty Name="setmeal_item_menu_id" ColumnName="setmeal_item_menu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="setmeal_item_opt">
+            <EntityTypeMapping TypeName="gcafeModel.setmeal_item_opt">
+              <MappingFragment StoreEntitySet="setmeal_item_opt">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="setmeal_item_id" ColumnName="setmeal_item_id" />
+                <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shift">
+            <EntityTypeMapping TypeName="gcafeModel.shift">
+              <MappingFragment StoreEntitySet="shift">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shift_detail">
+            <EntityTypeMapping TypeName="gcafeModel.shift_detail">
+              <MappingFragment StoreEntitySet="shift_detail">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="shift_id" ColumnName="shift_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staff">
+            <EntityTypeMapping TypeName="gcafeModel.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="join_date" ColumnName="join_date" />
+                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sys_info">
+            <EntityTypeMapping TypeName="gcafeModel.sys_info">
+              <MappingFragment StoreEntitySet="sys_info">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="branch_id" ColumnName="branch_id" />
+                <ScalarProperty Name="order_cnt" ColumnName="order_cnt" />
+                <ScalarProperty Name="is_festival" ColumnName="is_festival" />
+                <ScalarProperty Name="order_detail_cnt" ColumnName="order_detail_cnt" />
+                <ScalarProperty Name="print_cnt" ColumnName="print_cnt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="IncreaseAndResetPrintCnt" FunctionName="gcafeModel.Store.IncreaseAndResetPrintCnt" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

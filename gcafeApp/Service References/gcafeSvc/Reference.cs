@@ -17,7 +17,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MenuCatalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MenuCatalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40", IsReference=true)]
     public partial class MenuCatalog : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int IDField;
@@ -77,7 +77,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MenuItem", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MenuItem", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40", IsReference=true)]
     public partial class MenuItem : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int GroupCntField;
@@ -272,7 +272,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="method", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="method", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class method : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -362,7 +362,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SetmealItem", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SetmealItem", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40", IsReference=true)]
     public partial class SetmealItem : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int MenuIDField;
@@ -452,7 +452,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="method_catalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="method_catalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class method_catalog : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -512,7 +512,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="order_detail_method", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="order_detail_method", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class order_detail_method : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -647,7 +647,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="order_detail", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="order_detail", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class order_detail : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.Nullable<int> cancel_staff_idField;
@@ -962,7 +962,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="order_detail_setmeal", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="order_detail_setmeal", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class order_detail_setmeal : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -1067,7 +1067,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="device", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="device", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class device : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string device_idField;
@@ -1187,7 +1187,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="menu", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="menu", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class menu : object, System.ComponentModel.INotifyPropertyChanged {
         
         private gcafeApp.gcafeSvc.branch branchField;
@@ -1502,7 +1502,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="order", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="order", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class order : object, System.ComponentModel.INotifyPropertyChanged {
         
         private gcafeApp.gcafeSvc.branch branchField;
@@ -1967,7 +1967,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="staff", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="staff", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class staff : object, System.ComponentModel.INotifyPropertyChanged {
         
         private gcafeApp.gcafeSvc.branch branchField;
@@ -2207,7 +2207,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="branch", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="branch", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class branch : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -2342,7 +2342,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="member", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="member", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class member : object, System.ComponentModel.INotifyPropertyChanged {
         
         private decimal creditField;
@@ -2522,7 +2522,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="shift", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="shift", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class shift : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -2627,7 +2627,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="credit", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="credit", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class credit : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -2762,7 +2762,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="shift_detail", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="shift_detail", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class shift_detail : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -2852,7 +2852,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="member_refill", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="member_refill", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class member_refill : object, System.ComponentModel.INotifyPropertyChanged {
         
         private gcafeApp.gcafeSvc.branch branchField;
@@ -3002,7 +3002,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="printer_group", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="printer_group", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class printer_group : object, System.ComponentModel.INotifyPropertyChanged {
         
         private gcafeApp.gcafeSvc.branch branchField;
@@ -3137,7 +3137,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="sys_info", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="sys_info", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class sys_info : object, System.ComponentModel.INotifyPropertyChanged {
         
         private gcafeApp.gcafeSvc.branch branchField;
@@ -3257,7 +3257,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="role", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="role", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class role : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -3317,7 +3317,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="menu_catalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="menu_catalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class menu_catalog : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -3422,7 +3422,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="setmeal_item", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="setmeal_item", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class setmeal_item : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -3527,7 +3527,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="setmeal_item_opt", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="setmeal_item_opt", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class setmeal_item_opt : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -3617,7 +3617,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="printer", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="printer", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public partial class printer : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int idField;
@@ -3722,7 +3722,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TableInfo", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TableInfo", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40", IsReference=true)]
     public partial class TableInfo : object, System.ComponentModel.INotifyPropertyChanged {
         
         private decimal AmountField;
@@ -3842,7 +3842,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Staff", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Staff", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40", IsReference=true)]
     public partial class Staff1 : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string BranchField;
@@ -3961,7 +3961,7 @@ namespace gcafeApp.gcafeSvc {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TableOprType", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TableOprType", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40")]
     public enum TableOprType : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
@@ -3976,7 +3976,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MethodCatalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MethodCatalog", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40", IsReference=true)]
     public partial class MethodCatalog : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int IDField;
@@ -4036,7 +4036,7 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Method", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Method", Namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40", IsReference=true)]
     public partial class Method1 : object, System.ComponentModel.INotifyPropertyChanged {
         
         private int IDField;

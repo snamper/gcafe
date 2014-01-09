@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="Rlwl8qMT33Q9axKKk6aScCcXI+8=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="h7/c2hNuZadTLrYTriH89HI8AEo=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IgcafeSvc">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IgcafeSvc" contract="gcafeSvc.IgcafeSvc" bindingType="basicHttpBinding" address="http://192.168.15.210/gcafeSvc.svc" bindingConfiguration="BasicHttpBinding_IgcafeSvc">
+    <endpoint name="BasicHttpBinding_IgcafeSvc" contract="gcafeSvc.IgcafeSvc" bindingType="basicHttpBinding" address="http://192.168.15.81:47773/gcafeSvc.svc" bindingConfiguration="BasicHttpBinding_IgcafeSvc">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.15.210/gcafeSvc.svc</serializedValue>
+          <serializedValue>http://192.168.15.81:47773/gcafeSvc.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
