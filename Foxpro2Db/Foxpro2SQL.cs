@@ -327,6 +327,23 @@ namespace Foxpro2Db
             }
         }
 
+        int? GetPrinterGroupId(string pgn)
+        {
+            int? rtn = null;
+
+            using (var conn = new SqlConnection(DbConnStr))
+            {
+                conn.Open();
+
+                var cmd = new SqlCommand(string.Format("SELECT id FROM printer_group WHERE name = '{0}'", pgn), conn);
+                rtn = (int?)cmd.ExecuteScalar();
+
+                conn.Close();
+            }
+
+            return rtn;
+        }
+
         private int? GetMenuCataId(string prodNo)
         {
             int? id = null;
