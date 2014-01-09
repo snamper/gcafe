@@ -15,17 +15,30 @@ namespace Foxpro2Db
     {
         public override void Convert()
         {
-            //DbMaintain();
+            DbMaintain();
 
             MenuCata();
 
             SqlTransaction trans = null;
+            List<string> _sellOuts = new List<string>();
 
             try
             {
                 using (var conn = new OleDbConnection(FoxproConnStr))
                 {
                     conn.Open();
+
+                    var soCmd = new OleDbCommand("SELECT productno FROM sellout", conn);
+                    var soReader = soCmd.ExecuteReader();
+                    while (soReader.Read())
+                    {
+                        _sellOuts.Add(soReader.GetString(0));
+                    }
+                    soReader.Close();
+
+                    // 是否节日价
+                    soCmd = new OleDbCommand("SELECT pricetype FROM sysinfo", conn);
+                    int pType = Int32.Parse((string)soCmd.ExecuteScalar());
 
                     using (var adapter = new OleDbDataAdapter("SELECT * FROM product", conn))
                     {
@@ -35,6 +48,9 @@ namespace Foxpro2Db
                         using (var dbConn = new SqlConnection(DbConnStr))
                         {
                             dbConn.Open();
+
+                            var cc = new SqlCommand(string.Format("UPDATE sys_info SET is_festival = {0} WHERE branch_id = {1}", pType == 2 ? 1 : 0, 1), dbConn);
+                            cc.ExecuteNonQuery();
 
                             trans = dbConn.BeginTransaction("trans");
                             List<string> listSetmeal = new List<string>();
@@ -47,23 +63,43 @@ namespace Foxpro2Db
                                 string prodName = ((string)row["prodname"]).Trim();
                                 decimal price = (decimal)row["price"];
                                 decimal fprice = (decimal)row["fprice"];
+                                bool locked = (bool)row["locked"];
                                 bool isSetmeal = IsSetmeal(prodNo);
 
                                 if ((prodNo.Substring(0, 2) != "33") &&
                                     (prodNo.Length > 4))
                                 {
-                                    int? catId = GetMenuCataId(prodNo);
-
-                                    if (catId != null)
-                                        sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, menu_catalog_id, fprice) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3}, {4}, {5})",
-                                            prodName, prodNo, price, isSetmeal ? 1 : 0, catId, fprice);
-                                    else
-                                        sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, fprice) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3}, {4})",
-                                            prodName, prodNo, price, isSetmeal ? 1 : 0, fprice);
-
-                                    using (var dbCmd = new SqlCommand(sql, dbConn, trans))
+                                    sql = string.Format("SELECT price, fprice FROM menu WHERE number = '{0}'", prodNo);
+                                    var dbCmd = new SqlCommand(sql, dbConn, trans);
+                                    var dbReader = dbCmd.ExecuteReader();
+                                    if (dbReader.Read())
                                     {
-                                        dbCmd.ExecuteNonQuery();
+                                        sql = string.Format("UPDATE menu SET price = {0}, fprice = {1}, is_locked = {2}, sold_out = {3} WHERE number = '{4}'", price, fprice, locked ? 1 : 0, _sellOuts.Contains(prodNo) ? 1 : 0, prodNo);
+                                    }
+                                    else
+                                    {
+                                        if (locked == true)
+                                        {
+                                            dbReader.Close();
+                                            continue;
+                                        }
+                                        else
+                                        {
+                                            int? catId = GetMenuCataId(prodNo);
+
+                                            if (catId != null)
+                                                sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, menu_catalog_id, fprice) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3}, {4}, {5})",
+                                                    prodName, prodNo, price, isSetmeal ? 1 : 0, catId, fprice);
+                                            else
+                                                sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, fprice) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3}, {4})",
+                                                    prodName, prodNo, price, isSetmeal ? 1 : 0, fprice);
+                                        }
+                                    }
+                                    dbReader.Close();
+
+                                    using (var dbCmd1 = new SqlCommand(sql, dbConn, trans))
+                                    {
+                                        dbCmd1.ExecuteNonQuery();
                                     }
 
                                     System.Console.WriteLine(prodName);
@@ -212,27 +248,35 @@ namespace Foxpro2Db
             {
                 conn.Open();
 
-                var adapter = new OleDbDataAdapter("SELECT productno, prodname FROM product ORDER BY productno", conn);
+                var adapter = new OleDbDataAdapter("SELECT productno, prodname, locked FROM product ORDER BY productno", conn);
                 var table = new DataTable();
                 adapter.Fill(table);
                 foreach (DataRow r in table.Rows)
                 {
                     string prodNo = ((string)r["productno"]).Trim();
                     string prodName = ((string)r["prodname"]).Trim();
+                    bool locked = (bool)r["locked"];
 
                     if (prodNo.Substring(0, 2) != "33")
                     {
                         if ((prodNo.Length > 2) &&
                             (prodNo.Length < 5))
                         {
-                            string sql = string.Format("INSERT INTO menu_catalog(parent_id, name) VALUES({0}, '{1}')", prodNo.Substring(0, 2) == "11" ? 1 : 2, prodName);
-
                             using (var sqlConn = new SqlConnection(DbConnStr))
                             {
                                 sqlConn.Open();
 
+                                string sql;
+
+                                sql = string.Format("SELECT name FROM menu_catalog WHERE name = '{0}'", prodName);
                                 var cmd = new SqlCommand(sql, sqlConn);
-                                cmd.ExecuteNonQuery();
+                                if (cmd.ExecuteScalar() == null)
+                                {
+                                    sql = string.Format("INSERT INTO menu_catalog(parent_id, name, locked) VALUES({0}, '{1}', {2})", prodNo.Substring(0, 2) == "11" ? 1 : 2, prodName, locked ? 1 : 0);
+
+                                    cmd = new SqlCommand(sql, sqlConn);
+                                    cmd.ExecuteNonQuery();
+                                }
 
                                 sqlConn.Close();
                             }
