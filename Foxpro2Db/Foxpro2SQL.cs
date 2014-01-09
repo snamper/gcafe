@@ -36,6 +36,10 @@ namespace Foxpro2Db
                     }
                     soReader.Close();
 
+                    var soAdapter = new OleDbDataAdapter("SELECT * FROM prntr", conn);
+                    var prntrTbl = new DataTable();
+                    soAdapter.Fill(prntrTbl);
+
                     // 是否节日价
                     soCmd = new OleDbCommand("SELECT pricetype FROM sysinfo", conn);
                     int pType = Int32.Parse((string)soCmd.ExecuteScalar());
@@ -51,6 +55,41 @@ namespace Foxpro2Db
 
                             var cc = new SqlCommand(string.Format("UPDATE sys_info SET is_festival = {0} WHERE branch_id = {1}", pType == 2 ? 1 : 0, 1), dbConn);
                             cc.ExecuteNonQuery();
+
+                            // 插入打印机
+                            foreach (DataRow rr in prntrTbl.Rows)
+                            {
+                                string pgn = (string)rr["Printgroup"];
+                                string prntr = (string)rr["prntr"];
+
+                                cc = new SqlCommand(string.Format("SELECT id FROM printer_group WHERE name = '{0} AND branch_id = {1}", pgn, 1), dbConn);
+                                int? id = (int?)cc.ExecuteScalar();
+                                if (id != null)
+                                {
+                                    cc = new SqlCommand(string.Format("SELECT name FROM printer WHERE printer_group_id = {0}", id), dbConn);
+                                    string pn = (string)cc.ExecuteScalar();
+                                    if (pn == null)
+                                    {
+                                        cc = new SqlCommand(string.Format("INSERT INTO printer(name, printer_group_id, print_cnt, print_total_cnt) VALUES('{0}', {1}, 0, 0)", prntr, id), dbConn);
+                                        cc.ExecuteNonQuery();
+                                    }
+                                    else
+                                    {
+                                        if (pn != prntr)
+                                        {
+                                            cc = new SqlCommand(string.Format("UPDATE printer SET name = '{0}' WHERE printer_group_id = {1}", prntr, id), dbConn);
+                                            cc.ExecuteNonQuery();
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    cc = new SqlCommand(string.Format("INSERT INTO printer_group(name, branch_id, print_cnt, print_total_cnt) VALUES('{0}', {1}, 0, 0)", pgn, 1), dbConn);
+                                    cc.ExecuteNonQuery();
+                                    cc = new SqlCommand(string.Format("INSERT INTO printer(name, printer_group_id, print_cnt, print_total_cnt) VALUES('{0}', @@Identity, 0, 0)"));
+                                    cc.ExecuteNonQuery();
+                                }
+                            }
 
                             trans = dbConn.BeginTransaction("trans");
                             List<string> listSetmeal = new List<string>();
