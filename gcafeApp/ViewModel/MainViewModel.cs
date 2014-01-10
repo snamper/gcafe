@@ -153,6 +153,23 @@ namespace gcafeApp.ViewModel
             App.RootFrame.Navigate(new Uri("/Pages/SelectMethodPage.xaml", UriKind.Relative));
         }
 
+        public RelayCommand<object> DeleteCommand
+        {
+            get
+            {
+                if (_deleteCommand == null)
+                    _deleteCommand = new RelayCommand<object>(OnDeleteCommand);
+
+                return _deleteCommand;
+            }
+        }
+        private RelayCommand<object> _deleteCommand;
+
+        void OnDeleteCommand(object param)
+        {
+
+        }
+
         public ObservableCollection<MenuItem> MenuItems
         {
             get { return _menuItems; }

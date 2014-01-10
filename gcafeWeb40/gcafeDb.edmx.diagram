@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fa0a2fa6151d43709fbb0446a3e9ea18" Name="Diagram1">
+      <Diagram DiagramId="f2c9ea51e5b940569089ace5df8ef6b1" Name="Diagram1">
         <EntityTypeShape EntityType="gcafeModel.branch" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.credit" Width="1.5" PointX="8.25" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.device" Width="1.5" PointX="3.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.member" Width="1.5" PointX="0.75" PointY="19.625" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.member_refill" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.menu" Width="1.5" PointX="5.25" PointY="22.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="gcafeModel.menu_catalog" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gcafeModel.menu_catalog" Width="1.5" PointX="3" PointY="23.25" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.method" Width="1.5" PointX="8.25" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.method_catalog" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="gcafeModel.order" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
