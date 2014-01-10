@@ -23,6 +23,7 @@ namespace gcafePrnConsole
         public int id { get; set; }
         public string name { get; set; }
         public Nullable<int> parent_id { get; set; }
+        public bool locked { get; set; }
     
         public virtual ICollection<menu> menu { get; set; }
         public virtual ICollection<menu_catalog> menu_catalog1 { get; set; }

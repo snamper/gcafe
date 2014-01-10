@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="gcafeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="gcafeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="branch">
           <Key>
             <PropertyRef Name="id" />
@@ -69,7 +69,7 @@
           <Property Name="unit" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="fprice" Type="decimal" Precision="8" Scale="2" Nullable="false" />
-          <Property Name="printer_group_id" Type="int" Nullable="false" />
+          <Property Name="printer_group_id" Type="int" />
           <Property Name="is_setmeal" Type="bit" Nullable="false" />
           <Property Name="is_locked" Type="bit" Nullable="false" />
           <Property Name="sold_out" Type="bit" Nullable="false" />
@@ -81,6 +81,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="parent_id" Type="int" />
+          <Property Name="locked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="method">
           <Key>
@@ -347,7 +348,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Menu_printer_group">
-          <End Role="printer_group" Type="Self.printer_group" Multiplicity="1" />
+          <End Role="printer_group" Type="Self.printer_group" Multiplicity="0..1" />
           <End Role="menu" Type="Self.menu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="printer_group">
@@ -699,29 +700,29 @@
           <Parameter Name="isIncrease" Type="bit" Mode="In" />
         </Function>
         <EntityContainer Name="gcafeModelStoreContainer">
-          <EntitySet Name="branch" EntityType="Self.branch" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="credit" EntityType="Self.credit" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="device" EntityType="Self.device" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="member_refill" EntityType="Self.member_refill" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="menu_catalog" EntityType="Self.menu_catalog" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="method" EntityType="Self.method" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="method_catalog" EntityType="Self.method_catalog" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="order_detail" EntityType="Self.order_detail" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="order_detail_method" EntityType="Self.order_detail_method" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="order_detail_setmeal" EntityType="Self.order_detail_setmeal" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="printer" EntityType="Self.printer" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="printer_group" EntityType="Self.printer_group" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="service" EntityType="Self.service" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="setmeal_item" EntityType="Self.setmeal_item" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="setmeal_item_opt" EntityType="Self.setmeal_item_opt" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="shift" EntityType="Self.shift" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="shift_detail" EntityType="Self.shift_detail" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="sys_info" EntityType="Self.sys_info" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="branch" EntityType="Self.branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="credit" EntityType="Self.credit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="device" EntityType="Self.device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member_refill" EntityType="Self.member_refill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="menu_catalog" EntityType="Self.menu_catalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="method" EntityType="Self.method" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="method_catalog" EntityType="Self.method_catalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_detail" EntityType="Self.order_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_detail_method" EntityType="Self.order_detail_method" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_detail_setmeal" EntityType="Self.order_detail_setmeal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="printer" EntityType="Self.printer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="printer_group" EntityType="Self.printer_group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="service" EntityType="Self.service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="setmeal_item" EntityType="Self.setmeal_item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="setmeal_item_opt" EntityType="Self.setmeal_item_opt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shift" EntityType="Self.shift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shift_detail" EntityType="Self.shift_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sys_info" EntityType="Self.sys_info" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_credit_member" Association="Self.FK_credit_member">
             <End Role="member" EntitySet="member" />
             <End Role="credit" EntitySet="credit" />
@@ -875,7 +876,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="gcafeModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+      <Schema Namespace="gcafeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="branch">
           <Key>
             <PropertyRef Name="id" />
@@ -956,7 +957,7 @@
           <Property Name="unit" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="fprice" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
-          <Property Name="printer_group_id" Type="Int32" Nullable="false" />
+          <Property Name="printer_group_id" Type="Int32" />
           <Property Name="is_setmeal" Type="Boolean" Nullable="false" />
           <Property Name="is_locked" Type="Boolean" Nullable="false" />
           <Property Name="sold_out" Type="Boolean" Nullable="false" />
@@ -976,6 +977,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="parent_id" Type="Int32" />
+          <Property Name="locked" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="menu" Relationship="Self.FK_menu_menu_catalog" FromRole="menu_catalog" ToRole="menu" />
           <NavigationProperty Name="menu_catalog1" Relationship="Self.FK_menu_catalog_this" FromRole="menu_catalog" ToRole="menu_catalog1" />
           <NavigationProperty Name="menu_catalog2" Relationship="Self.FK_menu_catalog_this" FromRole="menu_catalog1" ToRole="menu_catalog" />
@@ -1364,7 +1366,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Menu_printer_group">
-          <End Role="printer_group" Type="Self.printer_group" Multiplicity="1" />
+          <End Role="printer_group" Type="Self.printer_group" Multiplicity="0..1" />
           <End Role="menu" Type="Self.menu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="printer_group">
@@ -1820,7 +1822,7 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="gcafeModelStoreContainer" CdmEntityContainer="gcafeEntities">
           <EntitySetMapping Name="branch">
             <EntityTypeMapping TypeName="gcafeModel.branch">
@@ -1903,6 +1905,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="locked" ColumnName="locked" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2096,7 +2099,7 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
@@ -2112,6 +2115,6 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams />
+    <Diagrams></Diagrams>
   </Designer>
 </edmx:Edmx>

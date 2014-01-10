@@ -282,8 +282,8 @@ namespace gcafePrnConsole
                         {
                             foreach (order_detail_setmeal setmealItem in orderDetail.order_detail_setmeal)
                             {
-                                if (prnGrp.ContainsKey(setmealItem.menu.printer_group_id.ToString()) == false)
-                                    prnGrp.Add(setmealItem.menu.printer_group_id.ToString(), new List<object>());
+                                if (prnGrp.ContainsKey(setmealItem.menu.printer_group_id == null ? "NULL" : setmealItem.menu.printer_group_id.ToString()) == false)
+                                    prnGrp.Add(setmealItem.menu.printer_group_id == null ? "NULL" : setmealItem.menu.printer_group_id.ToString(), new List<object>());
 
                                 // 如果数量大于1，每张单只代表一个量，因为这单要跟碟
                                 for (int i = 0; i < setmealItem.order_detail.quantity; i++)
@@ -292,8 +292,8 @@ namespace gcafePrnConsole
                         }
                         else
                         {
-                            if (prnGrp.ContainsKey(orderDetail.menu.printer_group_id.ToString()) == false)
-                                prnGrp.Add(orderDetail.menu.printer_group_id.ToString(), new List<object>());
+                            if (prnGrp.ContainsKey(orderDetail.menu.printer_group_id == null ? "NULL" : orderDetail.menu.printer_group_id.ToString()) == false)
+                                prnGrp.Add(orderDetail.menu.printer_group_id == null ? "NULL" : orderDetail.menu.printer_group_id.ToString(), new List<object>());
 
                             // 如果数量大于1，每张单只代表一个量，因为这单要跟碟
                             for (int i = 0; i < orderDetail.quantity; i++)
@@ -308,12 +308,20 @@ namespace gcafePrnConsole
                     #region 将数据填入visual
                     foreach (var key in prnGrp.Keys)
                     {
+                        if (key == "NULL")
+                            continue;
+
                         printer pnt = GetPrinterNameByGroupId(Int32.Parse(key));
+                        if (pnt == null)
+                            continue;
+                        if (string.IsNullOrEmpty(pnt.name))
+                            continue;
                         string pgName = pnt.printer_group.name;
 
                         var printers = new LocalPrintServer().GetPrintQueues();
                         var selectedPrinter = printers.FirstOrDefault(p => p.Name == pnt.name);
                         printDlg.PrintQueue = selectedPrinter;
+                        Global.Logger.Debug(string.Format("printer name:{0}", pnt.name));
 
                         int? prnCnt = GetAndAddPrintCnt(pnt.id);
 
