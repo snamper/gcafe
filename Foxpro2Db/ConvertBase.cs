@@ -20,7 +20,7 @@ namespace Foxpro2Db
             set;
         }
 
-        public virtual void Convert()
+        public virtual void Convert(int branchId)
         {
         }
 

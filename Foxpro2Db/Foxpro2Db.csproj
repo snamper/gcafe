@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C2180268-EDC1-4CB8-9C6E-91B068917473}</ProjectGuid>
+    <ProjectGuid>{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Foxpro2Db</RootNamespace>

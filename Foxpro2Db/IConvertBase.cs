@@ -23,7 +23,7 @@ namespace Foxpro2Db
             set;
         }
 
-        void Convert();
+        void Convert(int branchId);
 
         /// <summary>
         /// prodNo是否套餐

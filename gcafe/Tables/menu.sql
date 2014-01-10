@@ -8,7 +8,7 @@
 	[unit] NVARCHAR(6) NOT NULL,
     [price] DECIMAL(8, 2) NOT NULL, 
 	[fprice] DECIMAL(8, 2) NOT NULL DEFAULT 0, 
-    [printer_group_id] INT NOT NULL, 
+    [printer_group_id] INT NULL, 
 	[is_setmeal] BIT NOT NULL DEFAULT 0, 
     [is_locked] BIT NOT NULL DEFAULT 0, 
     [sold_out] BIT NOT NULL DEFAULT 0, 

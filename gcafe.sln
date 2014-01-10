@@ -7,11 +7,6 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "gcafe", "gcafe\gcafe.sqlpro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeWeb", "gcafeWeb\gcafeWeb.csproj", "{5137AFC1-B508-41CD-8053-59766C9F56B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foxpro2Db", "Foxpro2Db\Foxpro2Db.csproj", "{C2180268-EDC1-4CB8-9C6E-91B068917473}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5137AFC1-B508-41CD-8053-59766C9F56B7} = {5137AFC1-B508-41CD-8053-59766C9F56B7}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeApp", "gcafeApp\gcafeApp.csproj", "{A712BF43-F580-4935-B3BA-2D1FD204CC01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuPrint", "MenuPrint\MenuPrint.csproj", "{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}"
@@ -21,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafePrnConsole", "gcafePrnConsole\gcafePrnConsole.csproj", "{A8CD8B23-79FF-4313-80DD-CAD64BF20C0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeWeb40", "gcafeWeb40\gcafeWeb40.csproj", "{BA8C3671-E98B-4D5D-A17C-8508333A7DD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foxpro2Db", "Foxpro2Db\Foxpro2Db.csproj", "{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,16 +53,6 @@ Global
 		{5137AFC1-B508-41CD-8053-59766C9F56B7}.Release|ARM.ActiveCfg = Release|Any CPU
 		{5137AFC1-B508-41CD-8053-59766C9F56B7}.Release|x64.ActiveCfg = Release|Any CPU
 		{5137AFC1-B508-41CD-8053-59766C9F56B7}.Release|x86.ActiveCfg = Release|Any CPU
-		{C2180268-EDC1-4CB8-9C6E-91B068917473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2180268-EDC1-4CB8-9C6E-91B068917473}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2180268-EDC1-4CB8-9C6E-91B068917473}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{C2180268-EDC1-4CB8-9C6E-91B068917473}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C2180268-EDC1-4CB8-9C6E-91B068917473}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C2180268-EDC1-4CB8-9C6E-91B068917473}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2180268-EDC1-4CB8-9C6E-91B068917473}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2180268-EDC1-4CB8-9C6E-91B068917473}.Release|ARM.ActiveCfg = Release|Any CPU
-		{C2180268-EDC1-4CB8-9C6E-91B068917473}.Release|x64.ActiveCfg = Release|Any CPU
-		{C2180268-EDC1-4CB8-9C6E-91B068917473}.Release|x86.ActiveCfg = Release|Any CPU
 		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A712BF43-F580-4935-B3BA-2D1FD204CC01}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -126,6 +113,16 @@ Global
 		{BA8C3671-E98B-4D5D-A17C-8508333A7DD7}.Release|ARM.ActiveCfg = Release|Any CPU
 		{BA8C3671-E98B-4D5D-A17C-8508333A7DD7}.Release|x64.ActiveCfg = Release|Any CPU
 		{BA8C3671-E98B-4D5D-A17C-8508333A7DD7}.Release|x86.ActiveCfg = Release|Any CPU
+		{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}.Release|ARM.ActiveCfg = Release|Any CPU
+		{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}.Release|x64.ActiveCfg = Release|Any CPU
+		{CCE0A52D-BA9A-4B56-8EB4-EDECD9B14BA0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

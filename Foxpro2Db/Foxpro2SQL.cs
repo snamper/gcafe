@@ -13,7 +13,7 @@ namespace Foxpro2Db
 {
     class Foxpro2SQL : ConvertBase
     {
-        public override void Convert()
+        public override void Convert(int branchId)
         {
             DbMaintain();
 
@@ -36,9 +36,13 @@ namespace Foxpro2Db
                     }
                     soReader.Close();
 
-                    var soAdapter = new OleDbDataAdapter("SELECT * FROM prntr", conn);
-                    var prntrTbl = new DataTable();
-                    soAdapter.Fill(prntrTbl);
+                    DataTable prntrTbl = null;
+                    using (var conn1 = new OleDbConnection(@"Provider=VFPOLEDB.1;Data Source=D:\gwr\DATA\printt.dbc"))
+                    {
+                        var soAdapter = new OleDbDataAdapter("SELECT * FROM prntr", conn1);
+                        prntrTbl = new DataTable();
+                        soAdapter.Fill(prntrTbl);
+                    }
 
                     // 是否节日价
                     soCmd = new OleDbCommand("SELECT pricetype FROM sysinfo", conn);
@@ -53,16 +57,17 @@ namespace Foxpro2Db
                         {
                             dbConn.Open();
 
-                            var cc = new SqlCommand(string.Format("UPDATE sys_info SET is_festival = {0} WHERE branch_id = {1}", pType == 2 ? 1 : 0, 1), dbConn);
+                            var cc = new SqlCommand(string.Format("UPDATE sys_info SET is_festival = {0} WHERE branch_id = {1}", pType == 2 ? 1 : 0, branchId), dbConn);
                             cc.ExecuteNonQuery();
 
+                            #region
                             // 插入打印机
                             foreach (DataRow rr in prntrTbl.Rows)
                             {
                                 string pgn = (string)rr["Printgroup"];
-                                string prntr = (string)rr["prntr"];
+                                string prntr = ((string)rr["prntr"]).Trim();
 
-                                cc = new SqlCommand(string.Format("SELECT id FROM printer_group WHERE name = '{0} AND branch_id = {1}", pgn, 1), dbConn);
+                                cc = new SqlCommand(string.Format("SELECT id FROM printer_group WHERE name = '{0}' AND branch_id = {1}", pgn, branchId), dbConn);
                                 int? id = (int?)cc.ExecuteScalar();
                                 if (id != null)
                                 {
@@ -84,12 +89,13 @@ namespace Foxpro2Db
                                 }
                                 else
                                 {
-                                    cc = new SqlCommand(string.Format("INSERT INTO printer_group(name, branch_id, print_cnt, print_total_cnt) VALUES('{0}', {1}, 0, 0)", pgn, 1), dbConn);
+                                    cc = new SqlCommand(string.Format("INSERT INTO printer_group(name, branch_id, print_cnt, print_total_cnt) VALUES('{0}', {1}, 0, 0)", pgn, branchId), dbConn);
                                     cc.ExecuteNonQuery();
-                                    cc = new SqlCommand(string.Format("INSERT INTO printer(name, printer_group_id, print_cnt, print_total_cnt) VALUES('{0}', @@Identity, 0, 0)"));
+                                    cc = new SqlCommand(string.Format("INSERT INTO printer(name, printer_group_id, print_cnt, print_total_cnt) VALUES('{0}', @@Identity, 0, 0)", prntr), dbConn);
                                     cc.ExecuteNonQuery();
                                 }
                             }
+                            #endregion
 
                             trans = dbConn.BeginTransaction("trans");
                             List<string> listSetmeal = new List<string>();
@@ -108,12 +114,14 @@ namespace Foxpro2Db
                                 if ((prodNo.Substring(0, 2) != "33") &&
                                     (prodNo.Length > 4))
                                 {
+                                    int? pgId = GetPrinterGroupId(((string)row["printgroup"]).Trim());
+
                                     sql = string.Format("SELECT price, fprice FROM menu WHERE number = '{0}'", prodNo);
                                     var dbCmd = new SqlCommand(sql, dbConn, trans);
                                     var dbReader = dbCmd.ExecuteReader();
                                     if (dbReader.Read())
                                     {
-                                        sql = string.Format("UPDATE menu SET price = {0}, fprice = {1}, is_locked = {2}, sold_out = {3} WHERE number = '{4}'", price, fprice, locked ? 1 : 0, _sellOuts.Contains(prodNo) ? 1 : 0, prodNo);
+                                        sql = string.Format("UPDATE menu SET price = {0}, fprice = {1}, is_locked = {2}, sold_out = {3}, printer_group_id = {6} WHERE number = '{4}' AND branch_id = {5}", price, fprice, locked ? 1 : 0, _sellOuts.Contains(prodNo) ? 1 : 0, prodNo, branchId, pgId == null ? "NULL" : pgId.ToString());
                                     }
                                     else
                                     {
@@ -127,11 +135,11 @@ namespace Foxpro2Db
                                             int? catId = GetMenuCataId(prodNo);
 
                                             if (catId != null)
-                                                sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, menu_catalog_id, fprice) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3}, {4}, {5})",
-                                                    prodName, prodNo, price, isSetmeal ? 1 : 0, catId, fprice);
+                                                sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, menu_catalog_id, fprice) VALUES({6}, '{0}', '{1}', '份', {2}, {7}, {3}, {4}, {5})",
+                                                    prodName, prodNo, price, isSetmeal ? 1 : 0, catId, fprice, branchId, pgId == null ? "NULL" : pgId.ToString());
                                             else
-                                                sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, fprice) VALUES(1, '{0}', '{1}', '份', {2}, 1, {3}, {4})",
-                                                    prodName, prodNo, price, isSetmeal ? 1 : 0, fprice);
+                                                sql = string.Format("INSERT INTO menu(branch_id, name, number, unit, price, printer_group_id, is_setmeal, fprice) VALUES({5}, '{0}', '{1}', '份', {2}, {6}, {3}, {4})",
+                                                    prodName, prodNo, price, isSetmeal ? 1 : 0, fprice, branchId, pgId == null ? "NULL" : pgId.ToString());
                                         }
                                     }
                                     dbReader.Close();
@@ -331,14 +339,17 @@ namespace Foxpro2Db
         {
             int? rtn = null;
 
-            using (var conn = new SqlConnection(DbConnStr))
+            if (!string.IsNullOrEmpty(pgn))
             {
-                conn.Open();
+                using (var conn = new SqlConnection(DbConnStr))
+                {
+                    conn.Open();
 
-                var cmd = new SqlCommand(string.Format("SELECT id FROM printer_group WHERE name = '{0}'", pgn), conn);
-                rtn = (int?)cmd.ExecuteScalar();
+                    var cmd = new SqlCommand(string.Format("SELECT id FROM printer_group WHERE name = '{0}'", pgn), conn);
+                    rtn = (int?)cmd.ExecuteScalar();
 
-                conn.Close();
+                    conn.Close();
+                }
             }
 
             return rtn;
