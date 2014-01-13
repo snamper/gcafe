@@ -303,8 +303,8 @@ namespace gcafePrnConsole
                     #endregion 用来区分不同打印组下有哪些条目
 
                     PrintDialog printDlg = new PrintDialog();
-                    string foxproOrderNum = GetOrderNumFromFoxproByTablenNum(orderDetails[0].order.table_no);
-
+                    //string foxproOrderNum = GetOrderNumFromFoxproByTablenNum(orderDetails[0].order.table_no);
+                    string foxproOrderNum = "111";
                     #region 将数据填入visual
                     foreach (var key in prnGrp.Keys)
                     {

@@ -116,12 +116,14 @@
                                                     <TextBlock Foreground="Aqua">
                                                     <Run Text="{Binding SetmealItems, Converter={StaticResource ItemCountToTextConverter}}" />
                                                     </TextBlock>
+
+                                                    <toolkit:ContextMenuService.ContextMenu>
+                                                        <toolkit:ContextMenu>
+                                                            <toolkit:MenuItem Header="选择做法" />
+                                                        </toolkit:ContextMenu>
+                                                    </toolkit:ContextMenuService.ContextMenu>
+
                                                 </StackPanel>
-                                                <toolkit:ContextMenuService.ContextMenu>
-                                                    <toolkit:ContextMenu>
-                                                        <toolkit:MenuItem Header="选择做法" />
-                                                    </toolkit:ContextMenu>
-                                                </toolkit:ContextMenuService.ContextMenu>
                                             </ListBoxItem>
                                         </DataTemplate>
                                     </toolkit:ExpanderView.ExpanderTemplate>

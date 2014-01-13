@@ -105,23 +105,30 @@ namespace gcafeApp.ViewModel
 
         void _svc_GetTablesInfoCompleted(object sender, GetTablesInfoCompletedEventArgs e)
         {
-            if (e.Result != null)
+            try
             {
-                List<TableViewModel> vmList = new List<TableViewModel>();
-                foreach (TableInfo tbl in e.Result)
+                if (e.Result != null)
                 {
-                    vmList.Add(new TableViewModel()
+                    List<TableViewModel> vmList = new List<TableViewModel>();
+                    foreach (TableInfo tbl in e.Result)
                     {
-                        OrderNum = tbl.OrderNum,
-                        TableNo = tbl.Num,
-                        CustomerNum = tbl.CustomerNum,
-                        OpenTableStaff = tbl.OpenTableStaff.Name,
-                        TableOpenedTime = tbl.OpenTableTime,
-                        Amount = tbl.Amount,
-                    });
-                }
+                        vmList.Add(new TableViewModel()
+                        {
+                            OrderNum = tbl.OrderNum,
+                            TableNo = tbl.Num,
+                            CustomerNum = tbl.CustomerNum,
+                            OpenTableStaff = tbl.OpenTableStaff.Name,
+                            TableOpenedTime = tbl.OpenTableTime,
+                            Amount = tbl.Amount,
+                        });
+                    }
 
-                this.OpenedTables = new ObservableCollection<TableViewModel>(vmList);
+                    this.OpenedTables = new ObservableCollection<TableViewModel>(vmList);
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
             }
         }
 

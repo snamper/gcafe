@@ -16,6 +16,15 @@ namespace gcafeApp.Pages
         public AuthenticationPage()
         {
             InitializeComponent();
+
+            ((ViewModel.VMLogin)DataContext).ExceptionCallback = ExceptionCallback;
+        }
+
+        void ExceptionCallback(Exception ex)
+        {
+            if (MessageBox.Show("这个程序必须架设WCF服务才能使用，具体请与zhangzq71@hotmail.com联系。", "WCF出错", MessageBoxButton.OK) == MessageBoxResult.OK)
+            { 
+            }
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

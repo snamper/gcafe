@@ -5,6 +5,7 @@
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
     <DefaultCollation>Chinese_PRC_CS_AS_KS_WS</DefaultCollation>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -88,6 +89,10 @@
     <None Include="gcafe.publish.xml" />
     <None Include="gcafe_1.publish.xml" />
     <None Include="laiyin.publish.xml" />
+    <None Include="gcafe_2.publish.xml" />
+    <None Include="laiyin_sql2008.publish.xml" />
+    <None Include="gcafe_3.publish.xml" />
+    <None Include="gcafe_4.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\member.sql" />

@@ -8,6 +8,7 @@ namespace gcafeApp.ViewModel
 {
     public class VMLogin : VMBase
     {
+        Action<Exception> _callBack;
         gcafeSvc.Staff1 _staff = new gcafeSvc.Staff1();
         gcafeSvc.IgcafeSvcClient _svc;
 
@@ -20,18 +21,34 @@ namespace gcafeApp.ViewModel
             _svc.GetStaffByNumCompleted += _svc_GetStaffByNumCompleted;
         }
 
+        public Action<Exception> ExceptionCallback
+        {
+            get { return _callBack; }
+            set { _callBack = value; }
+        }
+
         void _svc_GetStaffByNumCompleted(object sender, gcafeSvc.GetStaffByNumCompletedEventArgs e)
         {
-            _staff = e.Result;
-            if (_staff == null)
+            try
             {
-                IsUserError = true;
+                _staff = e.Result;
+                if (_staff == null)
+                {
+                    IsUserError = true;
+                }
+                else
+                {
+                    IsUserError = false;
+                    IsPasswordError = false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                IsUserError = false;
-                IsPasswordError = false;
+                if (_callBack != null)
+                    _callBack(ex);
             }
+
+            IsBusy = false;
         }
 
         public gcafeSvc.Staff1 Staff
@@ -66,6 +83,7 @@ namespace gcafeApp.ViewModel
             get { return _loginStaffNo; }
             set
             {
+                IsBusy = true;
                 _svc.GetStaffByNumAsync(Settings.AppSettings.DeviceID, value);
                 this._loginStaffNo = value;
                 RaisePropertyChanged();

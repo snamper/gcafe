@@ -43,7 +43,10 @@ namespace gcafeWeb40
                     else if (rootCata == "酒吧")
                         parent_id = 2;
 
-                    List<menu_catalog> menuCataList = context.menu_catalog.Where(n => n.parent_id == parent_id).OrderBy(n => n.name).ToList();
+                    List<menu_catalog> menuCataList = context.menu_catalog
+                        .Where(n => n.parent_id == parent_id)
+                        .OrderBy(n => n.name)
+                        .ToList();
                     foreach (menu_catalog mc in menuCataList)
                     {
                         cataList.Add(new MenuCatalog() { ID = mc.id, Name = mc.name });
