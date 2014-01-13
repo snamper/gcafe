@@ -64,7 +64,7 @@ namespace gcafeWeb40
         bool IsTableAvaliable(string tableNum);
 
         [OperationContract]
-        List<method> GetMethods();
+        List<Method> GetMethods();
 
         [OperationContract]
         List<MethodCatalog> GetMethodCatalogs();

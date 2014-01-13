@@ -79,7 +79,7 @@ namespace gcafeWeb40
         [DataMember]
         public List<SetmealItem> OptionItems { get; set; }
         [DataMember]
-        public List<method> Methods { get; set; }
+        public List<Method> Methods { get; set; }
     }
 
     [DataContract(IsReference = true)]
@@ -98,7 +98,7 @@ namespace gcafeWeb40
         [DataMember]
         public List<SetmealItem> SetmealItems { get; set; }
         [DataMember]
-        public List<method> Methods { get; set; }
+        public List<Method> Methods { get; set; }
         [DataMember]
         public int Quantity { get; set; }
         [DataMember]
