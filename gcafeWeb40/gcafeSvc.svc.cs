@@ -2,7 +2,6 @@
 using System.Transactions;
 using System.Configuration;
 using System.Data;
-using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -200,12 +199,12 @@ namespace gcafeWeb40
 
             try
             {
-                using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
-                {
-                    //_gcafePrn.PrintChuPing(orderId, -1, false);
-                    //_gcafePrn.PrintHuaDan(orderId, -1, false);
-                    //_gcafePrn.PrintLiuTai(orderId, -1, false);
-                }
+                //using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
+                //{
+                //    _gcafePrn.PrintChuPing(orderId, -1, false);
+                //    _gcafePrn.PrintHuaDan(orderId, -1, false);
+                //    _gcafePrn.PrintLiuTai(orderId, -1, false);
+                //}
             }
             catch (Exception ex)
             {
