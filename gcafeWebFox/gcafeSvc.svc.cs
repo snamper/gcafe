@@ -419,13 +419,57 @@ namespace gcafeWebFox
 
         public List<TableInfo> GetTablesInfo(string DeviceId)
         {
-            int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
             List<TableInfo> tableInfoList = new List<TableInfo>();
 
             _log.Trace(TraceMessage());
 
             try
             {
+                using (var conn = new OleDbConnection(ConfigurationManager.AppSettings.GetValues("foxproPath")[0]))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT orders.orderno, orders.ordertime, orders.tableno, orders.personum, orders.waiter, staff.name FROM orders, staff WHERE (orders.waiter = staff.idno) AND (orders.paid = 0)");
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        OleDbDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            string orderNo = reader.GetString(0).Trim();
+                            DateTime orderTime = reader.GetDateTime(1);
+                            string tableNo = reader.GetString(2).Trim();
+                            int customerNum = reader.GetInt32(3);
+                            string staffNum = reader.GetString(4).Trim();
+                            string staffName = reader.GetString(5);
+                            decimal amount = 0;
+
+                            sql = string.Format("SELECT price, quantity FROM orditem WHERE (orderno = '{0}')", orderNo);
+                            using (var cmd1 = new OleDbCommand(sql, conn))
+                            {
+                                OleDbDataReader reader1 = cmd1.ExecuteReader();
+                                while (reader1.Read())
+                                {
+                                    decimal price = reader1.GetDecimal(0);
+                                    int quantity = reader1.GetInt32(1);
+
+                                    amount += price * quantity;
+                                }
+                            }
+
+                            tableInfoList.Add(new TableInfo()
+                            {
+                                CustomerNum = customerNum,
+                                Num = tableNo,
+                                OrderNum = orderNo,
+                                OpenTableTime = orderTime,
+                                OpenTableStaff = new Staff() { Number = staffNum, Name = staffName },
+                                Amount = amount,
+                            });
+                        }
+                    }
+
+                    conn.Close();
+                }
             }
             catch (Exception ex)
             {
