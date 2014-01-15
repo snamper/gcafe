@@ -782,8 +782,34 @@ namespace gcafeWebFox
                 {
                     conn.Open();
 
-                    string sql = string.Format("SELECT ordertime, productno, prodname, price, quantity FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNum);
+                    string sql = string.Format("SELECT ordertime, productno, prodname, price, quantity, waiter FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNum);
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        OleDbDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            DateTime orderTime = reader.GetDateTime(0);
+                            string prodNo = reader.GetString(1).Trim();
+                            string prodName = reader.GetString(2).Trim();
+                            decimal price = reader.GetDecimal(3);
+                            int quantity = reader.GetInt32(4);
+                            string waiter = reader.GetString(5);
+                            if (waiter != null)
+                                waiter = waiter.Trim();
+                            else
+                                waiter = "未知";
 
+                            menuItems.Add(new MenuItem()
+                            {
+                                ID = Int32.Parse(prodNo),
+                                Name = prodName,
+                                OrderTime = orderTime,
+                                Price = price,
+                                Quantity = quantity,
+                                IsSetmeal = false,
+                            });
+                        }
+                    }
 
                     conn.Close();
                 }
