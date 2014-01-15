@@ -483,46 +483,28 @@ namespace gcafeWebFox
 
         public bool IsTableAvaliable(string tableNum)
         {
-            _log.Trace(TraceMessage());
-
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                _log.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
-            }
-
-            _log.Trace(TraceMessage());
-
-            return true;
-        }
-
-        public List<Method> GetMethods()
-        {
-            _log.Trace(TraceMessage());
-
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                _log.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
-            }
-
-            _log.Trace(TraceMessage());
-
-            return new List<Method>();
-        }
-
-        public List<MethodCatalog> GetMethodCatalogs()
-        {
-            List<MethodCatalog> rtn = new List<MethodCatalog>();
+            bool rtn = false;
 
             _log.Trace(TraceMessage());
 
             try
             {
+                using (var conn = new OleDbConnection(ConfigurationManager.AppSettings.GetValues("foxproPath")[0]))
+                {
+                    conn.Open();
+
+                    #region 检查是否已开台
+                    // 检查是否已开台
+                    string sql = string.Format("SELECT orderno FROM orders WHERE (tableno = '{0}') AND (paid = 0)", tableNum);
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        if (cmd.ExecuteScalar() == null)
+                            rtn = true;
+                    }
+                    #endregion 检查是否已开台
+
+                    conn.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -534,15 +516,230 @@ namespace gcafeWebFox
             return rtn;
         }
 
-        public string OrderMeal(string deviceId, int staffId, string tableNum, List<MenuItem> meals)
+        public List<Method> GetMethods()
         {
-            string rtn = string.Empty;
-            int orderId;
+            List<Method> methodList = new List<Method>();
 
             _log.Trace(TraceMessage());
 
             try
             {
+                using (var conn = new OleDbConnection(ConfigurationManager.AppSettings.GetValues("foxproPath")[0]))
+                {
+                    conn.Open();
+
+                    string sql = @"SELECT product.productno, product.prodname, tb1.productno AS Expr1, tb1.prodname AS Expr2 " +
+                        "FROM product, product tb1 " +
+                        "WHERE LEFT(product.productno, 4) = tb1.productno AND (product.productno LIKE '33%') AND (len(`TRIM`(product.productno)) > 4) " +
+                        "ORDER BY product.productno";
+
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        OleDbDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            string prodNo = reader.GetString(0).Trim();
+                            string prodName = reader.GetString(1).Trim();
+                            string cataProdNo = reader.GetString(2).Trim();
+                            string cataProdName = reader.GetString(3).Trim();
+
+                            methodList.Add(new Method()
+                            {
+                                ID = Int32.Parse(prodNo),
+                                Name = prodName,
+                                MethodCatalog = new MethodCatalog() { 
+                                    ID = Int32.Parse(cataProdNo), 
+                                    Name = cataProdName,
+                                }
+                            });
+                        }
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
+            }
+
+            _log.Trace(TraceMessage());
+
+            return methodList;
+        }
+
+        public List<MethodCatalog> GetMethodCatalogs()
+        {
+            List<MethodCatalog> rtn = new List<MethodCatalog>();
+
+            _log.Trace(TraceMessage());
+
+            try
+            {
+                using (var conn = new OleDbConnection(ConfigurationManager.AppSettings.GetValues("foxproPath")[0]))
+                {
+                    conn.Open();
+
+                    string sql = @"SELECT product.productno, product.prodname, tb1.productno AS Expr1, tb1.prodname AS Expr2 " +
+                        "FROM product, product tb1 " +
+                        "WHERE LEFT(product.productno, 4) = tb1.productno AND (product.productno LIKE '33%') AND (len(`TRIM`(product.productno)) > 4) " +
+                        "ORDER BY product.productno";
+
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        OleDbDataReader reader = cmd.ExecuteReader();
+                        string prevCataNo = string.Empty;
+                        while (reader.Read())
+                        {
+                            string prodNo = reader.GetString(0).Trim();
+                            string prodName = reader.GetString(1).Trim();
+                            string cataProdNo = reader.GetString(2).Trim();
+                            string cataProdName = reader.GetString(3).Trim();
+
+                            if (prevCataNo != cataProdNo)
+                            {
+                                rtn.Add(new MethodCatalog() { 
+                                    ID = Int32.Parse(cataProdNo), 
+                                    Name = cataProdName, 
+                                    Methods = new List<Method>(), 
+                                });
+
+                                prevCataNo = cataProdNo;
+                            }
+
+                            rtn.Last().Methods.Add(new Method() 
+                            { 
+                                ID = Int32.Parse(prodNo), 
+                                Name = prodName, 
+                            });
+                        }                        
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
+            }
+
+            _log.Trace(TraceMessage());
+
+            return rtn;
+        }
+
+        public string OrderMeal(string deviceId, int staffId, TableInfo tableInfo, List<MenuItem> meals)
+        {
+            string rtn = string.Empty;
+            OleDbTransaction trans = null;
+
+            _log.Trace(TraceMessage());
+
+            try
+            {
+                using (var conn = new OleDbConnection(ConfigurationManager.AppSettings.GetValues("foxproPath")[0]))
+                {
+                    conn.Open();
+
+                    trans = conn.BeginTransaction();
+
+                    string strMethod = string.Empty;
+                    string sql = string.Empty;
+
+                    int cnt = 0;
+                    foreach (MenuItem menuItem in meals)
+                    {
+                        #region 插入orditem表
+                        // 从product表查出price, price2, fprice, productnn
+                        sql = string.Format("SELECT prodname, price, price2, fprice, productnn FROM product WHERE (productno = '{0}')", menuItem.ID);
+                        using (var cmd = new OleDbCommand(sql, conn, trans))
+                        {
+                            string prodName, prodNn;
+                            decimal price, price2, fprice;
+
+                            OleDbDataReader reader = cmd.ExecuteReader();
+                            if (reader.Read())
+                            {
+                                prodName = reader.GetString(0).Trim();
+                                price = reader.GetDecimal(1);
+                                price2 = reader.GetDecimal(2);
+                                fprice = reader.GetDecimal(3);
+                                prodNn = reader.GetString(4).Trim();
+
+                                sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '')",
+                                    "{ fn NOW() }", tableInfo.OrderNum, menuItem.ID, menuItem.Name, menuItem.Price, price2, menuItem.Quantity, "A", prodNn);
+
+                                using (var cmd1 = new OleDbCommand(sql, conn, trans))
+                                {
+                                    cmd1.ExecuteNonQuery();
+                                }
+                            }
+                            else
+                                throw new Exception(string.Format("{0} 没有对应的产品", 111));
+                        }
+
+                        #endregion 插入orditem表
+
+                        // 做法
+                        if (menuItem.Methods != null && menuItem.Methods.Count > 0)
+                        {
+                            foreach (Method method in menuItem.Methods)
+                            {
+                                if (string.IsNullOrEmpty(strMethod))
+                                    strMethod += method.Name;
+                                else
+                                    strMethod += "," + method.Name;
+                            }
+                        }
+
+                        #region 插入poh表
+                        // 插入poh表
+                        if (menuItem.SetmealItems != null && menuItem.SetmealItems.Count > 0)
+                        {
+                            // 这是套餐
+                            foreach (SetmealItem setmeal in menuItem.SetmealItems)
+                            {
+                                if (setmeal.Methods != null && setmeal.Methods.Count > 0)
+                                {
+                                    foreach (Method method in setmeal.Methods)
+                                    {
+                                        if (string.IsNullOrEmpty(strMethod))
+                                            strMethod += method.Name;
+                                        else
+                                            strMethod += "," + method.Name;
+                                    }
+                                }
+
+                                sql = string.Format("INSERT INTO poh(department, ordertime, orderno, serialno, prodname, machineid, quantity, tableno, itemno, printgroup, remark1, remark2, waiter, serial) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}')",
+                                    setmeal.MenuID.ToString().Substring(0, 2), "{ fn NOW() }", tableInfo.OrderNum, GenerateSerialNo(setmeal.MenuID.ToString(), trans), setmeal.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(setmeal.MenuID.ToString(), trans), menuItem.Name, strMethod, menuItem.OrderStaffName, cnt);
+
+                                using (var cmd = new OleDbCommand(sql, conn, trans))
+                                {
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // 这不是套餐
+                            sql = string.Format("INSERT INTO poh(department, ordertime, orderno, serialno, prodname, machineid, quantity, tableno, itemno, printgroup, remark1, remark2, waiter, serial) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}')",
+                                menuItem.ID.ToString().Substring(0, 2), "{ fn NOW() }", tableInfo.OrderNum, GenerateSerialNo(menuItem.ID.ToString(), trans), menuItem.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(menuItem.ID.ToString(), trans), "", strMethod, menuItem.OrderStaffName, cnt);
+
+                            using (var cmd = new OleDbCommand(sql, conn, trans))
+                            {
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                        #endregion 插入poh表
+
+                        cnt++;
+                    }
+
+                    trans.Commit();
+
+                    conn.Close();
+                }
+
                 //using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
                 //{
                 //    _gcafePrn.PrintChuPing(orderId, -1, false);
@@ -552,7 +749,17 @@ namespace gcafeWebFox
             }
             catch (Exception ex)
             {
+                try
+                {
+                    trans.Rollback();
+                }
+                catch (Exception e)
+                {
+
+                }
+
                 _log.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
+                rtn = ex.Message;
 
                 //if (_gcafePrn.State == CommunicationState.Faulted)
                 //   _gcafePrn = new gcafePrnSvc.IgcafePrnClient();
@@ -560,19 +767,26 @@ namespace gcafeWebFox
 
             _log.Trace(TraceMessage());
 
-            return "点菜成功";
+            return rtn;
         }
 
         public List<MenuItem> GetOrderDetailByOrderNum(string orderNum)
         {
             List<MenuItem> menuItems = new List<MenuItem>();
 
-            //return menuItems;
-
             _log.Trace(TraceMessage());
 
             try
             {
+                using (var conn = new OleDbConnection(ConfigurationManager.AppSettings.GetValues("foxproPath")[0]))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT ordertime, productno, prodname, price, quantity FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNum);
+
+
+                    conn.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -621,6 +835,71 @@ namespace gcafeWebFox
             _log.Trace(TraceMessage());
 
             return staff;
+        }
+
+        /// <summary>
+        /// 生成poh.serialno
+        /// </summary>
+        /// <param name="productNo"></param>
+        /// <returns></returns>
+        int GenerateSerialNo(string productNo, OleDbTransaction trans)
+        {
+            int serialNo = -1;
+
+            try
+            {
+                string sql;
+
+                if (productNo.Substring(0, 2) == "11")
+                    sql = "SELECT kitchen FROM lastsn";
+                else if (productNo.Substring(0, 2) == "22")
+                    sql = "SELECT bar FROM lastsn";
+                else
+                    return -1;
+
+                using (var cmd = new OleDbCommand(sql, trans.Connection, trans))
+                {
+                    serialNo = Int32.Parse(cmd.ExecuteScalar() as string);
+                }
+
+                if (productNo.Substring(0, 2) == "11")
+                    sql = string.Format("UPDATE lastsn SET kitchen = '{0}'", serialNo + 1);
+                else if (productNo.Substring(0, 2) == "22")
+                    sql = string.Format("UPDATE lastsn SET bar = '{0}'", serialNo + 1);
+
+                using (var cmd = new OleDbCommand(sql, trans.Connection, trans))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+
+            return serialNo;
+        }
+
+        /// <summary>
+        /// 取回打印组
+        /// </summary>
+        /// <param name="productNo"></param>
+        /// <returns></returns>
+        private string GetPrintGroup(string productNo, OleDbTransaction trans)
+        {
+            string pg = string.Empty;
+
+            using (var cmd = new OleDbCommand(string.Format("SELECT printgroup FROM product WHERE productno = '{0}'", 
+                productNo), trans.Connection, trans))
+            {
+                pg = cmd.ExecuteScalar() as string;
+                if (pg != null)
+                    pg = pg.Trim();
+                else
+                    pg = string.Empty;
+            }
+
+            return pg;
         }
 
         /// <summary>

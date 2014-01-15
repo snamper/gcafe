@@ -137,6 +137,8 @@ namespace gcafeWeb40
         public int ID { get; set; }
         [DataMember]
         public string Name { get; set; }
+        [DataMember]
+        public virtual MethodCatalog MethodCatalog { get; set; }
     }
 
     [DataContract(IsReference = true)]

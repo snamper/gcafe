@@ -71,7 +71,7 @@ namespace gcafeWebFox
         List<MethodCatalog> GetMethodCatalogs();
 
         [OperationContract]
-        string OrderMeal(string deviceId, int staffId, string tableNum, List<MenuItem> meals);
+        string OrderMeal(string deviceId, int staffId, TableInfo tableInfo, List<MenuItem> meals);
 
         [OperationContract]
         List<MenuItem> GetOrderDetailByOrderNum(string orderNum);
