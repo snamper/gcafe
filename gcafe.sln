@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeWeb", "gcafeWeb\gcafeWeb.csproj", "{5137AFC1-B508-41CD-8053-59766C9F56B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeApp", "gcafeApp\gcafeApp.csproj", "{A712BF43-F580-4935-B3BA-2D1FD204CC01}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DE3D131C-B9DF-4A2C-83FE-B821D39DE70A} = {DE3D131C-B9DF-4A2C-83FE-B821D39DE70A}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuPrint", "MenuPrint\MenuPrint.csproj", "{BEA3D041-77D7-45C4-84A7-EE63B1AEA154}"
 EndProject

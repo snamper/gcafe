@@ -138,26 +138,26 @@ namespace gcafeApp.ViewModel
         }
         private MethodCata _methodCata;
 
-        public ObservableCollection<method_catalog> MethodCatalogs
-        {
-            get { return _methodCatalogs; }
-            private set
-            {
-                _methodCatalogs = value;
-                RaisePropertyChanged();
-            }
-        }
-        private ObservableCollection<method_catalog> _methodCatalogs;
+        //public ObservableCollection<method_catalog> MethodCatalogs
+        //{
+        //    get { return _methodCatalogs; }
+        //    private set
+        //    {
+        //        _methodCatalogs = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
+        //private ObservableCollection<method_catalog> _methodCatalogs;
 
-        public ObservableCollection<method> Methods
-        {
-            get { return _methods; }
-            private set
-            {
-                _methods = value;
-                RaisePropertyChanged();
-            }
-        }
-        private ObservableCollection<method> _methods;
+        //public ObservableCollection<method> Methods
+        //{
+        //    get { return _methods; }
+        //    private set
+        //    {
+        //        _methods = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
+        //private ObservableCollection<method> _methods;
     }
 }

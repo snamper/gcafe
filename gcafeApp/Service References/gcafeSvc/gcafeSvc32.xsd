@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.15.81:47773/gcafeSvc.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40" />
+  <xs:import schemaLocation="http://192.168.11.6:29307/gcafeSvc.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/gcafeWeb40" />
   <xs:element name="GetMenuCatalogs">
     <xs:complexType>
       <xs:sequence>
@@ -59,7 +59,7 @@
   <xs:element name="TableOprResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="TableOprResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="TableOprResult" nillable="true" type="q6:TableInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -73,7 +73,7 @@
   <xs:element name="GetTablesInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="GetTablesInfoResult" nillable="true" type="q6:ArrayOfTableInfo" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="GetTablesInfoResult" nillable="true" type="q7:ArrayOfTableInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -99,7 +99,7 @@
   <xs:element name="GetMethodsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="GetMethodsResult" nillable="true" type="q7:ArrayOfmethod" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="GetMethodsResult" nillable="true" type="q8:ArrayOfMethod" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -111,7 +111,7 @@
   <xs:element name="GetMethodCatalogsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="GetMethodCatalogsResult" nillable="true" type="q8:ArrayOfMethodCatalog" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="GetMethodCatalogsResult" nillable="true" type="q9:ArrayOfMethodCatalog" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -120,8 +120,8 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="deviceId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="staffId" type="xs:int" />
-        <xs:element minOccurs="0" name="tableNum" nillable="true" type="xs:string" />
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="meals" nillable="true" type="q9:ArrayOfMenuItem" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="tableInfo" nillable="true" type="q10:TableInfo" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="meals" nillable="true" type="q11:ArrayOfMenuItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -142,7 +142,7 @@
   <xs:element name="GetOrderDetailByOrderNumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="GetOrderDetailByOrderNumResult" nillable="true" type="q10:ArrayOfMenuItem" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="GetOrderDetailByOrderNumResult" nillable="true" type="q12:ArrayOfMenuItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -157,7 +157,7 @@
   <xs:element name="GetStaffByNumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q11:Staff" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/gcafeWeb40" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q13:Staff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

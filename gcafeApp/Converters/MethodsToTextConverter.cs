@@ -19,9 +19,9 @@ namespace gcafeApp.Converters
             {
                 rtn = "做法: ";
 
-                ObservableCollection<gcafeSvc.method> methods = (ObservableCollection<gcafeSvc.method>)value;
+                ObservableCollection<gcafeSvc.Method> methods = (ObservableCollection<gcafeSvc.Method>)value;
                 foreach (var method in methods)
-                    rtn += method.name + " ";
+                    rtn += method.Name + " ";
             }
 
             //if (value.GetType() == typeof(gcafeSvc.MenuItem))

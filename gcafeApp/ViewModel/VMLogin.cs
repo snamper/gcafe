@@ -9,7 +9,7 @@ namespace gcafeApp.ViewModel
     public class VMLogin : VMBase
     {
         Action<Exception> _callBack;
-        gcafeSvc.Staff1 _staff = new gcafeSvc.Staff1();
+        gcafeSvc.Staff _staff = new gcafeSvc.Staff();
         gcafeSvc.IgcafeSvcClient _svc;
 
         public VMLogin(IgcafeSvcClient svc)
@@ -51,7 +51,7 @@ namespace gcafeApp.ViewModel
             IsBusy = false;
         }
 
-        public gcafeSvc.Staff1 Staff
+        public gcafeSvc.Staff Staff
         {
             get { return _staff; }
         }

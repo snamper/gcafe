@@ -88,7 +88,10 @@ namespace gcafeApp.ViewModel
 
         void _svc_TableOprCompleted(object sender, TableOprCompletedEventArgs e)
         {
-            _openTableCallBack(e.Result);
+            if (e.Result != null)
+                _openTableCallBack("成功");
+            else
+                _openTableCallBack("错误");
             //string s = e.Result;
         }
 

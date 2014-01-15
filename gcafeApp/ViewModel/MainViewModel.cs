@@ -89,7 +89,7 @@ namespace gcafeApp.ViewModel
                 {
                     foreach (var method in menuItem.Methods)
                     {
-                        System.Diagnostics.Debug.WriteLine(method.name);
+                        System.Diagnostics.Debug.WriteLine(method.Name);
                     }
                 }
 
@@ -193,17 +193,17 @@ namespace gcafeApp.ViewModel
 
         public void SetMethods(List<ViewModel.Method> methods)
         {
-            List<method> ms = new List<method>();
+            List<gcafeSvc.Method> ms = new List<gcafeSvc.Method>();
             foreach (var method in methods)
-                ms.Add(new method() { id = method.Id, name = method.Name });
+                ms.Add(new gcafeSvc.Method() { ID = method.Id, Name = method.Name });
 
             if (_methodMenuItem != null)
             {
-                _methodMenuItem.Methods = new ObservableCollection<method>(ms);
+                _methodMenuItem.Methods = new ObservableCollection<gcafeSvc.Method>(ms);
             }
             else if (_methodSetmealItem != null)
             {
-                _methodSetmealItem.Methods = new ObservableCollection<method>(ms);
+                _methodSetmealItem.Methods = new ObservableCollection<gcafeSvc.Method>(ms);
             }
 
             _methodMenuItem = null;
@@ -216,7 +216,7 @@ namespace gcafeApp.ViewModel
             {
                 IsBusy = true;
                 _callBack = callback;
-                _svc.OrderMealAsync(gcafeApp.Settings.AppSettings.DeviceID, gcafeApp.Settings.AppSettings.LoginStaff.ID, tableNum, MenuItems);
+                _svc.OrderMealAsync(gcafeApp.Settings.AppSettings.DeviceID, gcafeApp.Settings.AppSettings.LoginStaff.ID, new TableInfo() { Num = tableNum }, MenuItems);
             }
         }
 

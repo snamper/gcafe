@@ -17,7 +17,7 @@ namespace gcafeApp.Converters
 
             if (value != null)
             {
-                ObservableCollection<gcafeSvc.method> methods = (ObservableCollection<gcafeSvc.method>)value;
+                ObservableCollection<gcafeSvc.Method> methods = (ObservableCollection<gcafeSvc.Method>)value;
                 if (methods.Count > 0)
                     rtn = Visibility.Visible;
             }

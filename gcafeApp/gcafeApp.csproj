@@ -238,10 +238,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SampleData\SelectMethodVMSampleData.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="SampleData\SubMenuCatalogSampleData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -273,13 +269,13 @@
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MenuItem.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.method.datasource">
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.Method1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MethodCatalog.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.Staff1.datasource">
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.Staff.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.TableInfo.datasource">

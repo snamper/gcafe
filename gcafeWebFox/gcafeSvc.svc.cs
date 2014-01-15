@@ -32,6 +32,11 @@ namespace gcafeWebFox
         {
             List<MenuCatalog> cataList = new List<MenuCatalog>();
 
+            if (rootCata == "厨房")
+                rootCata = "11";
+            else
+                rootCata = "22";
+
             _log.Trace(TraceMessage());
 
             try
@@ -646,6 +651,17 @@ namespace gcafeWebFox
                     string strMethod = string.Empty;
                     string sql = string.Empty;
 
+                    // 取orderNum, 应该是不需要这步的，但设计错误，只能这样，以后再改
+                    sql = string.Format("SELECT orderno FROM orders WHERE (paid = 0) AND (tableno = '{0}')", tableInfo.Num);
+                    using (var cmd = new OleDbCommand(sql, conn, trans))
+                    {
+                        tableInfo.OrderNum = (string)cmd.ExecuteScalar();
+                        if (tableInfo.OrderNum == null)
+                            throw new Exception("没有相应的台号");
+                        else
+                            tableInfo.OrderNum = tableInfo.OrderNum.Trim();
+                    }
+
                     int cnt = 0;
                     foreach (MenuItem menuItem in meals)
                     {
@@ -666,8 +682,8 @@ namespace gcafeWebFox
                                 fprice = reader.GetDecimal(3);
                                 prodNn = reader.GetString(4).Trim();
 
-                                sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '')",
-                                    "{ fn NOW() }", tableInfo.OrderNum, menuItem.ID, menuItem.Name, menuItem.Price, price2, menuItem.Quantity, "A", prodNn);
+                                sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no, waiter) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '', '{9:D4}')",
+                                    "{ fn NOW() }", tableInfo.OrderNum, menuItem.ID, menuItem.Name, menuItem.Price, price2, menuItem.Quantity, "A", prodNn, staffId);
 
                                 using (var cmd1 = new OleDbCommand(sql, conn, trans))
                                 {
@@ -710,8 +726,8 @@ namespace gcafeWebFox
                                     }
                                 }
 
-                                sql = string.Format("INSERT INTO poh(department, ordertime, orderno, serialno, prodname, machineid, quantity, tableno, itemno, printgroup, remark1, remark2, waiter, serial) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}')",
-                                    setmeal.MenuID.ToString().Substring(0, 2), "{ fn NOW() }", tableInfo.OrderNum, GenerateSerialNo(setmeal.MenuID.ToString(), trans), setmeal.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(setmeal.MenuID.ToString(), trans), menuItem.Name, strMethod, menuItem.OrderStaffName, cnt);
+                                sql = string.Format("INSERT INTO poh(department, ordertime, orderno, serialno, prodname, machineid, quantity, tableno, itemno, printgroup, remark1, remark2, waiter, serial) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12:D4}', '{13}')",
+                                    setmeal.MenuID.ToString().Substring(0, 2), "{ fn NOW() }", tableInfo.OrderNum, GenerateSerialNo(setmeal.MenuID.ToString(), trans), setmeal.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(setmeal.MenuID.ToString(), trans), menuItem.Name, strMethod, staffId, cnt);
 
                                 using (var cmd = new OleDbCommand(sql, conn, trans))
                                 {
@@ -722,8 +738,8 @@ namespace gcafeWebFox
                         else
                         {
                             // 这不是套餐
-                            sql = string.Format("INSERT INTO poh(department, ordertime, orderno, serialno, prodname, machineid, quantity, tableno, itemno, printgroup, remark1, remark2, waiter, serial) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}')",
-                                menuItem.ID.ToString().Substring(0, 2), "{ fn NOW() }", tableInfo.OrderNum, GenerateSerialNo(menuItem.ID.ToString(), trans), menuItem.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(menuItem.ID.ToString(), trans), "", strMethod, menuItem.OrderStaffName, cnt);
+                            sql = string.Format("INSERT INTO poh(department, ordertime, orderno, serialno, prodname, machineid, quantity, tableno, itemno, printgroup, remark1, remark2, waiter, serial) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12:D4}', '{13}')",
+                                menuItem.ID.ToString().Substring(0, 2), "{ fn NOW() }", tableInfo.OrderNum, GenerateSerialNo(menuItem.ID.ToString(), trans), menuItem.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(menuItem.ID.ToString(), trans), "", strMethod, staffId, cnt);
 
                             using (var cmd = new OleDbCommand(sql, conn, trans))
                             {
@@ -844,6 +860,7 @@ namespace gcafeWebFox
                         {
                             staff = new Staff() { 
                                 Number = reader.GetString(0).Trim(),
+                                ID = Int32.Parse(reader.GetString(0).Trim()),
                                 Name = reader.GetString(1).Trim(),
                                 Password = reader.GetString(2).Trim(),
                             };
