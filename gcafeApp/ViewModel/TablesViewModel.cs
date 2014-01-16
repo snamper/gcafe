@@ -191,6 +191,8 @@ namespace gcafeApp.ViewModel
         public void GetOpenedTables()
         {
             //GetTablesInfoRequest req = new GetTablesInfoRequest(Settings.AppSettings.DeviceID);
+            IsBusy = true;
+            this.Items = new ObservableCollection<TableViewModel>();
             _svc.GetTablesInfoAsync(Settings.AppSettings.DeviceID);
         }
     }
