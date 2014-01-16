@@ -130,6 +130,8 @@ namespace gcafeApp.ViewModel
             {
                 string s = ex.Message;
             }
+
+            IsBusy = false;
         }
 
         void _svc_OrderMealCompleted(object sender, OrderMealCompletedEventArgs e)
@@ -241,8 +243,9 @@ namespace gcafeApp.ViewModel
 
         public void GetOpenedTables()
         {
-            //_svc.GetTablesInfoAsync(Settings.AppSettings.DeviceID);
-            _svc.GetOrderDetailByOrderNumAsync("201412010001");
+            IsBusy = true;
+            _svc.GetTablesInfoAsync(Settings.AppSettings.DeviceID);
+            //_svc.GetOrderDetailByOrderNumAsync("201412010001");
         }
     }
 

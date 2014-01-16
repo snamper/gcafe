@@ -43,6 +43,9 @@
             与应用程序的 CurrentUICulture 匹配的 .resx 文件中
             提取属性的值。
          -->
+        <ProgressBar IsIndeterminate="True" HorizontalAlignment="Stretch" Margin="0,5,0,0"
+                         VerticalAlignment="Top"
+                         Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
         <!--枢轴控件-->
         <phone:Pivot Title="我的应用程序" SelectionChanged="Pivot_SelectionChanged">

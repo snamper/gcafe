@@ -649,6 +649,7 @@ namespace gcafeWebFox
                     trans = conn.BeginTransaction();
 
                     string strMethod = string.Empty;
+                    string strSetmealMethod = string.Empty;
                     string sql = string.Empty;
 
                     // 取orderNum, 应该是不需要这步的，但设计错误，只能这样，以后再改
@@ -697,6 +698,7 @@ namespace gcafeWebFox
                         #endregion 插入orditem表
 
                         // 做法
+                        strMethod = string.Empty;
                         if (menuItem.Methods != null && menuItem.Methods.Count > 0)
                         {
                             foreach (Method method in menuItem.Methods)
@@ -715,19 +717,31 @@ namespace gcafeWebFox
                             // 这是套餐
                             foreach (SetmealItem setmeal in menuItem.SetmealItems)
                             {
+                                strSetmealMethod = string.Empty;
+
                                 if (setmeal.Methods != null && setmeal.Methods.Count > 0)
                                 {
                                     foreach (Method method in setmeal.Methods)
                                     {
-                                        if (string.IsNullOrEmpty(strMethod))
-                                            strMethod += method.Name;
+                                        if (string.IsNullOrEmpty(strSetmealMethod))
+                                            strSetmealMethod += method.Name;
                                         else
-                                            strMethod += "," + method.Name;
+                                            strSetmealMethod += "," + method.Name;
                                     }
                                 }
 
+                                string recMethod = string.Empty;
+                                if (!string.IsNullOrEmpty(strMethod))
+                                {
+                                    recMethod = strMethod;
+                                    if (!string.IsNullOrEmpty(strSetmealMethod))
+                                        recMethod += ",";
+                                }
+ 
+                                recMethod = strSetmealMethod;
+
                                 sql = string.Format("INSERT INTO poh(department, ordertime, orderno, serialno, prodname, machineid, quantity, tableno, itemno, printgroup, remark1, remark2, waiter, serial) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12:D4}', '{13}')",
-                                    setmeal.MenuID.ToString().Substring(0, 2), "{ fn NOW() }", tableInfo.OrderNum, GenerateSerialNo(setmeal.MenuID.ToString(), trans), setmeal.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(setmeal.MenuID.ToString(), trans), menuItem.Name, strMethod, staffId, cnt);
+                                    setmeal.MenuID.ToString().Substring(0, 2), "{ fn NOW() }", tableInfo.OrderNum, GenerateSerialNo(setmeal.MenuID.ToString(), trans), setmeal.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(setmeal.MenuID.ToString(), trans), menuItem.Name, recMethod, staffId, cnt);
 
                                 using (var cmd = new OleDbCommand(sql, conn, trans))
                                 {
