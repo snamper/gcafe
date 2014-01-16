@@ -98,18 +98,22 @@
                                                 
                                                     <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Price}" Foreground="Red" />
                                                 </Grid>
-                                                <toolkit:ContextMenuService.ContextMenu>
-                                                    <toolkit:ContextMenu>
-                                                        <toolkit:MenuItem Header="可选内容" />
-                                                    </toolkit:ContextMenu>
-                                                </toolkit:ContextMenuService.ContextMenu>
                                             </ListBoxItem>
+                                            <toolkit:ContextMenuService.ContextMenu>
+                                                <toolkit:ContextMenu>
+                                                    <toolkit:MenuItem Header="选择做法发发" />
+                                                </toolkit:ContextMenu>
+                                            </toolkit:ContextMenuService.ContextMenu>
                                         </DataTemplate>
                                     </toolkit:ExpanderView.HeaderTemplate>
 
                                     <toolkit:ExpanderView.ExpanderTemplate>
                                         <DataTemplate>
                                             <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                                                <toolkit:GestureService.GestureListener>
+                                                    <toolkit:GestureListener Tap="GestureListener_Tap" />
+                                                </toolkit:GestureService.GestureListener>
+
                                                 <StackPanel>
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock Text="数量:" Foreground="{StaticResource PhoneAccentBrush}" />
@@ -119,15 +123,13 @@
                                                     <TextBlock Foreground="Aqua">
                                                     <Run Text="{Binding SetmealItems, Converter={StaticResource ItemCountToTextConverter}}" />
                                                     </TextBlock>
-
-                                                    <toolkit:ContextMenuService.ContextMenu>
-                                                        <toolkit:ContextMenu>
-                                                            <toolkit:MenuItem Header="选择做法" />
-                                                        </toolkit:ContextMenu>
-                                                    </toolkit:ContextMenuService.ContextMenu>
-
                                                 </StackPanel>
                                             </ListBoxItem>
+                                            <toolkit:ContextMenuService.ContextMenu>
+                                                <toolkit:ContextMenu Width="100" Height="100">
+                                                    <toolkit:MenuItem Header="选择做法发发" />
+                                                </toolkit:ContextMenu>
+                                            </toolkit:ContextMenuService.ContextMenu>
                                         </DataTemplate>
                                     </toolkit:ExpanderView.ExpanderTemplate>
 

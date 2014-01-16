@@ -38,9 +38,9 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="菜名"  Style="{StaticResource PhoneTextLargeStyle}" />
-            <TextBox Grid.Row="1" Width="380" HorizontalAlignment="Left" Text="{Binding MenuItem.Name, Mode=TwoWay}" />
+            <TextBox IsEnabled="False" Grid.Row="1" Width="380" HorizontalAlignment="Left" Text="{Binding MenuItem.Name, Mode=TwoWay}" />
             <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <Button Command="{Binding NavigateToCommand}" CommandParameter="CameraSel" FontSize="30" Content="&#xE12D;" FontFamily="Segoe UI Symbol" />
+                <Button IsEnabled="False" Command="{Binding NavigateToCommand}" CommandParameter="CameraSel" FontSize="30" Content="&#xE12D;" FontFamily="Segoe UI Symbol" />
                 <Button Margin="30, 0" Command="{Binding NavigateToCommand}" CommandParameter="CataSel" FontFamily="Segoe UI Symbol" FontSize="30" Content="&#xE179;" />
             </StackPanel>
             <TextBlock Margin="10, 20, 0, 0" Grid.Row="3" Text="数量" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"/>

@@ -108,6 +108,14 @@ namespace gcafeApp
                 ((ViewModel.MainViewModel)DataContext).GetOpenedTables();
         }
 
+        private void GestureListener_Tap(object sender, GestureEventArgs e)
+        {
+            Type t = sender.GetType();
+
+            //ContextMenu contextMenu = ContextMenuService.GetContextMenu()
+        }
+
+
 
         // 用于生成本地化 ApplicationBar 的示例代码
         //private void BuildLocalizedApplicationBar()
