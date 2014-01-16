@@ -45,7 +45,7 @@ namespace gcafeWeb
         /// <param name="oprType"></param>
         /// <returns>成功返回"成功", 失败返回出错原因</returns>
         [OperationContract]
-        string TableOpr(string DeviceId, TableInfo tableInfo, string oldTableNum, TableOprType oprType);
+        TableInfo TableOpr(string DeviceId, TableInfo tableInfo, string oldTableNum, TableOprType oprType);
 
         /// <summary>
         /// 取当前已开台并且还没埋单的台的信息
@@ -64,13 +64,13 @@ namespace gcafeWeb
         bool IsTableAvaliable(string tableNum);
 
         [OperationContract]
-        List<method> GetMethods();
+        List<Method> GetMethods();
 
         [OperationContract]
         List<MethodCatalog> GetMethodCatalogs();
 
         [OperationContract]
-        string OrderMeal(string deviceId, int staffId, string tableNum, List<MenuItem> meals);
+        string OrderMeal(string deviceId, int staffId, TableInfo tableInfo, List<MenuItem> meals);
 
         [OperationContract]
         List<MenuItem> GetOrderDetailByOrderNum(string orderNum);
@@ -83,5 +83,4 @@ namespace gcafeWeb
         [OperationContract]
         Staff GetStaffByNum(string DeviceId, string Num);
     }
-
 }

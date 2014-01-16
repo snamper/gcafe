@@ -69,7 +69,7 @@
           <Property Name="unit" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="fprice" Type="decimal" Precision="8" Scale="2" Nullable="false" />
-          <Property Name="printer_group_id" Type="int" Nullable="false" />
+          <Property Name="printer_group_id" Type="int" />
           <Property Name="is_setmeal" Type="bit" Nullable="false" />
           <Property Name="is_locked" Type="bit" Nullable="false" />
           <Property Name="sold_out" Type="bit" Nullable="false" />
@@ -81,6 +81,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="parent_id" Type="int" />
+          <Property Name="locked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="method">
           <Key>
@@ -347,7 +348,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Menu_printer_group">
-          <End Role="printer_group" Type="Self.printer_group" Multiplicity="1" />
+          <End Role="printer_group" Type="Self.printer_group" Multiplicity="0..1" />
           <End Role="menu" Type="Self.menu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="printer_group">
@@ -956,7 +957,7 @@
           <Property Name="unit" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="fprice" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
-          <Property Name="printer_group_id" Type="Int32" Nullable="false" />
+          <Property Name="printer_group_id" Type="Int32" />
           <Property Name="is_setmeal" Type="Boolean" Nullable="false" />
           <Property Name="is_locked" Type="Boolean" Nullable="false" />
           <Property Name="sold_out" Type="Boolean" Nullable="false" />
@@ -976,6 +977,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="parent_id" Type="Int32" />
+          <Property Name="locked" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="menu" Relationship="Self.FK_menu_menu_catalog" FromRole="menu_catalog" ToRole="menu" />
           <NavigationProperty Name="menu_catalog1" Relationship="Self.FK_menu_catalog_this" FromRole="menu_catalog" ToRole="menu_catalog1" />
           <NavigationProperty Name="menu_catalog2" Relationship="Self.FK_menu_catalog_this" FromRole="menu_catalog1" ToRole="menu_catalog" />
@@ -1364,7 +1366,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Menu_printer_group">
-          <End Role="printer_group" Type="Self.printer_group" Multiplicity="1" />
+          <End Role="printer_group" Type="Self.printer_group" Multiplicity="0..1" />
           <End Role="menu" Type="Self.menu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="printer_group">
@@ -1903,6 +1905,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="locked" ColumnName="locked" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

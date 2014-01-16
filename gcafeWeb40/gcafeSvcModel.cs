@@ -151,7 +151,7 @@ namespace gcafeWeb40
         [DataMember]
         public List<Method> Methods { get; set; }
     }
-    
+
     [DataContract(IsReference = true)]
     public class Staff
     {

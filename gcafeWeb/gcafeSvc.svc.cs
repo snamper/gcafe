@@ -146,9 +146,9 @@ namespace gcafeWeb
             return (MenuItem)null;
         }
 
-        public string TableOpr(string DeviceId, TableInfo tableInfo, string oldTableNum, TableOprType oprType)
+        public TableInfo TableOpr(string DeviceId, TableInfo tableInfo, string oldTableNum, TableOprType oprType)
         {
-            string rtn = string.Empty;
+            TableInfo rtn = null;
 
             int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
 
@@ -165,9 +165,7 @@ namespace gcafeWeb
                     {
                         case TableOprType.OpenTable:
                             dev = context.device.Where(n => n.device_id == DeviceId && n.is_deny == false).FirstOrDefault();
-                            if (dev == null)
-                                rtn = "设备未验证";
-                            else
+                            if (dev != null)
                             {
                                 sys_info sysInfo = context.sys_info.FirstOrDefault();
                                 string orderNum = string.Format("{0}{1:D2}{2:D2}{3:D2}{4:D4}", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, ConfigurationManager.AppSettings.GetValues("BranchID")[0], ++sysInfo.order_cnt);
@@ -192,7 +190,7 @@ namespace gcafeWeb
                                 }
 
 
-                                rtn = "开台成功";
+                                rtn = tableInfo;
                             }
                             break;
 
@@ -277,15 +275,30 @@ namespace gcafeWeb
             return true;
         }
 
-        public List<method> GetMethods()
+        public List<Method> GetMethods()
         {
+            List<Method> rtn = new List<Method>();
+
             _log.Trace(TraceMessage());
 
             try
             {
                 using (var context = new gcafeEntities())
                 {
-                    return context.method.Include(n => n.method_catalog).ToList();
+                    List<method> methods = context.method.Include(n => n.method_catalog).ToList();
+                    foreach (var method in methods)
+                    {
+                        rtn.Add(new Method()
+                        {
+                            ID = method.id,
+                            Name = method.name,
+                            MethodCatalog = new MethodCatalog()
+                            {
+                                ID = method.method_catalog.id,
+                                Name = method.method_catalog.name
+                            },
+                        });
+                    }
                 }
             }
             catch (Exception ex)
@@ -295,7 +308,7 @@ namespace gcafeWeb
 
             _log.Trace(TraceMessage());
 
-            return new List<method>();
+            return rtn;
         }
 
         public List<MethodCatalog> GetMethodCatalogs()
@@ -332,7 +345,7 @@ namespace gcafeWeb
             return rtn;
         }
 
-        public string OrderMeal(string deviceId, int staffId, string tableNum, List<MenuItem> meals)
+        public string OrderMeal(string deviceId, int staffId, TableInfo tableInfo, List<MenuItem> meals)
         {
             string rtn = string.Empty;
             int orderId;
@@ -344,13 +357,13 @@ namespace gcafeWeb
                 using (var context = new gcafeEntities())
                 {
                     device dev = context.device.FirstOrDefault(n => n.device_id == deviceId && n.is_deny == false);
-                    order order = context.order.FirstOrDefault(n => n.table_no == tableNum && n.check_out_staff_id == null);
+                    order order = context.order.FirstOrDefault(n => n.table_no == tableInfo.Num && n.check_out_staff_id == null);
 
                     if (dev == null)
                         return "设备未验证";
 
                     if (order == null)
-                        return string.Format("{0} 台还没开", tableNum);
+                        return string.Format("{0} 台还没开", tableInfo.Num);
                     else
                         orderId = order.id;
 
@@ -378,7 +391,7 @@ namespace gcafeWeb
                             if (meal.Methods != null)
                             {
                                 foreach (var method in meal.Methods)
-                                    context.order_detail_method.Add(new order_detail_method() { order_detail_id = orderDetail.id, method_id = method.id });
+                                    context.order_detail_method.Add(new order_detail_method() { order_detail_id = orderDetail.id, method_id = method.ID });
 
                                 context.SaveChanges();
                             }
@@ -398,7 +411,7 @@ namespace gcafeWeb
                                     if (setmeal.Methods != null)
                                     {
                                         foreach (var method in setmeal.Methods)
-                                            context.order_detail_method.Add(new order_detail_method() { order_detail_setmeal_id = ods.id, method_id = method.id });
+                                            context.order_detail_method.Add(new order_detail_method() { order_detail_setmeal_id = ods.id, method_id = method.ID });
 
                                         context.SaveChanges();
                                     }
@@ -469,10 +482,10 @@ namespace gcafeWeb
 
                         if (orderDetail.order_detail_method.Count > 0)
                         {
-                            menuItem.Methods = new List<method>();
+                            menuItem.Methods = new List<Method>();
                             foreach (var method in orderDetail.order_detail_method)
                             {
-                                menuItem.Methods.Add(new method() { id = method.method.id, name = method.method.name });
+                                menuItem.Methods.Add(new Method() { ID = method.method.id, Name = method.method.name });
                             }
                         }
 
@@ -487,7 +500,14 @@ namespace gcafeWeb
                                     foreach (var method in setmeal.order_detail_method)
                                         methods.Add(new method() { id = method.method.id, name = method.method.name });
 
-                                    menuItem.SetmealItems.Add(new SetmealItem() { Name = setmeal.menu.name, Unit = setmeal.menu.unit, Methods = methods });
+                                    List<Method> ms = new List<Method>();
+                                    foreach (var m in methods)
+                                    {
+                                        ms.Add(new Method() { ID = m.id, Name = m.name, });
+                                    }
+                                    menuItem.SetmealItems.Add(new SetmealItem() { Name = setmeal.menu.name, Unit = setmeal.menu.unit, Methods = ms, });
+                                    
+
                                 }
                                 else
                                     menuItem.SetmealItems.Add(new SetmealItem() { Name = setmeal.menu.name, Unit = setmeal.menu.unit });

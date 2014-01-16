@@ -11,8 +11,8 @@ using System.Runtime.CompilerServices;
 
 namespace gcafeWeb40
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "gcafeSvc" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select gcafeSvc.svc or gcafeSvc.svc.cs at the Solution Explorer and start debugging.
+    // 注意: 使用“重构”菜单上的“重命名”命令，可以同时更改代码、svc 和配置文件中的类名“gcafeSvc”。
+    // 注意: 为了启动 WCF 测试客户端以测试此服务，请在解决方案资源管理器中选择 gcafeSvc.svc 或 gcafeSvc.svc.cs，然后开始调试。
     public class gcafeSvc : IgcafeSvc
     {
         private static readonly NLog.Logger _log = NLog.LogManager.GetCurrentClassLogger();
@@ -33,6 +33,21 @@ namespace gcafeWeb40
 
             try
             {
+                using (var context = new gcafeEntities())
+                {
+                    int parent_id = 0;
+
+                    if (rootCata == "厨房")
+                        parent_id = 1;
+                    else if (rootCata == "酒吧")
+                        parent_id = 2;
+
+                    List<menu_catalog> menuCataList = context.menu_catalog.Where(n => n.parent_id == parent_id).OrderBy(n => n.name).ToList();
+                    foreach (menu_catalog mc in menuCataList)
+                    {
+                        cataList.Add(new MenuCatalog() { ID = mc.id, Name = mc.name });
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -54,6 +69,44 @@ namespace gcafeWeb40
 
             try
             {
+                using (var context = new gcafeEntities())
+                {
+                    List<menu> menus = context.menu
+                        .Include("setmeal_item.menu1")
+                        .Include("setmeal_item.setmeal_item_opt")
+                        .Where(n => (n.menu_catalog_id == cataId) && (n.branch_id == branchId))
+                        .OrderBy(n => n.name)
+                        .ToList();
+
+                    foreach (menu menu in menus)
+                    {
+                        if (menu.setmeal_item.Count > 0)
+                        {
+                            List<SetmealItem> setmeals = new List<SetmealItem>();
+                            foreach (var smitem in menu.setmeal_item)
+                            {
+                                //gcafeWeb.menu m = context.menu.FirstOrDefault(n => n.id == smitem.setmeal_item_menu_id);
+
+                                if (smitem.setmeal_item_opt.Count > 0)
+                                {
+                                    List<SetmealItem> opts = new List<SetmealItem>();
+                                    foreach (var opt in smitem.setmeal_item_opt)
+                                    {
+                                        //gcafeWeb.menu m1 = context.menu.FirstOrDefault(n => n.id == opt.menu_id);
+                                        opts.Add(new SetmealItem() { MenuID = opt.menu.id, Name = opt.menu.name, Unit = opt.menu.unit });
+                                    }
+                                    setmeals.Add(new SetmealItem() { MenuID = smitem.menu1.id, Name = smitem.menu1.name, Unit = smitem.menu1.unit, OptionItems = opts });
+                                }
+                                else
+                                    setmeals.Add(new SetmealItem() { MenuID = smitem.menu1.id, Name = smitem.menu1.name, Unit = smitem.menu1.unit });
+                            }
+
+                            menuList.Add(new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = true, Quantity = 1, SetmealItems = setmeals });
+                        }
+                        else
+                            menuList.Add(new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = false, Quantity = 1 });
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -73,6 +126,14 @@ namespace gcafeWeb40
 
             try
             {
+                using (var context = new gcafeEntities())
+                {
+                    menu menu = context.menu.Where(n => n.number == number && n.branch_id == branchId).FirstOrDefault();
+                    if (menu != null)
+                        return new MenuItem() { ID = menu.id, Name = menu.name, Unit = menu.unit, Price = menu.price, IsSetmeal = menu.is_setmeal };
+                    else
+                        return (MenuItem)null;
+                }
             }
             catch (Exception ex)
             {
@@ -84,27 +145,60 @@ namespace gcafeWeb40
             return (MenuItem)null;
         }
 
-        public string TableOpr(string DeviceId, TableInfo tableInfo, string oldTableNum, TableOprType oprType)
+        public TableInfo TableOpr(string DeviceId, TableInfo tableInfo, string oldTableNum, TableOprType oprType)
         {
-            string rtn = string.Empty;
+            TableInfo rtn = null;
 
             int branchId = Int32.Parse(ConfigurationManager.AppSettings.GetValues("BranchID")[0]);
+
+            order order;
+            device dev;
 
             _log.Trace(TraceMessage());
 
             try
             {
-                switch (oprType)
+                using (var context = new gcafeEntities())
                 {
-                    case TableOprType.OpenTable:
-                        rtn = "开台成功";
-                        break;
+                    switch (oprType)
+                    {
+                        case TableOprType.OpenTable:
+                            dev = context.device.Where(n => n.device_id == DeviceId && n.is_deny == false).FirstOrDefault();
+                            if (dev != null)
+                            {
+                                sys_info sysInfo = context.sys_info.FirstOrDefault();
+                                string orderNum = string.Format("{0}{1:D2}{2:D2}{3:D2}{4:D4}", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, ConfigurationManager.AppSettings.GetValues("BranchID")[0], ++sysInfo.order_cnt);
 
-                    case TableOprType.ChangeTable:
-                        break;
+                                order = new order()
+                                {
+                                    branch_id = branchId,
+                                    device_id = dev.id,
+                                    order_num = orderNum,
+                                    table_no = tableInfo.Num,
+                                    customer_number = tableInfo.CustomerNum,
+                                    open_table_staff_id = tableInfo.OpenTableStaff.ID,
+                                    table_opened_time = DateTime.Now,
+                                };
 
-                    case TableOprType.ChangeCustomerNum:
-                        break;
+                                context.order.Add(order);
+                                context.SaveChanges();
+
+                                using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
+                                {
+                                    _gcafePrn.OpenTable(orderNum, tableInfo.Num, tableInfo.OpenTableStaff.Name, tableInfo.CustomerNum);
+                                }
+
+
+                                rtn = tableInfo;
+                            }
+                            break;
+
+                        case TableOprType.ChangeTable:
+                            break;
+
+                        case TableOprType.ChangeCustomerNum:
+                            break;
+                    }
                 }
             }
             catch (Exception ex)
@@ -126,6 +220,27 @@ namespace gcafeWeb40
 
             try
             {
+                using (var context = new gcafeEntities())
+                {
+                    List<order> orders = context.order
+                        .Include("staff2")
+                        .Where(n => n.branch_id == branchId && n.check_out_staff_id == null)
+                        .OrderBy(n => n.table_no)
+                        .ToList();
+                    foreach (var order in orders)
+                    {
+                        tableInfoList.Add(new TableInfo()
+                        {
+                            ID = order.id,
+                            OrderNum = order.order_num,
+                            Num = order.table_no,
+                            CustomerNum = order.customer_number,
+                            Amount = order.receivable == null ? 0 : (decimal)order.receivable,
+                            OpenTableStaff = new Staff() { Name = order.staff2.name },
+                            OpenTableTime = order.table_opened_time,
+                        });
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -143,6 +258,11 @@ namespace gcafeWeb40
 
             try
             {
+                using (var context = new gcafeEntities())
+                {
+                    if (context.order.Where(n => n.table_no == tableNum && n.check_out_staff_id == null).FirstOrDefault() != null)
+                        return false;
+                }
             }
             catch (Exception ex)
             {
@@ -156,29 +276,29 @@ namespace gcafeWeb40
 
         public List<Method> GetMethods()
         {
-            _log.Trace(TraceMessage());
-
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                _log.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
-            }
-
-            _log.Trace(TraceMessage());
-
-            return new List<Method>();
-        }
-
-        public List<MethodCatalog> GetMethodCatalogs()
-        {
-            List<MethodCatalog> rtn = new List<MethodCatalog>();
+            List<Method> rtn = new List<Method>();
 
             _log.Trace(TraceMessage());
 
             try
             {
+                using (var context = new gcafeEntities())
+                {
+                    List<method> methods = context.method.Include("method_catalog").ToList();
+                    foreach (var method in methods)
+                    {
+                        rtn.Add(new Method()
+                        {
+                            ID = method.id,
+                            Name = method.name,
+                            MethodCatalog = new MethodCatalog()
+                            {
+                                ID = method.method_catalog.id,
+                                Name = method.method_catalog.name
+                            },
+                        });
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -190,7 +310,41 @@ namespace gcafeWeb40
             return rtn;
         }
 
-        public string OrderMeal(string deviceId, int staffId, string tableNum, List<MenuItem> meals)
+        public List<MethodCatalog> GetMethodCatalogs()
+        {
+            List<MethodCatalog> rtn = new List<MethodCatalog>();
+
+            _log.Trace(TraceMessage());
+
+            try
+            {
+                using (var context = new gcafeEntities())
+                {
+                    List<method_catalog> methodCatalogs = context.method_catalog.Include("method").ToList();
+
+                    foreach (var methodCatalog in methodCatalogs)
+                    {
+                        List<Method> methods = new List<Method>();
+                        foreach (var method in methodCatalog.method)
+                        {
+                            methods.Add(new Method() { ID = method.id, Name = method.name });
+                        }
+
+                        rtn.Add(new MethodCatalog() { ID = methodCatalog.id, Name = methodCatalog.name, Methods = methods });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
+            }
+
+            _log.Trace(TraceMessage());
+
+            return rtn;
+        }
+
+        public string OrderMeal(string deviceId, int staffId, TableInfo tableInfo, List<MenuItem> meals)
         {
             string rtn = string.Empty;
             int orderId;
@@ -199,12 +353,81 @@ namespace gcafeWeb40
 
             try
             {
-                //using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
-                //{
-                //    _gcafePrn.PrintChuPing(orderId, -1, false);
-                //    _gcafePrn.PrintHuaDan(orderId, -1, false);
-                //    _gcafePrn.PrintLiuTai(orderId, -1, false);
-                //}
+                using (var context = new gcafeEntities())
+                {
+                    device dev = context.device.FirstOrDefault(n => n.device_id == deviceId && n.is_deny == false);
+                    order order = context.order.FirstOrDefault(n => n.table_no == tableInfo.Num && n.check_out_staff_id == null);
+
+                    if (dev == null)
+                        return "设备未验证";
+
+                    if (order == null)
+                        return string.Format("{0} 台还没开", tableInfo.Num);
+                    else
+                        orderId = order.id;
+
+                    int groupCnt = context.sys_info.FirstOrDefault().order_detail_cnt++;
+                    context.SaveChanges();
+
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        foreach (var meal in meals)
+                        {
+                            order_detail orderDetail = new order_detail()
+                            {
+                                device_id = dev.id,
+                                order_id = order.id,
+                                menu_id = meal.ID,
+                                group_cnt = groupCnt + 1,
+                                price = meal.Price,
+                                quantity = meal.Quantity,
+                                order_staff_id = staffId,
+                                order_time = System.DateTime.Now,
+                            };
+                            context.order_detail.Add(orderDetail);
+                            context.SaveChanges();
+
+                            if (meal.Methods != null)
+                            {
+                                foreach (var method in meal.Methods)
+                                    context.order_detail_method.Add(new order_detail_method() { order_detail_id = orderDetail.id, method_id = method.ID });
+
+                                context.SaveChanges();
+                            }
+
+                            if (meal.SetmealItems != null)
+                            {
+                                foreach (var setmeal in meal.SetmealItems)
+                                {
+                                    order_detail_setmeal ods = new order_detail_setmeal()
+                                    {
+                                        order_detail_id = orderDetail.id,
+                                        menu_id = setmeal.MenuID,
+                                    };
+                                    context.order_detail_setmeal.Add(ods);
+                                    context.SaveChanges();
+
+                                    if (setmeal.Methods != null)
+                                    {
+                                        foreach (var method in setmeal.Methods)
+                                            context.order_detail_method.Add(new order_detail_method() { order_detail_setmeal_id = ods.id, method_id = method.ID });
+
+                                        context.SaveChanges();
+                                    }
+                                }
+                            }
+                        }
+
+                        scope.Complete();
+                    }
+
+                    using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
+                    {
+                        _gcafePrn.PrintChuPing(orderId, -1, false);
+                        _gcafePrn.PrintHuaDan(orderId, -1, false);
+                        _gcafePrn.PrintLiuTai(orderId, -1, false);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -229,6 +452,72 @@ namespace gcafeWeb40
 
             try
             {
+                using (var context = new gcafeEntities())
+                {
+                    List<order_detail> orderDetails = context.order_detail
+                        .Include("menu")
+                        .Include("staff")
+                        .Include("order_detail_method.method")
+                        .Include("order_detail_setmeal.menu")
+                        .Include("order_detail_setmeal.order_detail_method.method")
+                        .Where(n => n.order.order_num == orderNum)
+                        .ToList();
+
+                    foreach (var orderDetail in orderDetails)
+                    {
+                        MenuItem menuItem = new MenuItem()
+                        {
+                            ID = orderDetail.menu_id,
+                            Name = orderDetail.menu.name,
+                            Unit = orderDetail.menu.unit,
+                            Price = orderDetail.price,
+                            Quantity = (int)orderDetail.quantity,
+                            OrderStaffName = orderDetail.staff.name,
+                            OrderTime = orderDetail.order_time,
+                            ProduceTime = orderDetail.produced_time,
+                            GroupCnt = orderDetail.group_cnt,
+                            IsSetmeal = orderDetail.order_detail_setmeal.Count > 0,
+                        };
+
+                        if (orderDetail.order_detail_method.Count > 0)
+                        {
+                            menuItem.Methods = new List<Method>();
+                            foreach (var method in orderDetail.order_detail_method)
+                            {
+                                menuItem.Methods.Add(new Method() { ID = method.method.id, Name = method.method.name });
+                            }
+                        }
+
+                        if (orderDetail.order_detail_setmeal.Count > 0)
+                        {
+                            menuItem.SetmealItems = new List<SetmealItem>();
+                            foreach (var setmeal in orderDetail.order_detail_setmeal)
+                            {
+                                if (setmeal.order_detail_method.Count > 0)
+                                {
+                                    List<method> methods = new List<method>();
+                                    foreach (var method in setmeal.order_detail_method)
+                                        methods.Add(new method() { id = method.method.id, name = method.method.name });
+
+                                    List<Method> ms = new List<Method>();
+                                    foreach (var m in methods)
+                                    {
+                                        ms.Add(new Method() { ID = m.id, Name = m.name, });
+                                    }
+                                    menuItem.SetmealItems.Add(new SetmealItem() { Name = setmeal.menu.name, Unit = setmeal.menu.unit, Methods = ms, });
+
+
+                                }
+                                else
+                                    menuItem.SetmealItems.Add(new SetmealItem() { Name = setmeal.menu.name, Unit = setmeal.menu.unit });
+
+                            }
+                        }
+
+                        menuItems.Add(menuItem);
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -246,6 +535,18 @@ namespace gcafeWeb40
 
             try
             {
+                using (var context = new gcafeEntities())
+                {
+                    staff staff = context.staff.Include("branch").Where(n => n.number == Num).FirstOrDefault();
+
+                    if (staff != null)
+                    {
+                        Staff stf = new Staff() { Name = staff.name, ID = staff.id, Number = staff.number, Password = staff.password, RoleID = staff.role_id, Branch = staff.branch.name, BranchID = staff.branch_id };
+                        return stf;
+                    }
+                    else
+                        return null;
+                }
             }
             catch (Exception ex)
             {

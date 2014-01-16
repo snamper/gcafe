@@ -79,7 +79,7 @@ namespace gcafeWeb
         [DataMember]
         public List<SetmealItem> OptionItems { get; set; }
         [DataMember]
-        public List<method> Methods { get; set; }
+        public List<Method> Methods { get; set; }
     }
 
     [DataContract(IsReference = true)]
@@ -98,7 +98,7 @@ namespace gcafeWeb
         [DataMember]
         public List<SetmealItem> SetmealItems { get; set; }
         [DataMember]
-        public List<method> Methods { get; set; }
+        public List<Method> Methods { get; set; }
         [DataMember]
         public int Quantity { get; set; }
         [DataMember]
@@ -137,6 +137,8 @@ namespace gcafeWeb
         public int ID { get; set; }
         [DataMember]
         public string Name { get; set; }
+        [DataMember]
+        public virtual MethodCatalog MethodCatalog { get; set; }
     }
 
     [DataContract(IsReference = true)]
@@ -149,7 +151,7 @@ namespace gcafeWeb
         [DataMember]
         public List<Method> Methods { get; set; }
     }
-    
+
     [DataContract(IsReference = true)]
     public class Staff
     {
