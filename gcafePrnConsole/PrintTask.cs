@@ -395,9 +395,52 @@ namespace gcafePrnConsole
 #if FOXPRO
             try
             {
+                string orderNo = GetFoxproOrderNo(orderId);
+                if (string.IsNullOrEmpty(orderNo))
+                {
+                    Global.Logger.Debug(string.Format("PrintHuaDan中orderno出错:{0}", orderId));
+                    return string.Format("PrintHuaDan中orderno出错:{0}", orderId);
+                }
+
                 using (var conn = new OleDbConnection(Global.FoxproPath))
                 {
                     conn.Open();
+
+                    string sql = string.Empty;
+                    string orderTime = null;
+                    string tableNum = null;
+                    string waiter = null;
+
+                    #region 打印第几次，如果全打不执行
+                    // 打印第几次，如果全打不执行
+                    if (prnType != 0)
+                    {
+                        sql = string.Format("SELECT ordertime FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNo);
+                        using (var cmd = new OleDbCommand(sql, conn))
+                        {
+                            OleDbDataReader reader = cmd.ExecuteReader();
+                            int cnt = 1;
+                            while (reader.Read())
+                            {
+                                orderTime = string.Format("{0}^{1}{2}", "{", reader.GetDateTime(0).ToString("u"), "}");
+                                if (cnt == prnType)
+                                    break;
+
+                                cnt++;
+                            }
+                        }
+                    }
+                    #endregion 打印第几次，如果全打不执行
+
+                    if (orderTime == null)
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (department = '11') ORDER BY serial", orderNo);
+                    else
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) AND (department = '11') ORDER BY serial", orderNo, orderTime);
+
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        
+                    }
 
                     conn.Close();
                 }
@@ -572,6 +615,62 @@ namespace gcafePrnConsole
             string orderCount = string.Empty;
 
 #if FOXPRO
+            try
+            {
+                string orderNo = GetFoxproOrderNo(orderId);
+                if (string.IsNullOrEmpty(orderNo))
+                {
+                    Global.Logger.Debug(string.Format("PrintHuaDan中orderno出错:{0}", orderId));
+                    return string.Format("PrintHuaDan中orderno出错:{0}", orderId);
+                }
+
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Empty;
+                    string orderTime = null;
+                    string tableNum = null;
+                    string waiter = null;
+
+                    #region 打印第几次，如果全打不执行
+                    // 打印第几次，如果全打不执行
+                    if (prnType != 0)
+                    {
+                        sql = string.Format("SELECT ordertime FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNo);
+                        using (var cmd = new OleDbCommand(sql, conn))
+                        {
+                            OleDbDataReader reader = cmd.ExecuteReader();
+                            int cnt = 1;
+                            while (reader.Read())
+                            {
+                                orderTime = string.Format("{0}^{1}{2}", "{", reader.GetDateTime(0).ToString("u"), "}");
+                                if (cnt == prnType)
+                                    break;
+
+                                cnt++;
+                            }
+                        }
+                    }
+                    #endregion 打印第几次，如果全打不执行
+
+                    if (orderTime == null)
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (department = '11') ORDER BY serial", orderNo);
+                    else
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) AND (department = '11') ORDER BY serial", orderNo, orderTime);
+
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
 #else
             try
             {
