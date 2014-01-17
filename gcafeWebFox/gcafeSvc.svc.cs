@@ -771,12 +771,12 @@ namespace gcafeWebFox
                     conn.Close();
                 }
 
-                //using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
-                //{
+                using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
+                {
                 //    _gcafePrn.PrintChuPing(orderId, -1, false);
-                //    _gcafePrn.PrintHuaDan(orderId, -1, false);
+                    _gcafePrn.PrintHuaDan(Int32.Parse(tableInfo.OrderNum.Substring(2)), -1, false);
                 //    _gcafePrn.PrintLiuTai(orderId, -1, false);
-                //}
+                }
             }
             catch (Exception ex)
             {

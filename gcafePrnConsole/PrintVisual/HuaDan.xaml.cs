@@ -80,8 +80,10 @@ namespace gcafePrnConsole.PrintVisual
             Size size;
 
             // 不打印酒吧
+#if (FOXPRO == false)
             if (orderDetail.menu.number.Substring(0, 2) == "22")
                 return;
+#endif
 
             // 品名
             TextBlock tb = new TextBlock()
@@ -151,8 +153,10 @@ namespace gcafePrnConsole.PrintVisual
                 foreach (var setmeal in orderDetail.order_detail_setmeal)
                 {
                     // 不打印酒吧
+#if (FOXPRO == false)
                     if (setmeal.menu.number.Substring(0, 2) == "22")
                         return;
+#endif
 
                     // 套餐内容
                     tb = new TextBlock()

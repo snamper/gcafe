@@ -219,7 +219,7 @@ namespace gcafePrnConsole
                                     orderDetail.menu = new menu() { name = remark1 };
                                     orderDetail.order_detail_setmeal.Add(new order_detail_setmeal()
                                     {
-                                        menu = new menu() { name = remark1 }
+                                        menu = new menu() { name = prodName }
                                     });
 
                                     if (!string.IsNullOrEmpty(remark2))
@@ -242,7 +242,7 @@ namespace gcafePrnConsole
                                 // 来到这里的一定就是套餐内容
                                 orderDetail.order_detail_setmeal.Add(new order_detail_setmeal()
                                 {
-                                    menu = new menu() { name = remark1 }
+                                    menu = new menu() { name = prodName }
                                 });
 
                                 if (!string.IsNullOrEmpty(remark2))
@@ -257,6 +257,8 @@ namespace gcafePrnConsole
                                 }
                             }
                         }
+
+                        orderDetails.Add(orderDetail);
                     }
                     #endregion 填入orderDetails
 
