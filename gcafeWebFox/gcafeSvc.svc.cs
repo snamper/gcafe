@@ -648,6 +648,7 @@ namespace gcafeWebFox
 
                     trans = conn.BeginTransaction();
 
+                    string strNow = string.Format("{0}^{1}{2}", "{", System.DateTime.Now.ToString("u"), "}");
                     string strMethod = string.Empty;
                     string strSetmealMethod = string.Empty;
                     string sql = string.Empty;
@@ -684,7 +685,7 @@ namespace gcafeWebFox
                                 prodNn = reader.GetString(4).Trim();
 
                                 sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no, waiter) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '', '{9:D4}')",
-                                    "{ fn NOW() }", tableInfo.OrderNum, menuItem.ID, menuItem.Name, menuItem.Price, price2, menuItem.Quantity, "A", prodNn, staffId);
+                                    strNow, tableInfo.OrderNum, menuItem.ID, menuItem.Name, menuItem.Price, price2, menuItem.Quantity, "A", prodNn, staffId);
 
                                 using (var cmd1 = new OleDbCommand(sql, conn, trans))
                                 {
@@ -741,7 +742,7 @@ namespace gcafeWebFox
                                 recMethod = strSetmealMethod;
 
                                 sql = string.Format("INSERT INTO poh(department, ordertime, orderno, serialno, prodname, machineid, quantity, tableno, itemno, printgroup, remark1, remark2, waiter, serial) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12:D4}', '{13}')",
-                                    setmeal.MenuID.ToString().Substring(0, 2), "{ fn NOW() }", tableInfo.OrderNum, GenerateSerialNo(setmeal.MenuID.ToString(), trans), setmeal.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(setmeal.MenuID.ToString(), trans), menuItem.Name, recMethod, staffId, cnt);
+                                    setmeal.MenuID.ToString().Substring(0, 2), strNow, tableInfo.OrderNum, GenerateSerialNo(setmeal.MenuID.ToString(), trans), setmeal.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(setmeal.MenuID.ToString(), trans), menuItem.Name, recMethod, staffId, cnt);
 
                                 using (var cmd = new OleDbCommand(sql, conn, trans))
                                 {
@@ -753,7 +754,7 @@ namespace gcafeWebFox
                         {
                             // 这不是套餐
                             sql = string.Format("INSERT INTO poh(department, ordertime, orderno, serialno, prodname, machineid, quantity, tableno, itemno, printgroup, remark1, remark2, waiter, serial) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12:D4}', '{13}')",
-                                menuItem.ID.ToString().Substring(0, 2), "{ fn NOW() }", tableInfo.OrderNum, GenerateSerialNo(menuItem.ID.ToString(), trans), menuItem.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(menuItem.ID.ToString(), trans), "", strMethod, staffId, cnt);
+                                menuItem.ID.ToString().Substring(0, 2), strNow, tableInfo.OrderNum, GenerateSerialNo(menuItem.ID.ToString(), trans), menuItem.Name, "WP", menuItem.Quantity, tableInfo.Num, "0", GetPrintGroup(menuItem.ID.ToString(), trans), "", strMethod, staffId, cnt);
 
                             using (var cmd = new OleDbCommand(sql, conn, trans))
                             {
