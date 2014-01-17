@@ -25,7 +25,7 @@ namespace gcafePrnConsole.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Foxpro")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Provider=VFPOLEDB.1;Data Source=D:\\gwr\\DATA\\lygOrder.dbc")]
         public string FoxproPath {
             get {
                 return ((string)(this["FoxproPath"]));

@@ -14,6 +14,7 @@ namespace gcafePrnConsole
         {
             using (ServiceHost serviceHost = new ServiceHost(typeof(gcafeSvc.gcafePrn)/*, new Uri("net.tcp://localhost:9000/gcafePrnSvc/service")*/))
             {
+                string s = System.DateTime.Now.ToString("u");
                 // Open the ServiceHost to create listeners and start listening for messages.
                 serviceHost.Open();
 

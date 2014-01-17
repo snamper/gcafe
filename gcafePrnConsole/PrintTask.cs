@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 using System.Data;
 using System.Data.Entity;
-using System.Data.OleDb;
+using System.Data.OleDb; 
 
 namespace gcafePrnConsole
 {
@@ -123,6 +123,173 @@ namespace gcafePrnConsole
         {
             Global.Logger.Trace(Global.TraceMessage());
 
+#if FOXPRO
+            try
+            {
+                string orderNo = GetFoxproOrderNo(orderId);
+                if (string.IsNullOrEmpty(orderNo))
+                {
+                    Global.Logger.Debug(string.Format("PrintHuaDan中orderno出错:{0}", orderId));
+                    return string.Format("PrintHuaDan中orderno出错:{0}", orderId);
+                }
+
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Empty;
+                    string orderTime = null;
+                    string tableNum = null;
+                    string waiter = null;
+
+                    #region 打印第几次，如果全打不执行
+                    // 打印第几次，如果全打不执行
+                    if (prnType != 0)
+                    {
+                        sql = string.Format("SELECT ordertime FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNo);
+                        using (var cmd = new OleDbCommand(sql, conn))
+                        {
+                            OleDbDataReader reader = cmd.ExecuteReader();
+                            int cnt = 1;
+                            while (reader.Read())
+                            {
+                                orderTime = string.Format("{0}^{1}{2}", "{", reader.GetDateTime(0).ToString("u"), "}");
+                                if (cnt == prnType)
+                                    break;
+
+                                cnt++;
+                            }
+                        }
+                    }
+                    #endregion 打印第几次，如果全打不执行
+
+                    if (orderTime == null)
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (department = '11') ORDER BY serial", orderNo);
+                    else
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) AND (department = '11') ORDER BY serial", orderNo, orderTime);
+
+                    List<order_detail> orderDetails = new List<order_detail>();
+                    #region 填入orderDetails
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        string prevSerial = string.Empty;
+                        order_detail orderDetail = null;
+                        OleDbDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            string serial = reader.GetString(0).Trim();
+                            string prodName = reader.GetString(1).Trim();
+                            int quantity = reader.GetInt32(2);
+                            string prnGrp = reader.GetString(3).Trim();
+                            string remark1 = reader.GetString(4).Trim();
+                            string remark2 = reader.GetString(5).Trim();
+                            if (tableNum == null)
+                                tableNum = reader.GetString(6).Trim();
+                            if (waiter == null)
+                                waiter = reader.GetString(7).Trim();
+
+                            // 以serial来区分不同的项目，原因是套餐项目时，如果套餐名相同时
+                            // 区分不同的套餐内容
+                            if (serial != prevSerial)
+                            {
+                                if (orderDetail != null)
+                                {
+                                    orderDetails.Add(orderDetail);
+                                }
+
+                                orderDetail = new order_detail();
+                                if (string.IsNullOrEmpty(remark1))
+                                {
+                                    // 这个项目不是套餐
+                                    orderDetail.menu = new menu() { name = prodName };
+                                    if (!string.IsNullOrEmpty(remark2))
+                                    {
+                                        string[] methods = remark2.Split(',');
+                                        foreach (string method in methods)
+                                            orderDetail.order_detail_method.Add(
+                                                new order_detail_method()
+                                                {
+                                                    method = new method() { name = method }
+                                                });
+                                    }
+                                }
+                                else
+                                {
+                                    // 这个项目是套餐
+                                    orderDetail.menu = new menu() { name = remark1 };
+                                    orderDetail.order_detail_setmeal.Add(new order_detail_setmeal()
+                                    {
+                                        menu = new menu() { name = remark1 }
+                                    });
+
+                                    if (!string.IsNullOrEmpty(remark2))
+                                    {
+                                        string[] methods = remark2.Split(',');
+                                        foreach (string method in methods)
+                                            orderDetail.order_detail_setmeal.Last().order_detail_method.Add(
+                                                new order_detail_method()
+                                                {
+                                                    method = new method() { name = method }
+                                                });
+                                    }
+                                }
+                                orderDetail.quantity = quantity;
+
+                                prevSerial = serial;
+                            }
+                            else
+                            {
+                                // 来到这里的一定就是套餐内容
+                                orderDetail.order_detail_setmeal.Add(new order_detail_setmeal()
+                                {
+                                    menu = new menu() { name = remark1 }
+                                });
+
+                                if (!string.IsNullOrEmpty(remark2))
+                                {
+                                    string[] methods = remark2.Split(',');
+                                    foreach (string method in methods)
+                                        orderDetail.order_detail_setmeal.Last().order_detail_method.Add(
+                                            new order_detail_method()
+                                            {
+                                                method = new method() { name = method }
+                                            });
+                                }
+                            }
+                        }
+                    }
+                    #endregion 填入orderDetails
+
+                    PrintDialog printDlg = new PrintDialog();
+                    var printers = new LocalPrintServer().GetPrintQueues();
+                    var selectedPrinter = printers.FirstOrDefault(p => p.Name == Global.KitchenHuaDanPrinter);
+                    if (selectedPrinter != null)
+                    {
+                        printDlg.PrintQueue = selectedPrinter;
+
+                        PrintVisual.HuaDan huaDan = new PrintVisual.HuaDan()
+                        {
+                            TableNum = tableNum,
+                            OrderNum = orderNo,
+                            StaffName = waiter,
+                        };
+
+                        foreach (var orderDetail in orderDetails)
+                            huaDan.AddItem(orderDetail);
+
+                        huaDan.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
+                        huaDan.Arrange(new Rect(new Point(0, 0), huaDan.DesiredSize));
+                        printDlg.PrintVisual(huaDan, "划单打印");
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
+#else
             try
             {
                 List<order_detail> orderDetails;
@@ -212,6 +379,7 @@ namespace gcafePrnConsole
             {
                 Global.Logger.Error(ex.Message);
             }
+#endif
 
             Global.Logger.Trace(Global.TraceMessage());
 
@@ -222,6 +390,21 @@ namespace gcafePrnConsole
         {
             Global.Logger.Trace(Global.TraceMessage());
 
+#if FOXPRO
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
+#else
             try
             {
                 List<order_detail> orderDetails;
@@ -373,6 +556,7 @@ namespace gcafePrnConsole
             {
                 Global.Logger.Error(ex.Message);
             }
+#endif
 
             Global.Logger.Trace(Global.TraceMessage());
 
@@ -385,6 +569,8 @@ namespace gcafePrnConsole
 
             string orderCount = string.Empty;
 
+#if FOXPRO
+#else
             try
             {
                 List<order_detail> orderDetails;
@@ -471,6 +657,7 @@ namespace gcafePrnConsole
             {
                 Global.Logger.Error(ex.Message);
             }
+#endif
 
             Global.Logger.Trace(Global.TraceMessage());
 
@@ -744,6 +931,30 @@ namespace gcafePrnConsole
             }
 
             return zuofa;
+        }
+
+        string GetFoxproOrderNo(int orderId)
+        {
+            string orderNo = string.Empty;
+
+            using (var conn = new OleDbConnection(Global.FoxproPath))
+            {
+                conn.Open();
+
+                string sql = "SELECT fax FROM sysinfo";
+                using (var cmd = new OleDbCommand(sql, conn))
+                {
+                    string fax = (string)cmd.ExecuteScalar();
+                    if (fax != null)
+                    {
+                        orderNo = fax.Trim() + orderId.ToString();
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return orderNo;
         }
 
         public void Dispose()

@@ -115,7 +115,7 @@ namespace gcafePrnConsole.PrintVisual
             _gridItems.Children.Add(tb);
 
             // 做法
-            if (orderDetail.order_detail_method.Count > 0)
+            if (orderDetail.order_detail_method != null && orderDetail.order_detail_method.Count > 0)
             {
                 string zuofa = string.Empty;
                 foreach (var method in orderDetail.order_detail_method)
@@ -175,7 +175,7 @@ namespace gcafePrnConsole.PrintVisual
                     _gridItems.Children.Add(tb);
 
                     // 做法
-                    if (setmeal.order_detail_method.Count > 0)
+                    if (setmeal.order_detail_method != null && setmeal.order_detail_method.Count > 0)
                     {
                         string zuofa = string.Empty;
                         foreach (var method in setmeal.order_detail_method)
