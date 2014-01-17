@@ -437,10 +437,85 @@ namespace gcafePrnConsole
                     else
                         sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) AND (department = '11') ORDER BY serial", orderNo, orderTime);
 
+                    Dictionary<string, List<object>> prnGrp = new Dictionary<string, List<object>>();
+
+                    #region 填入prnGrp
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
-                        
+                        OleDbDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            string serial = reader.GetString(0).Trim();
+                            string prodName = reader.GetString(1).Trim();
+                            int quantity = reader.GetInt32(2);
+                            string prnGrpKey = reader.GetString(3).Trim();
+                            string remark1 = reader.GetString(4).Trim();
+                            string remark2 = reader.GetString(5).Trim();
+                            if (tableNum == null)
+                                tableNum = reader.GetString(6).Trim();
+                            if (waiter == null)
+                                waiter = reader.GetString(7).Trim();
+
+                            if (!string.IsNullOrEmpty(prnGrpKey))
+                            {
+                                if (prnGrp.ContainsKey(prnGrpKey) == false)
+                                    prnGrp.Add(prnGrpKey, new List<object>());
+
+                                if (string.IsNullOrEmpty(remark1))
+                                {
+                                    // 这个不是套餐
+                                    order_detail orderDetail = new order_detail()
+                                    {
+                                        quantity = 1,
+                                        menu = new menu() { name = prodName }
+                                    };
+
+                                    // 做法
+                                    if (!string.IsNullOrEmpty(remark2))
+                                    {
+                                        string[] methods = remark2.Split(',');
+                                        foreach (string method in methods)
+                                            orderDetail.order_detail_method.Add(
+                                                new order_detail_method()
+                                                {
+                                                    method = new method() { name = method }
+                                                });
+                                    }
+
+                                    for (int i = 0; i < quantity; i++)
+                                    {
+                                        prnGrp[prnGrpKey].Add(orderDetail);
+                                    }
+                                }
+                                else
+                                {
+                                    // 这个是套餐
+                                    order_detail_setmeal setmeal = new order_detail_setmeal()
+                                    {
+                                        menu = new menu() { name = prodName },
+                                        order_detail = new order_detail() { quantity = 1, menu = new menu() { name = remark1 } },
+                                    };
+
+                                    if (!string.IsNullOrEmpty(remark2))
+                                    {
+                                        string[] methods = remark2.Split(',');
+                                        foreach (string method in methods)
+                                            setmeal.order_detail_method.Add(
+                                                new order_detail_method()
+                                                {
+                                                    method = new method() { name = method }
+                                                });
+                                    }
+
+                                    for (int i = 0; i < quantity; i++)
+                                    {
+                                        prnGrp[prnGrpKey].Add(setmeal);
+                                    }
+                                }
+                            }
+                        }
                     }
+                    #endregion 填入prnGrp
 
                     conn.Close();
                 }
@@ -661,7 +736,11 @@ namespace gcafePrnConsole
 
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
+                        OleDbDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
 
+                        }
                     }
 
                     conn.Close();
