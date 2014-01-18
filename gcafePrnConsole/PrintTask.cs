@@ -433,9 +433,9 @@ namespace gcafePrnConsole
                     #endregion 打印第几次，如果全打不执行
 
                     if (orderTime == null)
-                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (department = '11') ORDER BY serial", orderNo);
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department FROM poh WHERE (orderno = '{0}') AND (department = '11') ORDER BY serial", orderNo);
                     else
-                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) AND (department = '11') ORDER BY serial", orderNo, orderTime);
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) AND (department = '11') ORDER BY serial", orderNo, orderTime);
 
                     Dictionary<string, List<object>> prnGrp = new Dictionary<string, List<object>>();
 
@@ -455,6 +455,7 @@ namespace gcafePrnConsole
                                 tableNum = reader.GetString(6).Trim();
                             if (waiter == null)
                                 waiter = reader.GetString(7).Trim();
+                            string department = reader.GetString(8).Trim();
 
                             if (!string.IsNullOrEmpty(prnGrpKey))
                             {
@@ -467,7 +468,8 @@ namespace gcafePrnConsole
                                     order_detail orderDetail = new order_detail()
                                     {
                                         quantity = 1,
-                                        menu = new menu() { name = prodName }
+                                        menu_id = Int32.Parse(serial),          // 在foxpro中，暂且用menu_id来记录serial
+                                        menu = new menu() { id = Int32.Parse(department), name = prodName }
                                     };
 
                                     // 做法
@@ -492,7 +494,8 @@ namespace gcafePrnConsole
                                     // 这个是套餐
                                     order_detail_setmeal setmeal = new order_detail_setmeal()
                                     {
-                                        menu = new menu() { name = prodName },
+                                        menu_id = Int32.Parse(serial),          // 在foxpro中，暂且用menu_id来记录serial
+                                        menu = new menu() { id = Int32.Parse(department), name = prodName },
                                         order_detail = new order_detail() { quantity = 1, menu = new menu() { name = remark1 } },
                                     };
 
@@ -516,6 +519,69 @@ namespace gcafePrnConsole
                         }
                     }
                     #endregion 填入prnGrp
+
+                    PrintDialog printDlg = new PrintDialog();
+                    #region 将数据填入visual
+                    foreach (var key in prnGrp.Keys)
+                    {
+                        if (key == "NULL")
+                            continue;
+
+                        string prnName = GetFoxproPrinterNameByPG(key);
+                        if (string.IsNullOrEmpty(prnName))
+                            continue;
+
+                        var printers = new LocalPrintServer().GetPrintQueues();
+                        var selectedPrinter = printers.FirstOrDefault(p => p.Name == prnName);
+                        if (selectedPrinter == null)
+                            continue;
+
+                        printDlg.PrintQueue = selectedPrinter;
+                        Global.Logger.Debug(string.Format("printer name:{0}", prnName));
+
+                        int currItem = 0;
+                        int totalItem = prnGrp[key].Count();
+                        foreach (var obj in prnGrp[key])
+                        {
+                            currItem++;
+
+                            if (obj.GetType().BaseType == typeof(order_detail))
+                            {
+                                using (gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
+                                {
+                                    cpd.OrderNum = orderNo;
+                                    cpd.Department = ((order_detail)obj).menu.id == 11 ? "厨房" : "酒吧";
+                                    cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
+                                    cpd.SerialNum = ((order_detail)obj).menu_id.ToString();
+                                    cpd.AddItem((order_detail)obj);
+                                    cpd.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
+                                    cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
+                                    printDlg.PrintVisual(cpd, "出品单打印");
+
+                                    Global.Logger.Debug(string.Format("({3}) - 共{0}张单的第{1}张 to {2}", totalItem, currItem, prnName, Global.TraceMessage()));
+                                }
+                            }
+                            else if (obj.GetType().BaseType == typeof(order_detail_setmeal))
+                            {
+                                using (gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
+                                {
+                                    cpd.OrderNum = orderNo;
+                                    cpd.Department = ((order_detail)obj).menu.id == 11 ? "厨房" : "酒吧";
+                                    cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
+                                    cpd.SerialNum = ((order_detail)obj).menu_id.ToString();
+                                    cpd.AddItem((order_detail_setmeal)obj);
+                                    cpd.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
+                                    cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
+                                    printDlg.PrintVisual(cpd, "出品单打印");
+
+                                    Global.Logger.Debug(string.Format("({3}) - 共{0}张单的第{1}张 to {2}", totalItem, currItem, prnName, Global.TraceMessage()));
+                                }
+                            }
+
+                        }
+                    }
+                    #endregion 将数据填入visual
+
 
                     conn.Close();
                 }
@@ -1111,6 +1177,28 @@ namespace gcafePrnConsole
             }
 
             return zuofa;
+        }
+
+        string GetFoxproPrinterNameByPG(string pg)
+        {
+            string rtn = string.Empty;
+
+            using (var conn = new OleDbConnection(Global.FoxproPrntrPath))
+            {
+                conn.Open();
+
+                string sql = string.Format("SELECT prntr FROM prntr WHERE printgroup = '{0}", pg);
+                using (var cmd = new OleDbCommand(sql, conn))
+                {
+                    rtn = (string)cmd.ExecuteScalar();
+                    if (rtn != null)
+                        rtn = rtn.Trim();
+                }
+
+                conn.Close();
+            }
+
+            return rtn;
         }
 
         string GetFoxproOrderNo(int orderId)

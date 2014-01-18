@@ -66,5 +66,13 @@ namespace gcafePrnConsole
             }
         }
 
+        public static string FoxproPrntrPath
+        {
+            get
+            {
+                return gcafePrnConsole.Properties.Settings.Default.FoxproPrntrPath;
+            }
+        }
+
     }
 }

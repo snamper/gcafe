@@ -31,5 +31,14 @@ namespace gcafePrnConsole.Properties {
                 return ((string)(this["FoxproPath"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Provider=VFPOLEDB.1;Data Source=D:\\gwr\\DATA\\printt.dbc")]
+        public string FoxproPrntrPath {
+            get {
+                return ((string)(this["FoxproPrntrPath"]));
+            }
+        }
     }
 }
