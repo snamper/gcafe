@@ -433,9 +433,9 @@ namespace gcafePrnConsole
                     #endregion 打印第几次，如果全打不执行
 
                     if (orderTime == null)
-                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department FROM poh WHERE (orderno = '{0}') AND (department = '11') ORDER BY serial", orderNo);
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department FROM poh WHERE (orderno = '{0}') ORDER BY serial", orderNo);
                     else
-                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) AND (department = '11') ORDER BY serial", orderNo, orderTime);
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) ORDER BY serial", orderNo, orderTime);
 
                     Dictionary<string, List<object>> prnGrp = new Dictionary<string, List<object>>();
 
@@ -796,9 +796,9 @@ namespace gcafePrnConsole
                     #endregion 打印第几次，如果全打不执行
 
                     if (orderTime == null)
-                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (department = '11') ORDER BY serial", orderNo);
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') ORDER BY serial", orderNo);
                     else
-                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) AND (department = '11') ORDER BY serial", orderNo, orderTime);
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) ORDER BY serial", orderNo, orderTime);
 
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
