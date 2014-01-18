@@ -151,13 +151,20 @@ namespace gcafePrnConsole
                         {
                             OleDbDataReader reader = cmd.ExecuteReader();
                             int cnt = 1;
+                            DateTime prevTime = DateTime.Now;
                             while (reader.Read())
                             {
-                                orderTime = string.Format("{0}^{1}{2}", "{", reader.GetDateTime(0).ToString("u"), "}");
-                                if (cnt == prnType)
-                                    break;
+                                DateTime ot = reader.GetDateTime(0);
+                                if (prevTime != ot)
+                                {
+                                    orderTime = string.Format("{0}^{1}{2}", "{", ot.ToString("u"), "}");
+                                    if (cnt == prnType)
+                                        break;
 
-                                cnt++;
+                                    cnt++;
+
+                                    prevTime = ot;
+                                }
                             }
                         }
                     }
@@ -420,13 +427,20 @@ namespace gcafePrnConsole
                         {
                             OleDbDataReader reader = cmd.ExecuteReader();
                             int cnt = 1;
+                            DateTime prevTime = DateTime.Now;
                             while (reader.Read())
                             {
-                                orderTime = string.Format("{0}^{1}{2}", "{", reader.GetDateTime(0).ToString("u"), "}");
-                                if (cnt == prnType)
-                                    break;
+                                DateTime ot = reader.GetDateTime(0);
+                                if (prevTime != ot)
+                                {
+                                    orderTime = string.Format("{0}^{1}{2}", "{", ot.ToString("u"), "}");
+                                    if (cnt == prnType)
+                                        break;
 
-                                cnt++;
+                                    cnt++;
+
+                                    prevTime = ot;
+                                }
                             }
                         }
                     }
@@ -783,13 +797,20 @@ namespace gcafePrnConsole
                         {
                             OleDbDataReader reader = cmd.ExecuteReader();
                             int cnt = 1;
+                            DateTime prevTime = DateTime.Now;
                             while (reader.Read())
                             {
-                                orderTime = string.Format("{0}^{1}{2}", "{", reader.GetDateTime(0).ToString("u"), "}");
-                                if (cnt == prnType)
-                                    break;
+                                DateTime ot = reader.GetDateTime(0);
+                                if (prevTime != ot)
+                                {
+                                    orderTime = string.Format("{0}^{1}{2}", "{", ot.ToString("u"), "}");
+                                    if (cnt == prnType)
+                                        break;
 
-                                cnt++;
+                                    cnt++;
+
+                                    prevTime = ot;
+                                }
                             }
                         }
                     }
