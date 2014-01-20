@@ -44,5 +44,10 @@ namespace gcafeApp.Pages
             else
                 vml.IsPasswordError = true;
         }
+
+        private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
+        {
+            App.RootFrame.Navigate(new Uri("/Pages/SettingPage.xaml", UriKind.Relative));
+        }
     }
 }

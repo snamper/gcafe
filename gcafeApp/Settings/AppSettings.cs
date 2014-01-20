@@ -37,5 +37,27 @@ namespace gcafeApp.Settings
                     throw new Exception("取UniqueID出错");
             }
         }
+
+        public static string ServiceURL
+        {
+            get
+            {
+                if (IsolatedStorageSettings.ApplicationSettings.Contains("ServiceURL"))
+                {
+                    return IsolatedStorageSettings.ApplicationSettings["ServiceURL"] as string;
+                }
+                else
+                {
+                    string serviceURL = "192.168.0.101:29307";
+                    IsolatedStorageSettings.ApplicationSettings["ServiceURL"] = serviceURL;
+                    return serviceURL;
+                }
+            }
+
+            set
+            {
+                IsolatedStorageSettings.ApplicationSettings["ServiceURL"] = value;
+            }
+        }
     }
 }

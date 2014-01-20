@@ -54,6 +54,9 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="设置" Click="ApplicationBarMenuItem_Click" />
+            </shell:ApplicationBar.MenuItems>
             <shell:ApplicationBarIconButton
                 IconUri="/Images/ApplicationBar.Check.png"
                 Text="确定" Click="ApplicationBarIconButton_Click" />
