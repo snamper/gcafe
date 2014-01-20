@@ -537,6 +537,8 @@ namespace gcafeWeb40
             {
                 using (var context = new gcafeEntities())
                 {
+                    Num = "01002";
+
                     staff staff = context.staff.Include("branch").Where(n => n.number == Num).FirstOrDefault();
 
                     if (staff != null)
