@@ -773,9 +773,9 @@ namespace gcafeWebFox
 
                 using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
                 {
-                //    _gcafePrn.PrintChuPing(orderId, -1, false);
+                    _gcafePrn.PrintChuPing(Int32.Parse(tableInfo.OrderNum.Substring(2)), -1, false);
                     _gcafePrn.PrintHuaDan(Int32.Parse(tableInfo.OrderNum.Substring(2)), -1, false);
-                //    _gcafePrn.PrintLiuTai(orderId, -1, false);
+                    _gcafePrn.PrintLiuTai(Int32.Parse(tableInfo.OrderNum.Substring(2)), -1, false);
                 }
             }
             catch (Exception ex)

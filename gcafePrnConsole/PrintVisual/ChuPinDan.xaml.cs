@@ -90,8 +90,8 @@ namespace gcafePrnConsole.PrintVisual
         /// <param name="showRealQuantity">true表示显示真正数量，false时数量总是1</param>
         public void AddItem(order_detail_setmeal item, bool showRealQuantity = false)
         {
-            StaffName = item.order_detail.staff.name;
-            TableNum = item.order_detail.order.table_no;
+            //StaffName = item.order_detail.staff.name;
+            //TableNum = item.order_detail.order.table_no;
             //OrderNum = item.order_detail.order.order_num;
 
             // 套餐品名
@@ -178,8 +178,8 @@ namespace gcafePrnConsole.PrintVisual
 
         public void AddItem(order_detail item, bool showRealQuantity = false)
         {
-            StaffName = item.staff.name;
-            TableNum = item.order.table_no;
+            //StaffName = item.staff.name;
+            //TableNum = item.order.table_no;
             //OrderNum = item.order.order_num;
 
             // 品名

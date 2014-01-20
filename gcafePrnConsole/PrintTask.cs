@@ -447,9 +447,9 @@ namespace gcafePrnConsole
                     #endregion 打印第几次，如果全打不执行
 
                     if (orderTime == null)
-                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department FROM poh WHERE (orderno = '{0}') ORDER BY serial", orderNo);
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department, serialno FROM poh WHERE (orderno = '{0}') ORDER BY serial", orderNo);
                     else
-                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) ORDER BY serial", orderNo, orderTime);
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department, serialno FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) ORDER BY serial", orderNo, orderTime);
 
                     Dictionary<string, List<object>> prnGrp = new Dictionary<string, List<object>>();
 
@@ -470,6 +470,7 @@ namespace gcafePrnConsole
                             if (waiter == null)
                                 waiter = reader.GetString(7).Trim();
                             string department = reader.GetString(8).Trim();
+                            string seriaoNo = reader.GetString(9).Trim();
 
                             if (!string.IsNullOrEmpty(prnGrpKey))
                             {
@@ -482,7 +483,7 @@ namespace gcafePrnConsole
                                     order_detail orderDetail = new order_detail()
                                     {
                                         quantity = 1,
-                                        menu_id = Int32.Parse(serial),          // 在foxpro中，暂且用menu_id来记录serial
+                                        menu_id = Int32.Parse(seriaoNo),          // 在foxpro中，暂且用menu_id来记录serial
                                         menu = new menu() { id = Int32.Parse(department), name = prodName }
                                     };
 
@@ -508,7 +509,7 @@ namespace gcafePrnConsole
                                     // 这个是套餐
                                     order_detail_setmeal setmeal = new order_detail_setmeal()
                                     {
-                                        menu_id = Int32.Parse(serial),          // 在foxpro中，暂且用menu_id来记录serial
+                                        menu_id = Int32.Parse(seriaoNo),          // 在foxpro中，暂且用menu_id来记录serial
                                         menu = new menu() { id = Int32.Parse(department), name = prodName },
                                         order_detail = new order_detail() { quantity = 1, menu = new menu() { name = remark1 } },
                                     };
@@ -559,10 +560,14 @@ namespace gcafePrnConsole
                         {
                             currItem++;
 
-                            if (obj.GetType().BaseType == typeof(order_detail))
+                            if (obj.GetType() == typeof(order_detail))
                             {
                                 using (gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
                                 {
+                                    
+                                    cpd.OrderNum = orderNo;
+                                    cpd.TableNum = tableNum;
+                                    cpd.StaffName = waiter;
                                     cpd.OrderNum = orderNo;
                                     cpd.Department = ((order_detail)obj).menu.id == 11 ? "厨房" : "酒吧";
                                     cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
@@ -575,14 +580,17 @@ namespace gcafePrnConsole
                                     Global.Logger.Debug(string.Format("({3}) - 共{0}张单的第{1}张 to {2}", totalItem, currItem, prnName, Global.TraceMessage()));
                                 }
                             }
-                            else if (obj.GetType().BaseType == typeof(order_detail_setmeal))
+                            else if (obj.GetType() == typeof(order_detail_setmeal))
                             {
                                 using (gcafePrnConsole.PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
                                 {
                                     cpd.OrderNum = orderNo;
-                                    cpd.Department = ((order_detail)obj).menu.id == 11 ? "厨房" : "酒吧";
+                                    cpd.TableNum = tableNum;
+                                    cpd.StaffName = waiter;
+                                    cpd.OrderNum = orderNo;
+                                    cpd.Department = ((order_detail_setmeal)obj).menu.id == 11 ? "厨房" : "酒吧";
                                     cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
-                                    cpd.SerialNum = ((order_detail)obj).menu_id.ToString();
+                                    cpd.SerialNum = ((order_detail_setmeal)obj).menu_id.ToString();
                                     cpd.AddItem((order_detail_setmeal)obj);
                                     cpd.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
                                     cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
@@ -767,8 +775,6 @@ namespace gcafePrnConsole
         {
             Global.Logger.Trace(Global.TraceMessage());
 
-            string orderCount = string.Empty;
-
 #if FOXPRO
             try
             {
@@ -787,6 +793,7 @@ namespace gcafePrnConsole
                     string orderTime = null;
                     string tableNum = null;
                     string waiter = null;
+                    int totalOrderCnt = 0;
 
                     #region 打印第几次，如果全打不执行
                     // 打印第几次，如果全打不执行
@@ -816,18 +823,158 @@ namespace gcafePrnConsole
                     }
                     #endregion 打印第几次，如果全打不执行
 
-                    if (orderTime == null)
-                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') ORDER BY serial", orderNo);
-                    else
-                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) ORDER BY serial", orderNo, orderTime);
-
+                    #region 看点了几次菜
+                    sql = string.Format("SELECT ordertime FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNo);
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
                         OleDbDataReader reader = cmd.ExecuteReader();
+                        DateTime prevTime = DateTime.Now;
                         while (reader.Read())
                         {
-
+                            DateTime ot = reader.GetDateTime(0);
+                            if (prevTime != ot)
+                            {
+                                totalOrderCnt++;
+                                prevTime = ot;
+                            }
                         }
+                    }
+                    #endregion 看点亮几次菜
+
+                    if (orderTime == null)
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department FROM poh WHERE (orderno = '{0}') ORDER BY serial", orderNo);
+                    else
+                        sql = string.Format("SELECT serial, prodname, quantity, printgroup, remark1, remark2, tableno, waiter, department FROM poh WHERE (orderno = '{0}') AND (ordertime = {1}) ORDER BY serial", orderNo, orderTime);
+
+                    List<order_detail> orderDetails = new List<order_detail>();
+                    #region 填入orderDetails
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        string prevSerial = string.Empty;
+                        order_detail orderDetail = null;
+                        order_detail_setmeal setmeal = null;
+                        OleDbDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            string serial = reader.GetString(0).Trim();
+                            string prodName = reader.GetString(1).Trim();
+                            int quantity = reader.GetInt32(2);
+                            string prnGrpKey = reader.GetString(3).Trim();
+                            string remark1 = reader.GetString(4).Trim();
+                            string remark2 = reader.GetString(5).Trim();
+                            if (tableNum == null)
+                                tableNum = reader.GetString(6).Trim();
+                            if (waiter == null)
+                                waiter = reader.GetString(7).Trim();
+                            string department = reader.GetString(8).Trim();
+
+                            if (prevSerial != serial)
+                            {
+                                if (orderDetail != null)
+                                    orderDetails.Add(orderDetail);
+
+                                orderDetail = new order_detail() { quantity = (decimal)quantity };
+
+                                // 看是否套餐
+                                if (string.IsNullOrEmpty(remark1))
+                                {
+                                    // 不是套餐
+                                    orderDetail.price = GetFoxproPrice(orderNo, prodName);
+                                    orderDetail.menu = new menu() { name = prodName };
+
+                                    //// 做法
+                                    //if (!string.IsNullOrEmpty(remark2))
+                                    //{
+                                    //    string[] methods = remark2.Split(',');
+                                    //    foreach (string method in methods)
+                                    //        orderDetail.order_detail_method.Add(
+                                    //            new order_detail_method()
+                                    //            {
+                                    //                method = new method() { name = method }
+                                    //            });
+                                    //}
+                                }
+                                else
+                                {
+                                    // 是套餐
+                                    orderDetail.price = GetFoxproPrice(orderNo, remark1);
+                                    orderDetail.menu = new menu() { name = remark1 };
+                                    setmeal = new order_detail_setmeal()
+                                    {
+                                        menu = new menu() { name = prodName }
+                                    };
+
+                                    //// 做法
+                                    //if (!string.IsNullOrEmpty(remark2))
+                                    //{
+                                    //    string[] methods = remark2.Split(',');
+                                    //    foreach (string method in methods)
+                                    //        setmeal.order_detail_method.Add(
+                                    //            new order_detail_method()
+                                    //            {
+                                    //                method = new method() { name = method }
+                                    //            });
+                                    //}
+
+                                    orderDetail.order_detail_setmeal.Add(setmeal);
+                                }
+
+                                prevSerial = serial;
+                            }
+                            else
+                            {
+                                // 来到这里的肯定是套餐内容
+                                setmeal = new order_detail_setmeal()
+                                {
+                                    menu = new menu() { name = prodName }
+                                };
+
+                                //// 做法
+                                //if (!string.IsNullOrEmpty(remark2))
+                                //{
+                                //    string[] methods = remark2.Split(',');
+                                //    foreach (string method in methods)
+                                //        setmeal.order_detail_method.Add(
+                                //            new order_detail_method()
+                                //            {
+                                //                method = new method() { name = method }
+                                //            });
+                                //}
+
+                                orderDetail.order_detail_setmeal.Add(setmeal);
+                            }
+                        }
+
+                        orderDetails.Add(orderDetail);
+                    }
+                    #endregion 填入orderDetails
+
+                    PrintDialog printDlg = new PrintDialog();
+                    var printers = new LocalPrintServer().GetPrintQueues();
+                    var selectedPrinter = printers.FirstOrDefault(p => p.Name == GetPrinterNameByTableNum(tableNum));
+                    if (selectedPrinter != null)
+                    {
+                        printDlg.PrintQueue = selectedPrinter;
+
+                        PrintVisual.LiuTaiDan liuTai = new PrintVisual.LiuTaiDan()
+                        {
+                            OrderCount = totalOrderCnt.ToString(),
+                            TableNum = tableNum,
+                            StaffName = waiter,
+                            OrderNum = orderNo,
+                            TotalPrice = GetFoxproTotalPrice(orderNo),
+                        };
+
+                        foreach (var orderDetail in orderDetails)
+                        {
+                            liuTai.AddItem(orderDetail);
+                        }
+
+                        liuTai.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
+                        liuTai.Arrange(new Rect(new Point(0, 0), liuTai.DesiredSize));
+                        printDlg.PrintVisual(liuTai, "留台单打印");
+
+                        Global.Logger.Debug(string.Format("留台单打印到: {0}, {1}", GetPrinterNameByTableNum(tableNum), Global.TraceMessage()));
                     }
 
                     conn.Close();
@@ -933,7 +1080,7 @@ namespace gcafePrnConsole
 
         string GetPrinterNameByTableNum(string tableNum)
         {
-            return "留台4";
+            return "PDFCreator";
         }
 
         /// <summary>
@@ -1208,7 +1355,7 @@ namespace gcafePrnConsole
             {
                 conn.Open();
 
-                string sql = string.Format("SELECT prntr FROM prntr WHERE printgroup = '{0}", pg);
+                string sql = string.Format("SELECT prntr FROM prntr WHERE printgroup = '{0}'", pg);
                 using (var cmd = new OleDbCommand(sql, conn))
                 {
                     rtn = (string)cmd.ExecuteScalar();
@@ -1219,7 +1366,8 @@ namespace gcafePrnConsole
                 conn.Close();
             }
 
-            return rtn;
+            return "PDFCreator";
+            //return rtn;
         }
 
         string GetFoxproOrderNo(int orderId)
@@ -1244,6 +1392,52 @@ namespace gcafePrnConsole
             }
 
             return orderNo;
+        }
+
+        decimal GetFoxproTotalPrice(string orderNum)
+        {
+            decimal rtn = 0;
+
+            using (var conn = new OleDbConnection(Global.FoxproPath))
+            {
+                conn.Open();
+
+                string sql = string.Format("SELECT price FROM orditem WHERE (orderno = '{0}')", orderNum);
+                using (var cmd = new OleDbCommand(sql, conn))
+                {
+                    OleDbDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        rtn += reader.GetDecimal(0);
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return rtn;
+        }
+
+        decimal GetFoxproPrice(string orderNum, string prodName)
+        {
+            decimal rtn = 0;
+
+            using (var conn = new OleDbConnection(Global.FoxproPath))
+            {
+                conn.Open();
+
+                string sql = string.Format("SELECT price FROM orditem WHERE (orderno = '{0}') AND (prodname = '{1}')", orderNum, prodName);
+                using (var cmd = new OleDbCommand(sql, conn))
+                {
+                    object val = cmd.ExecuteScalar();
+                    if (val != null)
+                        rtn = (decimal)val;
+                }
+
+                conn.Close();
+            }
+
+            return rtn;
         }
 
         public void Dispose()
