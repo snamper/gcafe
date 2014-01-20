@@ -31,8 +31,6 @@ namespace gcafeApp.ViewModel
 
         public MainViewModel(IgcafeSvcClient svc)
         {
-            System.Diagnostics.Debug.WriteLine("========================================================");
-
             //MethodCommand = new MethodCommand(this);
 
             if (IsInDesignMode)
@@ -176,7 +174,29 @@ namespace gcafeApp.ViewModel
 
         void OnDeleteCommand(object param)
         {
+            MenuItem menuItem = null;
 
+            if (param.GetType() == typeof(SetmealItem))
+            {
+                foreach (var mi in MenuItems)
+                {
+                    if (mi.SetmealItems != null && mi.SetmealItems.Count > 0)
+                    {
+                        foreach (var si in mi.SetmealItems)
+                        {
+                            if (si == (SetmealItem)param)
+                            {
+                                menuItem = mi;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+                menuItem = (MenuItem)param;
+
+            MenuItems.Remove(menuItem);
         }
 
         public ObservableCollection<MenuItem> MenuItems

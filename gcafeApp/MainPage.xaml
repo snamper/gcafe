@@ -109,7 +109,7 @@
 
                                     <toolkit:ExpanderView.ExpanderTemplate>
                                         <DataTemplate>
-                                            <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                                            <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True" FontFamily="Portable User Interface">
                                                 <toolkit:GestureService.GestureListener>
                                                     <toolkit:GestureListener Tap="GestureListener_Tap" />
                                                 </toolkit:GestureService.GestureListener>
@@ -144,6 +144,7 @@
                                                     <toolkit:ContextMenu>
                                                         <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                                                         <toolkit:MenuItem Header="可选内容" Visibility="{Binding Converter={StaticResource SelectableToVisableConverter}}" />
+                                                        <toolkit:MenuItem Header="删除品种" Command="{Binding Path=Main.DeleteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                                                     </toolkit:ContextMenu>
                                                 </toolkit:ContextMenuService.ContextMenu>
                                             </ListBoxItem>
