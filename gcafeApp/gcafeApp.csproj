@@ -260,7 +260,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="README_FIRST.txt" />
-    <None Include="Service References\gcafeSvc\gcafeSvc.disco" />
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MenuCatalog.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MenuItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.Method.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MethodCatalog.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.Staff.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.TableInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\gcafeSvc\gcafeSvc1.disco" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -277,34 +295,16 @@
     <Content Include="Assets\KitchenIcon.png" />
     <Content Include="Images\ApplicationBar.Cancel.png" />
     <Content Include="Images\ApplicationBar.Check.png" />
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MenuCatalog.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MenuItem.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.Method1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MethodCatalog.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.Staff.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.TableInfo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\gcafeSvc\configuration91.svcinfo" />
     <None Include="Service References\gcafeSvc\configuration.svcinfo" />
-    <None Include="Service References\gcafeSvc\gcafeSvc.wsdl" />
-    <None Include="Service References\gcafeSvc\gcafeSvc.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc1.wsdl" />
+    <None Include="Service References\gcafeSvc\gcafeSvc3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc1.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc2.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\gcafeSvc\Reference.svcmap">
@@ -352,7 +352,7 @@
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+      <HintPath>.\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
