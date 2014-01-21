@@ -91,7 +91,10 @@ namespace gcafeWebFox
                             isFestival = true;
                     }
 
-                    sql = string.Format("SELECT `TRIM`(productno) AS Expr1, `TRIM`(prodname) AS Expr2, price, fprice FROM product WHERE (productno LIKE '{0}%') AND (len(`TRIM`(productno)) > 4) AND (locked = 0)", cataId);
+                    if (cataId > 0)
+                        sql = string.Format("SELECT `TRIM`(productno) AS Expr1, `TRIM`(prodname) AS Expr2, price, fprice FROM product WHERE (productno LIKE '{0}%') AND (len(`TRIM`(productno)) > 4) AND (locked = 0)", cataId);
+                    else
+                        sql = string.Format("SELECT `TRIM`(productno) AS Expr1, `TRIM`(prodname) AS Expr2, price, fprice FROM product WHERE (len(`TRIM`(productno)) > 4) AND (locked = 0)");
 
                     using (var cmd = new OleDbCommand(sql, conn))
                     {

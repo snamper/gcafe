@@ -33,12 +33,15 @@ namespace gcafeApp.ViewModel
 
         void _svc_GetMenuItemsByCatalogIdCompleted(object sender, GetMenuItemsByCatalogIdCompletedEventArgs e)
         {
-            IsBusy = false;
+            if (ReferenceEquals(e.UserState, "VMMenuItem"))
+            {
+                IsBusy = false;
 
-            if (e.Result != null)
-                this.Items = new ObservableCollection<MenuItem>(e.Result);
-            else
-                this.Items = new ObservableCollection<MenuItem>();
+                if (e.Result != null)
+                    this.Items = new ObservableCollection<MenuItem>(e.Result);
+                else
+                    this.Items = new ObservableCollection<MenuItem>();
+            }
         }
 
         public int CatalogID
@@ -48,7 +51,7 @@ namespace gcafeApp.ViewModel
                 IsBusy = true;
 
                 Items = new ObservableCollection<MenuItem>();
-                _svc.GetMenuItemsByCatalogIdAsync(Settings.AppSettings.DeviceID, value);
+                _svc.GetMenuItemsByCatalogIdAsync(Settings.AppSettings.DeviceID, value, "VMMenuItem");
             }
         }
 

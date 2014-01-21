@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using GalaSoft.MvvmLight;
@@ -10,11 +12,29 @@ namespace gcafeApp.ViewModel
 {
     public class MenuSelectViewModel : VMBase
     {
+        gcafeSvc.IgcafeSvcClient _svc; 
         private RelayCommand<string> _navigateToCommand;
 
-        public MenuSelectViewModel()
+        public MenuSelectViewModel(IgcafeSvcClient svc)
         {
-            _navigateToCommand = new RelayCommand<string>(NavigateTo);
+            if (!IsInDesignMode)
+            {
+                _navigateToCommand = new RelayCommand<string>(NavigateTo);
+
+                IsBusy = true;
+                _svc = svc;
+                _svc.GetMenuItemsByCatalogIdCompleted += _svc_GetMenuItemsByCatalogIdCompleted;
+                _svc.GetMenuItemsByCatalogIdAsync("", -1, "MenuSelectViewModel");
+            }
+        }
+
+        void _svc_GetMenuItemsByCatalogIdCompleted(object sender, GetMenuItemsByCatalogIdCompletedEventArgs e)
+        {
+            if (ReferenceEquals(e.UserState, "MenuSelectViewModel"))
+            {
+                _allMenuItems = new List<MenuItem>(e.Result);
+                IsBusy = false;
+            }
         }
 
         public MenuItem MenuItem
@@ -44,6 +64,19 @@ namespace gcafeApp.ViewModel
                 App.RootFrame.Navigate(new Uri("/Pages/MenuCameraSelect.xaml", UriKind.Relative));
         }
 
+        public List<MenuItem> AllMenuItems
+        {
+            get { return _allMenuItems; }
+            set
+            {
+                if (!ReferenceEquals(_allMenuItems, value))
+                {
+                    _allMenuItems = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        private List<MenuItem> _allMenuItems;
 
         public string Pro1
         {
