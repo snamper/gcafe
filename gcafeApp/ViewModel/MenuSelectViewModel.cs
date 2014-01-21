@@ -32,7 +32,7 @@ namespace gcafeApp.ViewModel
         {
             if (ReferenceEquals(e.UserState, "MenuSelectViewModel"))
             {
-                _allMenuItems = new List<MenuItem>(e.Result);
+                AllMenuItems = new List<MenuItem>(e.Result);
                 IsBusy = false;
             }
         }

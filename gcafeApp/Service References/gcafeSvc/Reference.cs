@@ -90,6 +90,8 @@ namespace gcafeApp.gcafeSvc {
         
         private string NameField;
         
+        private string NumberField;
+        
         private string OrderStaffNameField;
         
         private System.DateTime OrderTimeField;
@@ -165,6 +167,19 @@ namespace gcafeApp.gcafeSvc {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Number {
+            get {
+                return this.NumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumberField, value) != true)) {
+                    this.NumberField = value;
+                    this.RaisePropertyChanged("Number");
                 }
             }
         }

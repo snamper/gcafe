@@ -260,6 +260,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="README_FIRST.txt" />
+    <None Include="Service References\gcafeSvc\gcafeSvc.disco" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -296,21 +297,20 @@
     </None>
     <None Include="Service References\gcafeSvc\configuration91.svcinfo" />
     <None Include="Service References\gcafeSvc\configuration.svcinfo" />
-    <None Include="Service References\gcafeSvc\gcafeSvc1.wsdl" />
-    <None Include="Service References\gcafeSvc\gcafeSvc3.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc.wsdl" />
+    <None Include="Service References\gcafeSvc\gcafeSvc.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc31.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc32.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvc2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\gcafeSvc\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc1.disco" />
     <Content Include="ServiceReferences.ClientConfig">
       <SubType>Designer</SubType>
     </Content>

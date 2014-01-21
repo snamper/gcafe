@@ -113,6 +113,7 @@ namespace gcafeWebFox
                                 MenuItem menuItem = new MenuItem()
                                 {
                                     ID = Int32.Parse(prodNo),
+                                    Number = prodNo,
                                     Name = prodName,
                                     Price = price,
                                     Unit = "份",

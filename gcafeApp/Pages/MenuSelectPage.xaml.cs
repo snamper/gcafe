@@ -15,6 +15,15 @@ namespace gcafeApp.Pages
         public MenuSelectPage()
         {
             InitializeComponent();
+
+            //AllItems.TextFilter += SearchItem;
+        }
+
+        bool SearchItem(string search, string value)
+        {
+            System.Diagnostics.Debug.WriteLine(string.Format("filter: {0}, {1}", search, value));
+
+            return false;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

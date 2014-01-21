@@ -90,6 +90,8 @@ namespace gcafeWeb40
         [DataMember]
         public string Name { get; set; }
         [DataMember]
+        public string Number { get; set; }
+        [DataMember]
         public string Unit { get; set; }
         [DataMember]
         public decimal Price { get; set; }

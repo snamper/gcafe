@@ -46,8 +46,24 @@
 
             <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="菜名"  Style="{StaticResource PhoneTextLargeStyle}" />
             <!--IsEnabled="False" Grid.Row="1" Width="380" HorizontalAlignment="Left" Text="{Binding MenuItem.Name, Mode=TwoWay}" /-->
-            <toolkit:AutoCompleteBox Grid.Row="1" Width="380" HorizontalAlignment="Left">
-                
+            <toolkit:AutoCompleteBox x:Name="AllItems" Grid.Row="1" Width="380" HorizontalAlignment="Left"
+                                     ItemsSource="{Binding AllMenuItems}"
+                                     InputScope="Number"
+                                     ValueMemberPath="Number">
+                <toolkit:AutoCompleteBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,7">
+                            <TextBlock
+                                Margin="8,0"
+                                Text="{Binding Number}"/>
+                            <TextBlock
+                                FontSize="{StaticResource PhoneFontSizeNormal}"
+                                Foreground="#ff666666"
+                                Margin="8,-6,8,2"
+                                Text="{Binding Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </toolkit:AutoCompleteBox.ItemTemplate>
             </toolkit:AutoCompleteBox>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <Button IsEnabled="False" Command="{Binding NavigateToCommand}" CommandParameter="CameraSel" FontSize="30" Content="&#xE12D;" FontFamily="Segoe UI Symbol" />

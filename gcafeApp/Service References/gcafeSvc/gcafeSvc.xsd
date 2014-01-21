@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/gcafeWeb40" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/gcafeWeb40" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.11.6:29307/gcafeSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:29307/gcafeSvc.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="ArrayOfMenuCatalog">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MenuCatalog" nillable="true" type="tns:MenuCatalog" />
@@ -30,6 +30,7 @@
       <xs:element minOccurs="0" name="IsSetmeal" type="xs:boolean" />
       <xs:element minOccurs="0" name="Methods" nillable="true" type="tns:ArrayOfMethod" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OrderStaffName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OrderTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Price" type="xs:decimal" />
