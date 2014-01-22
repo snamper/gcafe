@@ -9,9 +9,9 @@
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://192.168.15.210/gcafeSvc.svc" binding="basicHttpBinding"
-                bindingConfiguration="BasicHttpBinding_IgcafeSvc" contract="gcafeSvc.IgcafeSvc"
-                name="BasicHttpBinding_IgcafeSvc" />
+            <endpoint address="http://localhost:8733/Design_Time_Addresses/gcafeSvcFoxpro/gcafeSvc/"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IgcafeSvc"
+                contract="gcafeSvc.IgcafeSvc" name="BasicHttpBinding_IgcafeSvc" />
         </client>
     </system.serviceModel>
 </configuration>

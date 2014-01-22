@@ -278,7 +278,7 @@
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.TableInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc1.disco" />
+    <None Include="Service References\gcafeSvc\item.disco" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -298,13 +298,13 @@
     <None Include="Service References\gcafeSvc\configuration91.svcinfo" />
     <None Include="Service References\gcafeSvc\configuration.svcinfo" />
     <None Include="Service References\gcafeSvc\gcafeSvc1.wsdl" />
-    <None Include="Service References\gcafeSvc\gcafeSvc3.xsd">
+    <None Include="Service References\gcafeSvc\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc31.xsd">
+    <None Include="Service References\gcafeSvc\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\gcafeSvc32.xsd">
+    <None Include="Service References\gcafeSvc\item2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\gcafeSvc\Reference.svcmap">

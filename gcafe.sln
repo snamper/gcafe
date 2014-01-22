@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeWebFox", "gcafeWebFox\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeWebFox40", "gcafeWebFox40\gcafeWebFox40.csproj", "{2EEC2BDA-FFEF-4976-A576-062101ED2391}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcafeSvcFoxpro", "gcafeSvcFoxpro\gcafeSvcFoxpro.csproj", "{6277CAA0-BBE6-4082-9FA7-DFDBD221E254}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -150,6 +152,16 @@ Global
 		{2EEC2BDA-FFEF-4976-A576-062101ED2391}.Release|ARM.ActiveCfg = Release|Any CPU
 		{2EEC2BDA-FFEF-4976-A576-062101ED2391}.Release|x64.ActiveCfg = Release|Any CPU
 		{2EEC2BDA-FFEF-4976-A576-062101ED2391}.Release|x86.ActiveCfg = Release|Any CPU
+		{6277CAA0-BBE6-4082-9FA7-DFDBD221E254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6277CAA0-BBE6-4082-9FA7-DFDBD221E254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6277CAA0-BBE6-4082-9FA7-DFDBD221E254}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6277CAA0-BBE6-4082-9FA7-DFDBD221E254}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6277CAA0-BBE6-4082-9FA7-DFDBD221E254}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6277CAA0-BBE6-4082-9FA7-DFDBD221E254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6277CAA0-BBE6-4082-9FA7-DFDBD221E254}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6277CAA0-BBE6-4082-9FA7-DFDBD221E254}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6277CAA0-BBE6-4082-9FA7-DFDBD221E254}.Release|x64.ActiveCfg = Release|Any CPU
+		{6277CAA0-BBE6-4082-9FA7-DFDBD221E254}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
