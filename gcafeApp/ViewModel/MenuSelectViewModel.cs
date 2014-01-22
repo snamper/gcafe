@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,6 +38,12 @@ namespace gcafeApp.ViewModel
             }
         }
 
+        public MenuItem GetMenuItemByNumber(string number)
+        {
+            MenuItem = AllMenuItems.First(n => n.Number == number);
+            return MenuItem;
+        }
+
         public MenuItem MenuItem
         {
             get { return _menuItem; }
@@ -45,6 +52,11 @@ namespace gcafeApp.ViewModel
                 if (!ReferenceEquals(value, _menuItem))
                 {
                     _menuItem = value;
+                    if (_menuItem != null)
+                    {
+                        if (_menuItem.Quantity < 1)
+                            _menuItem.Quantity = 1;
+                    }
                     RaisePropertyChanged();
                 }
             }

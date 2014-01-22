@@ -48,7 +48,7 @@ namespace gcafeApp.Settings
                 }
                 else
                 {
-                    string serviceURL = "zhangzq71.wicp.net:8123";
+                    string serviceURL = "192.168.15.100:8733";
                     IsolatedStorageSettings.ApplicationSettings["ServiceURL"] = serviceURL;
                     return serviceURL;
                 }

@@ -16,12 +16,69 @@ namespace gcafeApp.Pages
         {
             InitializeComponent();
 
-            //AllItems.TextFilter += SearchItem;
+            AllItems.TextFilter += SearchItem;
+            AllItems.TextChanged += AllItems_TextChanged;
+            AllItems.SelectionChanged += AllItems_SelectionChanged;
+        }
+
+        void AllItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (e.RemovedItems.Count > 0)
+                    return;
+
+                if (e.AddedItems.Count > 0)
+                {
+                    ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
+                    vm.MenuItem = (gcafeSvc.MenuItem)e.AddedItems[0];
+                    //AllItems.Text = vm.MenuItem.Name;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }        
+
+        protected bool isNumberic(string message)
+        {
+            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex(@"^\d+$");
+
+            if (rex.IsMatch(message))
+                return true;
+            else
+                return false;
+        }
+
+        void AllItems_TextChanged(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (AllItems.Text.Length == 6 && isNumberic(AllItems.Text))
+                {
+                    ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
+                    vm.GetMenuItemByNumber(AllItems.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         bool SearchItem(string search, string value)
         {
-            System.Diagnostics.Debug.WriteLine(string.Format("filter: {0}, {1}", search, value));
+            //System.Diagnostics.Debug.WriteLine(string.Format("filter: {0}, {1}", search, value));
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                if (search.Length > 2)
+                {
+                    if (value.StartsWith(search))
+                        return true;
+                }
+            }
 
             return false;
         }

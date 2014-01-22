@@ -40,8 +40,8 @@ namespace gcafeApp.ViewModel
                     binding.MaxBufferSize = 2147483647;
                     binding.MaxReceivedMessageSize = 2147483647;
                     //EndpointAddress address = new EndpointAddress("http://192.168.15.210/gcafeSvc.svc");
-                    EndpointAddress address = new EndpointAddress("http://192.168.0.101:8733/Design_Time_Addresses/gcafeSvcFoxpro/gcafeSvc/");
-                    //EndpointAddress address = new EndpointAddress(string.Format("http://{0}/gcafesvc.svc", gcafeApp.Settings.AppSettings.ServiceURL));
+                    //EndpointAddress address = new EndpointAddress("http://192.168.15.100:8733/Design_Time_Addresses/gcafeSvcFoxpro/gcafeSvc/");
+                    EndpointAddress address = new EndpointAddress(string.Format("http://{0}/Design_Time_Addresses/gcafeSvcFoxpro/gcafeSvc/", gcafeApp.Settings.AppSettings.ServiceURL));
 
                     return new IgcafeSvcClient(binding, address);
                 });

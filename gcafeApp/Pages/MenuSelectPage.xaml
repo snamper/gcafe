@@ -42,17 +42,28 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="菜名"  Style="{StaticResource PhoneTextLargeStyle}" />
-            <!--IsEnabled="False" Grid.Row="1" Width="380" HorizontalAlignment="Left" Text="{Binding MenuItem.Name, Mode=TwoWay}" /-->
-            <toolkit:AutoCompleteBox x:Name="AllItems" Grid.Row="1" Width="380" HorizontalAlignment="Left"
+            <TextBox IsEnabled="False" Grid.Row="1" Width="380" HorizontalAlignment="Left" Text="{Binding MenuItem.Name, Mode=TwoWay}" />
+            <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="菜品编码"  Style="{StaticResource PhoneTextLargeStyle}" />
+            <toolkit:AutoCompleteBox x:Name="AllItems" Grid.Row="3" Width="380" HorizontalAlignment="Left"
                                      ItemsSource="{Binding AllMenuItems}"
                                      InputScope="Number"
-                                     ValueMemberPath="Number">
+                                     ValueMemberPath="Number"
+                                     Text="{Binding MenuItem.Number}">
                 <toolkit:AutoCompleteBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="0,7">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Number}" />
+                            <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}"
+                                       Foreground="#ff666666"
+                                       Margin="20, 0"
+                                       Text="{Binding Name}" />
+                        </StackPanel>
+                        <!--StackPanel Margin="0,7">
                             <TextBlock
                                 Margin="8,0"
                                 Text="{Binding Number}"/>
@@ -61,16 +72,16 @@
                                 Foreground="#ff666666"
                                 Margin="8,-6,8,2"
                                 Text="{Binding Name}"/>
-                        </StackPanel>
+                        </-->
                     </DataTemplate>
                 </toolkit:AutoCompleteBox.ItemTemplate>
             </toolkit:AutoCompleteBox>
-            <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <StackPanel Grid.Row="4" Orientation="Horizontal">
                 <Button IsEnabled="False" Command="{Binding NavigateToCommand}" CommandParameter="CameraSel" FontSize="30" Content="&#xE12D;" FontFamily="Segoe UI Symbol" />
                 <Button Margin="30, 0" Command="{Binding NavigateToCommand}" CommandParameter="CataSel" FontFamily="Segoe UI Symbol" FontSize="30" Content="&#xE179;" />
             </StackPanel>
-            <TextBlock Margin="10, 20, 0, 0" Grid.Row="3" Text="数量" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"/>
-            <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <TextBlock Margin="10, 20, 0, 0" Grid.Row="5" Text="数量" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"/>
+            <StackPanel Grid.Row="6" Orientation="Horizontal">
                 <TextBlock Margin="20, 0, 0, 0" x:Name="Quantity" Grid.Row="4" Width="100" HorizontalAlignment="Left" Text="{Binding MenuItem.Quantity, Mode=TwoWay}" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center"/>
                 <Button FontSize="30" Content="&#xE109;" FontFamily="Segoe UI Symbol" Click="ButtonPlus_Click" IsEnabled="{Binding ElementName=Quantity, Path=Text.Length}" />
                 <Button FontSize="30" Content="&#xE108;" FontFamily="Segoe UI Symbol" Click="ButtonMinu_Click" IsEnabled="{Binding ElementName=Quantity, Path=Text.Length}" />
