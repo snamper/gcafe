@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;FOXPRO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -28,29 +28,66 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;FOXPRO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.1.0\lib\net40\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="branch.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="credit.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="device.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gcafeDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gcafeDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gcafeDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gcafeDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gcafeDb.edmx</DependentUpon>
+    </Compile>
     <Compile Include="gcafeService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -59,7 +96,54 @@
     </Compile>
     <Compile Include="gcafeSvc.cs" />
     <Compile Include="gcafeSvcModel.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="IgcafeSvc.cs" />
+    <Compile Include="member.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="member_refill.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="menu.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="menu_catalog.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="method.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="method_catalog.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="order.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="order_detail.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="order_detail_method.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="order_detail_setmeal.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="printer.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="printer_group.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrintTask.cs" />
+    <Compile Include="PrintVisual\ChuPinDan.xaml.cs">
+      <DependentUpon>ChuPinDan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PrintVisual\HuaDan.xaml.cs">
+      <DependentUpon>HuaDan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PrintVisual\LiuTaiDan.xaml.cs">
+      <DependentUpon>LiuTaiDan.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
@@ -73,6 +157,30 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="role.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="service.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="setmeal_item.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="setmeal_item_opt.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="shift.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="shift_detail.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="staff.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sys_info.cs">
+      <DependentUpon>gcafeDb.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">
@@ -81,11 +189,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EntityDeploy Include="gcafeDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>gcafeDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="gcafeDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>gcafeDb.edmx</DependentUpon>
+      <LastGenOutput>gcafeDb.Context.cs</LastGenOutput>
+    </None>
+    <None Include="gcafeDb.edmx.diagram">
+      <DependentUpon>gcafeDb.edmx</DependentUpon>
+    </None>
+    <None Include="gcafeDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>gcafeDb.edmx</DependentUpon>
+      <LastGenOutput>gcafeDb.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="PrintVisual\ChuPinDan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrintVisual\HuaDan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrintVisual\LiuTaiDan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -94,11 +94,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Service References\gcafePrnSvc\gcafePrn.wsdl" />
-    <None Include="Service References\gcafePrnSvc\Mex.xsd">
+    <None Include="Service References\gcafePrnSvc\service.wsdl" />
+    <None Include="Service References\gcafePrnSvc\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafePrnSvc\Mex1.xsd">
+    <None Include="Service References\gcafePrnSvc\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Web.Debug.config">

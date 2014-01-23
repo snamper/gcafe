@@ -18,12 +18,12 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:9001/gcafePrnSvc/Mex" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.15.100:9001/gcafePrnSvc/Mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Mex.xsd" MetadataType="Schema" ID="d5b5bfc9-c715-409d-90f6-15fe8122bdc2" SourceId="1" SourceUrl="http://localhost:9001/gcafePrnSvc/Mex?xsd=xsd0" />
-    <MetadataFile FileName="gcafePrn.wsdl" MetadataType="Wsdl" ID="76a84191-99ec-4cce-8326-d1481462e2bf" SourceId="1" SourceUrl="http://localhost:9001/gcafePrnSvc/Mex" />
-    <MetadataFile FileName="Mex1.xsd" MetadataType="Schema" ID="4e879721-0f81-4ee6-807f-2a7fda582dee" SourceId="1" SourceUrl="http://localhost:9001/gcafePrnSvc/Mex?xsd=xsd1" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="af55d9b3-b39f-4b14-a8f7-37fc5170dda1" SourceId="1" SourceUrl="http://192.168.15.100:9001/gcafePrnSvc/Mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="c85817fc-1afd-445e-956f-b28c53f84682" SourceId="1" SourceUrl="http://192.168.15.100:9001/gcafePrnSvc/Mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="a176d6f3-638a-4ac8-964e-42fe5ba3f0e6" SourceId="1" SourceUrl="http://192.168.15.100:9001/gcafePrnSvc/Mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -296,7 +296,7 @@
     <Content Include="Images\ApplicationBar.Check.png" />
     <None Include="Service References\gcafeSvc\configuration91.svcinfo" />
     <None Include="Service References\gcafeSvc\configuration.svcinfo" />
-    <None Include="Service References\gcafeSvc\gcafeFoxproSvc.xsd">
+    <None Include="Service References\gcafeSvc\gcafeSvcFoxpro.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\gcafeSvc\Reference.svcmap">
@@ -306,11 +306,11 @@
     <Content Include="ServiceReferences.ClientConfig">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Service References\gcafeSvc\service.wsdl" />
-    <None Include="Service References\gcafeSvc\service.xsd">
+    <None Include="Service References\gcafeSvc\service1.wsdl" />
+    <None Include="Service References\gcafeSvc\service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\gcafeSvc\service1.xsd">
+    <None Include="Service References\gcafeSvc\service21.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="gcafeFoxproSvc.PrintVisual.LiuTaiDan"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Width="7cm" HorizontalAlignment="Left" Margin="15, 5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6cm" />
+            <RowDefinition Height="0.6cm" />
+            <RowDefinition Height="0.6cm" />
+            <RowDefinition Height="0.6cm" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1.6cm" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="tbDepart" Text="留台单" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" />
+        <TextBlock x:Name="tbTableNum" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" />
+        <TextBlock x:Name="tbOrderCnt" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="22" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <TextBlock Text="点菜员：" FontSize="16" />
+            <TextBlock x:Name="tbWaiter" FontSize="16"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <TextBlock x:Name="tbTime" Text="12:16:36" FontSize="13" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <TextBlock Text="账单号:" FontSize="16" />
+            <TextBlock x:Name="tbOrderNum" FontSize="16" />
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="合计：" FontSize="16"/>
+            <TextBlock x:Name="tbTotalPrice" FontSize="16"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <TextBlock Text="客人数：" FontSize="16"/>
+            <TextBlock x:Name="tbCustomNum" FontSize="16"/>
+        </StackPanel>
+
+        <Grid Grid.Row="4" x:Name="_gridItems">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="65*" />
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="20*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1.5" />
+            </Grid.RowDefinitions>
+
+            <TextBlock HorizontalAlignment="Center" FontSize="16" Text="品名" Grid.Column="0" />
+            <TextBlock HorizontalAlignment="Center" FontSize="16" Text="数量" Grid.Column="1" />
+            <TextBlock HorizontalAlignment="Center" FontSize="16" Text="小计" Grid.Column="2" />
+            <Border Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="1.5" />
+        </Grid>
+
+        <TextBlock Grid.Row="5" Text="结束标记" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+    </Grid>
+</UserControl>

@@ -5,5 +5,14 @@
     <Setting Name="FoxproPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Provider=VFPOLEDB.1;Data Source=D:\gwr\DATA\lygOrder.dbc</Value>
     </Setting>
+    <Setting Name="FoxproPrntrPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Provider=VFPOLEDB.1;Data Source=D:\gwr\DATA\printt.dbc</Value>
+    </Setting>
+    <Setting Name="KitchenHuaDanPrinter" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">划菜</Value>
+    </Setting>
+    <Setting Name="BarHuaDanPrinter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">划菜</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

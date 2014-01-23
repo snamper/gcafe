@@ -982,7 +982,7 @@ namespace gcafePrnConsole
             }
             catch (Exception ex)
             {
-                Global.Logger.Error(ex.Message);
+                Global.Logger.Error(string.Format("LiuTai:{0}", ex.Message));
             }
 #else
             try
@@ -1080,7 +1080,22 @@ namespace gcafePrnConsole
 
         string GetPrinterNameByTableNum(string tableNum)
         {
-            return string.Format("留台{0}", tableNum);
+            string rtn = string.Empty;
+
+            using (var conn = new OleDbConnection(Global.FoxproPath))
+            {
+                conn.Open();
+
+                string sql = string.Format("SELECT prntr FROM prntrb WHERE printgroup = '{0}'", tableNum);
+                using (var cmd = new OleDbCommand(sql, conn))
+                {
+                    rtn = (string)cmd.ExecuteScalar();
+                }
+
+                conn.Close();
+            }
+
+            return rtn;
         }
 
         /// <summary>

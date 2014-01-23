@@ -31,5 +31,35 @@ namespace gcafeFoxproSvc.Properties {
                 return ((string)(this["FoxproPath"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Provider=VFPOLEDB.1;Data Source=D:\\gwr\\DATA\\printt.dbc")]
+        public string FoxproPrntrPath {
+            get {
+                return ((string)(this["FoxproPrntrPath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("划菜")]
+        public string KitchenHuaDanPrinter {
+            get {
+                return ((string)(this["KitchenHuaDanPrinter"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("划菜")]
+        public string BarHuaDanPrinter {
+            get {
+                return ((string)(this["BarHuaDanPrinter"]));
+            }
+            set {
+                this["BarHuaDanPrinter"] = value;
+            }
+        }
     }
 }

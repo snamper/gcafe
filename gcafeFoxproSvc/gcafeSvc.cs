@@ -775,6 +775,9 @@ namespace gcafeFoxproSvc
                     conn.Close();
                 }
 
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintLiuTai, Int32.Parse(tableInfo.OrderNum.Substring(2)), -1));
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintChuPin, Int32.Parse(tableInfo.OrderNum.Substring(2)), -1));
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintHuaDan, Int32.Parse(tableInfo.OrderNum.Substring(2)), -1));
                 //using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
                 //{
                 //    _gcafePrn.PrintChuPing(Int32.Parse(tableInfo.OrderNum.Substring(2)), -1, false);
