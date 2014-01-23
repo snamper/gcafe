@@ -14,7 +14,7 @@ namespace gcafeFoxproSvc
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "gcafeSvc" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select gcafeSvc.svc or gcafeSvc.svc.cs at the Solution Explorer and start debugging.
-    public class gcafeSvc : IgcafeSvc
+    public class gcafeSvc : IgcafeSvc, IDisposable
     {
         private static readonly NLog.Logger _log = NLog.LogManager.GetCurrentClassLogger();
         //private static gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient();
@@ -1023,5 +1023,9 @@ namespace gcafeFoxproSvc
             return strRtn;
         }
 
+        public void Dispose()
+        {
+            int i = 0;
+        }
     }
 }

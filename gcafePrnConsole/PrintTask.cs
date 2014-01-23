@@ -1080,7 +1080,7 @@ namespace gcafePrnConsole
 
         string GetPrinterNameByTableNum(string tableNum)
         {
-            return "PDFCreator";
+            return string.Format("留台{0}", tableNum);
         }
 
         /// <summary>
@@ -1366,8 +1366,8 @@ namespace gcafePrnConsole
                 conn.Close();
             }
 
-            return "PDFCreator";
-            //return rtn;
+            //return "PDFCreator";
+            return rtn;
         }
 
         string GetFoxproOrderNo(int orderId)

@@ -38,8 +38,11 @@
             // 
             // gcafeSvcInstaller
             // 
-            this.gcafeSvcInstaller.ServiceName = "gcafeService";
             this.gcafeSvcInstaller.Description = "移动点菜系统数据处理服务";
+            this.gcafeSvcInstaller.DisplayName = "移动点菜处理服务";
+            this.gcafeSvcInstaller.ServiceName = "gcafeFoxproSvc";
+            this.gcafeSvcInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.serviceProcessInstaller.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
             // 
             // ProjectInstaller
             // 

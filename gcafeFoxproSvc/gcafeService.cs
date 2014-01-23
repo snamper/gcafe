@@ -6,11 +6,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using System.ServiceModel;
 
 namespace gcafeFoxproSvc
 {
     public partial class gcafeService : ServiceBase
     {
+        ServiceHost _serviceHost = null;
+
         public gcafeService()
         {
             InitializeComponent();
@@ -18,10 +21,13 @@ namespace gcafeFoxproSvc
 
         protected override void OnStart(string[] args)
         {
+            _serviceHost = new ServiceHost(typeof(gcafeSvc));
+            _serviceHost.Open();
         }
 
         protected override void OnStop()
         {
+            _serviceHost.Close();
         }
     }
 }

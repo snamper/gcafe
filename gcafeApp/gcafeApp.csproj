@@ -278,7 +278,6 @@
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.TableInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\gcafeSvc\item.disco" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -297,14 +296,7 @@
     <Content Include="Images\ApplicationBar.Check.png" />
     <None Include="Service References\gcafeSvc\configuration91.svcinfo" />
     <None Include="Service References\gcafeSvc\configuration.svcinfo" />
-    <None Include="Service References\gcafeSvc\gcafeSvc1.wsdl" />
-    <None Include="Service References\gcafeSvc\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\gcafeSvc\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\gcafeSvc\item2.xsd">
+    <None Include="Service References\gcafeSvc\gcafeFoxproSvc.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\gcafeSvc\Reference.svcmap">
@@ -314,6 +306,13 @@
     <Content Include="ServiceReferences.ClientConfig">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Service References\gcafeSvc\service.wsdl" />
+    <None Include="Service References\gcafeSvc\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\gcafeSvc\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
