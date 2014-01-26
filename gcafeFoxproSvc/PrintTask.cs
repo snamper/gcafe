@@ -1389,21 +1389,28 @@ namespace gcafeFoxproSvc
         {
             string orderNo = string.Empty;
 
-            using (var conn = new OleDbConnection(Global.FoxproPath))
+            if (orderId < 1000000000)
             {
-                conn.Open();
-
-                string sql = "SELECT fax FROM sysinfo";
-                using (var cmd = new OleDbCommand(sql, conn))
+                orderNo = string.Format("{0:D7}", orderId);
+            }
+            else
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
                 {
-                    string fax = (string)cmd.ExecuteScalar();
-                    if (fax != null)
-                    {
-                        orderNo = fax.Trim() + orderId.ToString();
-                    }
-                }
+                    conn.Open();
 
-                conn.Close();
+                    string sql = "SELECT fax FROM sysinfo";
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        string fax = (string)cmd.ExecuteScalar();
+                        if (fax != null)
+                        {
+                            orderNo = fax.Trim() + orderId.ToString();
+                        }
+                    }
+
+                    conn.Close();
+                }
             }
 
             return orderNo;

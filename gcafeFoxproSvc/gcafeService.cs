@@ -22,12 +22,14 @@ namespace gcafeFoxproSvc
         protected override void OnStart(string[] args)
         {
             _serviceHost = new ServiceHost(typeof(gcafeSvc));
+            Global.PrintTasmMgrInit();
             _serviceHost.Open();
         }
 
         protected override void OnStop()
         {
             _serviceHost.Close();
+            Global.PrintTaskMgr.Dispose();
         }
     }
 }

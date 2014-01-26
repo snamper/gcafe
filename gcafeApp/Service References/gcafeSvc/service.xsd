@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="" namespace="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" />
   <xs:element name="GetMenuCatalogs">
     <xs:complexType>
       <xs:sequence>
@@ -12,7 +12,7 @@
   <xs:element name="GetMenuCatalogsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="GetMenuCatalogsResult" nillable="true" type="q1:ArrayOfMenuCatalog" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="GetMenuCatalogsResult" nillable="true" type="q1:ArrayOfMenuCatalog" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -27,7 +27,7 @@
   <xs:element name="GetMenuItemsByCatalogIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="GetMenuItemsByCatalogIdResult" nillable="true" type="q2:ArrayOfMenuItem" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="GetMenuItemsByCatalogIdResult" nillable="true" type="q2:ArrayOfMenuItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -42,7 +42,7 @@
   <xs:element name="GetMenuItemByNumberResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="GetMenuItemByNumberResult" nillable="true" type="q3:MenuItem" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="GetMenuItemByNumberResult" nillable="true" type="q3:MenuItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -50,16 +50,16 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="tableInfo" nillable="true" type="q4:TableInfo" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="tableInfo" nillable="true" type="q4:TableInfo" />
         <xs:element minOccurs="0" name="oldTableNum" nillable="true" type="xs:string" />
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="oprType" type="q5:TableOprType" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="oprType" type="q5:TableOprType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="TableOprResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="TableOprResult" nillable="true" type="q6:TableInfo" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="TableOprResult" nillable="true" type="q6:TableInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -73,7 +73,7 @@
   <xs:element name="GetTablesInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="GetTablesInfoResult" nillable="true" type="q7:ArrayOfTableInfo" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="GetTablesInfoResult" nillable="true" type="q7:ArrayOfTableInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -99,7 +99,7 @@
   <xs:element name="GetMethodsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="GetMethodsResult" nillable="true" type="q8:ArrayOfMethod" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="GetMethodsResult" nillable="true" type="q8:ArrayOfMethod" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -111,7 +111,7 @@
   <xs:element name="GetMethodCatalogsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="GetMethodCatalogsResult" nillable="true" type="q9:ArrayOfMethodCatalog" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="GetMethodCatalogsResult" nillable="true" type="q9:ArrayOfMethodCatalog" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -120,8 +120,8 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="deviceId" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="staffId" type="xs:int" />
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="tableInfo" nillable="true" type="q10:TableInfo" />
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="meals" nillable="true" type="q11:ArrayOfMenuItem" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="tableInfo" nillable="true" type="q10:TableInfo" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="meals" nillable="true" type="q11:ArrayOfMenuItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -142,7 +142,7 @@
   <xs:element name="GetOrderDetailByOrderNumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="GetOrderDetailByOrderNumResult" nillable="true" type="q12:ArrayOfMenuItem" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="GetOrderDetailByOrderNumResult" nillable="true" type="q12:ArrayOfMenuItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -157,7 +157,7 @@
   <xs:element name="GetStaffByNumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/gcafeSvcFoxpro" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q13:Staff" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q13:Staff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

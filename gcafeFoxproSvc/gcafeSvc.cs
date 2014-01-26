@@ -436,7 +436,8 @@ namespace gcafeFoxproSvc
                 {
                     conn.Open();
 
-                    string sql = string.Format("SELECT orders.orderno, orders.ordertime, orders.tableno, orders.personum, orders.waiter, staff.name FROM orders, staff WHERE (orders.waiter = staff.idno) AND (orders.paid = 0)");
+                    string sql = string.Format("SELECT orders.orderno, orders.ordertime, orders.tableno, orders.personum, orders.waiter FROM orders WHERE (orders.paid = 0)");
+                    //string sql = string.Format("SELECT orders.orderno, orders.ordertime, orders.tableno, orders.personum, orders.waiter, staff.name FROM orders, staff WHERE (orders.waiter = staff.idno) AND (orders.paid = 0)");
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
                         OleDbDataReader reader = cmd.ExecuteReader();
@@ -447,8 +448,10 @@ namespace gcafeFoxproSvc
                             string tableNo = reader.GetString(2).Trim();
                             int customerNum = reader.GetInt32(3);
                             string staffNum = reader.GetString(4).Trim();
-                            string staffName = reader.GetString(5);
+                            Staff staff = GetStaffByNum("", staffNum);
+                            string staffName = staff != null ? staff.Name : "未知姓名";
                             decimal amount = 0;
+
 
                             sql = string.Format("SELECT price, quantity FROM orditem WHERE (orderno = '{0}')", orderNo);
                             using (var cmd1 = new OleDbCommand(sql, conn))
@@ -775,9 +778,9 @@ namespace gcafeFoxproSvc
                     conn.Close();
                 }
 
-                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintLiuTai, Int32.Parse(tableInfo.OrderNum.Substring(2)), -1));
-                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintChuPin, Int32.Parse(tableInfo.OrderNum.Substring(2)), -1));
-                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintHuaDan, Int32.Parse(tableInfo.OrderNum.Substring(2)), -1));
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintLiuTai, tableInfo.OrderNum.Length > 7 ? Int32.Parse(tableInfo.OrderNum.Substring(2)) : Int32.Parse(tableInfo.OrderNum), -1));
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintChuPin, tableInfo.OrderNum.Length > 7 ? Int32.Parse(tableInfo.OrderNum.Substring(2)) : Int32.Parse(tableInfo.OrderNum), -1));
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintHuaDan, tableInfo.OrderNum.Length > 7 ? Int32.Parse(tableInfo.OrderNum.Substring(2)) : Int32.Parse(tableInfo.OrderNum), -1));
                 //using (gcafePrnSvc.IgcafePrnClient _gcafePrn = new gcafePrnSvc.IgcafePrnClient())
                 //{
                 //    _gcafePrn.PrintChuPing(Int32.Parse(tableInfo.OrderNum.Substring(2)), -1, false);

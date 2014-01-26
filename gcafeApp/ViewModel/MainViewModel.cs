@@ -234,11 +234,22 @@ namespace gcafeApp.ViewModel
 
         public void OrderMeals(string tableNum, Action<string> callback)
         {
-            if (MenuItems.Count > 0)
+            if (tableNum == "请点击这里选择台号" || tableNum.Length < 1)
             {
-                IsBusy = true;
-                _callBack = callback;
-                _svc.OrderMealAsync(gcafeApp.Settings.AppSettings.DeviceID, gcafeApp.Settings.AppSettings.LoginStaff.ID, new TableInfo() { Num = tableNum }, MenuItems);
+                callback("未输入台号");
+            }
+            else if (MenuItems.Count < 1)
+            {
+                callback("未输入菜品");
+            }
+            else
+            {
+                if (MenuItems.Count > 0)
+                {
+                    IsBusy = true;
+                    _callBack = callback;
+                    _svc.OrderMealAsync(gcafeApp.Settings.AppSettings.DeviceID, gcafeApp.Settings.AppSettings.LoginStaff.ID, new TableInfo() { Num = tableNum }, MenuItems);
+                }
             }
         }
 

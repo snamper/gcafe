@@ -20,13 +20,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.15.81:8733/Design_Time_Addresses/gcafeSvcFoxpro/gcafeSvc/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://192.168.15.81:8733/Design_Time_Addresses/gcafeFoxproSvc/gcafeSvc/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="dec705db-21b7-4847-933a-8d34b318e2f1" SourceId="1" SourceUrl="http://192.168.15.81:8733/Design_Time_Addresses/gcafeSvcFoxpro/gcafeSvc/mex" />
-    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="51e4707c-e2d2-445a-bbfb-b8a78f96e352" SourceId="1" SourceUrl="http://192.168.15.81:8733/Design_Time_Addresses/gcafeSvcFoxpro/gcafeSvc/mex" />
-    <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="0e88dc10-f8ba-4d2d-a093-789abb0b37dd" SourceId="1" SourceUrl="http://192.168.15.81:8733/Design_Time_Addresses/gcafeSvcFoxpro/gcafeSvc/mex" />
-    <MetadataFile FileName="gcafeSvcFoxpro.xsd" MetadataType="Schema" ID="4c3f1225-3a43-4417-b613-5f9ef5bb112f" SourceId="1" SourceUrl="http://192.168.15.81:8733/Design_Time_Addresses/gcafeSvcFoxpro/gcafeSvc/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="f4d3dce5-5b66-43ad-92ff-614933680682" SourceId="1" SourceUrl="http://192.168.15.81:8733/Design_Time_Addresses/gcafeFoxproSvc/gcafeSvc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="c87e5f32-d778-4ed9-851d-8f28feade665" SourceId="1" SourceUrl="http://192.168.15.81:8733/Design_Time_Addresses/gcafeFoxproSvc/gcafeSvc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="60c56868-73ff-4559-8aea-5c6a060108b7" SourceId="1" SourceUrl="http://192.168.15.81:8733/Design_Time_Addresses/gcafeFoxproSvc/gcafeSvc/mex" />
+    <MetadataFile FileName="gcafeFoxproSvc.xsd" MetadataType="Schema" ID="27e55e33-4698-4ed4-950c-2ecb03335b81" SourceId="1" SourceUrl="http://192.168.15.81:8733/Design_Time_Addresses/gcafeFoxproSvc/gcafeSvc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

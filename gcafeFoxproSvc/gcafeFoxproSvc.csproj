@@ -206,6 +206,9 @@
       <DependentUpon>gcafeDb.edmx</DependentUpon>
       <LastGenOutput>gcafeDb.cs</LastGenOutput>
     </None>
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
