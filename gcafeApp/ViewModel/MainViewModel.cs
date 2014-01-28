@@ -28,6 +28,7 @@ namespace gcafeApp.ViewModel
         private readonly IgcafeSvcClient _svc;
         private MenuItem _methodMenuItem;
         private SetmealItem _methodSetmealItem;
+        private SetmealItem _optionSetmeal;
         private Action<string> _callBack;
 
         public MainViewModel(IgcafeSvcClient svc)
@@ -139,6 +140,37 @@ namespace gcafeApp.ViewModel
             _callBack(e.Result);
         }
 
+        public SetmealItem SelectedOptionMenu
+        {
+            get { return _selectedOptionMenu; }
+            set
+            {
+                if (_optionSetmeal.MenuID != value.MenuID)
+                {
+                    foreach (var mi in MenuItems)
+                    {
+                        if (mi.SetmealItems != null && mi.SetmealItems.Count > 0)
+                        {
+                            foreach (var si in mi.SetmealItems)
+                            {
+                                if (si == _optionSetmeal)
+                                {
+                                    si.MenuID = value.MenuID;
+                                    si.Name = value.Name;
+                                    si.Unit = value.Unit;
+
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    RaisePropertyChanged("MenuItems");
+                }
+            }
+        }
+        SetmealItem _selectedOptionMenu;
+
         public RelayCommand<object> MenuOptionCommand
         {
             get
@@ -153,9 +185,11 @@ namespace gcafeApp.ViewModel
 
         private void OnMenuOptionCommand(object param)
         {
+            _optionSetmeal = (SetmealItem)param;
+
             ViewModel.VMMenuOption vm = ((ViewModelLocator)App.Current.Resources["Locator"]).VMMenuOption;
 
-            vm.OptionItems = new List<SetmealItem>(((SetmealItem)param).OptionItems);
+            vm.OptionItems = new List<SetmealItem>(_optionSetmeal.OptionItems);
 
             //((ViewModelLocator)App.Current.Resources["Locator"]).VMMenuOption.OptionItems = (List<SetmealItem>)param;
 

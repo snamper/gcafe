@@ -17,5 +17,11 @@ namespace gcafeApp.Pages
             InitializeComponent();
 
         }
+
+        private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).Main.SelectedOptionMenu = (gcafeSvc.SetmealItem)e.AddedItems[0];
+            NavigationService.GoBack();
+        }
     }
 }

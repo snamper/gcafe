@@ -38,7 +38,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <phone:LongListSelector Margin="0,0,-22,0" ItemsSource="{Binding OptionItems}" 
-                                    toolkit:TiltEffect.IsTiltEnabled="True">
+                                    toolkit:TiltEffect.IsTiltEnabled="True" SelectionChanged="LongListSelector_SelectionChanged">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
