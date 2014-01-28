@@ -67,6 +67,12 @@ namespace gcafeApp.ViewModel
             SimpleIoc.Default.Register<VMMenuCameraSelect>();
             SimpleIoc.Default.Register<VMSelectMethod>();
             SimpleIoc.Default.Register<VMBillDetail>();
+            SimpleIoc.Default.Register<VMMenuOption>();
+        }
+
+        public VMMenuOption VMMenuOption
+        {
+            get { return ServiceLocator.Current.GetInstance<VMMenuOption>(); }
         }
 
         public VMBillDetail VMBillDetail

@@ -27,7 +27,6 @@ namespace gcafeApp
             //BuildLocalizedApplicationBar();
 
             //object o = this.Resources["mydata"];
-
         }
 
         // 为 ViewModel 项加载数据
@@ -79,6 +78,8 @@ namespace gcafeApp
             }
             else
             {
+                MessageBox.Show("点菜成功");
+
                 OrderCtrl.TableNum = "请点击这里选择台号";
                 ViewModel.MainViewModel mv = (ViewModel.MainViewModel)DataContext;
                 mv.CancelOrder();

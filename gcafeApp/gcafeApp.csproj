@@ -129,6 +129,9 @@
     <Compile Include="Pages\MenuItemPage.xaml.cs">
       <DependentUpon>MenuItemPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MenuOptionPage.xaml.cs">
+      <DependentUpon>MenuOptionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MenuSelectPage.xaml.cs">
       <DependentUpon>MenuSelectPage.xaml</DependentUpon>
     </Compile>
@@ -169,6 +172,7 @@
     <Compile Include="ViewModel\VMMenuCameraSelect.cs" />
     <Compile Include="ViewModel\VMMenuCatalog.cs" />
     <Compile Include="ViewModel\VMMenuItem.cs" />
+    <Compile Include="ViewModel\VMMenuOption.cs" />
     <Compile Include="ViewModel\VMSelectMethod.cs" />
     <Compile Include="ViewModel\VMSubMenuCatalog.cs" />
   </ItemGroup>
@@ -210,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MenuItemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MenuOptionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

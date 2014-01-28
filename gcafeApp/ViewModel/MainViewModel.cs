@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Phone.Shell;
 using Microsoft.Phone.Info;
 using gcafeApp.gcafeSvc;
 
@@ -136,6 +137,29 @@ namespace gcafeApp.ViewModel
         {
             IsBusy = false;
             _callBack(e.Result);
+        }
+
+        public RelayCommand<object> MenuOptionCommand
+        {
+            get
+            {
+                if (_menuOptionCommand == null)
+                    _menuOptionCommand = new RelayCommand<object>(OnMenuOptionCommand);
+
+                return _menuOptionCommand;
+            }
+        }
+        private RelayCommand<object> _menuOptionCommand;
+
+        private void OnMenuOptionCommand(object param)
+        {
+            ViewModel.VMMenuOption vm = ((ViewModelLocator)App.Current.Resources["Locator"]).VMMenuOption;
+
+            vm.OptionItems = new List<SetmealItem>(((SetmealItem)param).OptionItems);
+
+            //((ViewModelLocator)App.Current.Resources["Locator"]).VMMenuOption.OptionItems = (List<SetmealItem>)param;
+
+            App.RootFrame.Navigate(new Uri("/Pages/MenuOptionPage.xaml", UriKind.Relative));
         }
 
         public RelayCommand<object> MethodCommand

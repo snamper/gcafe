@@ -120,7 +120,7 @@ namespace gcafeFoxproSvc
 
                                 #region 看是否有套餐内容
                                 // 看是否有套餐内容
-                                sql = string.Format("SELECT `TRIM`(subprod.product2) AS Expr1, `TRIM`(product.prodname) As Expr2 FROM product, subprod WHERE (product.productno = subprod.product2) AND (subprod.productno = '{0}')", prodNo);
+                                sql = string.Format("SELECT `TRIM`(subprod.product2) AS Expr1, `TRIM`(product.prodname) As Expr2, subprod.real FROM product, subprod WHERE (product.productno = subprod.product2) AND (subprod.productno = '{0}')", prodNo);
                                 using (var cmd1 = new OleDbCommand(sql, conn))
                                 {
                                     using (var reader1 = cmd1.ExecuteReader())
@@ -129,6 +129,7 @@ namespace gcafeFoxproSvc
                                         {
                                             string subProdNo = reader1.GetString(0).Trim();
                                             string subProdName = reader1.GetString(1).Trim();
+                                            bool subReal = reader1.GetBoolean(2);
 
                                             if (!menuItem.IsSetmeal)
                                                 menuItem.IsSetmeal = true;
@@ -143,6 +144,33 @@ namespace gcafeFoxproSvc
 
                                             #region 看是否有可选内容
                                             // 看是否有可选内容
+                                            if (subReal)
+                                            {
+                                                menuItem.SetmealItems.Last().OptionItems.Add(new SetmealItem()
+                                                    {
+                                                        MenuID = Int32.Parse(subProdNo),
+                                                        Name = subProdName,
+                                                        Unit = "份",
+                                                    });
+
+                                                sql = string.Format("SELECT subprod2.realname, `TRIM`(product.prodname) As Expr2 FROM product, subprod2 WHERE (product.productno = subprod2.realname) AND (subprod2.productno = '{0}') AND (subprod2.subprod = '{1}')", prodNo, subProdNo);
+                                                using (var cmd2 = new OleDbCommand(sql, conn))
+                                                {
+                                                    var reader2 = cmd2.ExecuteReader();
+                                                    while (reader2.Read())
+                                                    {
+                                                        subProdNo = reader2.GetString(0).Trim();
+                                                        subProdName = reader2.GetString(1).Trim();
+
+                                                        menuItem.SetmealItems.Last().OptionItems.Add(new SetmealItem()
+                                                        {
+                                                            MenuID = Int32.Parse(subProdNo),
+                                                            Name = subProdName,
+                                                            Unit = "份",
+                                                        });
+                                                    }
+                                                }
+                                            }
                                             #endregion 看是否有可选内容
                                         }
                                     }
@@ -217,7 +245,7 @@ namespace gcafeFoxproSvc
 
                                 #region 看是否有套餐内容
                                 // 看是否有套餐内容
-                                sql = string.Format("SELECT `TRIM`(subprod.product2) AS Expr1, `TRIM`(product.prodname) As Expr2 FROM product, subprod WHERE (product.productno = subprod.product2) AND (subprod.productno = '{0}')", prodNo);
+                                sql = string.Format("SELECT `TRIM`(subprod.product2) AS Expr1, `TRIM`(product.prodname) As Expr2, subprod.real FROM product, subprod WHERE (product.productno = subprod.product2) AND (subprod.productno = '{0}')", prodNo);
                                 using (var cmd1 = new OleDbCommand(sql, conn))
                                 {
                                     using (var reader1 = cmd1.ExecuteReader())
@@ -226,6 +254,7 @@ namespace gcafeFoxproSvc
                                         {
                                             string subProdNo = reader1.GetString(0).Trim();
                                             string subProdName = reader1.GetString(1).Trim();
+                                            bool subReal = reader1.GetBoolean(2);
 
                                             if (!menuItem.IsSetmeal)
                                                 menuItem.IsSetmeal = true;
@@ -240,6 +269,33 @@ namespace gcafeFoxproSvc
 
                                             #region 看是否有可选内容
                                             // 看是否有可选内容
+                                            if (subReal)
+                                            {
+                                                menuItem.SetmealItems.Last().OptionItems.Add(new SetmealItem()
+                                                {
+                                                    MenuID = Int32.Parse(subProdNo),
+                                                    Name = subProdName,
+                                                    Unit = "份",
+                                                });
+
+                                                sql = string.Format("SELECT subprod2.realname, `TRIM`(product.prodname) As Expr2 FROM product, subprod2 WHERE (product.productno = subprod2.realname) AND (subprod2.productno = '{0}') AND (subprod2.subprod = '{1}')", prodNo, subProdNo);
+                                                using (var cmd2 = new OleDbCommand(sql, conn))
+                                                {
+                                                    var reader2 = cmd2.ExecuteReader();
+                                                    while (reader2.Read())
+                                                    {
+                                                        subProdNo = reader2.GetString(0).Trim();
+                                                        subProdName = reader2.GetString(1).Trim();
+
+                                                        menuItem.SetmealItems.Last().OptionItems.Add(new SetmealItem()
+                                                            {
+                                                                MenuID = Int32.Parse(subProdNo),
+                                                                Name = subProdName,
+                                                                Unit = "份",
+                                                            });
+                                                    }
+                                                }
+                                            }
                                             #endregion 看是否有可选内容
                                         }
                                     }
