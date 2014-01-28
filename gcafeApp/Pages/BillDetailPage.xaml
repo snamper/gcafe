@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -29,7 +30,7 @@
             <StackPanel>
                 <Controls:PageTitle />
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="111" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="Red"/>
+                    <TextBlock Text="{Binding OrderDetail.TableNo}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="Red"/>
                     <TextBlock Text="号台账单" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
                 </StackPanel>
                 <Grid>
@@ -39,17 +40,17 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="张志强" FontSize="22"/>
-                            <TextBlock Text="12:00:00" FontSize="22"/>
+                            <TextBlock Text="{Binding OrderDetail.OpenTableStaff}" FontSize="22"/>
+                            <TextBlock Text="{Binding OrderDetail.TableOpenedTime}" FontSize="22"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="账单号:" FontSize="22" />
-                            <TextBlock Text="201401010001" />
+                            <TextBlock Text="{Binding OrderDetail.OrderNum}" />
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                         <TextBlock Text="总价: " FontSize="22" HorizontalAlignment="Right" />
-                        <TextBlock Text="999.99" FontSize="22" Foreground="Orange"/>
+                        <TextBlock Text="{Binding OrderDetail.Amount}" FontSize="22" Foreground="Orange"/>
                         <TextBlock Text=" 元" FontSize="22" />
                     </StackPanel>
 
@@ -59,7 +60,26 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
+            <phone:LongListSelector x:Name="TableList" Margin="0,0,-22,0" ItemsSource="{Binding MenuItems}"
+                                    toolkit:TiltEffect.IsTiltEnabled="True">
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70*" />
+                                <ColumnDefinition Width="30*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="65*" />
+                                <RowDefinition Height="35*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding Name}" />
+                            <TextBlock Grid.Row="1" Text="{Binding OrderStaffName}" />
+                            <TextBlock Grid.Column="1" Grid.RowSpan="2" Text="{Binding Price}" />
+                        </Grid>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+            </phone:LongListSelector>
         </Grid>
     </Grid>
 

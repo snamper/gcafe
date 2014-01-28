@@ -104,7 +104,9 @@ namespace gcafeApp
 
         private void TableList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            ((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).VMBillDetail.OrderId = Int32.Parse(((ViewModel.TableViewModel)e.AddedItems[0]).OrderNum);
+            ((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).VMBillDetail.OrderDetail = (ViewModel.TableViewModel)e.AddedItems[0];
+            App.RootFrame.Navigate(new Uri("/Pages/BillDetailPage.xaml", UriKind.Relative));
         }
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)

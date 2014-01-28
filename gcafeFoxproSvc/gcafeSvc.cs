@@ -871,6 +871,8 @@ namespace gcafeFoxproSvc
         {
             List<MenuItem> menuItems = new List<MenuItem>();
 
+            orderNum = GetFoxproOrderNo(Int32.Parse(orderNum));
+
             _log.Trace(TraceMessage());
 
             try
@@ -1083,6 +1085,37 @@ namespace gcafeFoxproSvc
                 System.DateTime.Now.Month, System.DateTime.Now.Day, orderNo);
 
             return strRtn;
+        }
+
+        string GetFoxproOrderNo(int orderId)
+        {
+            string orderNo = string.Empty;
+
+            if (orderId < 1000000000)
+            {
+                orderNo = string.Format("{0:D7}", orderId);
+            }
+            else
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = "SELECT fax FROM sysinfo";
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        string fax = (string)cmd.ExecuteScalar();
+                        if (fax != null)
+                        {
+                            orderNo = fax.Trim() + orderId.ToString();
+                        }
+                    }
+
+                    conn.Close();
+                }
+            }
+
+            return orderNo;
         }
 
         public void Dispose()

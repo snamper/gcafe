@@ -267,6 +267,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Bill.png" />
     <Content Include="README_FIRST.txt" />
     <None Include="Service References\gcafeSvc\gcafeApp.gcafeSvc.MenuCatalog.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
