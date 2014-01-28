@@ -41,7 +41,8 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding OrderDetail.OpenTableStaff}" FontSize="22"/>
-                            <TextBlock Text="{Binding OrderDetail.TableOpenedTime}" FontSize="22"/>
+                            <TextBlock Text="{Binding OrderDetail.TableOpenedTime, StringFormat=HH:mm}" FontSize="22"/>
+                            <TextBlock Text="开台" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="账单号:" FontSize="22" />
@@ -64,7 +65,7 @@
                                     toolkit:TiltEffect.IsTiltEnabled="True">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid Margin="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="70*" />
                                 <ColumnDefinition Width="30*" />
@@ -73,9 +74,12 @@
                                 <RowDefinition Height="65*" />
                                 <RowDefinition Height="35*" />
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Text="{Binding Name}" />
-                            <TextBlock Grid.Row="1" Text="{Binding OrderStaffName}" />
-                            <TextBlock Grid.Column="1" Grid.RowSpan="2" Text="{Binding Price}" />
+                            <TextBlock Grid.Row="0" Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" TextWrapping="Wrap" />
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Text="{Binding OrderStaffName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock Text="{Binding OrderTime, StringFormat=HH:mm}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Grid.RowSpan="2" Text="{Binding Price, StringFormat='{}{0:0.00}'}"  Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </Grid>
                     </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>

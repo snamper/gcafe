@@ -219,7 +219,7 @@
                                 <StackPanel Grid.Column="1" VerticalAlignment="Top">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="已消费:" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
-                                        <TextBlock Text="{Binding Amount}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                                        <TextBlock Text="{Binding Amount, StringFormat='{}{0:0.00}'}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
                                         <TextBlock Text="元" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
@@ -233,6 +233,14 @@
                                         <TextBlock Text="开台" Style="{StaticResource PhoneTextSmallStyle}"/>
                                     </StackPanel>
                                 </StackPanel>
+
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu>
+                                        <toolkit:MenuItem Header="换台" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                        <toolkit:MenuItem Header="删除此菜品" Command="{Binding Path=Main.DeleteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+
                             </Grid>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>

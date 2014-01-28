@@ -898,10 +898,14 @@ namespace gcafeFoxproSvc
                             else
                                 waiter = "未知";
 
+                            Staff staff = GetStaffByNum("", waiter);
+                            waiter = staff != null ? staff.Name : "未知名";
+
                             menuItems.Add(new MenuItem()
                             {
                                 ID = Int32.Parse(prodNo),
                                 Name = prodName,
+                                OrderStaffName = waiter,
                                 OrderTime = orderTime,
                                 Price = price,
                                 Quantity = quantity,
