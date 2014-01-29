@@ -171,6 +171,41 @@ namespace gcafeApp.ViewModel
         }
         SetmealItem _selectedOptionMenu;
 
+        public RelayCommand<TableViewModel> ReprintLiuTaiDanCommand
+        {
+            get
+            {
+                if (_reprintLiuTaiDanCommand == null)
+                {
+                    _reprintLiuTaiDanCommand = new RelayCommand<TableViewModel>(orderDetail =>
+                    {
+                    });
+                }
+
+                return _reprintLiuTaiDanCommand;
+            }
+        }
+        RelayCommand<TableViewModel> _reprintLiuTaiDanCommand;
+
+        public RelayCommand<TableViewModel> ChangeTableCommand
+        {
+            get 
+            {
+                if (_changeTableCommand == null)
+                {
+                    _changeTableCommand = new RelayCommand<TableViewModel>(orderDetail =>
+                    {
+                        ((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).VMChangeTable.OrigTable = orderDetail;
+
+                        App.RootFrame.Navigate(new Uri("/Pages/ChangeTablePage.xaml", UriKind.Relative));
+                    });
+                }
+
+                return _changeTableCommand;
+            }
+        }
+        RelayCommand<TableViewModel> _changeTableCommand;
+
         public RelayCommand<object> MenuOptionCommand
         {
             get

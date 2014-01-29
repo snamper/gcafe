@@ -68,6 +68,12 @@ namespace gcafeApp.ViewModel
             SimpleIoc.Default.Register<VMSelectMethod>();
             SimpleIoc.Default.Register<VMBillDetail>();
             SimpleIoc.Default.Register<VMMenuOption>();
+            SimpleIoc.Default.Register<VMChangeTable>();
+        }
+
+        public VMChangeTable VMChangeTable
+        {
+            get { return ServiceLocator.Current.GetInstance<VMChangeTable>(); }
         }
 
         public VMMenuOption VMMenuOption

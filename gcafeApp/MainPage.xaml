@@ -236,8 +236,8 @@
 
                                 <toolkit:ContextMenuService.ContextMenu>
                                     <toolkit:ContextMenu>
-                                        <toolkit:MenuItem Header="换台" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-                                        <toolkit:MenuItem Header="删除此菜品" Command="{Binding Path=Main.DeleteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                        <toolkit:MenuItem Header="换台" Command="{Binding Path=Main.ChangeTableCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                        <toolkit:MenuItem Header="重打留台单" Command="{Binding Path=Main.ReprintLiuTaiDanCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
 

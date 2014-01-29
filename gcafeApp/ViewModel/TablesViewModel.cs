@@ -88,10 +88,13 @@ namespace gcafeApp.ViewModel
 
         void _svc_TableOprCompleted(object sender, TableOprCompletedEventArgs e)
         {
-            if (e.Result != null)
-                _openTableCallBack("成功");
-            else
-                _openTableCallBack("错误");
+            if (ReferenceEquals(e.UserState, "TablesViewModel"))
+            {
+                if (e.Result != null)
+                    _openTableCallBack("成功");
+                else
+                    _openTableCallBack("错误");
+            }
             //string s = e.Result;
         }
 
@@ -183,7 +186,8 @@ namespace gcafeApp.ViewModel
             _svc.TableOprAsync(Settings.AppSettings.DeviceID, 
                 new TableInfo() { Num = TableNum, CustomerNum = CustomerNum, OpenTableStaff = Settings.AppSettings.LoginStaff }, 
                 null, 
-                TableOprType.OpenTable);
+                TableOprType.OpenTable,
+                "TablesViewModel");
 
             IsBusy = true;
         }
