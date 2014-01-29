@@ -69,6 +69,12 @@ namespace gcafeApp.ViewModel
             SimpleIoc.Default.Register<VMBillDetail>();
             SimpleIoc.Default.Register<VMMenuOption>();
             SimpleIoc.Default.Register<VMChangeTable>();
+            SimpleIoc.Default.Register<VMPrintLiuTaiDan>();
+        }
+
+        public VMPrintLiuTaiDan VMPrintLiuTaiDan
+        {
+            get { return ServiceLocator.Current.GetInstance<VMPrintLiuTaiDan>(); }
         }
 
         public VMChangeTable VMChangeTable
