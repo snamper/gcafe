@@ -34,25 +34,22 @@
                     <TextBlock Text="号台账单" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
                 </StackPanel>
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="300" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding OrderDetail.OpenTableStaff}" FontSize="22"/>
-                            <TextBlock Text="{Binding OrderDetail.TableOpenedTime, StringFormat=HH:mm}" FontSize="22"/>
-                            <TextBlock Text="开台" />
+                            <TextBlock Text="{Binding OrderDetail.OpenTableStaff}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="Orange" />
+                            <TextBlock Text="{Binding OrderDetail.TableOpenedTime, StringFormat=HH:mm}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="LightBlue"/>
+                            <TextBlock Text="开台" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="账单号:" FontSize="22" />
-                            <TextBlock Text="{Binding OrderDetail.OrderNum}" />
+                            <TextBlock Text="账单号:" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                            <TextBlock Text="{Binding OrderDetail.OrderNum}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="Orange"/>
                         </StackPanel>
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                        <TextBlock Text="总价: " FontSize="22" HorizontalAlignment="Right" />
-                        <TextBlock Text="{Binding OrderDetail.Amount}" FontSize="22" Foreground="Orange"/>
-                        <TextBlock Text=" 元" FontSize="22" />
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock Text="总价: " Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalAlignment="Right" />
+                            <TextBlock Text="{Binding OrderDetail.Amount}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="Orange"/>
+                            <TextBlock Text=" 元" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                        </StackPanel>
+
                     </StackPanel>
 
                 </Grid>
@@ -60,7 +57,7 @@
         </Grid>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,15,12,0">
             <phone:LongListSelector x:Name="TableList" Margin="0,0,-22,0" ItemsSource="{Binding MenuItems}"
                                     toolkit:TiltEffect.IsTiltEnabled="True">
                 <phone:LongListSelector.ItemTemplate>
@@ -76,8 +73,8 @@
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" TextWrapping="Wrap" />
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock Text="{Binding OrderStaffName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-                                <TextBlock Text="{Binding OrderTime, StringFormat=HH:mm}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock Text="{Binding OrderStaffName}" Style="{StaticResource PhoneTextNormalStyle}" Foreground="Orange"/>
+                                <TextBlock Text="{Binding OrderTime, StringFormat=HH:mm}" Style="{StaticResource PhoneTextNormalStyle}" Foreground="LightBlue"/>
                             </StackPanel>
                             <TextBlock Grid.Column="1" Grid.RowSpan="2" Text="{Binding Price, StringFormat='{}{0:0.00}'}"  Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </Grid>

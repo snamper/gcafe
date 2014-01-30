@@ -24,6 +24,7 @@ namespace gcafeApp.ViewModel
         void _svc_GetOrderDetailByOrderNumCompleted(object sender, GetOrderDetailByOrderNumCompletedEventArgs e)
         {
             MenuItems = new List<MenuItem>(e.Result);
+            IsBusy = false;
         }
 
         public List<MenuItem> MenuItems
@@ -65,6 +66,8 @@ namespace gcafeApp.ViewModel
                 {
                     _orderId = value;
 
+                    IsBusy = true;
+                    MenuItems = new List<MenuItem>();
                     _svc.GetOrderDetailByOrderNumAsync(_orderId.ToString());
                 }
             }

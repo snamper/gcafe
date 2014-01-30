@@ -179,6 +179,8 @@ namespace gcafeApp.ViewModel
                 {
                     _reprintLiuTaiDanCommand = new RelayCommand<TableViewModel>(orderDetail =>
                     {
+                        ((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).VMPrintLiuTaiDan.TableInfo = orderDetail;
+                        App.RootFrame.Navigate(new Uri("/Pages/ReprintLiuTaiDanPage.xaml", UriKind.Relative));
                     });
                 }
 

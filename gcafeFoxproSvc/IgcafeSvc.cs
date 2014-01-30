@@ -74,6 +74,9 @@ namespace gcafeFoxproSvc
         [OperationContract]
         List<MenuItem> GetOrderDetailByOrderNum(string orderNum);
 
+        [OperationContract]
+        int GetTableOrderCount(string orderNum);
+
         /// <summary>
         /// 根据Num取员工信息
         /// </summary>

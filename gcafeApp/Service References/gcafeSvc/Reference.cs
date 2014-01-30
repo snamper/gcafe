@@ -803,6 +803,11 @@ namespace gcafeApp.gcafeSvc {
         
         System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> EndGetOrderDetailByOrderNum(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetTableOrderCount", ReplyAction="http://tempuri.org/IgcafeSvc/GetTableOrderCountResponse")]
+        System.IAsyncResult BeginGetTableOrderCount(string orderNum, System.AsyncCallback callback, object asyncState);
+        
+        int EndGetTableOrderCount(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetStaffByNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetStaffByNumResponse")]
         System.IAsyncResult BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState);
         
@@ -1005,6 +1010,25 @@ namespace gcafeApp.gcafeSvc {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTableOrderCountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTableOrderCountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public int Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class GetStaffByNumCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -1086,6 +1110,12 @@ namespace gcafeApp.gcafeSvc {
         
         private System.Threading.SendOrPostCallback onGetOrderDetailByOrderNumCompletedDelegate;
         
+        private BeginOperationDelegate onBeginGetTableOrderCountDelegate;
+        
+        private EndOperationDelegate onEndGetTableOrderCountDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTableOrderCountCompletedDelegate;
+        
         private BeginOperationDelegate onBeginGetStaffByNumDelegate;
         
         private EndOperationDelegate onEndGetStaffByNumDelegate;
@@ -1164,6 +1194,8 @@ namespace gcafeApp.gcafeSvc {
         public event System.EventHandler<OrderMealCompletedEventArgs> OrderMealCompleted;
         
         public event System.EventHandler<GetOrderDetailByOrderNumCompletedEventArgs> GetOrderDetailByOrderNumCompleted;
+        
+        public event System.EventHandler<GetTableOrderCountCompletedEventArgs> GetTableOrderCountCompleted;
         
         public event System.EventHandler<GetStaffByNumCompletedEventArgs> GetStaffByNumCompleted;
         
@@ -1646,6 +1678,52 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetTableOrderCount(string orderNum, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTableOrderCount(orderNum, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        int gcafeApp.gcafeSvc.IgcafeSvc.EndGetTableOrderCount(System.IAsyncResult result) {
+            return base.Channel.EndGetTableOrderCount(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTableOrderCount(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string orderNum = ((string)(inValues[0]));
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginGetTableOrderCount(orderNum, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTableOrderCount(System.IAsyncResult result) {
+            int retVal = ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndGetTableOrderCount(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTableOrderCountCompleted(object state) {
+            if ((this.GetTableOrderCountCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTableOrderCountCompleted(this, new GetTableOrderCountCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTableOrderCountAsync(string orderNum) {
+            this.GetTableOrderCountAsync(orderNum, null);
+        }
+        
+        public void GetTableOrderCountAsync(string orderNum, object userState) {
+            if ((this.onBeginGetTableOrderCountDelegate == null)) {
+                this.onBeginGetTableOrderCountDelegate = new BeginOperationDelegate(this.OnBeginGetTableOrderCount);
+            }
+            if ((this.onEndGetTableOrderCountDelegate == null)) {
+                this.onEndGetTableOrderCountDelegate = new EndOperationDelegate(this.OnEndGetTableOrderCount);
+            }
+            if ((this.onGetTableOrderCountCompletedDelegate == null)) {
+                this.onGetTableOrderCountCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTableOrderCountCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTableOrderCountDelegate, new object[] {
+                        orderNum}, this.onEndGetTableOrderCountDelegate, this.onGetTableOrderCountCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginGetStaffByNum(DeviceId, Num, callback, asyncState);
         }
@@ -1903,6 +1981,19 @@ namespace gcafeApp.gcafeSvc {
             public System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> EndGetOrderDetailByOrderNum(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> _result = ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem>)(base.EndInvoke("GetOrderDetailByOrderNum", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetTableOrderCount(string orderNum, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = orderNum;
+                System.IAsyncResult _result = base.BeginInvoke("GetTableOrderCount", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public int EndGetTableOrderCount(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                int _result = ((int)(base.EndInvoke("GetTableOrderCount", _args, result)));
                 return _result;
             }
             

@@ -927,6 +927,48 @@ namespace gcafeFoxproSvc
             return menuItems;
         }
 
+        public int GetTableOrderCount(string orderNum)
+        {
+            int rtn = -1;
+
+            _log.Trace(TraceMessage());
+
+            try
+            {
+                using (var conn = new OleDbConnection(Properties.Settings.Default.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT ordertime FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNum);
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        OleDbDataReader reader = cmd.ExecuteReader();
+                        rtn = 0;
+                        DateTime prevTime = DateTime.Now;
+                        while (reader.Read())
+                        {
+                            DateTime ot = reader.GetDateTime(0);
+                            if (prevTime != ot)
+                            {
+                                rtn++;
+                                prevTime = ot;
+                            }
+                        }
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.Error(string.Format("{0}, msg:{1}", TraceMessage(), ex.Message));
+            }
+
+            _log.Trace(TraceMessage());
+
+            return rtn;
+        }
+
         public Staff GetStaffByNum(string DeviceId, string Num)
         {
             Staff staff = null;

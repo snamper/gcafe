@@ -146,6 +146,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetTableOrderCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orderNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTableOrderCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetTableOrderCountResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetStaffByNum">
     <xs:complexType>
       <xs:sequence>
