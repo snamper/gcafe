@@ -24,7 +24,8 @@ namespace gcafeApp.Pages
 
             if (btn.Text == "账单")
             {
-
+                ((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).VMBilling.OrderDetail = new ViewModel.TableViewModel();
+                App.RootFrame.Navigate(new Uri("/Pages/BillingPage.xaml", UriKind.Relative));
             }
             else
             {
