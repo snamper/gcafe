@@ -82,5 +82,10 @@ namespace gcafeApp.ViewModel
             }
         }
         TableViewModel _tableInfo;
+
+        public void PrintLiuTaiDan()
+        {
+
+        }
     }
 }

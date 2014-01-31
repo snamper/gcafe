@@ -19,7 +19,17 @@ namespace gcafeApp.Pages
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
+            ApplicationBarIconButton btn = (ApplicationBarIconButton)sender;
+            ViewModel.VMPrintLiuTaiDan vm = (ViewModel.VMPrintLiuTaiDan)DataContext;
 
+            if (btn.Text == "确定")
+            {
+                vm.PrintLiuTaiDan();
+            }
+            else
+            {
+
+            }
         }
     }
 }

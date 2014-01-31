@@ -120,6 +120,9 @@
     <Compile Include="Pages\BillDetailPage.xaml.cs">
       <DependentUpon>BillDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BillingPage.xaml.cs">
+      <DependentUpon>BillingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ChangeTablePage.xaml.cs">
       <DependentUpon>ChangeTablePage.xaml</DependentUpon>
     </Compile>
@@ -174,6 +177,7 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\VMBase.cs" />
     <Compile Include="ViewModel\VMBillDetail.cs" />
+    <Compile Include="ViewModel\VMBilling.cs" />
     <Compile Include="ViewModel\VMChangeTable.cs" />
     <Compile Include="ViewModel\VMLogin.cs" />
     <Compile Include="ViewModel\VMMenuCameraSelect.cs" />
@@ -210,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BillDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BillingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

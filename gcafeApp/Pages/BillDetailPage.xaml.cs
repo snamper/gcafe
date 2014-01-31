@@ -16,5 +16,20 @@ namespace gcafeApp.Pages
         {
             InitializeComponent();
         }
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            ApplicationBarIconButton btn = (ApplicationBarIconButton)sender;
+            //ViewModel.VMChangeTable vm = (ViewModel.VMBillDetail)DataContext;
+
+            if (btn.Text == "账单")
+            {
+
+            }
+            else
+            {
+
+            }
+        }
     }
 }
