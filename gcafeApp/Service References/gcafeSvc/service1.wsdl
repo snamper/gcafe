@@ -73,6 +73,18 @@
   <wsdl:message name="IgcafeSvc_GetTableOrderCount_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTableOrderCountResponse" />
   </wsdl:message>
+  <wsdl:message name="IgcafeSvc_ReprintLiutaiDan_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReprintLiutaiDan" />
+  </wsdl:message>
+  <wsdl:message name="IgcafeSvc_ReprintLiutaiDan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReprintLiutaiDanResponse" />
+  </wsdl:message>
+  <wsdl:message name="IgcafeSvc_ReprintChupinDan_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReprintChupinDan" />
+  </wsdl:message>
+  <wsdl:message name="IgcafeSvc_ReprintChupinDan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReprintChupinDanResponse" />
+  </wsdl:message>
   <wsdl:message name="IgcafeSvc_GetStaffByNum_InputMessage">
     <wsdl:part name="parameters" element="tns:GetStaffByNum" />
   </wsdl:message>
@@ -123,6 +135,14 @@
     <wsdl:operation name="GetTableOrderCount">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetTableOrderCount" message="tns:IgcafeSvc_GetTableOrderCount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/GetTableOrderCountResponse" message="tns:IgcafeSvc_GetTableOrderCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReprintLiutaiDan">
+      <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/ReprintLiutaiDan" message="tns:IgcafeSvc_ReprintLiutaiDan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/ReprintLiutaiDanResponse" message="tns:IgcafeSvc_ReprintLiutaiDan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReprintChupinDan">
+      <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/ReprintChupinDan" message="tns:IgcafeSvc_ReprintChupinDan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IgcafeSvc/ReprintChupinDanResponse" message="tns:IgcafeSvc_ReprintChupinDan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetStaffByNum">
       <wsdl:input wsaw:Action="http://tempuri.org/IgcafeSvc/GetStaffByNum" message="tns:IgcafeSvc_GetStaffByNum_InputMessage" />
@@ -223,6 +243,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetTableOrderCount">
       <soap:operation soapAction="http://tempuri.org/IgcafeSvc/GetTableOrderCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReprintLiutaiDan">
+      <soap:operation soapAction="http://tempuri.org/IgcafeSvc/ReprintLiutaiDan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReprintChupinDan">
+      <soap:operation soapAction="http://tempuri.org/IgcafeSvc/ReprintChupinDan" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

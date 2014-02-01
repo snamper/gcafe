@@ -160,6 +160,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ReprintLiutaiDan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orderNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="prnType" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReprintLiutaiDanResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReprintChupinDan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orderNum" nillable="true" type="xs:string" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="menuItems" nillable="true" type="q13:ArrayOfMenuItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReprintChupinDanResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetStaffByNum">
     <xs:complexType>
       <xs:sequence>
@@ -171,7 +197,7 @@
   <xs:element name="GetStaffByNumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q13:Staff" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc" minOccurs="0" name="GetStaffByNumResult" nillable="true" type="q14:Staff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

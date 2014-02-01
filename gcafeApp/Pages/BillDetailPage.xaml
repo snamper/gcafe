@@ -5,6 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -49,9 +50,7 @@
                             <TextBlock Text="{Binding OrderDetail.Amount}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="Orange"/>
                             <TextBlock Text=" 元" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
                         </StackPanel>
-
                     </StackPanel>
-
                 </Grid>
             </StackPanel>
         </Grid>
@@ -76,7 +75,14 @@
                                 <TextBlock Text="{Binding OrderStaffName}" Style="{StaticResource PhoneTextNormalStyle}" Foreground="Orange"/>
                                 <TextBlock Text="{Binding OrderTime, StringFormat=HH:mm}" Style="{StaticResource PhoneTextNormalStyle}" Foreground="LightBlue"/>
                             </StackPanel>
-                            <TextBlock Grid.Column="1" Grid.RowSpan="2" Text="{Binding Price, StringFormat='{}{0:0.00}'}"  Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Grid.RowSpan="2" Text="{Binding Price, StringFormat='{}{0:0.00}'}"  Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Red" />
+
+                            <toolkit:ContextMenuService.ContextMenu>
+                                <toolkit:ContextMenu>
+                                    <toolkit:MenuItem Header="重打出品单" Command="{Binding Path=VMBillDetail.ReprintChupinDan, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                </toolkit:ContextMenu>
+                            </toolkit:ContextMenuService.ContextMenu>
+
                         </Grid>
                     </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>
@@ -88,7 +94,8 @@
         <shell:ApplicationBar IsMenuEnabled="True" Mode="Default"  Opacity=".6">
             <shell:ApplicationBarIconButton
                 IconUri="/Images/Bill.png"
-                Text="账单" Click="ApplicationBarIconButton_Click"/>
+                Text="账单" Click="ApplicationBarIconButton_Click">
+            </shell:ApplicationBarIconButton>
             <shell:ApplicationBarIconButton
                 IconUri="/Images/ApplicationBar.Cancel.png"
                 Text="取消" Click="ApplicationBarIconButton_Click"/>

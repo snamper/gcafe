@@ -808,6 +808,16 @@ namespace gcafeApp.gcafeSvc {
         
         int EndGetTableOrderCount(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/ReprintLiutaiDan", ReplyAction="http://tempuri.org/IgcafeSvc/ReprintLiutaiDanResponse")]
+        System.IAsyncResult BeginReprintLiutaiDan(string orderNum, int prnType, System.AsyncCallback callback, object asyncState);
+        
+        void EndReprintLiutaiDan(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/ReprintChupinDan", ReplyAction="http://tempuri.org/IgcafeSvc/ReprintChupinDanResponse")]
+        System.IAsyncResult BeginReprintChupinDan(string orderNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> menuItems, System.AsyncCallback callback, object asyncState);
+        
+        void EndReprintChupinDan(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IgcafeSvc/GetStaffByNum", ReplyAction="http://tempuri.org/IgcafeSvc/GetStaffByNumResponse")]
         System.IAsyncResult BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState);
         
@@ -1116,6 +1126,18 @@ namespace gcafeApp.gcafeSvc {
         
         private System.Threading.SendOrPostCallback onGetTableOrderCountCompletedDelegate;
         
+        private BeginOperationDelegate onBeginReprintLiutaiDanDelegate;
+        
+        private EndOperationDelegate onEndReprintLiutaiDanDelegate;
+        
+        private System.Threading.SendOrPostCallback onReprintLiutaiDanCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginReprintChupinDanDelegate;
+        
+        private EndOperationDelegate onEndReprintChupinDanDelegate;
+        
+        private System.Threading.SendOrPostCallback onReprintChupinDanCompletedDelegate;
+        
         private BeginOperationDelegate onBeginGetStaffByNumDelegate;
         
         private EndOperationDelegate onEndGetStaffByNumDelegate;
@@ -1196,6 +1218,10 @@ namespace gcafeApp.gcafeSvc {
         public event System.EventHandler<GetOrderDetailByOrderNumCompletedEventArgs> GetOrderDetailByOrderNumCompleted;
         
         public event System.EventHandler<GetTableOrderCountCompletedEventArgs> GetTableOrderCountCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ReprintLiutaiDanCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ReprintChupinDanCompleted;
         
         public event System.EventHandler<GetStaffByNumCompletedEventArgs> GetStaffByNumCompleted;
         
@@ -1724,6 +1750,100 @@ namespace gcafeApp.gcafeSvc {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginReprintLiutaiDan(string orderNum, int prnType, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginReprintLiutaiDan(orderNum, prnType, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        void gcafeApp.gcafeSvc.IgcafeSvc.EndReprintLiutaiDan(System.IAsyncResult result) {
+            base.Channel.EndReprintLiutaiDan(result);
+        }
+        
+        private System.IAsyncResult OnBeginReprintLiutaiDan(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string orderNum = ((string)(inValues[0]));
+            int prnType = ((int)(inValues[1]));
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginReprintLiutaiDan(orderNum, prnType, callback, asyncState);
+        }
+        
+        private object[] OnEndReprintLiutaiDan(System.IAsyncResult result) {
+            ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndReprintLiutaiDan(result);
+            return null;
+        }
+        
+        private void OnReprintLiutaiDanCompleted(object state) {
+            if ((this.ReprintLiutaiDanCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ReprintLiutaiDanCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ReprintLiutaiDanAsync(string orderNum, int prnType) {
+            this.ReprintLiutaiDanAsync(orderNum, prnType, null);
+        }
+        
+        public void ReprintLiutaiDanAsync(string orderNum, int prnType, object userState) {
+            if ((this.onBeginReprintLiutaiDanDelegate == null)) {
+                this.onBeginReprintLiutaiDanDelegate = new BeginOperationDelegate(this.OnBeginReprintLiutaiDan);
+            }
+            if ((this.onEndReprintLiutaiDanDelegate == null)) {
+                this.onEndReprintLiutaiDanDelegate = new EndOperationDelegate(this.OnEndReprintLiutaiDan);
+            }
+            if ((this.onReprintLiutaiDanCompletedDelegate == null)) {
+                this.onReprintLiutaiDanCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnReprintLiutaiDanCompleted);
+            }
+            base.InvokeAsync(this.onBeginReprintLiutaiDanDelegate, new object[] {
+                        orderNum,
+                        prnType}, this.onEndReprintLiutaiDanDelegate, this.onReprintLiutaiDanCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginReprintChupinDan(string orderNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> menuItems, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginReprintChupinDan(orderNum, menuItems, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        void gcafeApp.gcafeSvc.IgcafeSvc.EndReprintChupinDan(System.IAsyncResult result) {
+            base.Channel.EndReprintChupinDan(result);
+        }
+        
+        private System.IAsyncResult OnBeginReprintChupinDan(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string orderNum = ((string)(inValues[0]));
+            System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> menuItems = ((System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem>)(inValues[1]));
+            return ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).BeginReprintChupinDan(orderNum, menuItems, callback, asyncState);
+        }
+        
+        private object[] OnEndReprintChupinDan(System.IAsyncResult result) {
+            ((gcafeApp.gcafeSvc.IgcafeSvc)(this)).EndReprintChupinDan(result);
+            return null;
+        }
+        
+        private void OnReprintChupinDanCompleted(object state) {
+            if ((this.ReprintChupinDanCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ReprintChupinDanCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ReprintChupinDanAsync(string orderNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> menuItems) {
+            this.ReprintChupinDanAsync(orderNum, menuItems, null);
+        }
+        
+        public void ReprintChupinDanAsync(string orderNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> menuItems, object userState) {
+            if ((this.onBeginReprintChupinDanDelegate == null)) {
+                this.onBeginReprintChupinDanDelegate = new BeginOperationDelegate(this.OnBeginReprintChupinDan);
+            }
+            if ((this.onEndReprintChupinDanDelegate == null)) {
+                this.onEndReprintChupinDanDelegate = new EndOperationDelegate(this.OnEndReprintChupinDan);
+            }
+            if ((this.onReprintChupinDanCompletedDelegate == null)) {
+                this.onReprintChupinDanCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnReprintChupinDanCompleted);
+            }
+            base.InvokeAsync(this.onBeginReprintChupinDanDelegate, new object[] {
+                        orderNum,
+                        menuItems}, this.onEndReprintChupinDanDelegate, this.onReprintChupinDanCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult gcafeApp.gcafeSvc.IgcafeSvc.BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginGetStaffByNum(DeviceId, Num, callback, asyncState);
         }
@@ -1995,6 +2115,32 @@ namespace gcafeApp.gcafeSvc {
                 object[] _args = new object[0];
                 int _result = ((int)(base.EndInvoke("GetTableOrderCount", _args, result)));
                 return _result;
+            }
+            
+            public System.IAsyncResult BeginReprintLiutaiDan(string orderNum, int prnType, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = orderNum;
+                _args[1] = prnType;
+                System.IAsyncResult _result = base.BeginInvoke("ReprintLiutaiDan", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public void EndReprintLiutaiDan(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                base.EndInvoke("ReprintLiutaiDan", _args, result);
+            }
+            
+            public System.IAsyncResult BeginReprintChupinDan(string orderNum, System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.MenuItem> menuItems, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = orderNum;
+                _args[1] = menuItems;
+                System.IAsyncResult _result = base.BeginInvoke("ReprintChupinDan", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public void EndReprintChupinDan(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                base.EndInvoke("ReprintChupinDan", _args, result);
             }
             
             public System.IAsyncResult BeginGetStaffByNum(string DeviceId, string Num, System.AsyncCallback callback, object asyncState) {

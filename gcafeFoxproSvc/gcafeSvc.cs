@@ -1010,6 +1010,16 @@ namespace gcafeFoxproSvc
             return staff;
         }
 
+        public void ReprintLiutaiDan(string orderNum, int prnType)
+        {
+
+        }
+
+        public void ReprintChupinDan(string orderNum, List<MenuItem> menuItems)
+        {
+
+        }
+
         /// <summary>
         /// 生成poh.serialno
         /// </summary>

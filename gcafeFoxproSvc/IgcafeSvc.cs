@@ -77,6 +77,12 @@ namespace gcafeFoxproSvc
         [OperationContract]
         int GetTableOrderCount(string orderNum);
 
+        [OperationContract]
+        void ReprintLiutaiDan(string orderNum, int prnType);
+
+        [OperationContract]
+        void ReprintChupinDan(string orderNum, List<MenuItem> menuItems);
+
         /// <summary>
         /// 根据Num取员工信息
         /// </summary>

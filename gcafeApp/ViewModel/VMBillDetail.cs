@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using gcafeApp.gcafeSvc;
 
 namespace gcafeApp.ViewModel
@@ -87,5 +88,21 @@ namespace gcafeApp.ViewModel
             }
         }
         private ObservableCollection<MenuItem> _orderDetails;
+
+        public RelayCommand<MenuItem> ReprintChupinDan
+        {
+            get
+            {
+                if (_reprintChupinDan == null)
+                {
+                    _reprintChupinDan = new RelayCommand<MenuItem>(mnenuItem =>
+                    {
+                    });
+                }
+
+                return _reprintChupinDan;
+            }
+        }
+        RelayCommand<MenuItem> _reprintChupinDan;
     }
 }
