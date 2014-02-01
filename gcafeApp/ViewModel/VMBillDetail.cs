@@ -89,20 +89,24 @@ namespace gcafeApp.ViewModel
         }
         private ObservableCollection<MenuItem> _orderDetails;
 
-        public RelayCommand<MenuItem> ReprintChupinDan
+        public RelayCommand<gcafeSvc.MenuItem> ReprintChupinDan
         {
             get
             {
                 if (_reprintChupinDan == null)
                 {
-                    _reprintChupinDan = new RelayCommand<MenuItem>(mnenuItem =>
+                    _reprintChupinDan = new RelayCommand<MenuItem>(menuItem =>
                     {
+                        ObservableCollection<gcafeSvc.MenuItem> param = new ObservableCollection<gcafeSvc.MenuItem>();
+                        param.Add(menuItem);
+
+                        _svc.ReprintChupinDanAsync(OrderDetail.OrderNum, param);
                     });
                 }
 
                 return _reprintChupinDan;
             }
         }
-        RelayCommand<MenuItem> _reprintChupinDan;
+        RelayCommand<gcafeSvc.MenuItem> _reprintChupinDan;
     }
 }

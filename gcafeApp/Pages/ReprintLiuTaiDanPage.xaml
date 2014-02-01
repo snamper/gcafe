@@ -57,7 +57,7 @@
                     <TextBlock Text="张留台单" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
                 </StackPanel>
                 <TextBlock Text="请选择重打哪张留台单" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
-                <toolkit:ListPicker ItemsSource="{Binding PrintItems}" />
+                <toolkit:ListPicker ItemsSource="{Binding PrintItems.View}" SelectionChanged="ListPicker_SelectionChanged" />
             </StackPanel>
         </Grid>
     </Grid>

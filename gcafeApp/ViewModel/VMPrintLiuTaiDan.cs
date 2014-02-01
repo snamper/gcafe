@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Data;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -32,12 +33,14 @@ namespace gcafeApp.ViewModel
             {
                 prnItems.Add(string.Format("第{0}次点菜留台单", i + 1));
             }
-            PrintItems = new List<string>(prnItems);
+            PrintItems = new CollectionViewSource() { Source = prnItems };
 
             IsBusy = false;
         }
 
-        public List<string> PrintItems
+        public int PrnType { get; set; }
+
+        public CollectionViewSource PrintItems
         {
             get { return _printItems; }
             set
@@ -49,7 +52,7 @@ namespace gcafeApp.ViewModel
                 }
             }
         }
-        List<string> _printItems;
+        CollectionViewSource _printItems;
 
         public int OrderCount
         {
@@ -85,7 +88,7 @@ namespace gcafeApp.ViewModel
 
         public void PrintLiuTaiDan()
         {
-
+            _svc.ReprintLiutaiDanAsync(TableInfo.OrderNum, PrnType);
         }
     }
 }
