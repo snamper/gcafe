@@ -26,10 +26,11 @@ namespace gcafeApp.Pages
             if (btn.Text == "确定")
             {
                 vm.PrintLiuTaiDan();
+                NavigationService.GoBack();
             }
             else
             {
-
+                NavigationService.GoBack();
             }
         }
 
