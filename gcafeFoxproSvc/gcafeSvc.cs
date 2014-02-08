@@ -414,6 +414,14 @@ namespace gcafeFoxproSvc
 
                             rtn = tableInfo;
                         }
+
+                        sql = string.Format("UPDATE poh SET tableno = '{0}' WHERE (orderno = '{1}')", tableInfo.Num, tableInfo.OrderNum);
+                        using (var cmd = new OleDbCommand(sql, conn))
+                        {
+                            cmd.ExecuteNonQuery();
+
+                            rtn = tableInfo;
+                        }
                     }
 
                     conn.Close();
@@ -1012,7 +1020,7 @@ namespace gcafeFoxproSvc
 
         public void ReprintLiutaiDan(string orderNum, int prnType)
         {
-
+            Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintLiuTai, orderNum.Length > 7 ? Int32.Parse(orderNum.Substring(2)) : Int32.Parse(orderNum), prnType));
         }
 
         public void ReprintChupinDan(string orderNum, List<MenuItem> menuItems)

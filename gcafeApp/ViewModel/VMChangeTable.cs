@@ -26,6 +26,7 @@ namespace gcafeApp.ViewModel
             {
                 if (e.Result != null)
                 {
+                    ((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).Main.GetOpenedTables();
                     Messenger.Default.Send<string>("换台成功", "ChangeTablePage");
                 }
                 else

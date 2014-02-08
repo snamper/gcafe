@@ -20,7 +20,13 @@ namespace gcafeApp.ViewModel
                 _svc = svc;
 
                 _svc.GetTableOrderCountCompleted += _svc_GetTableOrderCountCompleted;
+                _svc.ReprintLiutaiDanCompleted += _svc_ReprintLiutaiDanCompleted;
             }
+        }
+
+        void _svc_ReprintLiutaiDanCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            IsBusy = false;
         }
 
         void _svc_GetTableOrderCountCompleted(object sender, GetTableOrderCountCompletedEventArgs e)
@@ -88,6 +94,7 @@ namespace gcafeApp.ViewModel
 
         public void PrintLiuTaiDan()
         {
+            IsBusy = true;
             _svc.ReprintLiutaiDanAsync(TableInfo.OrderNum, PrnType);
         }
     }

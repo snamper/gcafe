@@ -51,6 +51,7 @@ namespace gcafeApp.Pages
                     Match match = cntRegex.Match(selectedItem);
                     vm.PrnType = Int32.Parse(match.Value);
                 }
+
             }
         }
     }
