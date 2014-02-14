@@ -1455,6 +1455,146 @@ namespace gcafePrnConsole
             return rtn;
         }
 
+        bool IsNeedToTidy()
+        {
+            bool rtn = false;
+
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT ");
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return rtn;
+        }
+
+        bool IsNeed10Percent()
+        {
+            bool rtn = false;
+
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT ");
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return rtn;
+        }
+
+        string GetFoxproProductNumByName(string prodName)
+        {
+            string rtn = string.Empty;
+
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT productno FROM product WHERE prodname = '{0}'", prodName);
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        rtn = (string)cmd.ExecuteScalar();
+                        if (rtn == null)
+                            rtn = string.Empty;
+                        else
+                            rtn = rtn.Trim();
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return rtn;
+        }
+
+        void FoxproTidyup()
+        {
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT ordertime, orderno, serial, prodname, printgroup FROM poh ORDER BY ordertime");
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        DateTime orderTimePrev;
+                        string orderNoPrev = string.Empty;
+                        string prodNamePrev = string.Empty;
+                        string printGroupPrev = string.Empty;
+                        string remark = string.Empty;
+
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            DateTime orderTime = reader.GetDateTime(0);
+                            string orderNo = reader.GetString(1);
+                            string serial = reader.GetString(2);
+                            string prodName = reader.GetString(3);
+                            string printGroup = reader.GetString(4);
+                            string productNo = GetFoxproProductNumByName(prodName);
+
+                            if ((productNo == "111901" || productNo.Substring(0, 2) == "33") &&     // 111901是加铁板
+                                printGroup == printGroupPrev)
+                            {
+                                if (string.IsNullOrEmpty(remark))
+                                    remark = prodName;
+                                else
+                                    remark += "," + prodName;
+                            }
+                            else
+                            {
+                                orderTimePrev = orderTime;
+                                orderNoPrev = orderNo;
+                                prodNamePrev = prodName;
+                                printGroupPrev = printGroup;
+                                remark = string.Empty;
+                            }
+                        }
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         public void Dispose()
         {
             _isStop = true;

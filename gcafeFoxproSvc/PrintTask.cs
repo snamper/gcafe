@@ -86,6 +86,9 @@ namespace gcafeFoxproSvc
                     PrintTask printTask = this.Dequeue();
                     _mutex.ReleaseMutex();
 
+                    if (IsNeedToTidy())
+                        FoxproTidyup();
+
                     System.Diagnostics.Debug.WriteLine("==== {0}, {1} ====", printTask.Type, Count);
 
                     switch (printTask.Type)
@@ -1460,6 +1463,179 @@ namespace gcafeFoxproSvc
             }
 
             return rtn;
+        }
+
+        bool IsNeedToTidy()
+        {
+            bool rtn = true;
+
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT ");
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
+
+            return rtn;
+        }
+
+        bool IsNeed10Percent()
+        {
+            bool rtn = false;
+
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT ");
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
+
+            return rtn;
+        }
+
+        string GetFoxproProductNumByName(string prodName)
+        {
+            string rtn = string.Empty;
+
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT productno FROM product WHERE prodname = '{0}'", prodName);
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        rtn = (string)cmd.ExecuteScalar();
+                        if (rtn == null)
+                            rtn = string.Empty;
+                        else
+                            rtn = rtn.Trim();
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
+
+            return rtn;
+        }
+
+        void FoxproTidyup()
+        {
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT ordertime, orderno, serial, prodname, printgroup, remark2 FROM poh ORDER BY ordertime, serial");
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        DateTime orderTimePrev = System.DateTime.Now;
+                        string serialPrev = string.Empty;
+                        string orderNoPrev = string.Empty;
+                        string prodNamePrev = string.Empty;
+                        string printGroupPrev = string.Empty;
+                        string remarkPrev = string.Empty;
+                        string remarkUpdate = string.Empty;
+
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            DateTime orderTime = reader.GetDateTime(0);
+                            string orderNo = reader.GetString(1).Trim();
+                            string serial = reader.GetString(2).Trim();
+                            string prodName = reader.GetString(3).Trim();
+                            string printGroup = reader.GetString(4).Trim();
+                            string remark = reader.GetString(5).Trim();
+                            string productNo = GetFoxproProductNumByName(prodName).Trim();
+
+                            if ((productNo.Length > 3) && (productNo.Substring(0, 4) == "1119" || productNo.Substring(0, 2) == "33") &&     // 111901是加铁板
+                                (printGroup == printGroupPrev))
+                            {
+                                if (!string.IsNullOrEmpty(remarkPrev))
+                                {
+                                    remarkUpdate = remarkPrev;
+                                    remarkPrev = string.Empty;
+                                }
+
+                                if (string.IsNullOrEmpty(remarkUpdate))
+                                    remarkUpdate = prodName;
+                                else
+                                    remarkUpdate += "," + prodName;
+
+                                // 将做法和加铁板加到主的remark2中
+                                string strOrderTime = string.Format("{0}^{1}{2}", "{", orderTimePrev.ToString("u"), "}");
+                                sql = string.Format("UPDATE poh SET remark2 = '{0}' WHERE (orderNo = '{1}') AND (prodname = '{2}') AND (ordertime = {3}) AND (serial = '{4}')", remarkUpdate, orderNoPrev, prodNamePrev, strOrderTime, serialPrev);
+                                using (var cmd1 = new OleDbCommand(sql, conn))
+                                {
+                                    cmd1.ExecuteNonQuery();
+                                }
+
+                                // 删除这记录
+                                strOrderTime = string.Format("{0}^{1}{2}", "{", orderTime.ToString("u"), "}");
+                                sql = string.Format("DELETE FROM poh WHERE (orderno = '{0}') AND (prodname = '{1}') AND (ordertime = {2}) AND (serial = '{3}')", orderNoPrev, prodName, strOrderTime, serial);
+                                using (var cmd1 = new OleDbCommand(sql, conn))
+                                {
+                                    cmd1.ExecuteNonQuery();
+                                }
+                            }
+                            else
+                            {
+                                serialPrev = serial;
+                                orderTimePrev = orderTime;
+                                orderNoPrev = orderNo;
+                                prodNamePrev = prodName;
+                                printGroupPrev = printGroup;
+                                remarkPrev = remark;
+                                remarkUpdate = string.Empty;
+                            }
+                        }
+                    }
+
+                    sql = string.Format("DELETE FROM orditem WHERE (productno LIKE '33%')");
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
         }
 
         public void Dispose()
