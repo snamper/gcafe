@@ -889,38 +889,128 @@ namespace gcafeFoxproSvc
                 {
                     conn.Open();
 
-                    string sql = string.Format("SELECT ordertime, productno, prodname, price, quantity, waiter FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNum);
+                    string sql = string.Format("SELECT ordertime, serial, prodname, quantity, remark1, remark2, waiter FROM poh WHERE orderno = '{0}' ORDER BY ordertime, serial", orderNum);
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
-                        OleDbDataReader reader = cmd.ExecuteReader();
+                        MenuItem menuItem = null;
+
+                        DateTime orderTimePrev = System.DateTime.Now;
+                        string serialPrev = string.Empty;
+
+                        var reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
                             DateTime orderTime = reader.GetDateTime(0);
-                            string prodNo = reader.GetString(1).Trim();
+                            string serial = reader.GetString(1).Trim();
                             string prodName = reader.GetString(2).Trim();
-                            decimal price = reader.GetDecimal(3);
-                            int quantity = reader.GetInt32(4);
-                            string waiter = reader.GetString(5);
-                            if (waiter != null)
-                                waiter = waiter.Trim();
-                            else
+                            int quantity = reader.GetInt32(3);
+                            string remark1 = reader.GetString(4).Trim();
+                            string remark2 = reader.GetString(5).Trim();
+                            string waiter = reader.GetString(6).Trim();
+                            if (string.IsNullOrEmpty(waiter))
                                 waiter = "未知";
 
-                            Staff staff = GetStaffByNum("", waiter);
-                            waiter = staff != null ? staff.Name : "未知名";
-
-                            menuItems.Add(new MenuItem()
+                            if (orderTimePrev != orderTime || serialPrev != serial)
                             {
-                                ID = Int32.Parse(prodNo),
-                                Name = prodName,
-                                OrderStaffName = waiter,
-                                OrderTime = orderTime,
-                                Price = price,
-                                Quantity = quantity,
-                                IsSetmeal = false,
-                            });
+                                if (menuItem != null)
+                                    menuItems.Add(menuItem);
+
+                                menuItem = new MenuItem()
+                                {
+                                    Quantity = quantity,
+                                    OrderStaffName = waiter,
+                                    OrderTime = orderTime,
+                                    IsSetmeal = false,
+                                    SetmealItems = new List<SetmealItem>(),
+                                    Methods = new List<Method>(),
+                                };
+
+                                if (string.IsNullOrEmpty(remark1))
+                                {
+                                    // 不是套餐
+                                    menuItem.Name = prodName;
+                                    
+                                    if (!string.IsNullOrEmpty(remark2))
+                                    {
+                                        // 有做法
+                                        string[] methods = remark2.Split(',');
+                                        foreach (string method in methods)
+                                            menuItem.Methods.Add(new Method() { Name = method, });
+                                    }
+                                }
+                                else
+                                {
+                                    // 是套餐
+                                    menuItem.IsSetmeal = true;
+                                    menuItem.Name = remark1;
+
+                                    SetmealItem setmeal = new SetmealItem()
+                                    {
+                                        Name = prodName,
+                                        Methods = new List<Method>(),
+                                    };
+
+                                    if (!string.IsNullOrEmpty(remark2))
+                                    {
+                                        // 有做法
+                                        string[] methods = remark2.Split(',');
+                                        foreach (string method in methods)
+                                            setmeal.Methods.Add(new Method() { Name = method, });
+                                    }
+
+                                    menuItem.SetmealItems.Add(setmeal);
+                                }
+
+                                // update
+                                orderTimePrev = orderTime;
+                                serialPrev = serial;
+                            }
+                            else
+                            {
+                                // 这一定是套餐内容项
+
+                                if (!string.IsNullOrEmpty(remark2))
+                                {
+                                    // 有做法
+                                    string[] methods = remark2.Split(',');
+                                }
+
+                            }
                         }
                     }
+
+                    //string sql = string.Format("SELECT ordertime, productno, prodname, price, quantity, waiter FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNum);
+                    //using (var cmd = new OleDbCommand(sql, conn))
+                    //{
+                    //    OleDbDataReader reader = cmd.ExecuteReader();
+                    //    while (reader.Read())
+                    //    {
+                    //        DateTime orderTime = reader.GetDateTime(0);
+                    //        string prodNo = reader.GetString(1).Trim();
+                    //        string prodName = reader.GetString(2).Trim();
+                    //        decimal price = reader.GetDecimal(3);
+                    //        int quantity = reader.GetInt32(4);
+                    //        string waiter = reader.GetString(5);
+                    //        if (waiter != null)
+                    //            waiter = waiter.Trim();
+                    //        else
+                    //            waiter = "未知";
+
+                    //        Staff staff = GetStaffByNum("", waiter);
+                    //        waiter = staff != null ? staff.Name : "未知名";
+
+                    //        menuItems.Add(new MenuItem()
+                    //        {
+                    //            ID = Int32.Parse(prodNo),
+                    //            Name = prodName,
+                    //            OrderStaffName = waiter,
+                    //            OrderTime = orderTime,
+                    //            Price = price,
+                    //            Quantity = quantity,
+                    //            IsSetmeal = false,
+                    //        });
+                    //    }
+                    //}
 
                     conn.Close();
                 }
