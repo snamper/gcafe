@@ -929,6 +929,7 @@ namespace gcafeFoxproSvc
                                 {
                                     // 不是套餐
                                     menuItem.Name = prodName;
+                                    menuItem.Price = GetFoxproOrderitemPrice(orderNum, orderTime, prodName);
                                     
                                     if (!string.IsNullOrEmpty(remark2))
                                     {
@@ -943,6 +944,7 @@ namespace gcafeFoxproSvc
                                     // 是套餐
                                     menuItem.IsSetmeal = true;
                                     menuItem.Name = remark1;
+                                    menuItem.Price = GetFoxproOrderitemPrice(orderNum, orderTime, remark1);
 
                                     SetmealItem setmeal = new SetmealItem()
                                     {
@@ -985,6 +987,8 @@ namespace gcafeFoxproSvc
                                 menuItem.SetmealItems.Add(setmeal);
                             }
                         }
+
+                        menuItems.Add(menuItem);
                     }
 
                     //string sql = string.Format("SELECT ordertime, productno, prodname, price, quantity, waiter FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNum);
@@ -1247,6 +1251,29 @@ namespace gcafeFoxproSvc
                 System.DateTime.Now.Month, System.DateTime.Now.Day, orderNo);
 
             return strRtn;
+        }
+
+        decimal GetFoxproOrderitemPrice(string orderNum, DateTime orderTime, string prodName)
+        {
+            decimal rtn = 0;
+
+            using (var conn = new OleDbConnection(Global.FoxproPath))
+            {
+                conn.Open();
+
+                string strOrderTime = string.Format("{0}^{1}{2}", "{", orderTime.ToString("u"), "}");
+                string sql = string.Format("SELECT price FROM orditem WHERE (orderno = '{0}') AND (ordertime = {1}) AND (prodname = '{2}')", orderNum, strOrderTime, prodName);
+                using (var cmd = new OleDbCommand(sql, conn))
+                {
+                    decimal? price = (decimal?)cmd.ExecuteScalar();
+                    if (price != null)
+                        rtn = (decimal)price;
+                }
+
+                conn.Close();
+            }
+
+            return rtn;
         }
 
         string GetFoxproOrderNo(int orderId)

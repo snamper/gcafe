@@ -47,7 +47,7 @@
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                             <TextBlock Text="总价: " Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalAlignment="Right" />
-                            <TextBlock Text="{Binding OrderDetail.Amount}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="Orange"/>
+                            <TextBlock Text="{Binding OrderDetail.Amount, StringFormat='{}{0:0.00}'}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="Orange"/>
                             <TextBlock Text=" 元" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
                         </StackPanel>
                     </StackPanel>
