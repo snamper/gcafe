@@ -78,6 +78,7 @@
   <xs:complexType name="SetmealItem">
     <xs:sequence>
       <xs:element minOccurs="0" name="MenuID" type="xs:int" />
+      <xs:element minOccurs="0" name="MenuItem" nillable="true" type="tns:MenuItem" />
       <xs:element minOccurs="0" name="Methods" nillable="true" type="tns:ArrayOfMethod" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OptionItems" nillable="true" type="tns:ArrayOfSetmealItem" />

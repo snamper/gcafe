@@ -80,6 +80,8 @@ namespace gcafeFoxproSvc
         public List<SetmealItem> OptionItems { get; set; }
         [DataMember]
         public List<Method> Methods { get; set; }
+        [DataMember]
+        public MenuItem MenuItem { get; set; }
     }
 
     [DataContract(IsReference = true)]

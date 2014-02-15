@@ -37,6 +37,7 @@ namespace gcafeFoxproSvc
         public int SetmealId { get; private set; }
         public bool IsUrge { get; set; }
         public bool RePrint { get; set; }
+        public MenuItem MenuItem { get; set; }
     }
 
     public class PrintTaskMgr : Queue<PrintTask>, IDisposable
@@ -98,7 +99,10 @@ namespace gcafeFoxproSvc
                             break;
 
                         case PrintTask.PrintType.PrintChuPin:
-                            PrintChuPin(printTask.OrderId, printTask.PrnType);
+                            if (printTask.MenuItem == null)
+                                PrintChuPin(printTask.OrderId, printTask.PrnType);
+                            else
+                                PrintChuPin(printTask.OrderId, printTask.MenuItem);
                             break;
 
                         case PrintTask.PrintType.PrintLiuTai:
@@ -398,6 +402,123 @@ namespace gcafeFoxproSvc
             return "";
         }
 
+        string PrintChuPin(int orderId, MenuItem item)
+        {
+            Global.Logger.Trace(Global.TraceMessage());
+
+            try
+            {
+                string orderNo = GetFoxproOrderNo(orderId);
+
+                string prnName = GetFoxproPrinterNameByPG(item.Number.Split(',')[0]);
+                if (string.IsNullOrEmpty(prnName))
+                    return "";
+
+                var printers = new LocalPrintServer().GetPrintQueues();
+                var selectedPrinter = printers.FirstOrDefault(p => p.Name == prnName);
+                if (selectedPrinter == null)
+                    return "";
+
+                PrintDialog printDlg = new PrintDialog();
+                printDlg.PrintQueue = selectedPrinter;
+
+                if (item.SetmealItems != null && item.SetmealItems.Count > 0)
+                {
+                    // 套餐
+                    order_detail_setmeal setmeal = new order_detail_setmeal()
+                    {
+                        menu_id = item.ID,
+                        menu = new menu() 
+                        { 
+                            id = item.SetmealItems[0].MenuID, 
+                            name = item.SetmealItems[0].Name 
+                        },
+                        order_detail = new order_detail()
+                        {
+                            quantity = 1,
+                            menu = new menu()
+                            {
+                                name = item.Name
+                            }
+                        },
+                    };
+
+                    if (item.SetmealItems[0].Methods.Count > 0)
+                    {
+                        foreach (var method in item.SetmealItems[0].Methods)
+                            setmeal.order_detail_method.Add(new order_detail_method()
+                            {
+                                method = new method() { name = method.Name }
+                            });
+                    }
+
+                    using (PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
+                    {
+                        cpd.OrderNum = orderNo;
+                        cpd.TableNum = item.Number.Split(',')[1];
+                        cpd.StaffName = item.OrderStaffName;
+                        cpd.Department = item.GroupCnt == 11 ? "厨房" : "酒吧";
+                        cpd.PageCnt = string.Format("共{0}张单的第{1}张", 1, 1);
+                        cpd.SerialNum = item.ID.ToString();
+                        cpd.AddItem(setmeal);
+                        cpd.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
+                        cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
+                        printDlg.PrintVisual(cpd, "出品单打印");
+
+                        Global.Logger.Debug(string.Format("({3}) - 共{0}张单的第{1}张 to {2}", 1, 1, prnName, Global.TraceMessage()));
+                    }
+                }
+                else
+                {
+                    // 非套餐
+                    order_detail orderDetail = new order_detail()
+                    {
+                        quantity = 1,
+                        menu_id = item.ID,          // 在foxpro中，暂且用menu_id来记录serial
+                        menu = new menu() { name = item.Name, },
+                    };
+
+                    if (item.Methods.Count > 0)
+                    {
+                        foreach (var method in item.Methods)
+                            orderDetail.order_detail_method.Add(new order_detail_method() 
+                            { 
+                                method = new method() 
+                                { 
+                                    name = method.Name 
+                                } 
+                            });
+                    }
+
+                    using (PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
+                    {
+
+                        cpd.OrderNum = orderNo;
+                        cpd.TableNum = item.Number.Split(',')[1];
+                        cpd.StaffName = item.OrderStaffName;
+                        cpd.Department = item.GroupCnt == 11 ? "厨房" : "酒吧";
+                        cpd.PageCnt = string.Format("共{0}张单的第{1}张", 1, 1);
+                        cpd.SerialNum = item.ID.ToString();
+                        cpd.AddItem(orderDetail);
+                        cpd.Measure(new Size(printDlg.PrintableAreaWidth, printDlg.PrintableAreaHeight));
+                        cpd.Arrange(new Rect(new Point(0, 0), cpd.DesiredSize));
+                        printDlg.PrintVisual(cpd, "出品单打印");
+
+                        Global.Logger.Debug(string.Format("({3}) - 共{0}张单的第{1}张 to {2}", 1, 1, prnName, Global.TraceMessage()));
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
+
+            Global.Logger.Trace(Global.TraceMessage());
+
+            return "";
+        }
+
         string PrintChuPin(int orderId, int prnType, bool rePrint = false)
         {
             Global.Logger.Trace(Global.TraceMessage());
@@ -571,7 +692,6 @@ namespace gcafeFoxproSvc
                                     cpd.OrderNum = orderNo;
                                     cpd.TableNum = tableNum;
                                     cpd.StaffName = waiter;
-                                    cpd.OrderNum = orderNo;
                                     cpd.Department = ((order_detail)obj).menu.id == 11 ? "厨房" : "酒吧";
                                     cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
                                     cpd.SerialNum = ((order_detail)obj).menu_id.ToString();
@@ -590,7 +710,6 @@ namespace gcafeFoxproSvc
                                     cpd.OrderNum = orderNo;
                                     cpd.TableNum = tableNum;
                                     cpd.StaffName = waiter;
-                                    cpd.OrderNum = orderNo;
                                     cpd.Department = ((order_detail_setmeal)obj).menu.id == 11 ? "厨房" : "酒吧";
                                     cpd.PageCnt = string.Format("共{0}张单的第{1}张", totalItem, currItem);
                                     cpd.SerialNum = ((order_detail_setmeal)obj).menu_id.ToString();
@@ -1368,6 +1487,7 @@ namespace gcafeFoxproSvc
         string GetFoxproPrinterNameByPG(string pg)
         {
             string rtn = string.Empty;
+            return "PDFCreator";
 
             using (var conn = new OleDbConnection(Global.FoxproPrntrPath))
             {

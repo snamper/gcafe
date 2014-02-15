@@ -9,6 +9,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Runtime.CompilerServices;
 using System.Data.OleDb;
+using System.Reflection;
 
 namespace gcafeFoxproSvc
 {
@@ -889,7 +890,7 @@ namespace gcafeFoxproSvc
                 {
                     conn.Open();
 
-                    string sql = string.Format("SELECT ordertime, serial, prodname, quantity, remark1, remark2, waiter FROM poh WHERE orderno = '{0}' ORDER BY ordertime, serial", orderNum);
+                    string sql = string.Format("SELECT ordertime, serial, prodname, quantity, remark1, remark2, waiter, department, printgroup, serialno, tableno FROM poh WHERE orderno = '{0}' ORDER BY ordertime, serial", orderNum);
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
                         MenuItem menuItem = null;
@@ -907,8 +908,14 @@ namespace gcafeFoxproSvc
                             string remark1 = reader.GetString(4).Trim();
                             string remark2 = reader.GetString(5).Trim();
                             string waiter = reader.GetString(6).Trim();
+                            string department = reader.GetString(7).Trim();
+                            string printGroup = reader.GetString(8).Trim();
+                            string serialNo = reader.GetString(9).Trim();
+                            string tableNo = reader.GetString(10).Trim();
                             if (string.IsNullOrEmpty(waiter))
                                 waiter = "未知";
+
+                            System.Diagnostics.Debug.WriteLine(prodName);
 
                             if (orderTimePrev != orderTime || serialPrev != serial)
                             {
@@ -917,6 +924,9 @@ namespace gcafeFoxproSvc
 
                                 menuItem = new MenuItem()
                                 {
+                                    ID = Int32.Parse(serialNo),                                     // 用来重打出品单（催单）
+                                    GroupCnt = Int32.Parse(department),                             // 用来重打出品单（催单）
+                                    Number = string.Format("{0},{1}", printGroup, tableNo),         // 用来重打出品单（催单）
                                     Quantity = quantity,
                                     OrderStaffName = waiter,
                                     OrderTime = orderTime,
@@ -953,6 +963,24 @@ namespace gcafeFoxproSvc
                                         Methods = new List<Method>(),
                                     };
 
+                                    setmeal.MenuItem = new MenuItem()
+                                    {
+                                        ID = Int32.Parse(serialNo),                                     // 用来重打出品单（催单）
+                                        GroupCnt = Int32.Parse(department),                             // 用来重打出品单（催单）
+                                        Number = string.Format("{0},{1}", printGroup, tableNo),         // 用来重打出品单（催单）
+                                        Quantity = quantity,
+                                        OrderStaffName = waiter,
+                                        OrderTime = orderTime,
+                                        IsSetmeal = true,
+                                        Unit = "份",
+                                        Name = remark1,
+                                        Price = menuItem.Price,
+                                        SetmealItems = new List<SetmealItem>(),
+                                        Methods = new List<Method>(),
+                                    };
+                                    setmeal.MenuItem.SetmealItems = new List<SetmealItem>();
+                                    setmeal.MenuItem.SetmealItems.Add(setmeal);
+
                                     if (!string.IsNullOrEmpty(remark2))
                                     {
                                         // 有做法
@@ -976,6 +1004,24 @@ namespace gcafeFoxproSvc
                                     Name = prodName,
                                     Methods = new List<Method>(),
                                 };
+
+                                setmeal.MenuItem = new MenuItem()
+                                {
+                                    ID = Int32.Parse(serialNo),                                     // 用来重打出品单（催单）
+                                    GroupCnt = Int32.Parse(department),                             // 用来重打出品单（催单）
+                                    Number = string.Format("{0},{1}", printGroup, tableNo),         // 用来重打出品单（催单）
+                                    Quantity = quantity,
+                                    OrderStaffName = waiter,
+                                    OrderTime = orderTime,
+                                    IsSetmeal = true,
+                                    Unit = "份",
+                                    Name = remark1,
+                                    Price = menuItem.Price,
+                                    SetmealItems = new List<SetmealItem>(),
+                                    Methods = new List<Method>(),
+                                };
+                                setmeal.MenuItem.SetmealItems = new List<SetmealItem>();
+                                setmeal.MenuItem.SetmealItems.Add(setmeal);
 
                                 if (!string.IsNullOrEmpty(remark2))
                                 {
@@ -1128,7 +1174,8 @@ namespace gcafeFoxproSvc
 
         public void ReprintChupinDan(string orderNum, List<MenuItem> menuItems)
         {
-
+            foreach(var menuItem in menuItems)
+                Global.PrintTaskMgr.AddTask(new PrintTask(PrintTask.PrintType.PrintChuPin, orderNum.Length > 7 ? Int32.Parse(orderNum.Substring(2)) : Int32.Parse(orderNum), 0) { MenuItem = menuItem });
         }
 
         /// <summary>
@@ -1311,6 +1358,51 @@ namespace gcafeFoxproSvc
         public void Dispose()
         {
             int i = 0;
+        }
+    }
+
+
+    public static class ObjectExtension
+    {
+
+        public static object CloneObject(this object objSource)
+        {
+
+            //Get the type of source object and create a new instance of that type
+            Type typeSource = objSource.GetType();
+            object objTarget = Activator.CreateInstance(typeSource);
+
+            //Get all the properties of source object type
+            PropertyInfo[] propertyInfo = typeSource.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //Assign all source property to taget object 's properties
+            foreach (PropertyInfo property in propertyInfo)
+            {
+                //Check whether property can be written to 
+                if (property.CanWrite)
+                {
+                    //check whether property type is value type, enum or string type
+                    if (property.PropertyType.IsValueType || property.PropertyType.IsEnum || property.PropertyType.Equals(typeof(System.String)))
+                    {
+                        property.SetValue(objTarget, property.GetValue(objSource, null), null);
+                    }
+                    //else property type is object/complex types, so need to recursively call this method until the end of the tree is reached
+                    else
+                    {
+                        object objPropertyValue = property.GetValue(objSource, null);
+                        if (objPropertyValue == null)
+                        {
+                            property.SetValue(objTarget, null, null);
+                        }
+                        else
+                        {
+                            property.SetValue(objTarget, objPropertyValue.CloneObject(), null);
+                        }
+                    }
+                }
+            }
+
+            return objTarget;
         }
     }
 }

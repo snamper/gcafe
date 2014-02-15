@@ -95,7 +95,7 @@
                                     </ListBoxItem>
                                     <toolkit:ContextMenuService.ContextMenu>
                                         <toolkit:ContextMenu>
-                                            <toolkit:MenuItem Header="选择做法发发" />
+                                            <toolkit:MenuItem Header="催单" />
                                         </toolkit:ContextMenu>
                                     </toolkit:ContextMenuService.ContextMenu>
                                 </DataTemplate>
@@ -135,9 +135,7 @@
                                         </StackPanel>
                                         <toolkit:ContextMenuService.ContextMenu>
                                             <toolkit:ContextMenu>
-                                                <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-                                                <toolkit:MenuItem Header="可选内容" Command="{Binding Path=Main.MenuOptionCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" Visibility="{Binding Converter={StaticResource SelectableToVisableConverter}}" />
-                                                <toolkit:MenuItem Header="删除品种" Command="{Binding Path=Main.DeleteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                                <toolkit:MenuItem Header="催单" Command="{Binding Path=VMBillDetail.ReprintChupinDan, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                                             </toolkit:ContextMenu>
                                         </toolkit:ContextMenuService.ContextMenu>
                                     </ListBoxItem>
@@ -174,8 +172,7 @@
 
                                         <toolkit:ContextMenuService.ContextMenu>
                                             <toolkit:ContextMenu>
-                                                <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-                                                <toolkit:MenuItem Header="删除此菜品" Command="{Binding Path=Main.DeleteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                                <toolkit:MenuItem Header="催单" Command="{Binding Path=VMBillDetail.ReprintChupinDan, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                                             </toolkit:ContextMenu>
                                         </toolkit:ContextMenuService.ContextMenu>
                                     </ListBoxItem>
