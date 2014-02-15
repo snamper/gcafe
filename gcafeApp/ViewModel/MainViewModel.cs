@@ -348,6 +348,25 @@ namespace gcafeApp.ViewModel
             }
         }
 
+        public RelayCommand<object> OrderDetailCommand
+        {
+            get
+            {
+                if (_orderDetailCommand == null)
+                {
+                    _orderDetailCommand = new RelayCommand<object>(o =>
+                    {
+                        Type t = o.GetType();
+                        int i = 0;
+                    });
+                }
+
+                return _orderDetailCommand;
+            }
+        }
+        public RelayCommand<object> _orderDetailCommand;
+
+
         public void CancelOrder()
         {
             MenuItems = new ObservableCollection<MenuItem>();

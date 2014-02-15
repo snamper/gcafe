@@ -63,7 +63,7 @@ namespace gcafeApp.ViewModel
             get { return _orderId; }
             set
             {
-                if (_orderId != value)
+                //if (_orderId != value)
                 {
                     _orderId = value;
 
@@ -88,6 +88,24 @@ namespace gcafeApp.ViewModel
             }
         }
         private ObservableCollection<MenuItem> _orderDetails;
+
+        public RelayCommand<object> OrderDetailCommand
+        {
+            get
+            {
+                if (_orderDetailCommand == null)
+                {
+                    _orderDetailCommand = new RelayCommand<object>(o =>
+                    {
+                        Type t = o.GetType();
+                        int i = 0;
+                    });
+                }
+
+                return _orderDetailCommand;
+            }
+        }
+        public RelayCommand<object> _orderDetailCommand;
 
         public RelayCommand<object> ReprintChupinDan
         {

@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using gcafeApp.Resources;
+using Microsoft.Practices.ServiceLocation;
 
 namespace gcafeApp
 {
@@ -104,10 +105,19 @@ namespace gcafeApp
 
         private void TableList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (TableList.SelectedItem == null)
+                return;
+
             string orderNum = ((ViewModel.TableViewModel)e.AddedItems[0]).OrderNum;
-            ((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).VMBillDetail.OrderId = Int32.Parse(orderNum.Length > 7 ? orderNum.Substring(2) : orderNum);
-            ((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).VMBillDetail.OrderDetail = (ViewModel.TableViewModel)e.AddedItems[0];
+            //((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).VMBillDetail.OrderId = Int32.Parse(orderNum.Length > 7 ? orderNum.Substring(2) : orderNum);
+            //((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).VMBillDetail.OrderDetail = (ViewModel.TableViewModel)e.AddedItems[0];
+
+            ServiceLocator.Current.GetInstance<ViewModel.VMBillDetail>().OrderId = Int32.Parse(orderNum.Length > 7 ? orderNum.Substring(2) : orderNum);
+            ServiceLocator.Current.GetInstance<ViewModel.VMBillDetail>().OrderDetail = (ViewModel.TableViewModel)e.AddedItems[0];
+
             App.RootFrame.Navigate(new Uri("/Pages/BillDetailPage.xaml", UriKind.Relative));
+
+            TableList.SelectedItem = null;
         }
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -124,6 +134,11 @@ namespace gcafeApp
             Type t = sender.GetType();
 
             //ContextMenu contextMenu = ContextMenuService.GetContextMenu()
+        }
+
+        private void GestureListener_Tap_1(object sender, GestureEventArgs e)
+        {
+            Type t = sender.GetType();
         }
 
 
