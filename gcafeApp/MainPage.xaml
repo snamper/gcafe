@@ -95,8 +95,8 @@
                                                                Foreground="Orange"
                                                                FontSize="32"
                                                                TextWrapping="Wrap" />
-                                                
-                                                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Price}" Foreground="Red" />
+
+                                                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Price, StringFormat='{}{0:0.00}'}" FontSize="28" Foreground="Red" />
                                                 </Grid>
                                             </ListBoxItem>
                                             <toolkit:ContextMenuService.ContextMenu>
@@ -166,7 +166,7 @@
                                                                FontSize="32"
                                                                TextWrapping="Wrap" />
 
-                                                        <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Price}" Foreground="Red" />
+                                                        <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Price, StringFormat='{}{0:0.00}'}" Foreground="Red" FontSize="28" />
                                                     </Grid>
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock Text="数量:" Foreground="{StaticResource PhoneAccentBrush}" />

@@ -921,6 +921,7 @@ namespace gcafeFoxproSvc
                                     OrderStaffName = waiter,
                                     OrderTime = orderTime,
                                     IsSetmeal = false,
+                                    Unit = "份",
                                     SetmealItems = new List<SetmealItem>(),
                                     Methods = new List<Method>(),
                                 };

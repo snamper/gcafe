@@ -57,36 +57,136 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,15,12,0">
-            <phone:LongListSelector x:Name="TableList" Margin="0,0,-22,0" ItemsSource="{Binding MenuItems}"
-                                    toolkit:TiltEffect.IsTiltEnabled="True">
-                <phone:LongListSelector.ItemTemplate>
+            <ListBox Grid.Row="1" ItemsSource="{Binding Path=MenuItems}" Margin="0,0,-22,0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70*" />
-                                <ColumnDefinition Width="30*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="65*" />
-                                <RowDefinition Height="35*" />
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" TextWrapping="Wrap" />
-                            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock Text="{Binding OrderStaffName}" Style="{StaticResource PhoneTextNormalStyle}" Foreground="Orange"/>
-                                <TextBlock Text="{Binding OrderTime, StringFormat=HH:mm}" Style="{StaticResource PhoneTextNormalStyle}" Foreground="LightBlue"/>
-                            </StackPanel>
-                            <TextBlock Grid.Column="1" Grid.RowSpan="2" Text="{Binding Price, StringFormat='{}{0:0.00}'}"  Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Red" />
+                        <toolkit:ExpanderView Margin="0,0,0,8" Background="Red"
+                                                      Header="{Binding}"
+                                                      NonExpandableHeader="{Binding}"
+                                                      Expander="{Binding}"
+                                                      ItemsSource="{Binding SetmealItems}"
+                                                      IsNonExpandable="{Binding IsSetmeal, Converter={StaticResource InverseBooleanConverter}}">
+                            <toolkit:ExpanderView.HeaderTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="360" />
+                                                <ColumnDefinition Width="80" />
+                                            </Grid.ColumnDefinitions>
 
-                            <toolkit:ContextMenuService.ContextMenu>
-                                <toolkit:ContextMenu>
-                                    <toolkit:MenuItem Header="重打出品单" Command="{Binding Path=VMBillDetail.ReprintChupinDan, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-                                </toolkit:ContextMenu>
-                            </toolkit:ContextMenuService.ContextMenu>
+                                            <TextBlock Text="{Binding Name}" 
+                                                               Foreground="Orange"
+                                                               FontSize="32"
+                                                               TextWrapping="Wrap" />
 
-                        </Grid>
+                                            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Price, StringFormat='{}{0:0.00}'}" FontSize="28" Foreground="Red" />
+                                        </Grid>
+                                    </ListBoxItem>
+                                    <toolkit:ContextMenuService.ContextMenu>
+                                        <toolkit:ContextMenu>
+                                            <toolkit:MenuItem Header="选择做法发发" />
+                                        </toolkit:ContextMenu>
+                                    </toolkit:ContextMenuService.ContextMenu>
+                                </DataTemplate>
+                            </toolkit:ExpanderView.HeaderTemplate>
+
+                            <toolkit:ExpanderView.ExpanderTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True" FontFamily="Portable User Interface">
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="数量:" Foreground="{StaticResource PhoneAccentBrush}" />
+                                                <TextBlock Margin="10, 0" Text="{Binding Quantity}" Foreground="{StaticResource PhoneAccentBrush}" />
+                                                <TextBlock Text="{Binding Unit}" Foreground="{StaticResource PhoneAccentBrush}" />
+
+                                                <TextBlock Margin="10, 0"  Text="{Binding OrderStaffName}" Foreground="{StaticResource PhoneAccentBrush}" />
+                                                <TextBlock Text="{Binding OrderTime, StringFormat=HH:mm}" Foreground="{StaticResource PhoneAccentBrush}" />
+                                            </StackPanel>
+                                            <TextBlock Foreground="Aqua">
+                                                    <Run Text="{Binding SetmealItems, Converter={StaticResource ItemCountToTextConverter}}" />
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ListBoxItem>
+                                    <toolkit:ContextMenuService.ContextMenu>
+                                        <toolkit:ContextMenu Width="100" Height="100">
+                                            <toolkit:MenuItem Header="选择做法发发" />
+                                        </toolkit:ContextMenu>
+                                    </toolkit:ContextMenuService.ContextMenu>
+                                </DataTemplate>
+                            </toolkit:ExpanderView.ExpanderTemplate>
+
+                            <toolkit:ExpanderView.ItemTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="Blue" />
+                                            <TextBlock Text="{Binding Methods, Converter={StaticResource MethodsToTextConverter}}" Visibility="{Binding Methods, Converter={StaticResource MethodsToVisibilityConverter}}" />
+                                        </StackPanel>
+                                        <toolkit:ContextMenuService.ContextMenu>
+                                            <toolkit:ContextMenu>
+                                                <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                                <toolkit:MenuItem Header="可选内容" Command="{Binding Path=Main.MenuOptionCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" Visibility="{Binding Converter={StaticResource SelectableToVisableConverter}}" />
+                                                <toolkit:MenuItem Header="删除品种" Command="{Binding Path=Main.DeleteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                            </toolkit:ContextMenu>
+                                        </toolkit:ContextMenuService.ContextMenu>
+                                    </ListBoxItem>
+                                </DataTemplate>
+                            </toolkit:ExpanderView.ItemTemplate>
+
+                            <toolkit:ExpanderView.NonExpandableHeaderTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem toolkit:TiltEffect.IsTiltEnabled="True">
+                                        <StackPanel>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="360" />
+                                                    <ColumnDefinition Width="80" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Text="{Binding Name}" 
+                                                               Foreground="Orange"
+                                                               FontSize="32"
+                                                               TextWrapping="Wrap" />
+
+                                                <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Price, StringFormat='{}{0:0.00}'}" Foreground="Red" FontSize="28" />
+                                            </Grid>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="数量:" Foreground="{StaticResource PhoneAccentBrush}" />
+                                                <TextBlock Margin="10, 0" Text="{Binding Quantity}" Foreground="{StaticResource PhoneAccentBrush}"/>
+                                                <TextBlock Text="{Binding Unit}" Foreground="{StaticResource PhoneAccentBrush}"/>
+
+                                                <TextBlock Margin="10, 0" Text="{Binding OrderStaffName}" Foreground="{StaticResource PhoneAccentBrush}" />
+                                                <TextBlock Text="{Binding OrderTime, StringFormat=HH:mm}" Foreground="{StaticResource PhoneAccentBrush}" />
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding Methods, Converter={StaticResource MethodsToTextConverter}}" Visibility="{Binding Methods, Converter={StaticResource MethodsToVisibilityConverter}}" />
+                                        </StackPanel>
+
+                                        <toolkit:ContextMenuService.ContextMenu>
+                                            <toolkit:ContextMenu>
+                                                <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                                <toolkit:MenuItem Header="删除此菜品" Command="{Binding Path=Main.DeleteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                            </toolkit:ContextMenu>
+                                        </toolkit:ContextMenuService.ContextMenu>
+                                    </ListBoxItem>
+                                </DataTemplate>
+                            </toolkit:ExpanderView.NonExpandableHeaderTemplate>
+
+                        </toolkit:ExpanderView>
+
                     </DataTemplate>
-                </phone:LongListSelector.ItemTemplate>
-            </phone:LongListSelector>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 
