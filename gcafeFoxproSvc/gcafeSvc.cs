@@ -968,13 +968,21 @@ namespace gcafeFoxproSvc
                             else
                             {
                                 // 这一定是套餐内容项
+                                SetmealItem setmeal = new SetmealItem()
+                                {
+                                    Name = prodName,
+                                    Methods = new List<Method>(),
+                                };
 
                                 if (!string.IsNullOrEmpty(remark2))
                                 {
                                     // 有做法
                                     string[] methods = remark2.Split(',');
+                                    foreach (string method in methods)
+                                        setmeal.Methods.Add(new Method() { Name = method, });
                                 }
 
+                                menuItem.SetmealItems.Add(setmeal);
                             }
                         }
                     }
