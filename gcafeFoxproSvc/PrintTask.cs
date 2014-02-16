@@ -1587,7 +1587,7 @@ namespace gcafeFoxproSvc
 
         bool IsNeedToTidy()
         {
-            bool rtn = true;
+            bool rtn = false;
 
             try
             {
@@ -1595,10 +1595,20 @@ namespace gcafeFoxproSvc
                 {
                     conn.Open();
 
-                    string sql = string.Format("SELECT ");
+                    string sql = string.Format("SELECT note FROM sysinfo");
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
-
+                        string n = ((string)cmd.ExecuteScalar()).Trim();
+                        if (n == "1")
+                            rtn = true;
+                        else
+                        {
+                            sql = string.Format("UPDATE sysinfo SET note = '0'");
+                            using (var cmd1 = new OleDbCommand(sql, conn))
+                            {
+                                cmd1.ExecuteNonQuery();
+                            }
+                        }
                     }
 
                     conn.Close();
@@ -1622,10 +1632,10 @@ namespace gcafeFoxproSvc
                 {
                     conn.Open();
 
-                    string sql = string.Format("SELECT ");
+                    string sql = string.Format("SELECT add10 FROM sysinfo");
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
-
+                        rtn = (bool)cmd.ExecuteScalar();
                     }
 
                     conn.Close();
