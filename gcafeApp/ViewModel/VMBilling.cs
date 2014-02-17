@@ -23,6 +23,21 @@ namespace gcafeApp.ViewModel
             }
         }
 
+        public string OrderNum
+        {
+            get { return _orderNum; }
+            set
+            {
+                if (_orderNum != value)
+                {
+                    _orderNum = value;
+
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        private string _orderNum;
+
         public TableViewModel OrderDetail
         {
             get { return _orderDetail; }

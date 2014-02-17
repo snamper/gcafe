@@ -75,20 +75,11 @@ namespace gcafeFoxproSvc
 
             try
             {
-                bool isFestival = false;
-
                 using (var conn = new OleDbConnection(Properties.Settings.Default.FoxproPath))
                 {
                     conn.Open();
 
-                    string sql = string.Format("SELECT pricetype FROM sysinfo");
-
-                    // 看是否节日价
-                    using (var cmd = new OleDbCommand(sql, conn))
-                    {
-                        if (Int32.Parse((string)cmd.ExecuteScalar()) == 2)
-                            isFestival = true;
-                    }
+                    string sql = string.Empty;
 
                     if (cataId > 0)
                         sql = string.Format("SELECT `TRIM`(productno) AS Expr1, `TRIM`(prodname) AS Expr2, price, fprice FROM product WHERE (productno LIKE '{0}%') AND (len(`TRIM`(productno)) > 4) AND (locked = 0)", cataId);
@@ -105,9 +96,14 @@ namespace gcafeFoxproSvc
                                 string prodName = reader.GetString(1).Trim();
                                 decimal price = reader.GetDecimal(2);
                                 decimal fprice = reader.GetDecimal(3);
-                                if (isFestival)
+                                
+                                // 是否节日
+                                if (IsFestival)
                                     if (fprice > price)
                                         price = fprice;
+                                // 是否加10%
+                                if (IsNeed10Percent)
+                                    price *= (decimal)1.1;
 
                                 MenuItem menuItem = new MenuItem()
                                 {
@@ -204,20 +200,11 @@ namespace gcafeFoxproSvc
 
             try
             {
-                bool isFestival = false;
-
                 using (var conn = new OleDbConnection(Properties.Settings.Default.FoxproPath))
                 {
                     conn.Open();
 
-                    string sql = string.Format("SELECT pricetype FROM sysinfo");
-
-                    // 看是否节日价
-                    using (var cmd = new OleDbCommand(sql, conn))
-                    {
-                        if (Int32.Parse((string)cmd.ExecuteScalar()) == 2)
-                            isFestival = true;
-                    }
+                    string sql = string.Empty;
 
                     sql = string.Format("SELECT `TRIM`(productno) AS Expr1, `TRIM`(prodname) AS Expr2, price, fprice FROM product WHERE (productno = '{0}') AND (len(`TRIM`(productno)) > 4) AND (locked = 0)", number);
 
@@ -231,9 +218,14 @@ namespace gcafeFoxproSvc
                                 string prodName = reader.GetString(1).Trim();
                                 decimal price = reader.GetDecimal(2);
                                 decimal fprice = reader.GetDecimal(3);
-                                if (isFestival)
+
+                                // 是否节日
+                                if (IsFestival)
                                     if (fprice > price)
                                         price = fprice;
+                                // 是否加10%
+                                if (IsNeed10Percent)
+                                    price *= (decimal)1.1;
 
                                 menuItem = new MenuItem()
                                 {
@@ -755,6 +747,14 @@ namespace gcafeFoxproSvc
                                 price2 = reader.GetDecimal(2);
                                 fprice = reader.GetDecimal(3);
                                 prodNn = reader.GetString(4).Trim();
+
+                                // 是否节日
+                                if (IsFestival)
+                                    if (fprice > price)
+                                        price = fprice;
+                                // 是否加10%
+                                if (IsNeed10Percent)
+                                    price *= (decimal)1.1;
 
                                 sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no, waiter) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '', '{9:D4}')",
                                     strNow, tableInfo.OrderNum, menuItem.ID, menuItem.Name, menuItem.Price, price2, menuItem.Quantity, "A", prodNn, staffId);
@@ -1353,6 +1353,68 @@ namespace gcafeFoxproSvc
             }
 
             return orderNo;
+        }
+
+        bool IsFestival
+        {
+            get
+            {
+                bool rtn = true;
+
+                try
+                {
+                    using (var conn = new OleDbConnection(Global.FoxproPath))
+                    {
+                        string sql = string.Format("SELECT pricetype FROM sysinfo");
+
+                        // 看是否节日价
+                        using (var cmd = new OleDbCommand(sql, conn))
+                        {
+                            if (Int32.Parse((string)cmd.ExecuteScalar()) == 2)
+                                rtn = true;
+                            else
+                                rtn = false;
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Global.Logger.Error(ex.Message);
+                }
+
+                return rtn;
+            }
+        }
+
+        bool IsNeed10Percent
+        {
+            get
+            {
+                bool rtn = false;
+
+                try
+                {
+                    using (var conn = new OleDbConnection(Global.FoxproPath))
+                    {
+                        conn.Open();
+
+                        string sql = string.Format("SELECT add10 FROM sysinfo");
+                        using (var cmd = new OleDbCommand(sql, conn))
+                        {
+                            rtn = (bool)cmd.ExecuteScalar();
+                        }
+
+                        conn.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Global.Logger.Error(ex.Message);
+                }
+
+                return rtn;
+            }
         }
 
         public void Dispose()

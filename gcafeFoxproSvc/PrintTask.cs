@@ -1622,33 +1622,6 @@ namespace gcafeFoxproSvc
             return rtn;
         }
 
-        bool IsNeed10Percent()
-        {
-            bool rtn = false;
-
-            try
-            {
-                using (var conn = new OleDbConnection(Global.FoxproPath))
-                {
-                    conn.Open();
-
-                    string sql = string.Format("SELECT add10 FROM sysinfo");
-                    using (var cmd = new OleDbCommand(sql, conn))
-                    {
-                        rtn = (bool)cmd.ExecuteScalar();
-                    }
-
-                    conn.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                Global.Logger.Error(ex.Message);
-            }
-
-            return rtn;
-        }
-
         string GetFoxproProductNumByName(string prodName)
         {
             string rtn = string.Empty;

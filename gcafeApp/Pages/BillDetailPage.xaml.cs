@@ -29,7 +29,7 @@ namespace gcafeApp.Pages
             }
             else
             {
-
+                NavigationService.GoBack();
             }
         }
     }
