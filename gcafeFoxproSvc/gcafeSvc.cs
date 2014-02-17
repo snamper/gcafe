@@ -683,6 +683,20 @@ namespace gcafeFoxproSvc
                                 Name = prodName,
                             });
                         }
+
+                        foreach (var mc in rtn)
+                        {
+                            if (mc.Name == "加")
+                            {
+                                mc.Methods.Add(new Method()
+                                    {
+                                        ID = 111901,
+                                        Name = "加铁板",
+                                    });
+
+                                break;
+                            }
+                        }
                     }
 
                     conn.Close();
@@ -758,7 +772,7 @@ namespace gcafeFoxproSvc
                                     price *= (decimal)1.1;
 
                                 sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no, waiter) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '', '{9:D4}')",
-                                    strNow, tableInfo.OrderNum, menuItem.ID, menuItem.Name, menuItem.Price, price2, menuItem.Quantity, "A", prodNn, staffId);
+                                    strNow, tableInfo.OrderNum, menuItem.ID, menuItem.Name, price, price2, menuItem.Quantity, "A", prodNn, staffId);
 
                                 using (var cmd1 = new OleDbCommand(sql, conn, trans))
                                 {
@@ -767,6 +781,52 @@ namespace gcafeFoxproSvc
                             }
                             else
                                 throw new Exception(string.Format("{0} 没有对应的产品", 111));
+                        }
+
+                        // 加铁板的处理
+                        if (menuItem.Methods != null)
+                        {
+                            foreach (var method in menuItem.Methods)
+                            {
+                                if (method.Name == "加铁板")
+                                {
+                                    sql = string.Format("SELECT prodname, price, price2, fprice, productnn FROM product WHERE (productno = '{0}')", method.ID);
+                                    using (var cmd = new OleDbCommand(sql, conn, trans))
+                                    {
+                                        string prodName, prodNn;
+                                        decimal price, price2, fprice;
+
+                                        OleDbDataReader reader = cmd.ExecuteReader();
+                                        if (reader.Read())
+                                        {
+                                            prodName = reader.GetString(0).Trim();
+                                            price = reader.GetDecimal(1);
+                                            price2 = reader.GetDecimal(2);
+                                            fprice = reader.GetDecimal(3);
+                                            prodNn = reader.GetString(4).Trim();
+
+                                            // 是否节日
+                                            if (IsFestival)
+                                                if (fprice > price)
+                                                    price = fprice;
+                                            // 是否加10%
+                                            if (IsNeed10Percent)
+                                                price *= (decimal)1.1;
+
+                                            sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no, waiter) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '', '{9:D4}')",
+                                                strNow, tableInfo.OrderNum, method.ID, method.Name, price, price2, 1, "A", prodNn, staffId);
+
+                                            using (var cmd1 = new OleDbCommand(sql, conn, trans))
+                                            {
+                                                cmd1.ExecuteNonQuery();
+                                            }
+                                        }
+                                        else
+                                            throw new Exception(string.Format("{0} 没有对应的产品", 111));
+                                    }
+
+                                }
+                            }
                         }
 
                         #endregion 插入orditem表
@@ -1042,6 +1102,39 @@ namespace gcafeFoxproSvc
                         }
 
                         menuItems.Add(menuItem);
+                    }
+
+                    // 处理加铁板
+                    sql = string.Format("SELECT ordertime, productno, prodname, price, quantity, waiter FROM orditem WHERE (orderno = '{0}') AND (prodname = '加铁板')", orderNum);
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        MenuItem menuItem = null;
+
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            DateTime orderTime = reader.GetDateTime(0);
+                            string prodNo = reader.GetString(1).Trim();
+                            string prodName = reader.GetString(2).Trim();
+                            decimal price = reader.GetDecimal(3);
+                            int quantity = reader.GetInt32(4);
+                            string waiter = reader.GetString(5);
+
+                            menuItem = new MenuItem()
+                            {
+                                Name = prodName,
+                                Price = price,
+                                Quantity = quantity,
+                                OrderStaffName = waiter,
+                                OrderTime = orderTime,
+                                IsSetmeal = false,
+                                Unit = "份",
+                                SetmealItems = new List<SetmealItem>(),
+                                Methods = new List<Method>(),
+                            };
+
+                            menuItems.Add(menuItem);
+                        }
                     }
 
                     //string sql = string.Format("SELECT ordertime, productno, prodname, price, quantity, waiter FROM orditem WHERE orderno = '{0}' ORDER BY ordertime", orderNum);
