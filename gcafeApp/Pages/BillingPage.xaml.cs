@@ -16,5 +16,10 @@ namespace gcafeApp.Pages
         {
             InitializeComponent();
         }
+
+        private void ListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

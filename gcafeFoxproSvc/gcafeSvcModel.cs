@@ -112,6 +112,8 @@ namespace gcafeFoxproSvc
         [DataMember]
         public string OrderStaffName { get; set; }
         [DataMember]
+        public bool DiscountAllowed { get; set; }
+        [DataMember]
         public int GroupCnt { get; set; }
     }
 

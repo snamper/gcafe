@@ -80,6 +80,8 @@ namespace gcafeApp.gcafeSvc {
     [System.Runtime.Serialization.DataContractAttribute(Name="MenuItem", Namespace="http://schemas.datacontract.org/2004/07/gcafeFoxproSvc", IsReference=true)]
     public partial class MenuItem : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private bool DiscountAllowedField;
+        
         private int GroupCntField;
         
         private int IDField;
@@ -105,6 +107,19 @@ namespace gcafeApp.gcafeSvc {
         private System.Collections.ObjectModel.ObservableCollection<gcafeApp.gcafeSvc.SetmealItem> SetmealItemsField;
         
         private string UnitField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool DiscountAllowed {
+            get {
+                return this.DiscountAllowedField;
+            }
+            set {
+                if ((this.DiscountAllowedField.Equals(value) != true)) {
+                    this.DiscountAllowedField = value;
+                    this.RaisePropertyChanged("DiscountAllowed");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int GroupCnt {

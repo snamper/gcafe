@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Practices.ServiceLocation;
+using gcafeApp.ViewModel;
 
 namespace gcafeApp.Pages
 {
@@ -24,7 +26,8 @@ namespace gcafeApp.Pages
 
             if (btn.Text == "账单")
             {
-                ((ViewModel.ViewModelLocator)App.Current.Resources["Locator"]).VMBilling.OrderDetail = new ViewModel.TableViewModel();
+                ((ViewModelLocator)App.Current.Resources["Locator"]).VMBilling.MenuItems = ServiceLocator.Current.GetInstance<VMBillDetail>().MenuItems;
+                ((ViewModelLocator)App.Current.Resources["Locator"]).VMBilling.OrderDetail = ServiceLocator.Current.GetInstance<VMBillDetail>().OrderDetail;
                 App.RootFrame.Navigate(new Uri("/Pages/BillingPage.xaml", UriKind.Relative));
             }
             else

@@ -10,6 +10,7 @@ using System.Text;
 using System.Runtime.CompilerServices;
 using System.Data.OleDb;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace gcafeFoxproSvc
 {
@@ -915,7 +916,7 @@ namespace gcafeFoxproSvc
                             if (string.IsNullOrEmpty(waiter))
                                 waiter = "未知";
 
-                            System.Diagnostics.Debug.WriteLine(prodName);
+                            //System.Diagnostics.Debug.WriteLine(prodName);
 
                             if (orderTimePrev != orderTime || serialPrev != serial)
                             {
@@ -940,6 +941,7 @@ namespace gcafeFoxproSvc
                                 {
                                     // 不是套餐
                                     menuItem.Name = prodName;
+                                    menuItem.DiscountAllowed = DiscountAllowed(prodName);
                                     menuItem.Price = GetFoxproOrderitemPrice(orderNum, orderTime, prodName);
                                     
                                     if (!string.IsNullOrEmpty(remark2))
@@ -953,8 +955,12 @@ namespace gcafeFoxproSvc
                                 else
                                 {
                                     // 是套餐
+                                    Match match = Regex.Match(remark1, @"\((\w+)×\d\)");
+                                    if (match.Groups.Count > 1)
+                                        remark1 = match.Groups[1].Value;
                                     menuItem.IsSetmeal = true;
                                     menuItem.Name = remark1;
+                                    menuItem.DiscountAllowed = false;
                                     menuItem.Price = GetFoxproOrderitemPrice(orderNum, orderTime, remark1);
 
                                     SetmealItem setmeal = new SetmealItem()
@@ -1415,6 +1421,35 @@ namespace gcafeFoxproSvc
 
                 return rtn;
             }
+        }
+
+        bool DiscountAllowed(string prodName)
+        {
+            bool rtn = false;
+
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT nodiscount FROM product WHERE prodname = '{0}'", prodName);
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        object val = cmd.ExecuteScalar();
+                        if (val != null)
+                            rtn = (bool)val;
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
+
+            return rtn;
         }
 
         public void Dispose()

@@ -1661,7 +1661,7 @@ namespace gcafeFoxproSvc
                 {
                     conn.Open();
 
-                    string sql = string.Format("SELECT ordertime, orderno, serial, prodname, printgroup, remark2 FROM poh ORDER BY ordertime, serial");
+                    string sql = string.Format("SELECT ordertime, orderno, serial, prodname, printgroup, remark2 FROM poh ORDER BY ordertime, serialno");
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
                         DateTime orderTimePrev = System.DateTime.Now;
@@ -1677,7 +1677,7 @@ namespace gcafeFoxproSvc
                         {
                             DateTime orderTime = reader.GetDateTime(0);
                             string orderNo = reader.GetString(1).Trim();
-                            string serial = reader.GetString(2).Trim();
+                            string serial = reader.GetString(2).TrimEnd();
                             string prodName = reader.GetString(3).Trim();
                             string printGroup = reader.GetString(4).Trim();
                             string remark = reader.GetString(5).Trim();
