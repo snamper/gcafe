@@ -23,6 +23,12 @@
         <data:MainViewModel x:Key="mydata" />
     </-->
     
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="ListFooterPadding">
+            <Border Height="72" />
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+    
 
     <!--LayoutRoot 是包含所有页面内容的根网格-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource MyBackground}">
@@ -65,18 +71,9 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ListBox Grid.Row="1" ItemsSource="{Binding Path=MenuItems, Mode=TwoWay}" Margin="12,0,0,0">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemTemplate>
+                    <phone:LongListSelector Grid.Row="1" ItemsSource="{Binding Path=MenuItems, Mode=TwoWay}" Margin="12,0,0,0" 
+                                            ListFooterTemplate="{StaticResource ListFooterPadding}">
+                        <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <toolkit:ExpanderView Margin="0,0,0,8" Background="Red"
                                                       Header="{Binding}"
@@ -191,8 +188,8 @@
                                 </toolkit:ExpanderView>
 
                             </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
                     <Controls:Order x:Name="OrderCtrl" />
                 </Grid>
                 

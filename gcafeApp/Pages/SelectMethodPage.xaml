@@ -16,6 +16,10 @@
     DataContext="{Binding VMSelectMethod, Source={StaticResource Locator}}">
     
     <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="ListFooterPadding">
+            <Border Height="72" />
+        </DataTemplate>
+
         <DataTemplate x:Key="MethodsGroupHeaderTemplate">
             <TextBlock Text="{Binding Name}" 
                        FontSize="{StaticResource PhoneFontSizeLarge}"
@@ -111,6 +115,7 @@
                                            IsGroupingEnabled="True"
                                            HideEmptyGroups="False"
                                            EnforceIsSelectionEnabled="True"
+                                           ListFooterTemplate="{StaticResource ListFooterPadding}" 
                                            GroupHeaderTemplate="{StaticResource MethodsGroupHeaderTemplate}"
                                            JumpListStyle="{StaticResource MethodsJumpListStyle}"
                                            ItemTemplate="{StaticResource MethodsGridTemplate}"/>
