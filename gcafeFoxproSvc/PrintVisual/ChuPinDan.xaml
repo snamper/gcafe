@@ -19,6 +19,7 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock x:Name="TableNo" Text="1231" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="25" />
             <TextBlock Text="(出品)" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" />
+            <TextBlock x:Name="reprint" Text="重打" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" Visibility="Collapsed" />
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
             <TextBlock Text="点菜员：" FontSize="16" />

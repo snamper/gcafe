@@ -454,6 +454,7 @@ namespace gcafeFoxproSvc
 
                     using (PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
                     {
+                        cpd.IsReprint = true;
                         cpd.OrderNum = orderNo;
                         cpd.TableNum = item.Number.Split(',')[1];
                         cpd.StaffName = item.OrderStaffName;
@@ -492,7 +493,7 @@ namespace gcafeFoxproSvc
 
                     using (PrintVisual.ChuPinDan cpd = new PrintVisual.ChuPinDan())
                     {
-
+                        cpd.IsReprint = true;
                         cpd.OrderNum = orderNo;
                         cpd.TableNum = item.Number.Split(',')[1];
                         cpd.StaffName = item.OrderStaffName;
@@ -1208,10 +1209,12 @@ namespace gcafeFoxproSvc
             {
                 conn.Open();
 
-                string sql = string.Format("SELECT prntr FROM prntrb WHERE printgroup = '{0}'", tableNum);
+                string sql = string.Format("SELECT prntr FROM prntrb WHERE printgroup = '{0}'", tableNum.Substring(0, 1));
                 using (var cmd = new OleDbCommand(sql, conn))
                 {
-                    rtn = (string)cmd.ExecuteScalar();
+                    object val = cmd.ExecuteScalar();
+                    if (val != null)
+                        rtn = ((string)val).Trim();
                 }
 
                 conn.Close();
@@ -1487,7 +1490,6 @@ namespace gcafeFoxproSvc
         string GetFoxproPrinterNameByPG(string pg)
         {
             string rtn = string.Empty;
-            return "PDFCreator";
 
             using (var conn = new OleDbConnection(Global.FoxproPrntrPath))
             {
@@ -1547,13 +1549,13 @@ namespace gcafeFoxproSvc
             {
                 conn.Open();
 
-                string sql = string.Format("SELECT price FROM orditem WHERE (orderno = '{0}')", orderNum);
+                string sql = string.Format("SELECT price, quantity FROM orditem WHERE (orderno = '{0}')", orderNum);
                 using (var cmd = new OleDbCommand(sql, conn))
                 {
                     OleDbDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        rtn += reader.GetDecimal(0);
+                        rtn += reader.GetDecimal(0) * reader.GetInt32(1);
                     }
                 }
 
@@ -1600,9 +1602,9 @@ namespace gcafeFoxproSvc
                     {
                         string n = ((string)cmd.ExecuteScalar()).Trim();
                         if (n == "1")
-                            rtn = true;
-                        else
                         {
+                            rtn = true;
+
                             sql = string.Format("UPDATE sysinfo SET note = '0'");
                             using (var cmd1 = new OleDbCommand(sql, conn))
                             {

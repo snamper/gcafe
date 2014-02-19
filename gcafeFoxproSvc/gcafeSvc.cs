@@ -39,18 +39,36 @@ namespace gcafeFoxproSvc
 
             _log.Trace(TraceMessage());
 
+            List<string> sellOutList = new List<string>();
+
             try
             {
                 using (var conn = new OleDbConnection(Properties.Settings.Default.FoxproPath))
                 {
                     conn.Open();
 
-                    string sql = string.Format("SELECT `TRIM`(productno) AS Expr1, prodname, len(`TRIM`(productno)) AS Expr1 FROM product WHERE (len(`TRIM`(productno)) = 4) AND (locked = 0) AND (LEFT(productno, 2) = '{0}') ORDER BY productno", rootCata);
+                    string sql = "SELECT productno FROM sellout";
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                sellOutList.Add(reader.GetString(0).Trim());
+                            }
+                        }
+                    }
+
+                    sql = string.Format("SELECT `TRIM`(productno) AS Expr1, prodname, len(`TRIM`(productno)) AS Expr1 FROM product WHERE (len(`TRIM`(productno)) = 4) AND (locked = 0) AND (LEFT(productno, 2) = '{0}') ORDER BY productno", rootCata);
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
                         OleDbDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
+                            string prodNo = reader.GetString(0).Trim();
+                            if (sellOutList.Contains(prodNo))
+                                continue;
+
                             cataList.Add(new MenuCatalog() { ID = Int32.Parse(reader.GetString(0)), Name = reader.GetString(1).Trim() });
                         }
                     }
@@ -74,13 +92,28 @@ namespace gcafeFoxproSvc
 
             _log.Trace(TraceMessage());
 
+            bool isFestivalPrice = IsFestival;
+            bool isNeed10Percent = IsNeed10Percent;
+
             try
             {
                 using (var conn = new OleDbConnection(Properties.Settings.Default.FoxproPath))
                 {
                     conn.Open();
 
-                    string sql = string.Empty;
+                    List<string> sellOutList = new List<string>();
+                    string sql = "SELECT productno FROM sellout";
+
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                sellOutList.Add(reader.GetString(0).Trim());
+                            }
+                        }
+                    }
 
                     if (cataId > 0)
                         sql = string.Format("SELECT `TRIM`(productno) AS Expr1, `TRIM`(prodname) AS Expr2, price, fprice FROM product WHERE (productno LIKE '{0}%') AND (len(`TRIM`(productno)) > 4) AND (locked = 0)", cataId);
@@ -97,13 +130,16 @@ namespace gcafeFoxproSvc
                                 string prodName = reader.GetString(1).Trim();
                                 decimal price = reader.GetDecimal(2);
                                 decimal fprice = reader.GetDecimal(3);
+
+                                if (sellOutList.Contains(prodNo))
+                                    continue;
                                 
                                 // 是否节日
-                                if (IsFestival)
+                                if (isFestivalPrice)
                                     if (fprice > price)
                                         price = fprice;
                                 // 是否加10%
-                                if (IsNeed10Percent)
+                                if (isNeed10Percent)
                                     price *= (decimal)1.1;
 
                                 MenuItem menuItem = new MenuItem()
@@ -199,6 +235,9 @@ namespace gcafeFoxproSvc
 
             _log.Trace(TraceMessage());
 
+            bool isFestivalPrice = IsFestival;
+            bool isNeed10Percent = IsNeed10Percent;
+
             try
             {
                 using (var conn = new OleDbConnection(Properties.Settings.Default.FoxproPath))
@@ -221,11 +260,11 @@ namespace gcafeFoxproSvc
                                 decimal fprice = reader.GetDecimal(3);
 
                                 // 是否节日
-                                if (IsFestival)
+                                if (isFestivalPrice)
                                     if (fprice > price)
                                         price = fprice;
                                 // 是否加10%
-                                if (IsNeed10Percent)
+                                if (isNeed10Percent)
                                     price *= (decimal)1.1;
 
                                 menuItem = new MenuItem()
@@ -719,6 +758,9 @@ namespace gcafeFoxproSvc
 
             _log.Trace(TraceMessage());
 
+            bool isFestival = IsFestival;
+            bool isNeed10Percent = IsNeed10Percent;
+
             try
             {
                 using (var conn = new OleDbConnection(Properties.Settings.Default.FoxproPath))
@@ -764,11 +806,11 @@ namespace gcafeFoxproSvc
                                 prodNn = reader.GetString(4).Trim();
 
                                 // 是否节日
-                                if (IsFestival)
+                                if (isFestival)
                                     if (fprice > price)
                                         price = fprice;
                                 // 是否加10%
-                                if (IsNeed10Percent)
+                                if (isNeed10Percent)
                                     price *= (decimal)1.1;
 
                                 sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no, waiter) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '', '{9:D4}')",
@@ -806,11 +848,11 @@ namespace gcafeFoxproSvc
                                             prodNn = reader.GetString(4).Trim();
 
                                             // 是否节日
-                                            if (IsFestival)
+                                            if (isFestival)
                                                 if (fprice > price)
                                                     price = fprice;
                                             // 是否加10%
-                                            if (IsNeed10Percent)
+                                            if (isNeed10Percent)
                                                 price *= (decimal)1.1;
 
                                             sql = string.Format("INSERT INTO orditem(ordertime, orderno, productno, prodname, price, price2, quantity, note1name, note2name, note1no, price1, quantity1, add10, quantity2, discount, machineid, taiji, memberno, amt, productnn, note2no, waiter) VALUES({0}, '{1}', '{2}', '{3}', {4}, {5}, {6}, '11', '', '', 0, 0, 0, 0, 1, '{7}', 0, '', 0, '{8}', '', '{9:D4}')",
@@ -951,6 +993,9 @@ namespace gcafeFoxproSvc
                 {
                     conn.Open();
 
+                    if (IsNeedToTidy())
+                        FoxproTidyup();
+
                     string sql = string.Format("SELECT ordertime, serial, prodname, quantity, remark1, remark2, waiter, department, printgroup, serialno, tableno FROM poh WHERE orderno = '{0}' ORDER BY ordertime, serial", orderNum);
                     using (var cmd = new OleDbCommand(sql, conn))
                     {
@@ -1003,6 +1048,12 @@ namespace gcafeFoxproSvc
                                     menuItem.Name = prodName;
                                     menuItem.DiscountAllowed = DiscountAllowed(prodName);
                                     menuItem.Price = GetFoxproOrderitemPrice(orderNum, orderTime, prodName);
+                                    // 因为删除orditem后没有相应删除poh
+                                    if (menuItem.Price == 0)
+                                    {
+                                        menuItem = null;
+                                        continue;
+                                    }
                                     
                                     if (!string.IsNullOrEmpty(remark2))
                                     {
@@ -1015,13 +1066,19 @@ namespace gcafeFoxproSvc
                                 else
                                 {
                                     // 是套餐
-                                    Match match = Regex.Match(remark1, @"\((\w+)×\d\)");
+                                    Match match = Regex.Match(remark1, @"\(([\w\s\(\)]+)×\d\)");
                                     if (match.Groups.Count > 1)
                                         remark1 = match.Groups[1].Value;
                                     menuItem.IsSetmeal = true;
                                     menuItem.Name = remark1;
                                     menuItem.DiscountAllowed = false;
                                     menuItem.Price = GetFoxproOrderitemPrice(orderNum, orderTime, remark1);
+                                    // 因为删除orditem后没有相应删除poh
+                                    if (menuItem.Price == 0)
+                                    {
+                                        menuItem = null;
+                                        continue;
+                                    }
 
                                     SetmealItem setmeal = new SetmealItem()
                                     {
@@ -1064,6 +1121,10 @@ namespace gcafeFoxproSvc
                             }
                             else
                             {
+                                // 因为删除orditem后没有相应删除poh
+                                if (menuItem == null)
+                                    continue;
+
                                 // 这一定是套餐内容项
                                 SetmealItem setmeal = new SetmealItem()
                                 {
@@ -1101,7 +1162,8 @@ namespace gcafeFoxproSvc
                             }
                         }
 
-                        menuItems.Add(menuItem);
+                        if (menuItem != null)
+                            menuItems.Add(menuItem);
                     }
 
                     // 处理加铁板
@@ -1464,6 +1526,7 @@ namespace gcafeFoxproSvc
                 {
                     using (var conn = new OleDbConnection(Global.FoxproPath))
                     {
+                        conn.Open();
                         string sql = string.Format("SELECT pricetype FROM sysinfo");
 
                         // 看是否节日价
@@ -1475,6 +1538,7 @@ namespace gcafeFoxproSvc
                                 rtn = false;
                         }
 
+                        conn.Close();
                     }
                 }
                 catch (Exception ex)
@@ -1514,6 +1578,162 @@ namespace gcafeFoxproSvc
 
                 return rtn;
             }
+        }
+
+        bool IsNeedToTidy()
+        {
+            bool rtn = false;
+
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT note FROM sysinfo");
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        string n = ((string)cmd.ExecuteScalar()).Trim();
+                        if (n == "1")
+                        {
+                            rtn = true;
+
+                            sql = string.Format("UPDATE sysinfo SET note = '0'");
+                            using (var cmd1 = new OleDbCommand(sql, conn))
+                            {
+                                cmd1.ExecuteNonQuery();
+                            }
+                        }
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
+
+            return rtn;
+        }
+
+        void FoxproTidyup()
+        {
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT ordertime, orderno, serial, prodname, printgroup, remark2 FROM poh ORDER BY ordertime, serialno");
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        DateTime orderTimePrev = System.DateTime.Now;
+                        string serialPrev = string.Empty;
+                        string orderNoPrev = string.Empty;
+                        string prodNamePrev = string.Empty;
+                        string printGroupPrev = string.Empty;
+                        string remarkPrev = string.Empty;
+                        string remarkUpdate = string.Empty;
+
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            DateTime orderTime = reader.GetDateTime(0);
+                            string orderNo = reader.GetString(1).Trim();
+                            string serial = reader.GetString(2).TrimEnd();
+                            string prodName = reader.GetString(3).Trim();
+                            string printGroup = reader.GetString(4).Trim();
+                            string remark = reader.GetString(5).Trim();
+                            string productNo = GetFoxproProductNumByName(prodName).Trim();
+
+                            if ((productNo.Length > 3) && (productNo.Substring(0, 4) == "1119" || productNo.Substring(0, 2) == "33") &&     // 111901是加铁板
+                                (printGroup == printGroupPrev))
+                            {
+                                if (!string.IsNullOrEmpty(remarkPrev))
+                                {
+                                    remarkUpdate = remarkPrev;
+                                    remarkPrev = string.Empty;
+                                }
+
+                                if (string.IsNullOrEmpty(remarkUpdate))
+                                    remarkUpdate = prodName;
+                                else
+                                    remarkUpdate += "," + prodName;
+
+                                // 将做法和加铁板加到主的remark2中
+                                string strOrderTime = string.Format("{0}^{1}{2}", "{", orderTimePrev.ToString("u"), "}");
+                                sql = string.Format("UPDATE poh SET remark2 = '{0}' WHERE (orderNo = '{1}') AND (prodname = '{2}') AND (ordertime = {3}) AND (serial = '{4}')", remarkUpdate, orderNoPrev, prodNamePrev, strOrderTime, serialPrev);
+                                using (var cmd1 = new OleDbCommand(sql, conn))
+                                {
+                                    cmd1.ExecuteNonQuery();
+                                }
+
+                                // 删除这记录
+                                strOrderTime = string.Format("{0}^{1}{2}", "{", orderTime.ToString("u"), "}");
+                                sql = string.Format("DELETE FROM poh WHERE (orderno = '{0}') AND (prodname = '{1}') AND (ordertime = {2}) AND (serial = '{3}')", orderNoPrev, prodName, strOrderTime, serial);
+                                using (var cmd1 = new OleDbCommand(sql, conn))
+                                {
+                                    cmd1.ExecuteNonQuery();
+                                }
+                            }
+                            else
+                            {
+                                serialPrev = serial;
+                                orderTimePrev = orderTime;
+                                orderNoPrev = orderNo;
+                                prodNamePrev = prodName;
+                                printGroupPrev = printGroup;
+                                remarkPrev = remark;
+                                remarkUpdate = string.Empty;
+                            }
+                        }
+                    }
+
+                    sql = string.Format("DELETE FROM orditem WHERE (productno LIKE '33%')");
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
+        }
+
+        string GetFoxproProductNumByName(string prodName)
+        {
+            string rtn = string.Empty;
+
+            try
+            {
+                using (var conn = new OleDbConnection(Global.FoxproPath))
+                {
+                    conn.Open();
+
+                    string sql = string.Format("SELECT productno FROM product WHERE prodname = '{0}'", prodName);
+                    using (var cmd = new OleDbCommand(sql, conn))
+                    {
+                        rtn = (string)cmd.ExecuteScalar();
+                        if (rtn == null)
+                            rtn = string.Empty;
+                        else
+                            rtn = rtn.Trim();
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.Logger.Error(ex.Message);
+            }
+
+            return rtn;
         }
 
         bool DiscountAllowed(string prodName)

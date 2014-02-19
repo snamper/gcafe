@@ -199,7 +199,8 @@
                 <!--无文字环绕的双线列表-->
                 <phone:LongListSelector x:Name="TableList" Margin="0,0,-22,0" ItemsSource="{Binding OpenedTables}" 
                                         SelectionChanged="TableList_SelectionChanged"
-                                        toolkit:TiltEffect.IsTiltEnabled="True">
+                                        toolkit:TiltEffect.IsTiltEnabled="True"
+                                        ListFooterTemplate="{StaticResource ListFooterPadding}">
                     <!--i:Interaction.Triggers>
                         <i:EventTrigger EventName="Tap">
                             <mvvm:EventToCommand Command="{Binding OrderDetailCommand}" CommandParameter="{Binding Path=SelectedItem}" />

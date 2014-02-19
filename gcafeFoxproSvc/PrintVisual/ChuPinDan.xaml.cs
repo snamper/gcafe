@@ -24,6 +24,17 @@ namespace gcafeFoxproSvc.PrintVisual
             Time = string.Format("{0} {1}", DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString());
         }
 
+        public bool IsReprint
+        {
+            set
+            {
+                if (value == true)
+                    reprint.Visibility = System.Windows.Visibility.Visible;
+                else
+                    reprint.Visibility = System.Windows.Visibility.Collapsed;
+            }
+        }
+
         public string Department
         {
             set
