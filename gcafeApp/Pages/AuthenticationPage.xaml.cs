@@ -42,7 +42,7 @@ namespace gcafeApp.Pages
                 AppSettings.LoginStaff = vml.Staff;
                 App.RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
-            else if (pwd.Password == vml.Staff.Password)
+            else if (pwd.Text == vml.Staff.Password)
             {
                 AppSettings.LoginStaff = vml.Staff;
                 App.RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));

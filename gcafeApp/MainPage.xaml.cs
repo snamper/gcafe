@@ -16,6 +16,7 @@ namespace gcafeApp
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        ApplicationBarIconButton _btnConfirm = null;
         // 构造函数
         public MainPage()
         {
@@ -85,6 +86,8 @@ namespace gcafeApp
                 ViewModel.MainViewModel mv = (ViewModel.MainViewModel)DataContext;
                 mv.CancelOrder();
             }
+
+            _btnConfirm.IsEnabled = true;
         }
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
@@ -94,6 +97,9 @@ namespace gcafeApp
 
             if (btn.Text == "确定")
             {
+                _btnConfirm = btn;
+
+                btn.IsEnabled = false;
                 mv.OrderMeals(OrderCtrl.TableNum, ShowMsg);
             }
             else
