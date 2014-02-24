@@ -34,6 +34,9 @@ namespace gcafeApp
         // 为 ViewModel 项加载数据
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (App.RootFrame.BackStack.Count() > 0)
+                App.RootFrame.RemoveBackEntry();
+
             ViewModel.MainViewModel mv = (ViewModel.MainViewModel)DataContext;
             //if (!App.ViewModel.IsDataLoaded)
             //{
@@ -54,6 +57,17 @@ namespace gcafeApp
 
                 PhoneApplicationService.Current.State.Remove("SelectedMethods");
             }
+        }
+
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("确定退出登录吗？", "退出", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                Settings.AppSettings.LoginStaff = null;
+                App.RootFrame.Navigate(new Uri("/Pages/AuthenticationPage.xaml", UriKind.Relative));
+            }
+
+            e.Cancel = true;
         }
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)

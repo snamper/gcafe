@@ -44,7 +44,10 @@ namespace gcafeApp.Settings
             {
                 if (IsolatedStorageSettings.ApplicationSettings.Contains("ServiceURL"))
                 {
-                    return IsolatedStorageSettings.ApplicationSettings["ServiceURL"] as string;
+                    string rtn = IsolatedStorageSettings.ApplicationSettings["ServiceURL"] as string;
+                    if (string.IsNullOrEmpty(rtn))
+                        rtn = "192.168.56.1:8733";
+                    return rtn;
                 }
                 else
                 {

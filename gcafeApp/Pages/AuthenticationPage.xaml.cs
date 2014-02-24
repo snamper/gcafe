@@ -27,10 +27,16 @@ namespace gcafeApp.Pages
             }
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (AppSettings.LoginStaff != null)
-                App.RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            ViewModel.VMLogin vml = (ViewModel.VMLogin)DataContext;
+            vml.Reset();
+
+            //if (AppSettings.LoginStaff != null)
+            //    App.RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+
+            if (App.RootFrame.BackStack.Count() > 0)
+                App.RootFrame.RemoveBackEntry();
         }
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
@@ -41,11 +47,17 @@ namespace gcafeApp.Pages
             {
                 AppSettings.LoginStaff = vml.Staff;
                 App.RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+
+                vml.Reset();
             }
             else if (pwd.Text == vml.Staff.Password)
             {
                 AppSettings.LoginStaff = vml.Staff;
                 App.RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+
+
+                pwd.Text = string.Empty;
+                vml.Reset();
             }
             else
                 vml.IsPasswordError = true;

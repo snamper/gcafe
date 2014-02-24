@@ -83,10 +83,13 @@ namespace gcafeApp.ViewModel
             get { return _loginStaffNo; }
             set
             {
-                IsBusy = true;
-                _svc.GetStaffByNumAsync(Settings.AppSettings.DeviceID, value);
-                this._loginStaffNo = value;
-                RaisePropertyChanged();
+                if (!string.IsNullOrEmpty(value))
+                {
+                    IsBusy = true;
+                    _svc.GetStaffByNumAsync(Settings.AppSettings.DeviceID, value);
+                    this._loginStaffNo = value;
+                    RaisePropertyChanged();
+                }
             }
         }
         private string _loginStaffNo;
@@ -138,5 +141,13 @@ namespace gcafeApp.ViewModel
         private bool _isPasswordError;
 
         public bool IsLogin { get; set; }
+
+        public void Reset()
+        {
+            _loginStaffNo = "";
+            _loginStaffPassword = "";
+            IsPasswordError = false;
+            _staff = null;
+        }
     }
 }

@@ -77,7 +77,7 @@
                 </toolkit:AutoCompleteBox.ItemTemplate>
             </toolkit:AutoCompleteBox>
             <StackPanel Grid.Row="4" Orientation="Horizontal">
-                <Button IsEnabled="False" Command="{Binding NavigateToCommand}" CommandParameter="CameraSel" FontSize="30" Content="&#xE12D;" FontFamily="Segoe UI Symbol" />
+                <Button IsEnabled="True" Command="{Binding NavigateToCommand}" CommandParameter="CameraSel" FontSize="30" Content="&#xE12D;" FontFamily="Segoe UI Symbol" />
                 <Button Margin="30, 0" Command="{Binding NavigateToCommand}" CommandParameter="CataSel" FontFamily="Segoe UI Symbol" FontSize="30" Content="&#xE179;" />
             </StackPanel>
             <TextBlock Margin="10, 20, 0, 0" Grid.Row="5" Text="数量" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"/>
