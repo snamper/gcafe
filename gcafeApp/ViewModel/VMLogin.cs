@@ -104,15 +104,18 @@ namespace gcafeApp.ViewModel
                 this._loginStaffPassword = value;
                 RaisePropertyChanged();
 
-                if (this._loginStaffPassword == _staff.Password)
+                if (_staff != null)
                 {
-                    IsLogin = true;
-                    IsPasswordError = false;
-                }
-                else
-                {
-                    IsLogin = false;
-                    IsPasswordError = true;
+                    if (this._loginStaffPassword == _staff.Password)
+                    {
+                        IsLogin = true;
+                        IsPasswordError = false;
+                    }
+                    else
+                    {
+                        IsLogin = false;
+                        IsPasswordError = true;
+                    }
                 }
             }
         }

@@ -35,6 +35,8 @@ namespace gcafeApp.Pages
         {
             PhoneApplicationService.Current.State["SelectedMenuItem"] = e.AddedItems[0];
 
+            App.RootFrame.RemoveBackEntry();
+            App.RootFrame.RemoveBackEntry();
             NavigationService.GoBack();
         }
 

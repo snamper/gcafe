@@ -64,6 +64,8 @@ namespace gcafeApp
             if (MessageBox.Show("确定退出登录吗？", "退出", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 Settings.AppSettings.LoginStaff = null;
+                ViewModel.MainViewModel mv = (ViewModel.MainViewModel)DataContext;
+                mv.CancelOrder();
                 App.RootFrame.Navigate(new Uri("/Pages/AuthenticationPage.xaml", UriKind.Relative));
             }
 
