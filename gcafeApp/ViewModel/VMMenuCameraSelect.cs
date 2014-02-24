@@ -59,6 +59,10 @@ namespace gcafeApp.ViewModel
 
                     //System.Diagnostics.Debug.WriteLine(this.Result);
                 }
+                else
+                {
+                    this.Result = "此项目不存在或被锁";
+                }
             }
             catch (Exception ex)
             {

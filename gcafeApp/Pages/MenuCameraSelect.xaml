@@ -22,7 +22,7 @@
             <StackPanel.RenderTransform>
                 <CompositeTransform Rotation="-90" TranslateY="450"/>
             </StackPanel.RenderTransform>
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="二维码点菜" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock Text="{Binding Result}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 

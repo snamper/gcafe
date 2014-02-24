@@ -104,7 +104,7 @@ namespace gcafeApp.ViewModel
                 this._loginStaffPassword = value;
                 RaisePropertyChanged();
 
-                if (_staff != null)
+                if ((_staff != null) && (!string.IsNullOrEmpty(value)))
                 {
                     if (this._loginStaffPassword == _staff.Password)
                     {
@@ -150,7 +150,6 @@ namespace gcafeApp.ViewModel
             _loginStaffNo = "";
             _loginStaffPassword = "";
             IsPasswordError = false;
-            _staff = null;
         }
     }
 }

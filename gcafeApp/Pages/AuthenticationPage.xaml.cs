@@ -32,8 +32,8 @@ namespace gcafeApp.Pages
             ViewModel.VMLogin vml = (ViewModel.VMLogin)DataContext;
             vml.Reset();
 
-            //if (AppSettings.LoginStaff != null)
-            //    App.RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            if (AppSettings.LoginStaff != null)
+                App.RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
 
             if (App.RootFrame.BackStack.Count() > 0)
                 App.RootFrame.RemoveBackEntry();
