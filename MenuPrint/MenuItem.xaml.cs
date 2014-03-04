@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.OleDb;
 
 namespace MenuPrint
 {
@@ -26,17 +27,19 @@ namespace MenuPrint
         {
             InitializeComponent();
 
-            using (var conn = new SqlConnection(@"Data Source=(localdb)\Projects;Initial Catalog=gcafe;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework"))
+            using (var conn = new OleDbConnection(@"Provider=VFPOLEDB.1;Data Source=D:\\gwr\\DATA\\lygOrder.dbc"))
+            //using (var conn = new SqlConnection(@"Data Source=(localdb)\Projects;Initial Catalog=gcafe;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework"))
             {
                 conn.Open();
 
                 DataTable table = new DataTable();
-                using (var adapter = new SqlDataAdapter("SELECT * FROM menu", conn))
+                //using (var adapter = new SqlDataAdapter("SELECT * FROM menu", conn))
+                using (var adapter = new OleDbDataAdapter("SELECT productno, prodname FROM product WHERE locked = 0", conn))
                 {
                     adapter.Fill(table);
 
                     int start = 500;
-                    int count = 200;
+                    int count = 20;
                     int i = 0;
                     foreach (DataRow r in table.Rows)
                     {
@@ -46,8 +49,8 @@ namespace MenuPrint
                                 break;
 
                             MenuItemDetail mi = new MenuItemDetail();
-                            mi.Code = (string)r["number"];
-                            mi.Desc = (string)r["name"];
+                            mi.Code = ((string)r["productno"]).Trim();
+                            mi.Desc = ((string)r["prodname"]).Trim();
                             mi.Padding = new Thickness(25);
 
                             wp.Children.Add(mi);

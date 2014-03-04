@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Printing;
 
 namespace MenuPrint
 {
@@ -27,8 +28,14 @@ namespace MenuPrint
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            VisualPrint.VisualPrintDialog dlg = new VisualPrint.VisualPrintDialog(new MenuItem() { WPWidth = 800 });
-            dlg.ShowDialog("HP LaserJet 6L");
+            //VisualPrint.VisualPrintDialog dlg = new VisualPrint.VisualPrintDialog(new MenuItem() { WPWidth = 800 });
+            //dlg.ShowDialog("HP LaserJet 6L");
+
+            PrintDialog printDlg = new PrintDialog();
+            var printers = new LocalPrintServer().GetPrintQueues();
+            var selectedPrinter = printers.FirstOrDefault(p => p.Name == "PDFCreator");
+            printDlg.PrintQueue = selectedPrinter;
+            printDlg.PrintVisual(new MenuItem() { WPWidth = 800 }, "二维码打印");
         }
     }
 }
