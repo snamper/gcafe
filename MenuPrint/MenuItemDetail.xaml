@@ -6,13 +6,16 @@
              xmlns:WPF="clr-namespace:Gma.QrCodeNet.Encoding.Windows.WPF;assembly=Gma.QrCodeNet.Encoding" x:Class="MenuPrint.MenuItemDetail" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Height="60" Width="40">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="20" />
-        </Grid.RowDefinitions>
+    <Grid Height="1.9cm" Width="3.22cm" Margin="0, 0, 0.2cm, 0.2cm" Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5cm" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
         <WPF:QrCodeImgControl x:Name="qrcode" Text="110101"/>
-        <TextBlock x:Name="desc" Grid.Row="1" Text="铁板牛肉" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="8" />
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock x:Name="desc" Margin="0, 3" Text="铁板牛肉" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="8" />
+            <TextBlock x:Name="code" Text="110201" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="8" />
+        </StackPanel>
     </Grid>
 </UserControl>

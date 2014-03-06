@@ -34,8 +34,9 @@ namespace MenuPrint
             PrintDialog printDlg = new PrintDialog();
             var printers = new LocalPrintServer().GetPrintQueues();
             var selectedPrinter = printers.FirstOrDefault(p => p.Name == "PDFCreator");
+            var area = selectedPrinter.GetPrintCapabilities(printDlg.PrintTicket).PageImageableArea;
             printDlg.PrintQueue = selectedPrinter;
-            printDlg.PrintVisual(new MenuItem() { WPWidth = 800 }, "二维码打印");
+            printDlg.PrintVisual(new MenuItem() { WPWidth = 793 }, "二维码打印");
         }
     }
 }

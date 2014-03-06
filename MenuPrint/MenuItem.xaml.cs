@@ -39,7 +39,7 @@ namespace MenuPrint
                     adapter.Fill(table);
 
                     int start = 500;
-                    int count = 20;
+                    int count = 85;
                     int i = 0;
                     foreach (DataRow r in table.Rows)
                     {
@@ -51,7 +51,7 @@ namespace MenuPrint
                             MenuItemDetail mi = new MenuItemDetail();
                             mi.Code = ((string)r["productno"]).Trim();
                             mi.Desc = ((string)r["prodname"]).Trim();
-                            mi.Padding = new Thickness(25);
+                            //mi.Padding = new Thickness(25);
 
                             wp.Children.Add(mi);
                         }

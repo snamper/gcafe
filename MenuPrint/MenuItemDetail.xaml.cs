@@ -30,6 +30,7 @@ namespace MenuPrint
             set
             {
                 qrcode.Text = value;
+                code.Text = value;
             }
         }
 
