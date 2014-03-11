@@ -12,6 +12,7 @@ using System.Windows.Media;
 using Windows.Foundation;
 using Microsoft.Phone.Shell;
 using Windows.Phone.Media.Capture;
+using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using gcafeApp.gcafeSvc;
@@ -22,6 +23,7 @@ namespace gcafeApp.ViewModel
     public class VMMenuCameraSelect : VMBase
     {
         private readonly IgcafeSvcClient _svc;
+        static bool isInit = false;
         bool _notfocus = false;
         bool _found = false;
         bool _break = false;
@@ -34,7 +36,46 @@ namespace gcafeApp.ViewModel
             if (!IsInDesignMode)
             {
                 _svc = svc;
-                _svc.GetMenuItemByNumberCompleted += _svc_GetMenuItemByNumberCompleted;
+
+                //_svc.GetMenuItemByNumberCompleted -= _svc_GetMenuItemByNumberCompleted;
+                if (!isInit)
+                {
+                    _svc.GetMenuItemByNumberCompleted += _svc_GetMenuItemByNumberCompleted;
+                    isInit = true;
+
+                    System.Diagnostics.Debug.WriteLine("================================================= inittttttttttttttt");
+                }
+                //if (!isInit)
+                //{
+                //    _svc.GetMenuItemByNumberCompleted += new EventHandler<GetMenuItemByNumberCompletedEventArgs>((sender, e) =>
+                //    {
+                //        try
+                //        {
+                //            if (e.Result != null)
+                //            {
+                //                MenuItem menuItem = e.Result;
+                //                this.Result = menuItem.Name;
+
+                //                PhoneApplicationService.Current.State["SelectedMenuItem"] = menuItem;
+
+                //                RaisePropertyChanged("SelectedMenuItem");
+
+                //                //System.Diagnostics.Debug.WriteLine(this.Result);
+                //            }
+                //            else
+                //            {
+                //                this.Result = "此项目不存在或被锁";
+                //            }
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            string s = ex.Message;
+                //        }
+
+                //    });
+
+                //    isInit = true;
+                //}
             }
         }
 
@@ -46,27 +87,30 @@ namespace gcafeApp.ViewModel
 
         void _svc_GetMenuItemByNumberCompleted(object sender, GetMenuItemByNumberCompletedEventArgs e)
         {
-            try
+            if (ReferenceEquals(e.UserState, "VMMenuCameraSelect"))
             {
-                if (e.Result != null)
+                try
                 {
-                    MenuItem menuItem = e.Result;
-                    this.Result = menuItem.Name;
+                    if (e.Result != null)
+                    {
+                        MenuItem menuItem = e.Result;
+                        this.Result = menuItem.Name;
 
-                    PhoneApplicationService.Current.State["SelectedMenuItem"] = menuItem;
+                        PhoneApplicationService.Current.State["SelectedMenuItem"] = menuItem;
 
-                    RaisePropertyChanged("SelectedMenuItem");
+                        RaisePropertyChanged("SelectedMenuItem");
 
-                    //System.Diagnostics.Debug.WriteLine(this.Result);
+                        //System.Diagnostics.Debug.WriteLine(this.Result);
+                    }
+                    else
+                    {
+                        this.Result = "此项目不存在或被锁";
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    this.Result = "此项目不存在或被锁";
+                    string s = ex.Message;
                 }
-            }
-            catch (Exception ex)
-            {
-                string s = ex.Message;
             }
         }
 
@@ -82,19 +126,24 @@ namespace gcafeApp.ViewModel
             //_found = false;
 
             System.Diagnostics.Debug.WriteLine(string.Format("init : ===== {0}", _break));
+            int cnt = 0;
             while (!_break)
             {
                 Result result = await GetBarcodeAsync();
+                System.Diagnostics.Debug.WriteLine("scan: {0} times", cnt++);
 
                 if (result != null)
                 {
                     if (result.Text.Substring(0, 2) == "11" ||
                         result.Text.Substring(0, 2) == "22")
                     {
-                        _svc.GetMenuItemByNumberAsync(Settings.AppSettings.DeviceID, result.Text);
+                        System.Diagnostics.Debug.WriteLine("cccccccccccccccccccccccccccallllllllllllllllllllllllllllllllll");
+                        _svc.GetMenuItemByNumberAsync(Settings.AppSettings.DeviceID, result.Text, "VMMenuCameraSelect");
                         _break = true;
                     }
                 }
+
+                await Task.Delay(10);
             }
 
             PhotoCaptureDevice.Dispose();
@@ -166,7 +215,7 @@ namespace gcafeApp.ViewModel
         private async Task<Result> GetBarcodeAsync()
         {
             //if (!_notfocus)
-            await PhotoCaptureDevice.FocusAsync();
+            //await PhotoCaptureDevice.FocusAsync();
             //PhotoCaptureDevice.FocusAsync();
             return await DetectBarcodeAsync();
         }
@@ -178,6 +227,8 @@ namespace gcafeApp.ViewModel
             var previewBuffer = new byte[width * height];
 
             PhotoCaptureDevice.GetPreviewBufferY(previewBuffer);
+
+            WriteableBitmap bmp;
 
             var barcodeReader = new BarcodeReader();
             //barcodeReader.TryHarder = true;
@@ -234,7 +285,10 @@ namespace gcafeApp.ViewModel
                 CompositeTransform = new CompositeTransform();
                 CompositeTransform.CenterX = .5;
                 CompositeTransform.CenterY = .5;
-                CompositeTransform.Rotation = PhotoCaptureDevice.SensorRotationInDegrees - 90;
+                CompositeTransform.Rotation = 0;
+                CompositeTransform.ScaleX = 1.5;
+                CompositeTransform.ScaleY = 1.5;
+                //CompositeTransform.Rotation = PhotoCaptureDevice.SensorRotationInDegrees - 90;
 
                 VideoBrush = new VideoBrush();
                 VideoBrush.RelativeTransform = CompositeTransform;

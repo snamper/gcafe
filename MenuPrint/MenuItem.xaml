@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <WrapPanel x:Name="wp" Margin="0, 0.1cm, 0, 0.1cm">
+        <WrapPanel x:Name="wp" Margin="0.7cm, 2.33cm, 0.1cm, 0.1cm" >
                 <!--MenuPrint:MenuItemDetail Code="111025" Desc="川味小炒肉跟饭" Padding="30" />
             <MenuPrint:MenuItemDetail Code="223105" Desc="川贝陈皮炖雪梨" Padding="30" />
             <MenuPrint:MenuItemDetail Code="111105" Desc="法兰西厚多士配雪糕" Padding="30" />

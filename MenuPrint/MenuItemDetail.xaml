@@ -6,7 +6,7 @@
              xmlns:WPF="clr-namespace:Gma.QrCodeNet.Encoding.Windows.WPF;assembly=Gma.QrCodeNet.Encoding" x:Class="MenuPrint.MenuItemDetail" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Height="1.9cm" Width="3.22cm" Margin="0, 0, 0.2cm, 0.2cm" Background="LightGray">
+    <Grid Height="1.9cm" Width="3.22cm" Margin="0, 0, 0.2cm, 0.2cm">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5cm" />
             <ColumnDefinition Width="*" />

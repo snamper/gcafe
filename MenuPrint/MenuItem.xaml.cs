@@ -34,12 +34,12 @@ namespace MenuPrint
 
                 DataTable table = new DataTable();
                 //using (var adapter = new SqlDataAdapter("SELECT * FROM menu", conn))
-                using (var adapter = new OleDbDataAdapter("SELECT productno, prodname FROM product WHERE locked = 0", conn))
+                using (var adapter = new OleDbDataAdapter("SELECT productno, prodname FROM product WHERE locked = 0 ORDER BY productno", conn))
                 {
                     adapter.Fill(table);
 
-                    int start = 500;
-                    int count = 85;
+                    int start = 73 * 0;
+                    int count = 73;
                     int i = 0;
                     foreach (DataRow r in table.Rows)
                     {
