@@ -12,6 +12,10 @@ namespace gcafeApp.Pages
 {
     public partial class MenuSelectPage : PhoneApplicationPage
     {
+        private OpticalReaderLib.IProcessor _processor = null;
+        private OpticalReaderLib.OpticalReaderTask _task = null;
+        private OpticalReaderLib.OpticalReaderResult _taskResult = null;
+
         public MenuSelectPage()
         {
             InitializeComponent();
@@ -83,21 +87,66 @@ namespace gcafeApp.Pages
             return false;
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            if (!e.Uri.OriginalString.Contains("Reader"))
+            {
+
+                if (_task != null)
+                {
+                    _task.Completed -= _task_Completed;
+                    _task.Dispose();
+                    _task = null;
+                }
+            }
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
-
-            if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
+            if (_taskResult != null)
             {
-                vm.MenuItem = PhoneApplicationService.Current.State["SelectedMenuItem"] as gcafeSvc.MenuItem;
-                vm.MenuItem.Quantity = 1;
-                PhoneApplicationService.Current.State.Remove("SelectedMenuItem");
+                ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
+
+                if (!string.IsNullOrEmpty(_taskResult.Text))
+                {
+                    if (_taskResult.Text.Substring(0, 2) == "11" ||
+                        _taskResult.Text.Substring(0, 2) == "22")
+                    {
+                        AllItems.Text = _taskResult.Text;
+                        vm.GetMenuItemByNumber(_taskResult.Text);
+                    }
+                    else
+                    {
+                        vm.MenuItem = null;
+                        AllItems.Text = string.Empty;
+                    }
+                }
+                else
+                {
+                    vm.MenuItem = null;
+                    AllItems.Text = string.Empty;
+                }
+
+                _taskResult = null;
             }
             else
             {
-                vm.MenuItem = null;
+                ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
+
+                if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
+                {
+                    vm.MenuItem = PhoneApplicationService.Current.State["SelectedMenuItem"] as gcafeSvc.MenuItem;
+                    vm.MenuItem.Quantity = 1;
+                    PhoneApplicationService.Current.State.Remove("SelectedMenuItem");
+                }
+                else
+                {
+                    vm.MenuItem = null;
+                }
             }
         }
 
@@ -108,7 +157,8 @@ namespace gcafeApp.Pages
             if (btn.Text == "确定")
             {
                 ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
-                PhoneApplicationService.Current.State["SelectedMenuItem"] = vm.MenuItem;
+                if (vm.MenuItem != null)
+                    PhoneApplicationService.Current.State["SelectedMenuItem"] = vm.MenuItem;
                 NavigationService.GoBack();
 
                 //int quantity;
@@ -146,6 +196,38 @@ namespace gcafeApp.Pages
 
             if (vm.MenuItem.Quantity > 1)
                 vm.MenuItem.Quantity--;
+        }
+
+        private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (_task != null)
+            {
+                _task.Completed += _task_Completed;
+                _task.Dispose();
+                _task = null;
+            }
+
+            _processor = new OpticalReaderLib.ZxingProcessor();
+
+            _task = new OpticalReaderLib.OpticalReaderTask()
+            {
+                Processor = _processor,
+                ShowDebugInformation = false,
+                FocusInterval = new TimeSpan(0, 0, 0, 0, 1200),
+                ObjectSize = new Windows.Foundation.Size(30, 30),
+                RequireConfirmation = false
+            };
+
+            _task.Completed += _task_Completed;
+            _task.Show();
+
+        }
+
+        void _task_Completed(object sender, OpticalReaderLib.OpticalReaderResult e)
+        {
+            _taskResult = e;
+
+            System.Diagnostics.Debug.WriteLine(e.Text);
         }
     }
 }
