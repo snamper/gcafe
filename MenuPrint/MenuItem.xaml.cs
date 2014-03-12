@@ -43,7 +43,7 @@ namespace MenuPrint
                     int i = 0;
                     foreach (DataRow r in table.Rows)
                     {
-                        if (i++ > start)
+                        if (i++ >= start)
                         {
                             if (i > (start + count))
                                 break;

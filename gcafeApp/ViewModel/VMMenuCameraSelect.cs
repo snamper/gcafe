@@ -116,7 +116,9 @@ namespace gcafeApp.ViewModel
 
         public async void InitializeAndGo()
         {
-            CaptureResolution = new Size(800, 480);
+            //CaptureResolution = await GetBestCaptureResolution();
+            //CaptureResolution = new Size(800, 480);
+            CaptureResolution = new Size(640, 480);
             await InitializePhotoCaptureDevice(CaptureResolution);
             await StartCapturingAsync();
             await PhotoCaptureDevice.FocusAsync();
@@ -125,31 +127,38 @@ namespace gcafeApp.ViewModel
 
             //_found = false;
 
-            System.Diagnostics.Debug.WriteLine(string.Format("init : ===== {0}", _break));
-            int cnt = 0;
-            while (!_break)
+            try
             {
-                Result result = await GetBarcodeAsync();
-                System.Diagnostics.Debug.WriteLine("scan: {0} times", cnt++);
-
-                if (result != null)
+                int cnt = 0;
+                while (!_break)
                 {
-                    if (result.Text.Substring(0, 2) == "11" ||
-                        result.Text.Substring(0, 2) == "22")
+                    Result result = await GetBarcodeAsync();
+                    System.Diagnostics.Debug.WriteLine("scan: {0} times", cnt++);
+
+                    if (result != null)
                     {
-                        System.Diagnostics.Debug.WriteLine("cccccccccccccccccccccccccccallllllllllllllllllllllllllllllllll");
-                        _svc.GetMenuItemByNumberAsync(Settings.AppSettings.DeviceID, result.Text, "VMMenuCameraSelect");
-                        _break = true;
+                        if (result.Text.Substring(0, 2) == "11" ||
+                            result.Text.Substring(0, 2) == "22")
+                        {
+                            _svc.GetMenuItemByNumberAsync(Settings.AppSettings.DeviceID, result.Text, "VMMenuCameraSelect");
+                            _break = true;
+                            break;
+                        }
                     }
+
+                    if (cnt % 10 == 0)
+                        await PhotoCaptureDevice.FocusAsync();
+                    else
+                        await Task.Delay(5);
                 }
 
-                await Task.Delay(10);
+                PhotoCaptureDevice.Dispose();
+                PhotoCaptureDevice = null;
             }
-
-            PhotoCaptureDevice.Dispose();
-            PhotoCaptureDevice = null;
-
-            System.Diagnostics.Debug.WriteLine("======================================== break..");
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
 
             _break = false;
 
@@ -228,8 +237,6 @@ namespace gcafeApp.ViewModel
 
             PhotoCaptureDevice.GetPreviewBufferY(previewBuffer);
 
-            WriteableBitmap bmp;
-
             var barcodeReader = new BarcodeReader();
             //barcodeReader.TryHarder = true;
             //barcodeReader.TryInverted = true;
@@ -247,8 +254,6 @@ namespace gcafeApp.ViewModel
                         _notfocus = true;
                     }
                 }
-                //await Task.Delay(10);
-                //System.Diagnostics.Debug.WriteLine(result.Text);
             }
 
 
@@ -264,7 +269,8 @@ namespace gcafeApp.ViewModel
                 var memoryStream = new MemoryStream();
                 sequence.Frames[0].CaptureStream = memoryStream.AsOutputStream();
 
-                PhotoCaptureDevice.SetProperty(KnownCameraPhotoProperties.FlashMode, FlashState.Off);
+                //PhotoCaptureDevice.SetProperty(KnownCameraPhotoProperties.FlashMode, FlashState.Off);
+                PhotoCaptureDevice.SetProperty(KnownCameraAudioVideoProperties.VideoTorchMode, VideoTorchMode.On);
                 PhotoCaptureDevice.SetProperty(KnownCameraPhotoProperties.SceneMode, CameraSceneMode.Macro);
 
                 await PhotoCaptureDevice.PrepareCaptureSequenceAsync(sequence);
@@ -288,6 +294,7 @@ namespace gcafeApp.ViewModel
                 CompositeTransform.Rotation = 0;
                 CompositeTransform.ScaleX = 1.5;
                 CompositeTransform.ScaleY = 1.5;
+                CompositeTransform.Rotation = 90;
                 //CompositeTransform.Rotation = PhotoCaptureDevice.SensorRotationInDegrees - 90;
 
                 VideoBrush = new VideoBrush();
@@ -301,6 +308,17 @@ namespace gcafeApp.ViewModel
                 string s = ex.Message;
             }
 
+        }
+
+        private async Task<Size> GetBestCaptureResolution()
+        {
+            // The last size in the AvailableCaptureResolutions is the lowest available
+            var captureResolutions = PhotoCaptureDevice.GetAvailableCaptureResolutions(CameraSensorLocation.Back);
+            var previewResolutions = PhotoCaptureDevice.GetAvailablePreviewResolutions(CameraSensorLocation.Back);
+
+            Size resolution = await Task.Factory.StartNew(() => captureResolutions.Last(
+                c => (c.Width > 1000.0 || c.Height > 1000.0) && previewResolutions.Any(p => (c.Width / c.Height).Equals(p.Width / p.Height))));
+            return resolution;
         }
 
         public VideoBrush VideoBrush
