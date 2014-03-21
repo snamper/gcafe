@@ -19,23 +19,30 @@ namespace gcafeApp.Pages
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
-            ApplicationBarIconButton btn = (ApplicationBarIconButton)sender;
-            if (btn.Text == "确定")
+            try
             {
-
-                List<ViewModel.Method> methods = new List<ViewModel.Method>();
-                foreach (var method in MenuCatalog.SelectedItems)
+                ApplicationBarIconButton btn = (ApplicationBarIconButton)sender;
+                if (btn.Text == "确定")
                 {
-                    methods.Add(new ViewModel.Method() { Id = ((ViewModel.Method)method).Id, Name = ((ViewModel.Method)method).Name });
-                }
-                PhoneApplicationService.Current.State["SelectedMethods"] = methods;
 
-                //PhoneApplicationService.Current.State["SelectedMethods"] = MenuCatalog.SelectedItems;
-                NavigationService.GoBack();
+                    List<ViewModel.Method> methods = new List<ViewModel.Method>();
+                    foreach (var method in MenuCatalog.SelectedItems)
+                    {
+                        methods.Add(new ViewModel.Method() { Id = ((ViewModel.Method)method).Id, Name = ((ViewModel.Method)method).Name });
+                    }
+                    PhoneApplicationService.Current.State["SelectedMethods"] = methods;
+
+                    //PhoneApplicationService.Current.State["SelectedMethods"] = MenuCatalog.SelectedItems;
+                    NavigationService.GoBack();
+                }
+                else
+                {
+                    NavigationService.GoBack();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                NavigationService.GoBack();
+                string s = ex.Message;
             }
         }
     }

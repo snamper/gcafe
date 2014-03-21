@@ -80,26 +80,31 @@ namespace gcafeApp.ViewModel
 
         void _svc_GetOrderDetailByOrderNumCompleted(object sender, GetOrderDetailByOrderNumCompletedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("=========================== ByOrderNum Completed ===============================");
-
-            foreach (var menuItem in e.Result)
+            try
             {
-                //System.Diagnostics.Debug.WriteLine(menuItem.Name);
-                if (menuItem.Methods != null)
+                foreach (var menuItem in e.Result)
                 {
-                    foreach (var method in menuItem.Methods)
+                    //System.Diagnostics.Debug.WriteLine(menuItem.Name);
+                    if (menuItem.Methods != null)
                     {
-                        System.Diagnostics.Debug.WriteLine(method.Name);
+                        foreach (var method in menuItem.Methods)
+                        {
+                            System.Diagnostics.Debug.WriteLine(method.Name);
+                        }
                     }
-                }
 
-                if (menuItem.SetmealItems != null)
-                {
-                    foreach (var setmeal in menuItem.SetmealItems)
+                    if (menuItem.SetmealItems != null)
                     {
-                        //System.Diagnostics.Debug.WriteLine(setmeal.Name);
+                        foreach (var setmeal in menuItem.SetmealItems)
+                        {
+                            //System.Diagnostics.Debug.WriteLine(setmeal.Name);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
             }
         }
 
@@ -137,7 +142,15 @@ namespace gcafeApp.ViewModel
         void _svc_OrderMealCompleted(object sender, OrderMealCompletedEventArgs e)
         {
             IsBusy = false;
-            _callBack(e.Result);
+
+            try
+            {
+                _callBack(e.Result);
+            }
+            catch (Exception ex)
+            {
+                _callBack("µã²Ë³ö´í");
+            }
         }
 
         public SetmealItem SelectedOptionMenu

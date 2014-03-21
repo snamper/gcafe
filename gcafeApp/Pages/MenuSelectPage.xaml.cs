@@ -91,15 +91,21 @@ namespace gcafeApp.Pages
         {
             base.OnNavigatedFrom(e);
 
-            if (!e.Uri.OriginalString.Contains("Reader"))
+            try
             {
-
-                if (_task != null)
+                if (!e.Uri.OriginalString.Contains("Reader"))
                 {
-                    _task.Completed -= _task_Completed;
-                    _task.Dispose();
-                    _task = null;
+                    if (_task != null)
+                    {
+                        _task.Completed -= _task_Completed;
+                        _task.Dispose();
+                        _task = null;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
             }
         }
 
@@ -107,46 +113,53 @@ namespace gcafeApp.Pages
         {
             base.OnNavigatedTo(e);
 
-            if (_taskResult != null)
+            try
             {
-                ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
-
-                if (!string.IsNullOrEmpty(_taskResult.Text))
+                if (_taskResult != null)
                 {
-                    if (_taskResult.Text.Substring(0, 2) == "11" ||
-                        _taskResult.Text.Substring(0, 2) == "22")
+                    ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
+
+                    if (!string.IsNullOrEmpty(_taskResult.Text))
                     {
-                        AllItems.Text = _taskResult.Text;
-                        vm.GetMenuItemByNumber(_taskResult.Text);
+                        if (_taskResult.Text.Substring(0, 2) == "11" ||
+                            _taskResult.Text.Substring(0, 2) == "22")
+                        {
+                            AllItems.Text = _taskResult.Text;
+                            vm.GetMenuItemByNumber(_taskResult.Text);
+                        }
+                        else
+                        {
+                            vm.MenuItem = null;
+                            AllItems.Text = string.Empty;
+                        }
                     }
                     else
                     {
                         vm.MenuItem = null;
                         AllItems.Text = string.Empty;
                     }
+
+                    _taskResult = null;
                 }
                 else
                 {
-                    vm.MenuItem = null;
-                    AllItems.Text = string.Empty;
-                }
+                    ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
 
-                _taskResult = null;
+                    if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
+                    {
+                        vm.MenuItem = PhoneApplicationService.Current.State["SelectedMenuItem"] as gcafeSvc.MenuItem;
+                        vm.MenuItem.Quantity = 1;
+                        PhoneApplicationService.Current.State.Remove("SelectedMenuItem");
+                    }
+                    else
+                    {
+                        vm.MenuItem = null;
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ViewModel.MenuSelectViewModel vm = (ViewModel.MenuSelectViewModel)DataContext;
-
-                if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
-                {
-                    vm.MenuItem = PhoneApplicationService.Current.State["SelectedMenuItem"] as gcafeSvc.MenuItem;
-                    vm.MenuItem.Quantity = 1;
-                    PhoneApplicationService.Current.State.Remove("SelectedMenuItem");
-                }
-                else
-                {
-                    vm.MenuItem = null;
-                }
+                string s = ex.Message;
             }
         }
 

@@ -34,28 +34,35 @@ namespace gcafeApp
         // 为 ViewModel 项加载数据
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (App.RootFrame.BackStack.Count() > 0)
-                App.RootFrame.RemoveBackEntry();
-
-            ViewModel.MainViewModel mv = (ViewModel.MainViewModel)DataContext;
-            //if (!App.ViewModel.IsDataLoaded)
-            //{
-            //    App.ViewModel.LoadData();
-            //}
-
-            if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
+            try
             {
-                mv.MenuItems.Add((gcafeSvc.MenuItem)PhoneApplicationService.Current.State["SelectedMenuItem"]);
+                if (App.RootFrame.BackStack.Count() > 0)
+                    App.RootFrame.RemoveBackEntry();
 
-                PhoneApplicationService.Current.State.Remove("SelectedMenuItem");
+                ViewModel.MainViewModel mv = (ViewModel.MainViewModel)DataContext;
+                //if (!App.ViewModel.IsDataLoaded)
+                //{
+                //    App.ViewModel.LoadData();
+                //}
+
+                if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
+                {
+                    mv.MenuItems.Add((gcafeSvc.MenuItem)PhoneApplicationService.Current.State["SelectedMenuItem"]);
+
+                    PhoneApplicationService.Current.State.Remove("SelectedMenuItem");
+                }
+
+                if (PhoneApplicationService.Current.State.ContainsKey("SelectedMethods"))
+                {
+                    List<ViewModel.Method> methods = (List<ViewModel.Method>)PhoneApplicationService.Current.State["SelectedMethods"];
+                    mv.SetMethods(methods);
+
+                    PhoneApplicationService.Current.State.Remove("SelectedMethods");
+                }
             }
-
-            if (PhoneApplicationService.Current.State.ContainsKey("SelectedMethods"))
+            catch (Exception ex)
             {
-                List<ViewModel.Method> methods = (List<ViewModel.Method>)PhoneApplicationService.Current.State["SelectedMethods"];
-                mv.SetMethods(methods);
-
-                PhoneApplicationService.Current.State.Remove("SelectedMethods");
+                string s = ex.Message;
             }
         }
 
@@ -90,7 +97,7 @@ namespace gcafeApp
 
         private void ShowMsg(string msg)
         {
-            if ((msg == "未输入台号") || (msg == "未输入菜品"))
+            if ((msg == "未输入台号") || (msg == "未输入菜品") || (msg == "点菜出错"))
             {
                 MessageBox.Show(msg);
             }

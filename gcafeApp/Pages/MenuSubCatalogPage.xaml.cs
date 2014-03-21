@@ -19,18 +19,25 @@ namespace gcafeApp.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
+            try
             {
-                NavigationService.GoBack();
-            }
-            else
-            {
-                string value;
-                if (NavigationContext.QueryString.TryGetValue("Catalog", out value))
+                if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
                 {
-                    ViewModel.VMSubMenuCatalog ctx = (ViewModel.VMSubMenuCatalog)DataContext;
-                    ctx.Catalog = value;
+                    NavigationService.GoBack();
                 }
+                else
+                {
+                    string value;
+                    if (NavigationContext.QueryString.TryGetValue("Catalog", out value))
+                    {
+                        ViewModel.VMSubMenuCatalog ctx = (ViewModel.VMSubMenuCatalog)DataContext;
+                        ctx.Catalog = value;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
             }
         }
 

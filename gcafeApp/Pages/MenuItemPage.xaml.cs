@@ -19,25 +19,39 @@ namespace gcafeApp.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string value;
-            if (NavigationContext.QueryString.TryGetValue("CatalogID", out value))
+            try
             {
-                int id;
-                if (Int32.TryParse(value, out id))
+                string value;
+                if (NavigationContext.QueryString.TryGetValue("CatalogID", out value))
                 {
-                    ViewModel.VMMenuItem ctx = (ViewModel.VMMenuItem)DataContext;
-                    ctx.CatalogID = id;
+                    int id;
+                    if (Int32.TryParse(value, out id))
+                    {
+                        ViewModel.VMMenuItem ctx = (ViewModel.VMMenuItem)DataContext;
+                        ctx.CatalogID = id;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
             }
         }
 
         private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            PhoneApplicationService.Current.State["SelectedMenuItem"] = e.AddedItems[0];
+            try
+            {
+                PhoneApplicationService.Current.State["SelectedMenuItem"] = e.AddedItems[0];
 
-            App.RootFrame.RemoveBackEntry();
-            App.RootFrame.RemoveBackEntry();
-            NavigationService.GoBack();
+                App.RootFrame.RemoveBackEntry();
+                App.RootFrame.RemoveBackEntry();
+                NavigationService.GoBack();
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
         }
 
     }

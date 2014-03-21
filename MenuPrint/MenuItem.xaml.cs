@@ -34,12 +34,12 @@ namespace MenuPrint
 
                 DataTable table = new DataTable();
                 //using (var adapter = new SqlDataAdapter("SELECT * FROM menu", conn))
-                using (var adapter = new OleDbDataAdapter("SELECT productno, prodname FROM product WHERE locked = 0 ORDER BY productno", conn))
+                using (var adapter = new OleDbDataAdapter("SELECT productno, prodname FROM product WHERE (locked = 0) AND (`SUBSTR`(productno, 1, 2) = '11' OR productno = '220310') ORDER BY productno", conn))
                 {
                     adapter.Fill(table);
 
-                    int start = 73 * 0;
-                    int count = 73;
+                    int start = 72 * 1;
+                    int count = 72;
                     int i = 0;
                     foreach (DataRow r in table.Rows)
                     {
@@ -60,6 +60,18 @@ namespace MenuPrint
 
                 conn.Close();
             }
+        }
+
+        void delete()
+        {
+             using (var conn = new OleDbConnection(@"Provider=VFPOLEDB.1;Data Source=D:\\gwr\\DATA\\lygOrder.dbc"))
+             {
+                 conn.Open();
+
+                 string[] nums = { "110102", "110103", "" };
+
+                 conn.Close();
+             }
         }
 
         public int WPWidth

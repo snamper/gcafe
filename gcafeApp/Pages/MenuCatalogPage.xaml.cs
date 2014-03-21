@@ -21,8 +21,15 @@ namespace gcafeApp.Pages
         {
             base.OnNavigatedTo(e);
 
-            if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
-                NavigationService.GoBack();
+            try
+            {
+                if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
+                    NavigationService.GoBack();
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
         }
     }
 }
