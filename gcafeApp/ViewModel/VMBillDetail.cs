@@ -24,8 +24,19 @@ namespace gcafeApp.ViewModel
 
         void _svc_GetOrderDetailByOrderNumCompleted(object sender, GetOrderDetailByOrderNumCompletedEventArgs e)
         {
-            MenuItems = new List<MenuItem>(e.Result);
-            IsBusy = false;
+            try
+            {
+                if (e.Error == null)
+                    MenuItems = new List<MenuItem>(e.Result);
+                else
+                    System.Windows.MessageBox.Show(e.Error.Message);
+
+                IsBusy = false;
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         public List<MenuItem> MenuItems
