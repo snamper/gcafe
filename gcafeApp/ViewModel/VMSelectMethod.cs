@@ -119,9 +119,21 @@ namespace gcafeApp.ViewModel
 
         void _svc_GetMethodCatalogsCompleted(object sender, GetMethodCatalogsCompletedEventArgs e)
         {
-            if (e.Result != null)
+            try
             {
-                MethodCatalog = new MethodCata(e.Result);
+                if (e.Error == null)
+                {
+                    if (e.Result != null)
+                    {
+                        MethodCatalog = new MethodCata(e.Result);
+                    }
+                }
+                else
+                    System.Windows.MessageBox.Show(e.Error.Message);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message);
             }
 
             IsBusy = false;

@@ -37,10 +37,22 @@ namespace gcafeApp.ViewModel
             {
                 IsBusy = false;
 
-                if (e.Result != null)
-                    this.Items = new ObservableCollection<MenuItem>(e.Result);
-                else
-                    this.Items = new ObservableCollection<MenuItem>();
+                try
+                {
+                    if (e.Error == null)
+                    {
+                        if (e.Result != null)
+                            this.Items = new ObservableCollection<MenuItem>(e.Result);
+                        else
+                            this.Items = new ObservableCollection<MenuItem>();
+                    }
+                    else
+                        System.Windows.MessageBox.Show(e.Error.Message);
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(ex.Message);
+                }
             }
         }
 
