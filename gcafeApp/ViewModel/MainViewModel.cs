@@ -336,6 +336,8 @@ namespace gcafeApp.ViewModel
                 _methodSetmealItem.Methods = new ObservableCollection<gcafeSvc.Method>(ms);
             }
 
+            RaisePropertyChanged("MenuItems");
+
             _methodMenuItem = null;
             _methodSetmealItem = null;
         }
@@ -382,7 +384,8 @@ namespace gcafeApp.ViewModel
 
         public void CancelOrder()
         {
-            MenuItems = new ObservableCollection<MenuItem>();
+            MenuItems.Clear();
+            //MenuItems = new ObservableCollection<MenuItem>();
         }
 
         public ObservableCollection<TableViewModel> OpenedTables

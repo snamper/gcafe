@@ -110,6 +110,7 @@
     <Compile Include="Converters\MethodsToTextConverter.cs" />
     <Compile Include="Converters\MethodsToVisibilityConverter.cs" />
     <Compile Include="Converters\SelectableToVisableConverter.cs" />
+    <Compile Include="Helper\ObjectExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -410,6 +411,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\gcafeSvc\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

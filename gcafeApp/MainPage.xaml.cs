@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using gcafeApp.Resources;
+using gcafeApp.Helper;
 using Microsoft.Practices.ServiceLocation;
 
 namespace gcafeApp
@@ -47,7 +48,10 @@ namespace gcafeApp
 
                 if (PhoneApplicationService.Current.State.ContainsKey("SelectedMenuItem"))
                 {
-                    mv.MenuItems.Add((gcafeSvc.MenuItem)PhoneApplicationService.Current.State["SelectedMenuItem"]);
+                    gcafeSvc.MenuItem mi = (gcafeSvc.MenuItem)PhoneApplicationService.Current.State["SelectedMenuItem"];
+                    gcafeSvc.MenuItem mm = mi.Copy();
+                    mv.MenuItems.Add(mm);
+                    //mv.MenuItems.Add((gcafeSvc.MenuItem)PhoneApplicationService.Current.State["SelectedMenuItem"]);
 
                     PhoneApplicationService.Current.State.Remove("SelectedMenuItem");
                 }

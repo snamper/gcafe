@@ -47,7 +47,13 @@
                                 <ColumnDefinition Width="30" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Background="Red" ></StackPanel>
+                            <StackPanel Background="Red" >
+                                <TextBlock Text="{Binding ID}" RenderTransformOrigin="0.0,0.0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="91.768" Margin="-15.884,0,-45.884,0" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+                                    <TextBlock.RenderTransform>
+                                        <CompositeTransform Rotation="-90" TranslateY="60" TranslateX="15"/>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </StackPanel>
                             <TextBlock Grid.Column="1" Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" VerticalAlignment="Center" Margin="10, 20" />
                         </Grid>
                     </DataTemplate>

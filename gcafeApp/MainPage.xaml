@@ -176,7 +176,7 @@
 
                                                 <toolkit:ContextMenuService.ContextMenu>
                                                     <toolkit:ContextMenu>
-                                                        <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                                                        <toolkit:MenuItem Header="选择做法" Command="{Binding Path=Main.MethodCommand, UpdateSourceTrigger=Explicit, Source={StaticResource Locator}}" CommandParameter="{Binding BindsDirectlyToSource=True}" />
                                                         <toolkit:MenuItem Header="删除此菜品" Command="{Binding Path=Main.DeleteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                                                     </toolkit:ContextMenu>
                                                 </toolkit:ContextMenuService.ContextMenu>
