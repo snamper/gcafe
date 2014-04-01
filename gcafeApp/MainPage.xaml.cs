@@ -112,6 +112,8 @@ namespace gcafeApp
                 OrderCtrl.TableNum = "请点击这里选择台号";
                 ViewModel.MainViewModel mv = (ViewModel.MainViewModel)DataContext;
                 mv.CancelOrder();
+
+                App.Current.Terminate();
             }
 
             _btnConfirm.IsEnabled = true;
@@ -173,7 +175,6 @@ namespace gcafeApp
         {
             Type t = sender.GetType();
         }
-
 
 
         // 用于生成本地化 ApplicationBar 的示例代码
